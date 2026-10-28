@@ -25,7 +25,8 @@ Running the app locally, the checks that must pass, and how it is built.
 ## Stack
 
 Python 3.12, FastAPI, SQLAlchemy (async), Alembic, PostgreSQL, S3-compatible
-object storage, Svelte 5 + Vite. Deployed on Railway.
+object storage, Svelte 5 + Vite. Deployed on Railway, or on a server of the
+client's own ([deploy-vps.md](deploy-vps.md)).
 
 ## Local setup
 
@@ -79,3 +80,11 @@ type check and build, and the secret scan. Everything must pass before a push.
 The project page's live demo (`docs/demo`) is built from the same frontend;
 after changing the form or the dashboard, rebuild it with
 `.venv/bin/python tools/make_demo.py` ([docs/README.md](README.md)).
+
+## Releases
+
+Installers deploy release tags, not `main` (SETUP.md, docs/deploy.md). A
+release is a `vX.Y.Z` tag on `main` once CI is green, with a GitHub Release
+that says in a few lines what changed for an installer: a new setting, a
+step to take, anything that needs a fresh `pip install`. Every change reaches
+`main` through a pull request after CI passes.

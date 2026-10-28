@@ -12,8 +12,9 @@ app, and a push notification on that phone for every new lead.
 
 ## How to work with the person
 
-- Speak the person's language: the one they write to you in. The product
-  itself stays in English, because the sellers and the business are in the US.
+- Speak the person's language: the one they write to you in. The product's
+  language follows the business's country: English for the US, the sellers'
+  language elsewhere ([Another country](#another-country)).
 - One step at a time. Say in a sentence what you are about to do and why, then
   do it. Ask a few questions at once at most, never a long questionnaire.
 - Run every command yourself. Ask the person only for what only they can do:
@@ -51,10 +52,11 @@ Tell the person briefly what they will need:
 3. Two Railway accounts, each on the Hobby plan ($5 a month, with a payment
    card): their own, where the instance is built and tested, and the
    business's own, on the business's card, which the finished project is
-   handed over to (step 10). The plan includes $5 of usage; one instance uses
-   about $2-3 of it. Railway moves a project between accounts only when both
-   have a paid plan. Outside the US the instance may run on a server of the
-   business's own in its country instead ([Another country](#another-country)).
+   handed over to (step 10). Hosting is about $5 a month (Railway Hobby,
+   includes $5 of usage; not yet checked against a real client's bill).
+   Railway moves a project between accounts only when both have a paid plan.
+   Outside the US the instance may run on a server of the business's own in
+   its country instead ([Another country](#another-country)).
 4. The business's own domain, owned by the business: a subdomain of its
    website such as `buy.<domain>`, or a new domain the business buys in its
    own name (about $10-15 a year). QR codes and cards are made only for it.
@@ -78,10 +80,13 @@ Check what is installed and install what is missing (ask first):
   either: `bash <(curl -fsSL cli.new)`.
 
 If you are not inside this repository yet, clone it into a folder of its own,
-for example `~/car-buyout`, and work from there:
+for example `~/car-buyout`, and work from there. Deploy the newest release
+(a `v*` tag), not `main`: `main` is where development happens.
 
 ```bash
 git clone https://github.com/ilyaxxing/cash-for-cars-lead-system.git ~/car-buyout
+cd ~/car-buyout
+git checkout "$(git tag --list 'v*' --sort=-v:refname | head -n 1)"
 ```
 
 Then the Python environment (Windows: `.venv\Scripts\python` instead of
@@ -272,8 +277,9 @@ log. The script never prints secrets, so you can show its output.
 
 ## Step 7. The owner's phone
 
-Give the person this message for the business owner, filled in (it is in
-English because the owner is in the US):
+Give the person this message for the business owner, filled in, in the
+owner's language (English in the US; elsewhere translate it, as the
+dashboard's texts are):
 
 > Your new lead system is ready. To get a notification for every car seller:
 >
@@ -407,7 +413,7 @@ private channel (a password manager's shared item, not email or chat).
 Then summarize for the person, in their language: the three addresses, where
 the settings file is, the monthly cost (the business's Railway plan and
 domain), and that you are done. Give them a short note for the owner, in
-English:
+the owner's language (English in the US):
 
 - The form address, the business card link and the dashboard address.
 - Statuses: New (not handled yet), In Progress (talking or negotiating),
@@ -419,12 +425,15 @@ English:
   installed the system can reset it.
 
 And remind the person:
-- Updates: `git pull`, then the same deploy command (while they are an
-  Editor on the business's project).
+- Updates: move to the newest release (`git fetch --tags`, then
+  `git checkout` the newest `v*` tag), then the same deploy command, while
+  they are an Editor on the business's project (docs/deploy.md, Updating).
 - Forgotten owner password: change `OWNER_PASSWORD` in the settings file and
   deploy again; that resets it.
-- Backups: Railway keeps continuous database backups. Photos are not backed up,
-  which is fine: they are working material that is erased anyway.
+- Backups: Railway keeps about 4 weeks of continuous database backups
+  (point-in-time recovery). Photos are not backed up, which is fine: they are
+  working material that is erased anyway. On a server of the business's own,
+  the dumps sit on that server: keep a copy off it (docs/deploy-vps.md).
 - Changing the look later: change the settings file or the files in
   `clients/<id>/`, then deploy again. A phone keeps the app icon it was added
   with: to see a new icon, remove the app from the home screen and add it
@@ -436,7 +445,7 @@ The system fits a business in any country without changing its code: its
 language, its form, its privacy policy, its card and, where needed, where it
 runs. Everything country-specific goes into the business's own files in
 `clients/<id>/`, next to its settings, never into `presets/` or `locales/`:
-then `git pull` brings updates to every client without conflicts.
+then a new release applies to every client without conflicts.
 
 Go through the list below for the business's country. For each point, use
 what you know and look up what you are not sure of (a web search, when you
@@ -493,7 +502,10 @@ root@<address>` with them once, with the root password from the provider.
 Then `VPS_HOST=root@<address>` in the settings file. The domain gets an A
 record pointing at the server's address before the first deploy (step 8
 moves before step 5). Where Docker Hub is slow or closed, set
-`DOCKER_MIRROR` (the provider's mirror, or `https://mirror.gcr.io`).
+`DOCKER_MIRROR` (the provider's mirror, or `https://mirror.gcr.io`). The
+daily dumps stay on that same server: have the business turn on the
+provider's server backups if it offers them, or copy a dump off now and then
+([docs/deploy-vps.md](docs/deploy-vps.md#logs-backups-restore)).
 
 **Then the details** (with step 3):
 
@@ -571,7 +583,7 @@ owner sees it.
 
 Only if the business asks for different questions or wording. A client's
 changes go into its own files next to its settings, never into `presets/` or
-`locales/`: then `git pull` brings updates without conflicts, for every
+`locales/`: then a new release applies without conflicts, for every
 client.
 
 - Wording (the form's, the dashboard's, the card's): `clients/<id>/texts.json`
@@ -591,9 +603,9 @@ the files before it uploads anything and says which text or field is wrong.
 
 - **"The settings would not start in production"**: the message lists what is
   missing or malformed. Fix the settings file and run the deploy again.
-- **"The git tree has uncommitted or untracked files"**: commit form changes on
-  the business's branch, or undo stray edits. Files in `clients/` and `qr/` are
-  ignored and never cause this.
+- **"The git tree has uncommitted or untracked files"**: undo stray edits: a
+  client's changes belong in `clients/<id>/`, never in tracked files. Files in
+  `clients/` and `qr/` are ignored and never cause this.
 - **The deploy waits and then times out**: `railway logs --service app` shows
   why the app didn't start.
 - **Railway refuses with "Deploys have been paused" or the CLI cannot reach

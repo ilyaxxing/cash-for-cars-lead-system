@@ -77,8 +77,26 @@ retention erases anyway.
 
 ## Updating
 
-Pull the new code, run the checks, and run the same command again. Migrations
-run before the new version starts serving.
+**Installing for a client**, with no code changes of your own: move to the
+newest release and run the same command again. There are no checks to run:
+they need Node, Docker and gitleaks, which an installer does not.
+
+```bash
+git fetch --tags
+git checkout "$(git tag --list 'v*' --sort=-v:refname | head -n 1)"
+.venv/bin/pip install -q -r requirements.txt
+.venv/bin/python tools/deploy_vps.py clients/acme.env
+```
+
+**Changed the code yourself**: commit it (the deploy uploads exactly the
+checked-out commit) and run the checks before deploying:
+
+```bash
+tools/check.sh
+.venv/bin/python tools/deploy_vps.py clients/acme.env
+```
+
+Migrations run before the new version starts serving.
 
 ## Logs, backups, restore
 
@@ -89,9 +107,23 @@ ssh root@203.0.113.10 'docker compose -p <name> logs app'
 ```
 
 The dumps are on the server itself (`app-<date>.sql.gz` in the `backups`
-volume). For a copy elsewhere, turn on the provider's server backups, or copy
-a dump off the server now and then. To restore one, from
-`/opt/cash-for-cars/<name>` on the server:
+volume), next to the database they copy.
+
+**Keep a copy off the server**: if the server is lost, its dumps go with it.
+The simplest way is the hosting provider's automatic backups or snapshots of
+the server, if it offers them: they cover the photos volume too, which the
+dumps do not. Otherwise copy the newest dump to your own computer now and
+then:
+
+```bash
+ssh root@203.0.113.10 'cd /opt/cash-for-cars/<name> && docker compose -p <name> --project-directory . -f src/deploy/vps/compose.yaml exec -T backup sh -c "cat \$(ls -1t /backups/app-*.sql.gz | head -n 1)"' > app-latest.sql.gz
+```
+
+A copy holds sellers' personal data: keep it somewhere private, and delete
+copies older than `BACKUP_DAYS`, so none outlives the time the privacy policy
+promises.
+
+To restore a dump, from `/opt/cash-for-cars/<name>` on the server:
 
 ```bash
 compose="docker compose -p <name> --project-directory . -f src/deploy/vps/compose.yaml"

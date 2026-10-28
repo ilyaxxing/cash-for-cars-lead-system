@@ -17,15 +17,16 @@ Businesses that buy used cars straight from private sellers:
 
 How many there are depends on the area: count the cards under wipers, the
 road signs and the map listings where you live. The best client already hands
-out cards or puts up signs: they pay for leads today and lose most of them.
+out cards or puts up signs: they already spend on getting sellers, and a code
+reaches people who would not call.
 
 ## What you sell
 
-A done-for-you lead system under the buyer's own name. Most people who find a
-card under their wiper never call, the ones who do call at all hours, and
-every call starts with the same questions before the seller goes quiet. With a
-QR code the seller answers those questions and sends photos in two minutes,
-and the owner sees the car before calling back.
+A done-for-you lead system under the buyer's own name. Many people who find a
+card under their wiper would rather not call a stranger, calls come at odd
+hours, and each one starts with the same questions. With a QR code the seller
+answers those questions and sends photos in a few minutes, and the owner sees
+the car before calling back.
 
 You build it with Claude Code on your Railway account and hand it over to the
 client's own: Railway and the domain are in the client's name and on the
@@ -42,7 +43,7 @@ flyers on cars, so the client should check the local rules.
   for road signs, flyers and ads, each counted separately.
 - **A form for sellers** that collects the year, make, model, mileage,
   condition, accident and loan history, asking price, location, VIN, contact
-  details and guided photos. About two minutes on a phone. A seller who stops
+  details and guided photos. A few minutes on a phone. A seller who stops
   halfway is not lost: the lead is saved as soon as the contact step is done.
 - **A push notification** to the owner's phone for every new lead, within
   seconds. iPhone and Android.
@@ -51,8 +52,9 @@ flyers on cars, so the client should check the local rules.
   statistics: how many sellers came, how many cars were bought, from cards,
   signs or ads.
 - **Their own brand and their own accounts**: their name, color, logo and
-  domain, hosted on their own Railway account (about $5 a month), their data
-  in their own database.
+  domain, hosted on their own Railway account for about $5 a month (Railway
+  Hobby, includes $5 of usage; not yet checked against a real client's bill),
+  their data in their own database.
 - **Privacy built in**: a privacy policy template, a consent checkbox, and
   sellers' names, phones and photos erased automatically 90 days after a lead
   is closed.
@@ -65,7 +67,7 @@ Suggested starting points, not market-tested yet.
 |---|---|---|
 | Setup | $300-600 once | Turnkey: installation, their name, color and logo, their domain, the card PDF and QR codes for signs and ads, the app on the owner's phone. |
 | Support (optional) | $25-50 a month | Changes to the questions, new QR placements, updates, someone to call. |
-| Hosting | about $5 a month | Railway's Hobby plan on the client's own card: $5 a month, which includes $5 of usage; one instance is expected to stay within it, not yet checked against a real bill. Where Railway doesn't fit (Russia), a small server in the client's country, at a similar price. |
+| Hosting | about $5 a month (Railway Hobby, includes $5 of usage; not yet checked against a real client's bill) | On the client's own card. Where Railway doesn't fit (Russia), a small server in the client's country, at a similar price. |
 | Domain | about $10-15 a year | Required, in the business's name. Free if the business has a website: use a subdomain such as `buy.<their domain>`. |
 | Printing | usually under $150 per 1,000 cards | Any print shop; the PDF is print-ready. |
 

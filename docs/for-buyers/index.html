@@ -94,6 +94,7 @@
     .toast { position: fixed; left: 50%; bottom: 18px; z-index: 10; transform: translate(-50%, calc(100% + 40px)); transition: transform .35s cubic-bezier(.2, .8, .2, 1); border: 0; border-radius: 999px; padding: 13px 20px; background: var(--accent); color: var(--on-accent); font: 600 15px/1 Geist, sans-serif; cursor: pointer; box-shadow: 0 12px 40px rgba(0, 0, 0, .5); white-space: nowrap; }
     .toast.shown { transform: translate(-50%, 0); }
     footer { padding: 72px 0 48px; color: var(--faint); font-size: 14px; }
+    footer a { color: var(--text); }
 
     @media (min-width: 760px) {
       .flow { grid-template-columns: 1fr 1fr; }
@@ -119,7 +120,7 @@
       <div>
         <div class="kicker">For cash-for-cars buyers</div>
         <h1>Every card under a wiper <em>can bring you a seller.</em></h1>
-        <p class="lead">Most people who find your card never call a stranger, but many will scan a code. They answer a few questions on their phone in about two minutes, and you get a push with the car, the price and photos, ready for the first call.</p>
+        <p class="lead">Many people who would never call a stranger will scan a code. They answer a few questions on their phone in a few minutes, and you get a push with the car, the price and photos, ready for the first call.</p>
         <a class="button" href="#try">Try it yourself ↓</a>
       </div>
       <div>
@@ -165,7 +166,7 @@
       <p class="sub">The form, the app and the cards carry your business's name, color and logo, at your own web address. It runs on your own account, and the leads belong to you. Sellers' personal details are deleted automatically 90 days after a deal is closed.</p>
     </section>
 
-    <footer>Questions? Ask the person who sent you this link.</footer>
+    <footer><span id="ask">Questions? Ask the person who sent you this link.</span></footer>
   </div>
   <button class="toast" id="toast" type="button">New lead on your phone ↓</button>
 
@@ -190,6 +191,24 @@
           frame.style.height = screen.clientHeight / scale + 'px';
         });
       }
+      // Who sent the link (?by=Alex+Lee&contact=(512)+555-0100): their name and
+      // a way to reach them, as plain text, a phone link or a mail link.
+      function clean(value) { return (value || '').replace(/[\u0000-\u001f\u007f]/g, '').trim().slice(0, 60); }
+      var by = clean(params.get('by'));
+      var contact = clean(params.get('contact'));
+      if (by || contact) {
+        var ask = document.getElementById('ask');
+        ask.textContent = by ? 'Questions? Ask ' + by + (contact ? ': ' : '.') : 'Questions? ';
+        if (contact) {
+          var digits = contact.replace(/[^\d+]/g, '');
+          var link = document.createElement('a');
+          if (/^\+?[\d\s().-]+$/.test(contact) && digits.replace('+', '').length >= 7) link.href = 'tel:' + digits;
+          else if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)) link.href = 'mailto:' + contact;
+          link.textContent = contact;
+          ask.appendChild(link.getAttribute('href') ? link : document.createTextNode(contact));
+        }
+      }
+
       load(false);
       fit();
       window.addEventListener('resize', fit);
