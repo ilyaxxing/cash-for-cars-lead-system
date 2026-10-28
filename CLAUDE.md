@@ -26,8 +26,9 @@ The repository is public. Write everything as if strangers read it.
   and the test suite. Failing tests or a finding → fix first, never push.
 - Conventional Commits, one logical change per commit. Commit email is the
   GitHub noreply address (repo-local git config).
-- `main` always works. Each stage on its own branch (`stage-N-...`), merged via
-  PR after tests and a browser check. No force push unless the user asks.
+- `main` always works. Every change on its own branch, merged via PR after
+  the tests pass (CI runs them) and, for UI, a browser check. Installers
+  deploy release tags, not `main`. No force push unless the user asks.
 - Some logic and many lessons come from an earlier Telegram bot by the same
   author (not public); they are written down where they apply.
 - Default brand "Car Buyout"; `BRAND_NAME` overrides.
@@ -49,19 +50,25 @@ The repository is public. Write everything as if strangers read it.
   instance), built by `tools/make_demo.py`. Rebuild it after UI changes.
   `docs/for-buyers/` is the page installers send a car buyer: the same demo
   in that business's name and color from the link, no prices or setup.
-- Hosting: Railway. Per client: app service `app` (1 replica: in-memory rate
-  limits and background jobs) + `Postgres` (point-in-time recovery) + bucket
-  `photos` (S3-compatible, no Railway backups). Built on the installer's
-  Railway account, then transferred to the client's own (Transfer Ownership:
-  the client pays; the installer stays an Editor for support). The domain is
-  the client's too, in their name. Railway domain
-  `*.up.railway.app` only until the client's own domain is connected, which
-  is required: QR codes and cards are made only for it (the commands refuse
-  the Railway address).
-- docker-compose only for local development. One deploy script,
-  `tools/deploy.py clients/<name>.env`: env file in, working URL out; it waits
-  for `/healthz` to report the uploaded git sha and the Alembic head (lesson
-  from the bot: never assume a deploy came up). It drives the Railway CLI step
+- Hosting, one instance per client, two ways. The domain is the client's
+  own, in their name, and required: QR codes and cards are made only for it
+  (the commands refuse a `*.up.railway.app` address).
+  - Railway (`tools/deploy.py`), the default. Per client: app service `app`
+    (1 replica: in-memory rate limits and background jobs) + `Postgres`
+    (point-in-time recovery, turned on by the deploy script; Railway keeps
+    about 4 weeks) + bucket `photos` (S3-compatible, no Railway backups).
+    Built on the installer's Railway account, then transferred to the
+    client's own (Transfer Ownership: the client pays; the installer stays an
+    Editor for support).
+  - A server of the client's own (`tools/deploy_vps.py`, `deploy/vps/`): any
+    Linux server over SSH, for a country whose law keeps data at home or a
+    business that cannot pay Railway. Docker compose with the app, PostgreSQL
+    with a daily dump on the same server (`BACKUP_DAYS`, 14), and Caddy for
+    HTTPS (Let's Encrypt); photos on a volume.
+- Deploy scripts: the client's env file in, a working URL out. Both wait for
+  `/healthz` to report the uploaded git sha and the Alembic head (lesson from
+  the bot: never assume a deploy came up). `docker-compose.dev.yml` is
+  for local development only. `tools/deploy.py` drives the Railway CLI step
   by step, not `.railway/railway.ts` IaC: IaC deletes every variable it does
   not list (the bot nearly lost its secrets that way) and railway.toml stops
   working on 2026-12-01. Client files live in git-ignored `clients/`;
@@ -167,27 +174,16 @@ select, yes_no, photos, phone), required, options, unit, follow_up, plus UI hint
 Field id equal to a fixed column → stored in the column, otherwise in `answers`.
 Invalid preset → the app refuses to start.
 
-## Stages
-0. Repo bootstrap on main (gitignore, secret scan, CLAUDE.md, README, LICENSE MIT
-   "Copyright (c) 2026 ilyaxxing", .env.example), GitHub repo
-   `ilyaxxing/cash-for-cars-lead-system`.
-1. Skeleton, config, DB, preset (`stage-1-skeleton`).
-2. Seller form (`stage-2-form`).
-3. Dashboard and statuses (`stage-3-dashboard`).
-4. Web Push (`stage-4-push`), iPhone check on a Railway test project.
-5. Retention, anti-spam (honeypot + per-IP limits, IP never stored), Railway
-   deploy script, docs ("Deploy", "Configure", "Customize the form", now in docs/)
-   (`stage-5-launch`). Honeypot input is named `referral_code` so AutoFill
-   never fills it; seller limits per address: 10 new leads and 600 requests
-   per hour (carrier NAT). The address comes from CLIENT_IP_HEADER (X-Real-IP
-   on Railway, set by the deploy script), never from X-Forwarded-For: uvicorn
-   with --forwarded-allow-ips='*' takes its first entry, so behind a proxy that
-   passes a client's own value through, limits and the login limit could be
-   reset at will. Checked live on 2026-10-20 with a header echo on a throwaway
-   Railway project: Railway's edge replaces both X-Real-IP and X-Forwarded-For
-   with the real address (forged, duplicated and lowercase values alike), so
-   Railway itself was not exploitable; only X-Real-IP is documented. QR codes: `python -m app.cli qr` (H, 4-module quiet
-   zone, >= 0.4 mm per module at 20 mm). iPhone push confirmed on 2026-10-20
-   on a Railway test project made by the deploy script, deleted afterwards
-   with `railway delete --project <name>`.
-After each stage: tests of key logic, manual check instructions, commit, push.
+## Abuse, addresses and QR codes
+- Spam: a honeypot input named `referral_code` (AutoFill never fills it); a
+  filled honeypot gets a convincing answer and nothing is stored. Seller
+  limits per address: 10 new leads and 600 requests per hour (carrier NAT),
+  counted in memory; the IP address is never stored or logged.
+- The address comes from CLIENT_IP_HEADER (X-Real-IP: set by the Railway deploy
+  script; Caddy sets it on a server of the client's own), never from
+  X-Forwarded-For: uvicorn with --forwarded-allow-ips='*' takes its first
+  entry, so behind a proxy that passes a client's own value through, the
+  limits and the login limit could be reset at will. Railway's edge replaces
+  X-Real-IP with the real address (checked live on 2026-10-20).
+- QR codes: `python -m app.cli qr`, error correction H, a 4-module quiet zone,
+  at least 0.4 mm per module at 20 mm.
