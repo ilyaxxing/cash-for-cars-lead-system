@@ -20,5 +20,12 @@ stored, as the policy says, so it is kept out of every log: the app logs its
 own events with ids only, uvicorn's access log is off, and on a server of the
 client's own (docs/deploy-vps.md) Caddy's log filter drops the address, and
 Docker keeps a few megabytes of each container's log, not an unlimited history.
-On a server of the client's own, the daily database dumps are kept 14 days
-(`BACKUP_DAYS`): that is the rotation the policy mentions.
+The policy's "kept for a limited time" is, in practice:
+
+- On Railway, about 4 weeks. Point-in-time recovery keeps the last 4 weekly
+  full backups and the database changes between them (Railway's
+  [Point-in-Time Recovery](https://docs.railway.com/volumes/point-in-time-recovery)
+  docs), so erased contacts can stay in that archive for about 4 weeks more.
+- On a server of the client's own, 14 days: the daily dumps are kept
+  `BACKUP_DAYS` days, plus whatever copies off the server are kept
+  (docs/deploy-vps.md asks to delete those after the same time).

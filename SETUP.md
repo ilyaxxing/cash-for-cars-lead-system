@@ -426,8 +426,10 @@ And remind the person:
   Editor on the business's project).
 - Forgotten owner password: change `OWNER_PASSWORD` in the settings file and
   deploy again; that resets it.
-- Backups: Railway keeps continuous database backups. Photos are not backed up,
-  which is fine: they are working material that is erased anyway.
+- Backups: Railway keeps about 4 weeks of continuous database backups
+  (point-in-time recovery). Photos are not backed up, which is fine: they are
+  working material that is erased anyway. On a server of the business's own,
+  the dumps sit on that server: keep a copy off it (docs/deploy-vps.md).
 - Changing the look later: change the settings file or the files in
   `clients/<id>/`, then deploy again. A phone keeps the app icon it was added
   with: to see a new icon, remove the app from the home screen and add it
@@ -496,7 +498,10 @@ root@<address>` with them once, with the root password from the provider.
 Then `VPS_HOST=root@<address>` in the settings file. The domain gets an A
 record pointing at the server's address before the first deploy (step 8
 moves before step 5). Where Docker Hub is slow or closed, set
-`DOCKER_MIRROR` (the provider's mirror, or `https://mirror.gcr.io`).
+`DOCKER_MIRROR` (the provider's mirror, or `https://mirror.gcr.io`). The
+daily dumps stay on that same server: have the business turn on the
+provider's server backups if it offers them, or copy a dump off now and then
+([docs/deploy-vps.md](docs/deploy-vps.md#logs-backups-restore)).
 
 **Then the details** (with step 3):
 
