@@ -12,8 +12,9 @@ app, and a push notification on that phone for every new lead.
 
 ## How to work with the person
 
-- Speak the person's language: the one they write to you in. The product
-  itself stays in English, because the sellers and the business are in the US.
+- Speak the person's language: the one they write to you in. The product's
+  language follows the business's country: English for the US, the sellers'
+  language elsewhere ([Another country](#another-country)).
 - One step at a time. Say in a sentence what you are about to do and why, then
   do it. Ask a few questions at once at most, never a long questionnaire.
 - Run every command yourself. Ask the person only for what only they can do:
@@ -53,8 +54,9 @@ Tell the person briefly what they will need:
    business's own, on the business's card, which the finished project is
    handed over to (step 10). Hosting is about $5 a month (Railway Hobby,
    includes $5 of usage; not yet checked against a real client's bill).
-   Railway moves a project between accounts only when both have a paid plan. Outside the US the instance may run on a server of the
-   business's own in its country instead ([Another country](#another-country)).
+   Railway moves a project between accounts only when both have a paid plan.
+   Outside the US the instance may run on a server of the business's own in
+   its country instead ([Another country](#another-country)).
 4. The business's own domain, owned by the business: a subdomain of its
    website such as `buy.<domain>`, or a new domain the business buys in its
    own name (about $10-15 a year). QR codes and cards are made only for it.
@@ -272,8 +274,9 @@ log. The script never prints secrets, so you can show its output.
 
 ## Step 7. The owner's phone
 
-Give the person this message for the business owner, filled in (it is in
-English because the owner is in the US):
+Give the person this message for the business owner, filled in, in the
+owner's language (English in the US; elsewhere translate it, as the
+dashboard's texts are):
 
 > Your new lead system is ready. To get a notification for every car seller:
 >
@@ -407,7 +410,7 @@ private channel (a password manager's shared item, not email or chat).
 Then summarize for the person, in their language: the three addresses, where
 the settings file is, the monthly cost (the business's Railway plan and
 domain), and that you are done. Give them a short note for the owner, in
-English:
+the owner's language (English in the US):
 
 - The form address, the business card link and the dashboard address.
 - Statuses: New (not handled yet), In Progress (talking or negotiating),
@@ -591,9 +594,9 @@ the files before it uploads anything and says which text or field is wrong.
 
 - **"The settings would not start in production"**: the message lists what is
   missing or malformed. Fix the settings file and run the deploy again.
-- **"The git tree has uncommitted or untracked files"**: commit form changes on
-  the business's branch, or undo stray edits. Files in `clients/` and `qr/` are
-  ignored and never cause this.
+- **"The git tree has uncommitted or untracked files"**: undo stray edits: a
+  client's changes belong in `clients/<id>/`, never in tracked files. Files in
+  `clients/` and `qr/` are ignored and never cause this.
 - **The deploy waits and then times out**: `railway logs --service app` shows
   why the app didn't start.
 - **Railway refuses with "Deploys have been paused" or the CLI cannot reach
