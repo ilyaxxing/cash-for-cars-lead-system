@@ -25,7 +25,8 @@ Running the app locally, the checks that must pass, and how it is built.
 ## Stack
 
 Python 3.12, FastAPI, SQLAlchemy (async), Alembic, PostgreSQL, S3-compatible
-object storage, Svelte 5 + Vite. Deployed on Railway.
+object storage, Svelte 5 + Vite. Deployed on Railway, or on a server of the
+client's own ([deploy-vps.md](deploy-vps.md)).
 
 ## Local setup
 
