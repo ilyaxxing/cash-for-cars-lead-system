@@ -80,10 +80,13 @@ Check what is installed and install what is missing (ask first):
   either: `bash <(curl -fsSL cli.new)`.
 
 If you are not inside this repository yet, clone it into a folder of its own,
-for example `~/car-buyout`, and work from there:
+for example `~/car-buyout`, and work from there. Deploy the newest release
+(a `v*` tag), not `main`: `main` is where development happens.
 
 ```bash
 git clone https://github.com/ilyaxxing/cash-for-cars-lead-system.git ~/car-buyout
+cd ~/car-buyout
+git checkout "$(git tag --list 'v*' --sort=-v:refname | head -n 1)"
 ```
 
 Then the Python environment (Windows: `.venv\Scripts\python` instead of
@@ -422,8 +425,9 @@ the owner's language (English in the US):
   installed the system can reset it.
 
 And remind the person:
-- Updates: `git pull`, then the same deploy command (while they are an
-  Editor on the business's project).
+- Updates: move to the newest release (`git fetch --tags`, then
+  `git checkout` the newest `v*` tag), then the same deploy command, while
+  they are an Editor on the business's project (docs/deploy.md, Updating).
 - Forgotten owner password: change `OWNER_PASSWORD` in the settings file and
   deploy again; that resets it.
 - Backups: Railway keeps about 4 weeks of continuous database backups
@@ -441,7 +445,7 @@ The system fits a business in any country without changing its code: its
 language, its form, its privacy policy, its card and, where needed, where it
 runs. Everything country-specific goes into the business's own files in
 `clients/<id>/`, next to its settings, never into `presets/` or `locales/`:
-then `git pull` brings updates to every client without conflicts.
+then a new release applies to every client without conflicts.
 
 Go through the list below for the business's country. For each point, use
 what you know and look up what you are not sure of (a web search, when you
@@ -579,7 +583,7 @@ owner sees it.
 
 Only if the business asks for different questions or wording. A client's
 changes go into its own files next to its settings, never into `presets/` or
-`locales/`: then `git pull` brings updates without conflicts, for every
+`locales/`: then a new release applies without conflicts, for every
 client.
 
 - Wording (the form's, the dashboard's, the card's): `clients/<id>/texts.json`
