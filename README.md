@@ -55,12 +55,6 @@ the same live demo and what it does for their business, without prices,
 setup details or GitHub. Add their name and color to the link
 (`for-buyers/?name=Rapid+Cash+Cars&color=ff8a00`), or make it with the link
 maker on the [project page](https://ilyaxxing.github.io/cash-for-cars-lead-system/#show).
-A message to go with it:
-
-> Hi, I set up systems that turn "we buy cars" cards into leads: the seller
-> scans the code, fills in a two-minute form, and you get a push with the
-> car, the price and photos. Here is a working demo in your name: [link].
-> Fill in the form on the first phone and watch the lead arrive on the second.
 
 ## Get started
 
