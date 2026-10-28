@@ -391,9 +391,13 @@
     })();
   </script>
   <script type="module">
-    // The link maker: the page for car buyers (for-buyers/) with a business's
-    // name and color, checked the way an instance checks BRAND_COLOR.
+    // The link maker: the page for car buyers with a business's name and color,
+    // checked the way an instance checks BRAND_COLOR. The page is a site of its
+    // own (tools/make_buyer_site.py), so a buyer cannot shorten its address
+    // to this page.
     import { accentVariables } from './demo/brand.js';
+
+    const BUYER_SITE = 'https://car-buyer-demo.github.io/';
 
     const name = document.getElementById('maker-name');
     const color = document.getElementById('maker-color');
@@ -402,7 +406,7 @@
     const copy = document.getElementById('maker-copy');
     const warn = document.getElementById('maker-warn');
     function update() {
-      const url = new URL('for-buyers/', location.href);
+      const url = new URL(BUYER_SITE);
       if (name.value.trim()) url.searchParams.set('name', name.value.trim());
       const usable = accentVariables(color.value) !== null;
       if (usable && color.value.toLowerCase() !== '#c7f747') url.searchParams.set('color', color.value.slice(1));

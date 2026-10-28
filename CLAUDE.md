@@ -48,8 +48,11 @@ The repository is public. Write everything as if strangers read it.
   the real bundles plus a stand-in server that runs in the browser
   (`frontend/src/demo`, typed against the API modules, never part of an
   instance), built by `tools/make_demo.py`. Rebuild it after UI changes.
-  `docs/for-buyers/` is the page installers send a car buyer: the same demo
-  in that business's name and color from the link, no prices or setup.
+  The page installers send a car buyer (`buyer-site/`, built by
+  `tools/make_buyer_site.py`) is a site of its own, https://car-buyer-demo.github.io/ (the
+  `car-buyer-demo` organization's Pages), so its address cannot be shortened
+  to the project page: the same demo in that business's name and color from
+  the link, no prices, setup or links back to this repository.
 - Hosting, one instance per client, two ways. The domain is the client's
   own, in their name, and required: QR codes and cards are made only for it
   (the commands refuse a `*.up.railway.app` address).

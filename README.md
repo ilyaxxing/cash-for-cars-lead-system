@@ -50,10 +50,10 @@ You pick the price, and whether to sell the setup alone or with monthly
 support. Suggested starting points, not market-tested yet. More in
 [docs/business.md](docs/business.md).
 
-**Show it to a client.** Send the buyer [the page made for them](https://ilyaxxing.github.io/cash-for-cars-lead-system/for-buyers/):
+**Show it to a client.** Send the buyer [the page made for them](https://car-buyer-demo.github.io/):
 the same live demo and what it does for their business, without prices,
 setup details or GitHub. Add their name and color to the link
-(`for-buyers/?name=Rapid+Cash+Cars&color=ff8a00`), or make it with the link
+(`https://car-buyer-demo.github.io/?name=Rapid+Cash+Cars&color=ff8a00`), or make it with the link
 maker on the [project page](https://ilyaxxing.github.io/cash-for-cars-lead-system/#show).
 
 ## Get started
