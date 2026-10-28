@@ -77,8 +77,26 @@ retention erases anyway.
 
 ## Updating
 
-Pull the new code, run the checks, and run the same command again. Migrations
-run before the new version starts serving.
+**Installing for a client**, with no code changes of your own: move to the
+newest release and run the same command again. There are no checks to run:
+they need Node, Docker and gitleaks, which an installer does not.
+
+```bash
+git fetch --tags
+git checkout "$(git tag --list 'v*' --sort=-v:refname | head -n 1)"
+.venv/bin/pip install -q -r requirements.txt
+.venv/bin/python tools/deploy_vps.py clients/acme.env
+```
+
+**Changed the code yourself**: commit it (the deploy uploads exactly the
+checked-out commit) and run the checks before deploying:
+
+```bash
+tools/check.sh
+.venv/bin/python tools/deploy_vps.py clients/acme.env
+```
+
+Migrations run before the new version starts serving.
 
 ## Logs, backups, restore
 
