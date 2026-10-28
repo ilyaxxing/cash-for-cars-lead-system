@@ -90,6 +90,27 @@ to left.
 
 > **AI assistants:** follow [SETUP.md](SETUP.md).
 
+## Limitations
+
+- Notifications are Web Push only, with no email or SMS fallback. Battery
+  savers on some Android phones can delay them, and an Android phone needs
+  Google's services (in mainland China, use an iPhone).
+- An iPhone needs iOS 16.4 or later and the dashboard added to its home
+  screen.
+- One owner login per business: no separate accounts for a team.
+- One language per instance. Languages written right to left (Arabic, Hebrew,
+  Persian, Urdu) are not supported yet, and on the business card, scripts
+  whose letters join (Arabic, Hindi, Thai) are refused.
+- The chat button in a lead opens WhatsApp or Telegram; another messenger can
+  only be the seller's stated preference.
+- Restoring the database from a backup has not been rehearsed yet. On Railway,
+  photos are not backed up.
+- Handing a Railway project over to the client's own account follows
+  Railway's documentation and has not been done with a real client yet. A
+  server of the client's own has been tested on a local virtual machine, not
+  yet with a public domain and a real certificate.
+- Prices and hosting costs are suggestions, not tested on real clients yet.
+
 ## More
 
 - **Stack:** Python (FastAPI, SQLAlchemy, Alembic), Svelte 5 + TypeScript,
