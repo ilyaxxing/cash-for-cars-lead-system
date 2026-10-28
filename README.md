@@ -43,7 +43,7 @@ and repair shops.
 |---|---|---|
 | Setup | $300-600 once | Turnkey: installation, their name, color and logo, their domain, the card PDF and QR codes, the app on the owner's phone |
 | Support | $25-50 a month | Optional: changes, updates, someone to call |
-| Hosting | about $5 a month | On the client's own Railway account |
+| Hosting | about $5 a month (Railway Hobby, includes $5 of usage; not yet checked against a real client's bill) | On the client's own Railway account |
 | Domain | about $10-15 a year | In the business's name, if it has none |
 
 You pick the price, and whether to sell the setup alone or with monthly
@@ -72,10 +72,12 @@ accounts and the domain are ready.
 
 - **You bring** Claude Code, which needs a paid Claude plan (Pro or higher)
   or an Anthropic API account, and your own [Railway](https://railway.com)
-  account.
-- **The business brings** its own Railway account with its card (about $5 a
-  month; the finished project is handed over to it), its domain, its name and
-  email, and the owner's phone for ten minutes.
+  account on the Hobby plan, $5 a month: each project is built there before
+  it is handed over. These two are your own running costs.
+- **The business brings** its own Railway account with its card, hosting
+  about $5 a month (Railway Hobby, includes $5 of usage; not yet checked
+  against a real client's bill); the finished project is handed over to it.
+  Also its domain, its name and email, and the owner's phone for ten minutes.
 
 Outside the US, Claude adapts the setup to the business's country: the
 sellers' language, the questions, the privacy policy, the card's size, and a

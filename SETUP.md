@@ -51,9 +51,9 @@ Tell the person briefly what they will need:
 3. Two Railway accounts, each on the Hobby plan ($5 a month, with a payment
    card): their own, where the instance is built and tested, and the
    business's own, on the business's card, which the finished project is
-   handed over to (step 10). The plan includes $5 of usage; one instance uses
-   about $2-3 of it. Railway moves a project between accounts only when both
-   have a paid plan. Outside the US the instance may run on a server of the
+   handed over to (step 10). Hosting is about $5 a month (Railway Hobby,
+   includes $5 of usage; not yet checked against a real client's bill).
+   Railway moves a project between accounts only when both have a paid plan. Outside the US the instance may run on a server of the
    business's own in its country instead ([Another country](#another-country)).
 4. The business's own domain, owned by the business: a subdomain of its
    website such as `buy.<domain>`, or a new domain the business buys in its
