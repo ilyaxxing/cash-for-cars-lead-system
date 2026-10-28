@@ -1,0 +1,24 @@
+[project]
+name = "cash-for-cars-lead-system"
+version = "0.1.0"
+description = "Lead intake for cash-for-cars buyers: QR card, mobile seller form, push alerts, owner dashboard"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+
+# Dependencies are pinned in requirements.txt and requirements-dev.txt.
+# This file only configures the tools.
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["frontend"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "session"
+asyncio_default_test_loop_scope = "session"

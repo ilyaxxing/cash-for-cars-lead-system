@@ -1,0 +1,102 @@
+# One client's instance on a server of its own: the app, PostgreSQL, a daily
+# dump of the database, and Caddy, which gets and renews the HTTPS
+# certificate for the client's domain.
+#
+# tools/deploy_vps.py uploads the code to /opt/cash-for-cars/<name>/src,
+# writes the settings to /opt/cash-for-cars/<name>/.env and runs this file
+# with that folder as the project directory, so the paths below are relative
+# to it. For a server where Railway is not an option (docs/deploy-vps.md).
+
+# Docker keeps every container's log until the disk is full unless told
+# otherwise: a few megabytes each is plenty.
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  app:
+    logging: *logging
+    build:
+      context: src
+      args:
+        GIT_SHA: ${GIT_SHA:-}
+    env_file: .env
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      # Sellers' photos. Not in the dumps: they are working material that
+      # retention erases anyway, as on Railway.
+      - uploads:/srv/data/uploads
+
+  db:
+    logging: *logging
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_DB: app
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set by tools/deploy_vps.py}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app -d app"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  # A dump a day, kept BACKUP_DAYS days, on the server itself. The privacy
+  # policy says backups are kept for a limited time: this is that time.
+  backup:
+    logging: *logging
+    image: postgres:16-alpine
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      BACKUP_DAYS: ${BACKUP_DAYS:-14}
+    volumes:
+      - backups:/backups
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        while true; do
+          name=/backups/app-$$(date +%F).sql.gz
+          if pg_dump -h db -U app app | gzip > "$$name.part"; then
+            mv "$$name.part" "$$name"
+          else
+            rm -f "$$name.part"
+            echo "backup failed" >&2
+          fi
+          find /backups -name 'app-*.sql.gz' -mtime +$$BACKUP_DAYS -delete
+          sleep 86400
+        done
+
+  caddy:
+    logging: *logging
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN:?set by tools/deploy_vps.py}
+    volumes:
+      - ./src/deploy/vps/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  pgdata:
+  uploads:
+  backups:
+  caddy_data:
+  caddy_config:

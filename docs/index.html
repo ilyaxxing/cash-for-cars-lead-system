@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <title>Cash for Cars Lead System</title>
+  <meta name="description" content="A QR card under the windshield wiper, a mobile form for car sellers, instant push to the buyer's phone and an app to work every lead. Open source, installed with Claude Code.">
+  <meta name="theme-color" content="#0b0c0c">
+  <style>
+    @font-face { font-family: Geist; font-weight: 400; font-display: swap; src: url(assets/fonts/geist-400.woff2) format("woff2"); }
+    @font-face { font-family: Geist; font-weight: 600; font-display: swap; src: url(assets/fonts/geist-600.woff2) format("woff2"); }
+    @font-face { font-family: Geist; font-weight: 800; font-display: swap; src: url(assets/fonts/geist-800.woff2) format("woff2"); }
+    @font-face { font-family: "Geist Mono"; font-weight: 500; font-display: swap; src: url(assets/fonts/geist-mono-500.woff2) format("woff2"); }
+
+    :root {
+      --bg: #0b0c0c;
+      --surface: #161717;
+      --line: #262828;
+      --text: #f4f3ee;
+      --muted: #a5a7a2;
+      --faint: #7c7e7a;
+      --accent: #c7f747;
+      --on-accent: #111212;
+      --paper: #f2f0eb;
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 400 17px/1.55 Geist, system-ui, -apple-system, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+    header.top { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 10px; font: 700 13px/1 Geist, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+    .mark { width: 24px; height: 24px; border-radius: 7px; background: var(--accent); display: grid; place-items: center; transition: background-color .4s; }
+    .mark svg { width: 100%; height: 100%; }
+    .gh { white-space: nowrap; font: 500 13px/1 "Geist Mono", ui-monospace, monospace; color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 9px 14px; }
+    .gh:hover { color: var(--text); border-color: var(--faint); }
+
+    .hero { display: grid; grid-template-columns: 1fr; gap: 28px; padding: 28px 0 8px; }
+    .kicker { font: 500 12px/1 "Geist Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    .kicker::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); transition: background-color .4s; }
+    h1 { margin: 14px 0 0; font: 800 clamp(40px, 7.4vw, 76px)/.98 Geist, sans-serif; letter-spacing: -.035em; }
+    h1 em { font-style: normal; color: var(--accent); transition: color .4s; }
+    .lead { margin: 20px 0 0; max-width: 34em; color: var(--muted); font-size: clamp(17px, 2vw, 19px); }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .button { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 22px; border-radius: 14px; font: 600 16px/1 Geist, sans-serif; text-decoration: none; }
+    .button.primary { background: var(--accent); color: var(--on-accent); transition: background-color .4s; }
+    .button.ghost { border: 1px solid var(--line); color: var(--text); }
+    .button.ghost:hover { border-color: var(--faint); }
+
+    /* The card, in 3D. 3.5 x 2 in. */
+    .stage { position: relative; display: grid; place-items: center; padding: 34px 0 10px; perspective: 1600px; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
+    .stage.dragging { cursor: grabbing; }
+    .card { position: relative; width: min(560px, 88vw); aspect-ratio: 3.5 / 2; transform-style: preserve-3d; transform: rotateX(var(--rx, 8deg)) rotateY(var(--ry, -22deg)); will-change: transform; }
+    .card.eased { transition: transform .9s cubic-bezier(.22, .68, .24, 1); }
+    .face { position: absolute; inset: 0; border-radius: 10px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: #1e2023 center / cover no-repeat; box-shadow: 0 1px 0 rgba(255, 255, 255, .06) inset; }
+    .face.front { transform: translateZ(1.5px); }
+    .face.back { transform: rotateY(180deg) translateZ(1.5px); }
+    .face::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, rgba(255, 255, 255, var(--gloss, .06)) 0%, rgba(255, 255, 255, 0) 45%); pointer-events: none; }
+    .edge { position: absolute; inset: 0; border-radius: 10px; background: var(--paper); transform: translateZ(0); }
+    .shadow { position: absolute; left: 50%; bottom: -6px; width: min(480px, 76vw); height: 26px; transform: translateX(-50%); border-radius: 50%; background: radial-gradient(50% 50% at 50% 50%, rgba(0, 0, 0, .7), transparent 75%); filter: blur(8px); pointer-events: none; }
+
+    .controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; padding: 22px 0 6px; }
+    .swatches { display: flex; gap: 10px; }
+    .swatch { width: 34px; height: 34px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, .14); background: var(--c); cursor: pointer; padding: 0; transition: transform .15s; }
+    .swatch:hover { transform: scale(1.08); }
+    .swatch[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--c); border-color: transparent; }
+    .flip { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--text); font: 500 13px/1 "Geist Mono", ui-monospace, monospace; cursor: pointer; }
+    .flip:hover { border-color: var(--faint); }
+    .hint { text-align: center; color: var(--faint); font: 500 12px/1.5 "Geist Mono", ui-monospace, monospace; margin: 4px 0 0; }
+
+    section { padding: 72px 0 0; }
+    h2 { margin: 0; font: 800 clamp(30px, 4.4vw, 44px)/1.04 Geist, sans-serif; letter-spacing: -.03em; }
+    .sub { color: var(--muted); max-width: 40em; margin: 14px 0 0; }
+
+    .flow { display: grid; grid-template-columns: 1fr; gap: 28px; margin-top: 36px; }
+    .phone { margin: 0; }
+    .phone .screen { position: relative; width: min(330px, 84vw); aspect-ratio: 390 / 844; margin: 0 auto; border-radius: 38px; overflow: hidden; background: #111212; border: 8px solid #222424; box-shadow: 0 30px 80px rgba(0, 0, 0, .5); }
+    /* The apps lay out at a phone's 390 px and are scaled to the frame (script below). */
+    .phone iframe { position: absolute; top: 0; left: 0; width: 390px; height: 844px; border: 0; transform: scale(var(--scale, .78)); transform-origin: 0 0; background: #111212; }
+    .demo-note { text-align: center; color: var(--faint); font: 500 12.5px/1.6 "Geist Mono", ui-monospace, monospace; margin: 28px auto 0; max-width: 46em; }
+    .demo-note .flip { margin-top: 12px; }
+    .toast { position: fixed; left: 50%; bottom: 18px; z-index: 10; transform: translate(-50%, calc(100% + 40px)); transition: transform .35s cubic-bezier(.2, .8, .2, 1); border: 0; border-radius: 999px; padding: 13px 20px; background: var(--accent); color: var(--on-accent); font: 600 15px/1 Geist, sans-serif; cursor: pointer; box-shadow: 0 12px 40px rgba(0, 0, 0, .5); white-space: nowrap; }
+    .toast.shown { transform: translate(-50%, 0); }
+    .maker { margin-top: 28px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); padding: 20px; }
+    .maker .fields { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+    .maker label { display: grid; gap: 6px; color: var(--muted); font-size: 14px; }
+    .maker input[type="text"] { width: min(320px, 70vw); min-height: 46px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: 400 16px Geist, sans-serif; }
+    .maker input[type="color"] { width: 64px; height: 46px; padding: 4px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); cursor: pointer; }
+    .maker .link { margin-top: 16px; font: 500 14px/1.6 "Geist Mono", ui-monospace, monospace; overflow-wrap: anywhere; color: var(--text); }
+    .maker .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .maker .actions .button { min-height: 46px; padding: 0 18px; font-size: 15px; border: 0; cursor: pointer; }
+    .maker .warn { margin: 10px 0 0; color: #ffb4a6; font-size: 14px; }
+    .needs { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
+    .needs .point ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: 15.5px; }
+    .needs .point li + li { margin-top: 4px; }
+    .phone figcaption { text-align: center; margin-top: 16px; color: var(--muted); font-size: 15px; }
+    .phone figcaption b { display: block; color: var(--text); font-weight: 600; font-size: 17px; }
+
+    .points { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 32px; }
+    .point { border: 1px solid var(--line); border-radius: 16px; padding: 20px; background: var(--surface); }
+    .point h3 { margin: 0; font: 600 18px/1.3 Geist, sans-serif; }
+    .point p { margin: 8px 0 0; color: var(--muted); font-size: 15.5px; }
+    .num { font: 500 12px/1 "Geist Mono", ui-monospace, monospace; color: var(--accent); transition: color .4s; }
+
+    .prompt { margin-top: 28px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); padding: 18px 20px; font: 500 15px/1.6 "Geist Mono", ui-monospace, monospace; overflow-wrap: anywhere; }
+    footer { padding: 72px 0 48px; color: var(--faint); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+
+    @media (min-width: 760px) {
+      .flow { grid-template-columns: 1fr 1fr; }
+      .points, .needs { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 980px) {
+      .hero { grid-template-columns: 1fr 1.05fr; align-items: center; padding-top: 48px; }
+      .stage { padding-top: 0; }
+    }
+    .short { display: none; }
+    @media (max-width: 520px) {
+      .long { display: none; }
+      .short { display: inline; }
+    }
+    /* ?spin: the card alone, turning, for recording the README animation. */
+    body.spin header.top, body.spin .hero > div:first-child, body.spin .controls, body.spin .hint, body.spin section, body.spin footer { display: none; }
+    body.spin .hero { min-height: 100vh; display: grid; place-items: center; padding: 0; }
+    body.spin .stage { padding: 0; }
+    @media (prefers-reduced-motion: reduce) {
+      .card.eased, .mark, h1 em, .button.primary { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <span class="mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 6.8v4.6c0 .5.2 1 .6 1.4l6.1 6.1c.8.8 2 .8 2.8 0l4.1-4.1c.8-.8.8-2 0-2.8l-6.1-6.1c-.4-.4-.9-.6-1.4-.6H6.8C5.8 5.3 5 6 5 6.8z" fill="var(--on-accent)"/><circle cx="8.4" cy="8.6" r="1.3" fill="var(--accent)"/></svg>
+        </span>
+        <span class="long">Cash for Cars Lead System</span><span class="short">Cash for Cars</span>
+      </div>
+      <a class="gh" data-repo href="https://github.com/ilyaxxing/cash-for-cars-lead-system">GitHub ↗</a>
+    </header>
+
+    <div class="hero">
+      <div>
+        <div class="kicker">Open source · For people who set it up for car buyers</div>
+        <h1>Every car seller <em>lands on the buyer's phone.</em></h1>
+        <p class="lead">A lead system for local businesses that buy used cars for cash. A card under the windshield wiper with a QR code, a two-minute mobile form for the car's owner, a push to the buyer's phone within seconds, and an app to work every lead. You set it up for a buyer under their name with Claude Code and charge for the setup.</p>
+        <div class="cta">
+          <a class="button primary" data-repo href="https://github.com/ilyaxxing/cash-for-cars-lead-system">Get it on GitHub →</a>
+          <a class="button ghost" href="#how">Try the live demo</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="stage" id="stage" aria-label="The windshield card in 3D. Drag to turn it.">
+          <div class="card eased" id="card">
+            <div class="edge" aria-hidden="true"></div>
+            <div class="face front" id="front" role="img" aria-label="Front of the windshield card: We buy any car, with a QR code"></div>
+            <div class="face back" id="back" role="img" aria-label="Back of the windshield card: what the business buys, the same QR code and the phone number"></div>
+          </div>
+          <div class="shadow" aria-hidden="true"></div>
+        </div>
+        <div class="controls">
+          <div class="swatches" id="swatches" role="group" aria-label="Accent color"></div>
+          <button class="flip" id="flip" type="button">Flip card</button>
+        </div>
+        <p class="hint">Drag to turn · every client gets their own color, logo and QR code</p>
+      </div>
+    </div>
+
+    <section id="how">
+      <div class="kicker">Live demo</div>
+      <h2>Fill in the form. Watch the lead arrive.</h2>
+      <p class="sub">These are the real seller's form and the buyer's app. Answer as a seller would: the moment the contact details are in, the lead lands in the app with a push, the way it reaches the buyer's phone. Tap the push, change the status, add a note.</p>
+      <div class="flow">
+        <figure class="phone">
+          <div class="screen"><iframe data-src="demo/index.html?src=card" src="demo/index.html?src=card" title="The seller's form, a working demo" loading="lazy"></iframe></div>
+          <figcaption><b>The seller</b>Found the card, scanned it. Two minutes, no app, no account.</figcaption>
+        </figure>
+        <figure class="phone" id="buyer">
+          <div class="screen"><iframe data-src="demo/app/index.html" src="demo/app/index.html" title="The buyer's app, a working demo" loading="lazy"></iframe></div>
+          <figcaption><b>The buyer</b>A push within seconds, then one tap to call.</figcaption>
+        </figure>
+      </div>
+      <p class="demo-note">A working demo with fictional leads and AI-generated car photos. It runs in your browser: nothing you type leaves this page.<br><button class="flip" id="restart" type="button">Start over</button></p>
+    </section>
+
+    <section id="show">
+      <div class="kicker">Show it to a client</div>
+      <h2>A demo in the buyer's own name.</h2>
+      <p class="sub">The page to send a car buyer you are talking to: the same live demo in their business's name and color, and what it does for them. No prices, no setup details, no GitHub.</p>
+      <div class="maker">
+        <div class="fields">
+          <label>Business name<input type="text" id="maker-name" maxlength="40" placeholder="Rapid Cash Cars" autocomplete="off"></label>
+          <label>Color<input type="color" id="maker-color" value="#c7f747"></label>
+        </div>
+        <div class="link" id="maker-link"></div>
+        <p class="warn" id="maker-warn" hidden>Too dark for the app's dark screens, so the link leaves it out. Pick a lighter shade.</p>
+        <div class="actions">
+          <button class="button primary" id="maker-copy" type="button">Copy link</button>
+          <a class="button ghost" id="maker-open" target="_blank" rel="noopener">Open</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="kicker">The business</div>
+      <h2>Sell it once, set it up in an afternoon.</h2>
+      <p class="sub">Cash-for-cars buyers leave thousands of cards under windshield wipers. Most people who find one never call a stranger, but many will scan a code. You install this system for the buyer, under their name, on their own account.</p>
+      <div class="points">
+        <div class="point"><span class="num">01</span><h3>Find the buyers</h3><p>Every "We buy cars" card under your wiper is one. So are the numbers on road signs and the "we buy cars" listings on maps. They already pay for leads.</p></div>
+        <div class="point"><span class="num">02</span><h3>Charge for the setup</h3><p>$300–600 for a turnkey setup, plus an optional support plan at $25–50 a month. Hosting (about $5 a month) and the domain (about $10–15 a year) are on the client's own accounts.</p></div>
+        <div class="point"><span class="num">03</span><h3>Install with Claude</h3><p>Claude Code asks the questions, deploys, connects the owner's phone and makes the print-ready card. About an hour once the accounts and the domain are ready.</p></div>
+      </div>
+      <p class="sub">Prices, who buys it and the other niches it fits are in the <a href="https://github.com/ilyaxxing/cash-for-cars-lead-system/blob/main/docs/business.md">business doc</a>. Suggested starting points, not market-tested yet.</p>
+    </section>
+
+    <section>
+      <div class="kicker">Start</div>
+      <h2>Paste one line into Claude Code.</h2>
+      <p class="sub">Open the Code tab in the Claude desktop app, start a session in an empty folder and send:</p>
+      <div class="prompt" id="prompt">Set up https://github.com/ilyaxxing/cash-for-cars-lead-system for my client.</div>
+      <div class="needs">
+        <div class="point"><h3>You</h3><ul><li>Claude Code (the Code tab in the Claude desktop app), on a paid Claude plan</li><li>Your own Railway account</li><li>About an hour, once the accounts and the domain are ready</li></ul></div>
+        <div class="point"><h3>The business</h3><ul><li>Its own Railway account with its card (about $5 a month); the finished project is handed over to it</li><li>Its domain, or a new one in its name (about $10–15 a year)</li><li>Its name, email, and the owner's phone for ten minutes</li></ul></div>
+        <div class="point"><h3>Claude</h3><ul><li>Asks about the business and deploys it</li><li>Connects the owner's phone and sends a test push</li><li>Makes the print-ready card and the QR codes</li><li>Tells you when a step needs a person: signing in, payment, DNS</li></ul></div>
+      </div>
+    </section>
+
+    <footer>
+      <span>Business #1 of 100 Ready-to-Launch Businesses, by <a href="https://instagram.com/ilyaxxing">@ilyaxxing</a></span>
+      <span>MIT license</span>
+      <a data-repo href="https://github.com/ilyaxxing/cash-for-cars-lead-system">Source on GitHub</a>
+      <span>Car photos in the demo are AI-generated. No real customer data.</span>
+    </footer>
+    <button class="toast" id="toast" type="button">New lead in the buyer's app ↓</button>
+  </div>
+
+  <script>
+    (function () {
+      var COLORS = [
+        ['lime', '#C7F747', '#111212'], ['orange', '#FF8A00', '#111212'], ['yellow', '#FFD60A', '#111212'],
+        ['red', '#FF4D4D', '#111212'], ['blue', '#3DA5FF', '#111212'], ['mint', '#3DDC97', '#111212']
+      ];
+      var root = document.documentElement;
+      var front = document.getElementById('front');
+      var back = document.getElementById('back');
+      var box = document.getElementById('swatches');
+      var cache = {};
+
+      function preload(name) {
+        ['front', 'back'].forEach(function (side) {
+          var key = name + '-' + side;
+          if (!cache[key]) { cache[key] = new Image(); cache[key].src = 'assets/card/' + key + '.webp'; }
+        });
+      }
+      function pick(color) {
+        var name = color[0];
+        front.style.backgroundImage = 'url(assets/card/' + name + '-front.webp)';
+        back.style.backgroundImage = 'url(assets/card/' + name + '-back.webp)';
+        root.style.setProperty('--accent', color[1]);
+        root.style.setProperty('--on-accent', color[2]);
+        Array.prototype.forEach.call(box.children, function (b) {
+          b.setAttribute('aria-pressed', b.dataset.name === name ? 'true' : 'false');
+        });
+        try { localStorage.setItem('card-color', name); } catch (e) {}
+      }
+      COLORS.forEach(function (color) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'swatch';
+        b.dataset.name = color[0];
+        b.style.setProperty('--c', color[1]);
+        b.setAttribute('aria-label', color[0]);
+        b.addEventListener('click', function () { pick(color); });
+        b.addEventListener('mouseenter', function () { preload(color[0]); });
+        box.appendChild(b);
+      });
+      var saved = null;
+      try { saved = localStorage.getItem('card-color'); } catch (e) {}
+      pick(COLORS.filter(function (c) { return c[0] === saved; })[0] || COLORS[0]);
+      COLORS.forEach(function (c) { preload(c[0]); });
+
+      // Drag to turn; let go and it settles. Idle: a slow sway.
+      var stage = document.getElementById('stage');
+      var card = document.getElementById('card');
+      var ry = -22, rx = 8, dragging = false, lastX = 0, lastY = 0, idle = true, start = performance.now();
+      var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var params = new URLSearchParams(location.search);
+      var spin = params.has('spin');
+      function render() {
+        rx = Math.max(-30, Math.min(30, rx));
+        card.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+        card.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+        card.style.setProperty('--gloss', (0.03 + 0.09 * Math.abs(Math.sin(ry * Math.PI / 180))).toFixed(3));
+      }
+      function loop(now) {
+        if (spin) {
+          card.classList.remove('eased');
+          ry = -22 + ((now - start) / 6000) * 360;
+          rx = 8 + Math.sin((now - start) / 1900) * 4;
+          render();
+        } else if (idle && !dragging && !still) {
+          card.classList.remove('eased');
+          var t = (now - start) / 1000;
+          ry = -22 + Math.sin(t * 0.6) * 10;
+          rx = 8 + Math.sin(t * 0.45) * 3;
+          render();
+        }
+        requestAnimationFrame(loop);
+      }
+      var face = 0;
+      stage.addEventListener('pointerdown', function (e) {
+        dragging = true; idle = false; lastX = e.clientX; lastY = e.clientY;
+        card.classList.remove('eased'); stage.classList.add('dragging');
+        try { stage.setPointerCapture(e.pointerId); } catch (err) {}
+      });
+      stage.addEventListener('pointermove', function (e) {
+        if (!dragging) return;
+        ry += (e.clientX - lastX) * 0.5; rx -= (e.clientY - lastY) * 0.3;
+        lastX = e.clientX; lastY = e.clientY; render();
+      });
+      function end() {
+        if (!dragging) return;
+        dragging = false; stage.classList.remove('dragging'); card.classList.add('eased');
+        face = Math.round((ry + 22) / 180); ry = face * 180 - 22; rx = 8; render();
+      }
+      stage.addEventListener('pointerup', end);
+      stage.addEventListener('pointercancel', end);
+      document.getElementById('flip').addEventListener('click', function () {
+        idle = false; card.classList.add('eased'); face += 1; ry = face * 180 - 22; rx = 8; render();
+      });
+      if (spin) document.body.classList.add('spin');
+      render();
+      requestAnimationFrame(loop);
+
+      // One place to change the repository address.
+      var repo = document.querySelector('[data-repo]').getAttribute('href');
+      document.getElementById('prompt').textContent = 'Set up ' + repo + ' for my client.';
+    })();
+
+    // The live demo (demo/, built by tools/make_demo.py): two frames of one
+    // page sharing their leads through this window.
+    (function () {
+      var frames = Array.prototype.slice.call(document.querySelectorAll('iframe[data-src]'));
+      function fit() {
+        frames.forEach(function (frame) {
+          var screen = frame.parentElement;
+          var scale = screen.clientWidth / 390;
+          frame.style.setProperty('--scale', scale);
+          frame.style.height = screen.clientHeight / scale + 'px';
+        });
+      }
+      fit();
+      window.addEventListener('resize', fit);
+
+      document.getElementById('restart').addEventListener('click', function () {
+        window.__carBuyoutDemo = undefined;
+        frames.forEach(function (frame) {
+          var src = frame.getAttribute('data-src');
+          frame.src = src + (src.indexOf('?') < 0 ? '?' : '&') + 'fresh=' + Date.now();
+        });
+      });
+
+      // On a phone the buyer's app is below the form: point at it when a lead arrives.
+      var toast = document.getElementById('toast');
+      var buyer = document.getElementById('buyer');
+      var timer;
+      toast.addEventListener('click', function () {
+        toast.classList.remove('shown');
+        buyer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+      if ('BroadcastChannel' in window) {
+        new BroadcastChannel('car-buyout-demo').addEventListener('message', function () {
+          var box = buyer.getBoundingClientRect();
+          if (box.top < window.innerHeight * 0.6 && box.bottom > window.innerHeight * 0.4) return;
+          toast.classList.add('shown');
+          clearTimeout(timer);
+          timer = setTimeout(function () { toast.classList.remove('shown'); }, 6000);
+        });
+      }
+    })();
+  </script>
+  <script type="module">
+    // The link maker: the page for car buyers (for-buyers/) with a business's
+    // name and color, checked the way an instance checks BRAND_COLOR.
+    import { accentVariables } from './demo/brand.js';
+
+    const name = document.getElementById('maker-name');
+    const color = document.getElementById('maker-color');
+    const output = document.getElementById('maker-link');
+    const open = document.getElementById('maker-open');
+    const copy = document.getElementById('maker-copy');
+    const warn = document.getElementById('maker-warn');
+    function update() {
+      const url = new URL('for-buyers/', location.href);
+      if (name.value.trim()) url.searchParams.set('name', name.value.trim());
+      const usable = accentVariables(color.value) !== null;
+      if (usable && color.value.toLowerCase() !== '#c7f747') url.searchParams.set('color', color.value.slice(1));
+      warn.hidden = usable;
+      url.hash = '';
+      output.textContent = url.href;
+      open.href = url.href;
+    }
+    name.addEventListener('input', update);
+    color.addEventListener('input', update);
+    copy.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(output.textContent);
+        copy.textContent = 'Copied';
+      } catch {
+        copy.textContent = 'Select the link above';
+      }
+      setTimeout(() => { copy.textContent = 'Copy link'; }, 1800);
+    });
+    update();
+  </script>
+</body>
+</html>

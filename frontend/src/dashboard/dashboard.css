@@ -1,0 +1,106 @@
+/* Animations and shared pieces of the owner dashboard, as in the design. */
+
+@keyframes ui-panel {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ui-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ui-toast {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 8px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+html,
+body {
+  overscroll-behavior: none;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 5px;
+  border: 2px solid var(--bg);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Status dot: filled for New and In Progress, outlined for Purchased, gray for Rejected. */
+.status-dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+}
+
+.status-new {
+  --status-bg: var(--accent);
+  --status-bd: var(--accent);
+  --status-c: var(--accent);
+}
+
+.status-in_work {
+  --status-bg: oklch(0.84 0.13 78);
+  --status-bd: oklch(0.84 0.13 78);
+  --status-c: #f4f3ee;
+}
+
+.status-bought {
+  --status-bg: transparent;
+  --status-bd: var(--accent);
+  --status-c: #f4f3ee;
+}
+
+.status-rejected {
+  --status-bg: #5a5c5b;
+  --status-bd: #5a5c5b;
+  --status-c: #a5a7a2;
+}
+
+.status-dot {
+  background: var(--status-bg);
+  box-shadow: inset 0 0 0 1.5px var(--status-bd);
+}
+
+.mono-label {
+  font: 500 11px/1 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.striped {
+  background: repeating-linear-gradient(135deg, #2c2e2e 0 9px, #262828 9px 18px);
+}

@@ -1,0 +1,24 @@
+# HTTPS for the client's domain, with a certificate Caddy gets and renews by
+# itself, in front of the app (deploy/vps/compose.yaml).
+{
+	# A visitor's address never reaches a log: the privacy policy says it is
+	# used in memory only. Errors are logged without it.
+	log default {
+		format filter {
+			request>remote_ip delete
+			request>remote_port delete
+			request>client_ip delete
+			request>headers delete
+		}
+	}
+}
+
+{$DOMAIN} {
+	encode zstd gzip
+	reverse_proxy app:8000 {
+		# The visitor's address for the app's rate limits (CLIENT_IP_HEADER).
+		# Caddy takes it from the connection itself, so a visitor cannot set
+		# it; X-Forwarded-For, which can carry a visitor's own text, is not used.
+		header_up X-Real-IP {remote_host}
+	}
+}

@@ -1,0 +1,44 @@
+# Local development.
+#
+#   docker compose -f docker-compose.dev.yml up -d          # PostgreSQL only
+#   docker compose -f docker-compose.dev.yml --profile full up --build
+#                                                         # PostgreSQL + the production image
+#
+# Day to day, run the database here and the app on the host:
+#   uvicorn --factory app.main:create_app --reload   (backend, port 8000)
+#   npm run dev --prefix frontend                     (frontend, port 5173)
+
+services:
+  db:
+    # Same major version as Railway's PostgreSQL.
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: carbuyout
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      # PostgreSQL 18 images keep data under /var/lib/postgresql/<version>.
+      - db-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "carbuyout"]
+      interval: 2s
+      retries: 15
+
+  app:
+    profiles: [full]
+    build: .
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/carbuyout
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  db-data:

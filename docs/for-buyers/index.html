@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Shared by link with one business at a time, never meant to be found. -->
+  <meta name="robots" content="noindex">
+  <title>Car Buyout · Leads from your windshield cards</title>
+  <meta name="description" content="A working demo: the form a seller fills in after scanning your card, and the app where the lead arrives with a push.">
+  <meta name="theme-color" content="#0b0c0c">
+  <script>
+    // A named link (?name=...&color=...) shows the page in that business's
+    // look; stay hidden for the moment it takes, never longer.
+    if (/[?&](name|color)=/.test(location.search)) {
+      document.documentElement.classList.add('pending');
+      setTimeout(function () { document.documentElement.classList.remove('pending'); }, 1500);
+    }
+  </script>
+  <style>
+    @font-face { font-family: Geist; font-weight: 400; font-display: swap; src: url(../assets/fonts/geist-400.woff2) format("woff2"); }
+    @font-face { font-family: Geist; font-weight: 600; font-display: swap; src: url(../assets/fonts/geist-600.woff2) format("woff2"); }
+    @font-face { font-family: Geist; font-weight: 800; font-display: swap; src: url(../assets/fonts/geist-800.woff2) format("woff2"); }
+    @font-face { font-family: "Geist Mono"; font-weight: 500; font-display: swap; src: url(../assets/fonts/geist-mono-500.woff2) format("woff2"); }
+
+    /* The accent is the business's color: brand.js puts it in from the link,
+       as an instance does from BRAND_COLOR. */
+    :root {
+      --bg: #0b0c0c;
+      --surface: #161717;
+      --line: #262828;
+      --text: #f4f3ee;
+      --muted: #a5a7a2;
+      --faint: #7c7e7a;
+      --accent: #c7f747;
+      --on-accent: #111212;
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 400 17px/1.55 Geist, system-ui, -apple-system, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      transition: opacity .2s;
+    }
+    .pending body { opacity: 0; }
+    a { color: inherit; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+    header.top { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 10px; min-width: 0; font: 700 13px/1.2 Geist, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
+    .mark { flex: none; width: 24px; height: 24px; border-radius: 7px; background: var(--accent); }
+    .mark svg { display: block; width: 100%; height: 100%; }
+    .badge { flex: none; font: 500 12px/1 "Geist Mono", ui-monospace, monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; }
+
+    .hero { display: grid; grid-template-columns: 1fr; gap: 36px; padding: 28px 0 8px; align-items: center; }
+    .kicker { font: 500 12px/1 "Geist Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+    .kicker::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); }
+    h1 { margin: 14px 0 0; font: 800 clamp(40px, 7vw, 72px)/.98 Geist, sans-serif; letter-spacing: -.035em; }
+    h1 em { font-style: normal; color: var(--accent); }
+    .lead { margin: 20px 0 0; max-width: 34em; color: var(--muted); font-size: clamp(17px, 2vw, 19px); }
+    .button { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; margin-top: 28px; padding: 0 22px; border-radius: 14px; font: 600 16px/1 Geist, sans-serif; text-decoration: none; background: var(--accent); color: var(--on-accent); }
+
+    .cards { position: relative; width: min(520px, 100%); margin: 0 auto; aspect-ratio: 3.5 / 3.1; }
+    .cards img { position: absolute; width: 72%; height: auto; border-radius: 9px; box-shadow: 0 24px 60px rgba(0, 0, 0, .55); }
+    .cards .front { left: 0; top: 0; transform: rotate(-4deg); z-index: 1; }
+    .cards .back { right: 0; bottom: 0; transform: rotate(3deg); }
+    .caption { text-align: center; color: var(--faint); font: 500 12px/1.5 "Geist Mono", ui-monospace, monospace; margin: 14px 0 0; }
+
+    section { padding: 72px 0 0; }
+    h2 { margin: 0; font: 800 clamp(30px, 4.4vw, 44px)/1.04 Geist, sans-serif; letter-spacing: -.03em; }
+    .sub { color: var(--muted); max-width: 40em; margin: 14px 0 0; }
+
+    .flow { display: grid; grid-template-columns: 1fr; gap: 28px; margin-top: 36px; }
+    .phone { margin: 0; }
+    .phone .screen { position: relative; width: min(330px, 84vw); aspect-ratio: 390 / 844; margin: 0 auto; border-radius: 38px; overflow: hidden; background: #111212; border: 8px solid #222424; box-shadow: 0 30px 80px rgba(0, 0, 0, .5); }
+    /* The apps lay out at a phone's 390 px and are scaled to the frame (script below). */
+    .phone iframe { position: absolute; top: 0; left: 0; width: 390px; height: 844px; border: 0; transform: scale(var(--scale, .78)); transform-origin: 0 0; background: #111212; }
+    .phone figcaption { text-align: center; margin-top: 16px; color: var(--muted); font-size: 15px; }
+    .phone figcaption b { display: block; color: var(--text); font-weight: 600; font-size: 17px; }
+    .note { text-align: center; color: var(--faint); font: 500 12.5px/1.6 "Geist Mono", ui-monospace, monospace; margin: 28px auto 0; max-width: 46em; }
+    .again { margin-top: 12px; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--text); font: 500 13px/1 "Geist Mono", ui-monospace, monospace; cursor: pointer; }
+    .again:hover { border-color: var(--faint); }
+
+    .points { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 32px; }
+    .point { border: 1px solid var(--line); border-radius: 16px; padding: 20px; background: var(--surface); }
+    .point h3 { margin: 0; font: 600 18px/1.3 Geist, sans-serif; }
+    .point p { margin: 8px 0 0; color: var(--muted); font-size: 15.5px; }
+    .num { font: 500 12px/1 "Geist Mono", ui-monospace, monospace; color: var(--accent); }
+
+    .toast { position: fixed; left: 50%; bottom: 18px; z-index: 10; transform: translate(-50%, calc(100% + 40px)); transition: transform .35s cubic-bezier(.2, .8, .2, 1); border: 0; border-radius: 999px; padding: 13px 20px; background: var(--accent); color: var(--on-accent); font: 600 15px/1 Geist, sans-serif; cursor: pointer; box-shadow: 0 12px 40px rgba(0, 0, 0, .5); white-space: nowrap; }
+    .toast.shown { transform: translate(-50%, 0); }
+    footer { padding: 72px 0 48px; color: var(--faint); font-size: 14px; }
+
+    @media (min-width: 760px) {
+      .flow { grid-template-columns: 1fr 1fr; }
+      .points { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 980px) {
+      .hero { grid-template-columns: 1fr 1fr; padding-top: 48px; }
+      .points { grid-template-columns: repeat(4, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 6.8v4.6c0 .5.2 1 .6 1.4l6.1 6.1c.8.8 2 .8 2.8 0l4.1-4.1c.8-.8.8-2 0-2.8l-6.1-6.1c-.4-.4-.9-.6-1.4-.6H6.8C5.8 5.3 5 6 5 6.8z" fill="var(--on-accent)"/><circle cx="8.4" cy="8.6" r="1.3" fill="var(--accent)"/></svg></span>
+        <span data-name>Car Buyout</span>
+      </div>
+      <span class="badge">Demo</span>
+    </header>
+
+    <div class="hero">
+      <div>
+        <div class="kicker">For cash-for-cars buyers</div>
+        <h1>Every card under a wiper <em>can bring you a seller.</em></h1>
+        <p class="lead">Most people who find your card never call a stranger, but many will scan a code. They answer a few questions on their phone in about two minutes, and you get a push with the car, the price and photos, ready for the first call.</p>
+        <a class="button" href="#try">Try it yourself ↓</a>
+      </div>
+      <div>
+        <div class="cards">
+          <img class="front" id="card-front" src="../assets/card/lime-front.webp" alt="A sample card, front: We buy any car, with a QR code" width="1008" height="576">
+          <img class="back" id="card-back" src="../assets/card/lime-back.webp" alt="A sample card, back: what is bought, the QR code again and the phone number" width="1008" height="576">
+        </div>
+        <p class="caption">A sample card. Yours carries your name, phone and color.</p>
+      </div>
+    </div>
+
+    <section id="try">
+      <div class="kicker">Live demo</div>
+      <h2>Be the seller. Then be the buyer.</h2>
+      <p class="sub">On the first phone, answer as someone who found your card would. The moment the contact details are in, the lead lands on the second phone with a push. Tap it, call, change the status, add a note.</p>
+      <div class="flow">
+        <figure class="phone">
+          <div class="screen"><iframe data-src="../demo/index.html?src=card" title="The seller's form, a working demo"></iframe></div>
+          <figcaption><b>The seller</b>Found your card, scanned it. No app, no account.</figcaption>
+        </figure>
+        <figure class="phone" id="buyer">
+          <div class="screen"><iframe data-src="../demo/app/index.html" title="Your app, a working demo"></iframe></div>
+          <figcaption><b>You</b>A push within seconds, then one tap to call.</figcaption>
+        </figure>
+      </div>
+      <p class="note">A working demo with made-up leads and AI-generated car photos. Nothing you type leaves this page.<br><button class="again" id="restart" type="button">Start over</button></p>
+    </section>
+
+    <section>
+      <div class="kicker">What you get</div>
+      <h2>Everything between the card and the call.</h2>
+      <div class="points">
+        <div class="point"><span class="num">01</span><h3>Cards with your QR code</h3><p>A print-ready file in your colors for any print shop. Each placement can get its own code, so you see which cards and spots bring cars.</p></div>
+        <div class="point"><span class="num">02</span><h3>A form sellers finish</h3><p>One question per screen, no app, no account, photos straight from the phone. A form left halfway waits for them for a week.</p></div>
+        <div class="point"><span class="num">03</span><h3>A push in seconds</h3><p>The car, the price and the photos on your phone. The seller's name and number never show on the lock screen.</p></div>
+        <div class="point"><span class="num">04</span><h3>Every lead in one app</h3><p>New, in progress, purchased, rejected. Notes, one tap to call or message, and statistics on what brings cars.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="kicker">Yours</div>
+      <h2>Your name, your colors, your address.</h2>
+      <p class="sub">The form, the app and the cards carry your business's name, color and logo, at your own web address. It runs on your own account, and the leads belong to you. Sellers' personal details are deleted automatically 90 days after a deal is closed.</p>
+    </section>
+
+    <footer>Questions? Ask the person who sent you this link.</footer>
+  </div>
+  <button class="toast" id="toast" type="button">New lead on your phone ↓</button>
+
+  <script>
+    (function () {
+      // The two apps get the same name and color as this page.
+      var params = new URLSearchParams(location.search);
+      var frames = Array.prototype.slice.call(document.querySelectorAll('iframe[data-src]'));
+      function load(fresh) {
+        frames.forEach(function (frame) {
+          var url = new URL(frame.getAttribute('data-src'), location.href);
+          ['name', 'color'].forEach(function (key) { if (params.get(key)) url.searchParams.set(key, params.get(key)); });
+          if (fresh) url.searchParams.set('fresh', Date.now());
+          frame.src = url.href;
+        });
+      }
+      function fit() {
+        frames.forEach(function (frame) {
+          var screen = frame.parentElement;
+          var scale = screen.clientWidth / 390;
+          frame.style.setProperty('--scale', scale);
+          frame.style.height = screen.clientHeight / scale + 'px';
+        });
+      }
+      load(false);
+      fit();
+      window.addEventListener('resize', fit);
+      document.getElementById('restart').addEventListener('click', function () {
+        window.__carBuyoutDemo = undefined;
+        load(true);
+      });
+
+      // On a phone the app is below the form: point at it when a lead arrives.
+      var toast = document.getElementById('toast');
+      var buyer = document.getElementById('buyer');
+      var timer;
+      toast.addEventListener('click', function () {
+        toast.classList.remove('shown');
+        buyer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+      if ('BroadcastChannel' in window) {
+        new BroadcastChannel('car-buyout-demo').addEventListener('message', function () {
+          var box = buyer.getBoundingClientRect();
+          if (box.top < window.innerHeight * 0.6 && box.bottom > window.innerHeight * 0.4) return;
+          toast.classList.add('shown');
+          clearTimeout(timer);
+          timer = setTimeout(function () { toast.classList.remove('shown'); }, 6000);
+        });
+      }
+    })();
+  </script>
+  <script type="module">
+    import { business, wear } from '../demo/brand.js';
+
+    const visitor = business();
+    if (visitor.colors) wear(visitor.colors);
+    if (visitor.name) {
+      for (const element of document.querySelectorAll('[data-name]')) element.textContent = visitor.name;
+      document.title = document.title.replace('Car Buyout', visitor.name);
+    }
+    // The sample card in the shade closest to the business's color.
+    const CARDS = { lime: '#C7F747', orange: '#FF8A00', yellow: '#FFD60A', red: '#FF4D4D', blue: '#3DA5FF', mint: '#3DDC97' };
+    const rgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+    const target = rgb(visitor.colors ? visitor.colors['--accent'] : CARDS.lime);
+    const distance = (hex) => rgb(hex).reduce((sum, channel, i) => sum + (channel - target[i]) ** 2, 0);
+    const [closest] = Object.keys(CARDS).sort((a, b) => distance(CARDS[a]) - distance(CARDS[b]));
+    document.getElementById('card-front').src = `../assets/card/${closest}-front.webp`;
+    document.getElementById('card-back').src = `../assets/card/${closest}-back.webp`;
+    document.documentElement.classList.remove('pending');
+  </script>
+</body>
+</html>

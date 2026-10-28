@@ -1,0 +1,53 @@
+# --- Secrets and local configuration ---
+# Real settings live only in .env files on the developer machine and in the
+# hosting provider's variables. .env.example is the only committed template.
+.env
+.env.*
+!.env.example
+# One settings file per client for tools/deploy.py (secrets included), and
+# the client's brand files next to it.
+clients/
+# Filled with a client's brand files only in the upload tools/deploy.py sends.
+brand/*
+!brand/README.md
+
+# --- Personal data and anything derived from it ---
+# Database dumps and backups contain sellers' names and phone numbers.
+*.sql
+*.sql.gz
+*.dump
+*.backup
+backups/
+# Photos uploaded by sellers (local storage backend in development).
+data/
+uploads/
+# Design source files and other reference material kept next to the repo.
+design-reference/
+# Generated QR codes and business cards carry the client's address
+# (python -m app.cli qr, python -m app.cli card).
+qr/
+cards/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# --- Frontend ---
+node_modules/
+frontend/dist/
+*.tsbuildinfo
+
+# --- Tools and OS ---
+.DS_Store
+.idea/
+.vscode/
+*.log
+.railway/node_modules/
