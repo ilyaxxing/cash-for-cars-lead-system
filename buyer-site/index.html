@@ -17,10 +17,10 @@
     }
   </script>
   <style>
-    @font-face { font-family: Geist; font-weight: 400; font-display: swap; src: url(../assets/fonts/geist-400.woff2) format("woff2"); }
-    @font-face { font-family: Geist; font-weight: 600; font-display: swap; src: url(../assets/fonts/geist-600.woff2) format("woff2"); }
-    @font-face { font-family: Geist; font-weight: 800; font-display: swap; src: url(../assets/fonts/geist-800.woff2) format("woff2"); }
-    @font-face { font-family: "Geist Mono"; font-weight: 500; font-display: swap; src: url(../assets/fonts/geist-mono-500.woff2) format("woff2"); }
+    @font-face { font-family: Geist; font-weight: 400; font-display: swap; src: url(assets/fonts/geist-400.woff2) format("woff2"); }
+    @font-face { font-family: Geist; font-weight: 600; font-display: swap; src: url(assets/fonts/geist-600.woff2) format("woff2"); }
+    @font-face { font-family: Geist; font-weight: 800; font-display: swap; src: url(assets/fonts/geist-800.woff2) format("woff2"); }
+    @font-face { font-family: "Geist Mono"; font-weight: 500; font-display: swap; src: url(assets/fonts/geist-mono-500.woff2) format("woff2"); }
 
     /* The accent is the business's color: brand.js puts it in from the link,
        as an instance does from BRAND_COLOR. */
@@ -125,8 +125,8 @@
       </div>
       <div>
         <div class="cards">
-          <img class="front" id="card-front" src="../assets/card/lime-front.webp" alt="A sample card, front: We buy any car, with a QR code" width="1008" height="576">
-          <img class="back" id="card-back" src="../assets/card/lime-back.webp" alt="A sample card, back: what is bought, the QR code again and the phone number" width="1008" height="576">
+          <img class="front" id="card-front" src="assets/card/lime-front.webp" alt="A sample card, front: We buy any car, with a QR code" width="1008" height="576">
+          <img class="back" id="card-back" src="assets/card/lime-back.webp" alt="A sample card, back: what is bought, the QR code again and the phone number" width="1008" height="576">
         </div>
         <p class="caption">A sample card. Yours carries your name, phone and color.</p>
       </div>
@@ -138,11 +138,11 @@
       <p class="sub">On the first phone, answer as someone who found your card would. The moment the contact details are in, the lead lands on the second phone with a push. Tap it, call, change the status, add a note.</p>
       <div class="flow">
         <figure class="phone">
-          <div class="screen"><iframe data-src="../demo/index.html?src=card" title="The seller's form, a working demo"></iframe></div>
+          <div class="screen"><iframe data-src="demo/index.html?src=card" title="The seller's form, a working demo"></iframe></div>
           <figcaption><b>The seller</b>Found your card, scanned it. No app, no account.</figcaption>
         </figure>
         <figure class="phone" id="buyer">
-          <div class="screen"><iframe data-src="../demo/app/index.html" title="Your app, a working demo"></iframe></div>
+          <div class="screen"><iframe data-src="demo/app/index.html" title="Your app, a working demo"></iframe></div>
           <figcaption><b>You</b>A push within seconds, then one tap to call.</figcaption>
         </figure>
       </div>
@@ -237,7 +237,7 @@
     })();
   </script>
   <script type="module">
-    import { business, wear } from '../demo/brand.js';
+    import { business, wear } from './demo/brand.js';
 
     const visitor = business();
     if (visitor.colors) wear(visitor.colors);
@@ -251,8 +251,8 @@
     const target = rgb(visitor.colors ? visitor.colors['--accent'] : CARDS.lime);
     const distance = (hex) => rgb(hex).reduce((sum, channel, i) => sum + (channel - target[i]) ** 2, 0);
     const [closest] = Object.keys(CARDS).sort((a, b) => distance(CARDS[a]) - distance(CARDS[b]));
-    document.getElementById('card-front').src = `../assets/card/${closest}-front.webp`;
-    document.getElementById('card-back').src = `../assets/card/${closest}-back.webp`;
+    document.getElementById('card-front').src = `assets/card/${closest}-front.webp`;
+    document.getElementById('card-back').src = `assets/card/${closest}-back.webp`;
     document.documentElement.classList.remove('pending');
   </script>
 </body>
