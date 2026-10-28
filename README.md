@@ -12,7 +12,7 @@ yours to sell. By [@ilyaxxing](https://instagram.com/ilyaxxing).
 [Project page](https://ilyaxxing.github.io/cash-for-cars-lead-system/)
 
 A lead system for businesses that buy used cars for cash. A seller scans the
-QR code on a card left under their windshield wiper and fills in a two-minute
+QR code on a card left under their windshield wiper and fills in a short
 form on their phone; the buyer gets a push notification with the car, the
 price and photos. Open source, for people who set it up for local car buyers:
 each business gets its own copy, under its name and on its own accounts, set
@@ -23,7 +23,7 @@ up with Claude Code, and you charge for the setup.
 1. **QR cards.** The business leaves cards with a QR code under windshield
    wipers and puts the code on signs. The card comes as a print-ready file in
    their color, with their logo.
-2. **The seller's form.** Car, condition, price, photos, contact. About two
+2. **The seller's form.** Car, condition, price, photos, contact. A few
    minutes, no app, no account.
 3. **A push to the buyer** on their iPhone or Android, within seconds.
 4. **The app.** Leads by status, photos, one tap to call, and statistics on
