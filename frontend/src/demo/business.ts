@@ -1,5 +1,5 @@
 // The business a demo link is shown to: ?name=Rapid+Cash+Cars&color=ff8a00.
-// The demo apps, the policy page and the page for car buyers (docs/for-buyers)
+// The demo apps, the policy page and the page for car buyers (buyer-site/)
 // all read it here, and wear the color the way an instance wears BRAND_COLOR.
 
 import { accentVariables } from './palette'

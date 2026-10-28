@@ -90,7 +90,7 @@ more, one extra car a month pays for the whole thing.
 - Craigslist: "we buy" posts in cars and trucks.
 - Tow companies, repair shops and junkyards: they know every buyer in town.
 
-When you talk to one, send them [the page for car buyers](https://ilyaxxing.github.io/cash-for-cars-lead-system/for-buyers/) with their
+When you talk to one, send them [the page for car buyers](https://car-buyer-demo.github.io/) with their
 name and color in the link (`?name=Rapid+Cash+Cars&color=ff8a00`, or the
 link maker on the project page): a live demo of the form and the app in
 their own look, with no prices or setup details on it.

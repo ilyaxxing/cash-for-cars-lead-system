@@ -15,11 +15,9 @@ for working on the code are in [CLAUDE.md](../CLAUDE.md).
 
 This folder also holds the project page for GitHub Pages
 ([index.html](index.html), with `.nojekyll` so it is served as it is), the
-media the README shows (`media/`), the page's live demo (`demo/`) and the
-page installers send to a car buyer (`for-buyers/`: the same demo in that
-business's name and color from the link, `?name=...&color=...`, with no
-prices or setup details; `&by=...&contact=...` puts the installer's name and
-phone or email in its "Questions?" line). To publish the page on a public
+media the README shows (`media/`) and the page's live demo (`demo/`).
+`for-buyers/` only forwards old links to the buyer site below. To publish the
+page on a public
 repository: Settings → Pages → Deploy from a branch → `main`, folder `/docs`.
 It appears at `https://<owner>.github.io/<repository>/`; the README links to
 it, and the page's repository links are set in one place at the top of
@@ -53,6 +51,21 @@ sources are kept out of git in `design-reference/demo-photos/`. A named link
 recolors the apps as an instance would (`frontend/src/demo/palette.ts`
 follows `app/branding/colors.py`); the static pages import that from
 `demo/brand.js`.
+
+**The buyer site.** The page installers send a car buyer lives at
+https://car-buyer-demo.github.io/, a site of its own (the `car-buyer-demo`
+organization's GitHub Pages), so a buyer who shortens the address cannot
+reach this project's page and its prices. It shows the same demo in that business's
+name and color from the link (`?name=...&color=...`), with no prices, setup
+details or links back here. Its source is `buyer-site/index.html`; to publish
+a change (or a rebuilt demo), build it into a clone of the site's repository
+and push, with a neutral commit message:
+
+```bash
+git clone https://github.com/car-buyer-demo/car-buyer-demo.github.io.git /tmp/buyer-site
+.venv/bin/python tools/make_buyer_site.py /tmp/buyer-site
+git -C /tmp/buyer-site add -A && git -C /tmp/buyer-site commit -m "Update the demo" && git -C /tmp/buyer-site push
+```
 
 The card images on the page come from the card generator
 (`app/branding/card.py`, rendered at 288 dpi as WebP), so they are exactly
