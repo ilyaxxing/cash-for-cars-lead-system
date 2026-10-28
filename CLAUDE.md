@@ -49,8 +49,7 @@ The repository is public. Write everything as if strangers read it.
   (`frontend/src/demo`, typed against the API modules, never part of an
   instance), built by `tools/make_demo.py`. Rebuild it after UI changes.
   `docs/for-buyers/` is the page installers send a car buyer: the same demo
-  in that business's name and color from the link, no prices or setup; the
-  installer's name and contact (`by`, `contact`) go in its last line.
+  in that business's name and color from the link, no prices or setup.
 - Hosting, one instance per client, two ways. The domain is the client's
   own, in their name, and required: QR codes and cards are made only for it
   (the commands refuse a `*.up.railway.app` address).

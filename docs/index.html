@@ -197,13 +197,11 @@
     <section id="show">
       <div class="kicker">Show it to a client</div>
       <h2>A demo in the buyer's own name.</h2>
-      <p class="sub">The page to send a car buyer you are talking to: the same live demo in their business's name and color, what it does for them, and, if you add them, your name and phone at the bottom. No prices, no setup details, no GitHub.</p>
+      <p class="sub">The page to send a car buyer you are talking to: the same live demo in their business's name and color, and what it does for them. No prices, no setup details, no GitHub.</p>
       <div class="maker">
         <div class="fields">
           <label>Business name<input type="text" id="maker-name" maxlength="40" placeholder="Rapid Cash Cars" autocomplete="off"></label>
           <label>Color<input type="color" id="maker-color" value="#c7f747"></label>
-          <label>Your name, optional<input type="text" id="maker-by" maxlength="60" placeholder="Alex Lee" autocomplete="off"></label>
-          <label>Your phone or email, optional<input type="text" id="maker-contact" maxlength="60" placeholder="(512) 555-0100" autocomplete="off"></label>
         </div>
         <div class="link" id="maker-link"></div>
         <p class="warn" id="maker-warn" hidden>Too dark for the app's dark screens, so the link leaves it out. Pick a lighter shade.</p>
@@ -399,9 +397,6 @@
 
     const name = document.getElementById('maker-name');
     const color = document.getElementById('maker-color');
-    // Who to ask, shown at the bottom of the buyer's page.
-    const by = document.getElementById('maker-by');
-    const contact = document.getElementById('maker-contact');
     const output = document.getElementById('maker-link');
     const open = document.getElementById('maker-open');
     const copy = document.getElementById('maker-copy');
@@ -412,16 +407,12 @@
       const usable = accentVariables(color.value) !== null;
       if (usable && color.value.toLowerCase() !== '#c7f747') url.searchParams.set('color', color.value.slice(1));
       warn.hidden = usable;
-      if (by.value.trim()) url.searchParams.set('by', by.value.trim());
-      if (contact.value.trim()) url.searchParams.set('contact', contact.value.trim());
       url.hash = '';
       output.textContent = url.href;
       open.href = url.href;
     }
     name.addEventListener('input', update);
     color.addEventListener('input', update);
-    by.addEventListener('input', update);
-    contact.addEventListener('input', update);
     copy.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(output.textContent);

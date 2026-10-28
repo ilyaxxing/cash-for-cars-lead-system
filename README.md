@@ -52,10 +52,8 @@ support. Suggested starting points, not market-tested yet. More in
 
 **Show it to a client.** Send the buyer [the page made for them](https://ilyaxxing.github.io/cash-for-cars-lead-system/for-buyers/):
 the same live demo and what it does for their business, without prices,
-setup details or GitHub. Add their name and color to the link, and your own
-name and phone or email for the "Questions?" line at the bottom
-(`for-buyers/?name=Rapid+Cash+Cars&color=ff8a00&by=Alex+Lee&contact=(512)+555-0100`),
-or make it with the link
+setup details or GitHub. Add their name and color to the link
+(`for-buyers/?name=Rapid+Cash+Cars&color=ff8a00`), or make it with the link
 maker on the [project page](https://ilyaxxing.github.io/cash-for-cars-lead-system/#show).
 
 ## Get started

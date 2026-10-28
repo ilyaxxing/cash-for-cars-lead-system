@@ -18,8 +18,7 @@ This folder also holds the project page for GitHub Pages
 media the README shows (`media/`), the page's live demo (`demo/`) and the
 page installers send to a car buyer (`for-buyers/`: the same demo in that
 business's name and color from the link, `?name=...&color=...`, with no
-prices or setup details; `&by=...&contact=...` puts the installer's name and
-phone or email in its "Questions?" line). To publish the page on a public
+prices or setup details). To publish the page on a public
 repository: Settings → Pages → Deploy from a branch → `main`, folder `/docs`.
 It appears at `https://<owner>.github.io/<repository>/`; the README links to
 it, and the page's repository links are set in one place at the top of
