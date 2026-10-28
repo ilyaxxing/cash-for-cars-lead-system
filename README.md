@@ -118,6 +118,7 @@ to left.
   Docker to a server of your own.
 - [The business in detail](docs/business.md)
 - [Technical docs](docs/README.md), [SETUP.md](SETUP.md), [CLAUDE.md](CLAUDE.md)
+- [Security](SECURITY.md): how to report a vulnerability privately
 - [Project page](https://ilyaxxing.github.io/cash-for-cars-lead-system/), with the
   [live demo](https://ilyaxxing.github.io/cash-for-cars-lead-system/#how)
 
