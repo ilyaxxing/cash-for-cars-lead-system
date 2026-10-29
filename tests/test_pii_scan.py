@@ -33,6 +33,9 @@ ALLOWED = [
     "released 2026-10-19 at 10:00 on port 5432",
     "price 21,500 and mileage 78,400",
     "build 1792420739013883",
+    "placeholder +7 912 345-67-89",
+    "demo +49 151 2345 6789 and +55 11 91234-5678",
+    "drama +44 7700 900123 and +33 1 99 00 12 34",
 ]
 
 
