@@ -14,10 +14,13 @@ One instance per client (separate Railway project), not multi-tenant.
 The repository is public. Write everything as if strangers read it.
 
 ## Hard rules
-- Code, comments, README, commits: English. UI text only in `locales/en.json`
-  (or a client's own `LOCALE_FILE` for another country); code uses keys.
-  Target market and reader: US; other countries through client files
-  (docs/customize-the-form.md, Another country), never by forking the code.
+- Code, comments, README, commits: English. UI text only in `locales/en.json`,
+  a client's own `LOCALE_FILE`, or a country's starting files in
+  `countries/<code>/` (its texts, and the demo's in `demo.yaml`); code uses
+  keys. Target market and reader: US; other countries through client files
+  started from `countries/` (docs/customize-the-form.md, Another country),
+  never by forking the code. Their translations had no native speaker's
+  review yet; say so wherever they are offered.
 - Never commit `.env`, secrets (tokens, passwords, VAPID keys, bucket keys),
   DB dumps/backups, uploaded photos, real client data (names, phones,
   domains, tax IDs). Client-specific values come only from env and the preset.
@@ -48,11 +51,17 @@ The repository is public. Write everything as if strangers read it.
   the real bundles plus a stand-in server that runs in the browser
   (`frontend/src/demo`, typed against the API modules, never part of an
   instance), built by `tools/make_demo.py`. Rebuild it after UI changes.
-  The page installers send a car buyer (`buyer-site/`, built by
-  `tools/make_buyer_site.py`) is a site of its own, https://car-buyer-demo.github.io/ (the
+  One demo per country in `countries/` (the US at `docs/demo`, the others at
+  `docs/demo/<code>/`), each with that country's settings and the fictional
+  business, leads, prices and units of its `demo.yaml`; calls and messages
+  show a notice instead of dialing. Demo phone numbers must be ones
+  `tools/pii_scan.py` knows to be fictional (tests/test_countries.py).
+  The page installers send a car buyer (`buyer-site/index.html`, a template
+  filled per country by `tools/make_buyer_site.py`: the US at the root, the
+  others at `/<code>/`) is a site of its own, https://car-buyer-demo.github.io/ (the
   `car-buyer-demo` organization's Pages), so its address cannot be shortened
-  to the project page: the same demo in that business's name and color from
-  the link, no prices, setup or links back to this repository.
+  to the project page: the same demo in that business's name, color and
+  language from the link, no prices, setup or links back to this repository.
 - Hosting, one instance per client, two ways. The domain is the client's
   own, in their name, and required: QR codes and cards are made only for it
   (the commands refuse a `*.up.railway.app` address).

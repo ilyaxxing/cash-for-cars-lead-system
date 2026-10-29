@@ -119,4 +119,7 @@ For a business in another country, Claude Code adapts the system during
 setup: the sellers' language, the questions, the privacy policy under that
 country's law (a draft for the client's lawyer), the card's size, and a
 server in the country where the law keeps personal data at home, as in
-Russia ([SETUP.md](../SETUP.md#another-country)).
+Russia ([SETUP.md](../SETUP.md#another-country)). For the US in Spanish,
+Canada in English and French, Brazil, Russia, the UK, Germany, France, Spain
+and Poland it starts from files already made in `countries/`, and the page
+for car buyers comes in that language too.

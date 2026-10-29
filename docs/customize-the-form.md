@@ -93,6 +93,15 @@ A business outside the US gets its own files, kept with its settings in
 `clients/<id>/` and uploaded with them, not edited into `presets/` and
 `locales/`: updates then reach every client without conflicts.
 
+`countries/` holds the starting point for eleven countries and languages
+(the US in Spanish, Canada in English and French, Brazil, Russia, the UK,
+Germany, France, Spain and Poland): each folder's `settings.env` has the
+country's settings, and its `texts.json`, `form.yaml` and `policy.md`, where
+there are any, are copied into `clients/<id>/`. The folder's `demo.yaml`
+feeds only the live demo in that language (`tools/make_demo.py`). A new
+country is a new folder with the same files; `tests/test_countries.py`
+checks that it is complete.
+
 | Setting | File |
 |---|---|
 | `PRESET_FILE` | The form: a copy of the shipped preset with the country's questions, `distance_unit`, `phone_region` and postal code rule. Its `id` is stored on each lead. |
