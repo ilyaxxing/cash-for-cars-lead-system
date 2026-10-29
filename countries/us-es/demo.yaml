@@ -1,0 +1,73 @@
+# The demo for this country (tools/make_demo.py, tools/make_buyer_site.py):
+# a fictional business, its leads and the page sent to a car buyer. Nothing
+# here goes into a client's instance. Phone numbers are fictional (555-01xx).
+
+# In the link maker on the project page: the country in English, the language in its own words.
+label: United States · Español
+lang: es
+
+business:
+  brand_name: Autos al Contado
+  brand_phone: (713) 555-0100
+  operator_name: Example Auto LLC
+  operator_email: privacy@example.com
+  operator_address: 100 Example St, Houston, TX 77002
+  policy_effective_date: 1 de octubre de 2026
+  public_url: https://buy.example.com
+  card_contact: Miguel
+
+calls_off: En la demo, las llamadas y los mensajes están desactivados.
+policy_note: Una política de ejemplo para un negocio inventado. Para uno real se escribe según las leyes de su país y la revisa su abogado.
+price_scale: 1
+price_step: 100
+
+featured:
+  - {make: Kia, model: Optima, location: Houston, postal_code: '77009', name: José Ramírez, vin: 5XXGT4L32HG123456}
+  - {make: Hyundai, model: Kona, location: Pasadena, postal_code: '77506', name: Ana Torres, email: ana@example.com, finance_details: Quedan unos $6,000 del préstamo.}
+  - {make: Hyundai, model: Accent, location: Katy, postal_code: '77449', name: Luis Herrera, accident_details: Choque de frente la primavera pasada. Todavía anda.}
+  - {make: Ford, model: F-150, location: Sugar Land, postal_code: '77478', name: Carmen Flores, vin: 1FTEW1EF5GFA12345, note: 'Llamé al vendedor, la visita es el jueves.'}
+  - {make: Honda, model: Odyssey, location: Houston, postal_code: '77036', name: Jorge Castillo, email: jorge@example.com, note: 'Le ofrecí 1,500 menos de lo que pide; lo está pensando.'}
+  - {make: Hyundai, model: Genesis, location: Houston, postal_code: '77011', name: Rosa Medina, note: 'Se remolcó el sábado, pagado en efectivo.'}
+phones: ['+17135550142', '+17135550117', '+17135550163', '+17135550128', '+17135550189', '+17135550104', '+17135550131', '+17135550175']
+
+cars: [[Toyota, Camry], [Toyota, Tacoma], [Ford, Escape], [Chevrolet, Silverado], [Honda, Civic], [Honda, CR-V], [Nissan, Altima], [Nissan, Sentra], [Kia, Forte], [Hyundai, Elantra], [Ram, '1500'], [Mazda, CX-5], [Chevrolet, Malibu], [Toyota, Corolla]]
+names: [María López, Juan Martínez, Lucía Gómez, Carlos Rodríguez, Sofía Hernández, Miguel Sánchez, Elena Díaz, Pedro Morales, Daniela Ruiz, Andrés Vargas, Patricia Reyes, Fernando Cruz]
+cities: [[Houston, '77002'], [Pasadena, '77502'], [Baytown, '77520'], [Pearland, '77581']]
+
+page:
+  title: Autos al Contado · Prospectos desde sus tarjetas
+  description: 'Una demo que funciona: el formulario que llena un vendedor al escanear su tarjeta, y la app donde llega el prospecto con una notificación.'
+  badge: Demo
+  kicker_hero: Para compradores de autos usados
+  h1: Cada tarjeta en un parabrisas <em>puede traerle un vendedor.</em>
+  lead: Mucha gente que nunca llamaría a un desconocido sí escanea un código. Contesta unas preguntas en su teléfono en pocos minutos, y a usted le llega una notificación con el auto, el precio y las fotos, listo para la primera llamada.
+  try_button: Pruébelo usted mismo ↓
+  card_front_alt: 'Una tarjeta de ejemplo, frente: Compramos su auto, con un código QR'
+  card_back_alt: 'Una tarjeta de ejemplo, reverso: qué compramos, el código QR otra vez y el teléfono'
+  card_caption: Una tarjeta de ejemplo. La suya lleva su nombre, teléfono y color.
+  kicker_demo: Demo en vivo
+  h2_demo: Sea el vendedor. Luego sea el comprador.
+  sub_demo: En el primer teléfono, conteste como lo haría alguien que encontró su tarjeta. En cuanto deja sus datos de contacto, el prospecto llega al segundo teléfono con una notificación. Tóquela, cambie el estado, agregue una nota.
+  seller_frame_title: El formulario del vendedor, una demo que funciona
+  seller_title: El vendedor
+  seller_caption: Encontró su tarjeta y la escaneó. Sin app ni cuenta.
+  buyer_frame_title: Su app, una demo que funciona
+  buyer_title: Usted
+  buyer_caption: Una notificación en segundos y un toque para llamar.
+  demo_note: Una demo que funciona, con prospectos inventados y fotos de autos generadas por IA. Nada de lo que escriba sale de esta página.
+  start_over: Empezar de nuevo
+  kicker_get: Lo que recibe
+  h2_get: Todo lo que hay entre la tarjeta y la llamada.
+  p1_title: Tarjetas con su código QR
+  p1_text: Un archivo listo para imprimir en sus colores, para cualquier imprenta. Cada lugar puede tener su propio código, así ve qué tarjetas y qué zonas le traen autos.
+  p2_title: Un formulario que los vendedores terminan
+  p2_text: Una pregunta por pantalla, sin app ni cuenta, fotos directo del teléfono. Si lo dejan a medias, los espera una semana.
+  p3_title: Una notificación en segundos
+  p3_text: El auto, el precio y las fotos en su teléfono. El nombre y el número del vendedor nunca aparecen en la pantalla bloqueada.
+  p4_title: Todos los prospectos en una app
+  p4_text: Nuevos, en proceso, comprados, rechazados. Notas, un toque para llamar o escribir, y estadísticas de qué le trae autos.
+  kicker_yours: Suyo
+  h2_yours: Su nombre, sus colores, su dirección web.
+  sub_yours: El formulario, la app y las tarjetas llevan el nombre, el color y el logo de su negocio, en su propia dirección web. Funciona en su propia cuenta y los prospectos son suyos. Los datos personales de los vendedores se borran solos 90 días después de cerrar un trato.
+  footer: ¿Preguntas? Escríbale a quien le envió este enlace.
+  toast: Nuevo prospecto en su teléfono ↓
