@@ -39,7 +39,7 @@ somewhere safe, such as a password manager. Fill in at least:
 | `OWNER_PASSWORD` | The owner's first dashboard password, for one sign-in: the dashboard then asks for one of their own. |
 | `TIMEZONE` | The owner's time zone, for dates and statistics. |
 | `VAPID_SUBJECT` | `mailto:` the client's email. Push services use it to report problems. |
-| `SOURCE_LABELS` | Names for the client's own QR placements, e.g. `parking:Parking lot,flyer:Flyers`. |
+| `SOURCE_LABELS` | Names for every place besides the business card, printed (a QR code) or online (a link), e.g. `sticker:Car sticker,maps:Google Maps`. See [QR codes](#qr-codes). |
 
 Leave `SECRET_KEY`, `VAPID_PUBLIC_KEY` and `VAPID_PRIVATE_KEY` empty: the
 first deploy generates them and saves them into the file. Never change them

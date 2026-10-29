@@ -196,11 +196,28 @@ The business card is asked about later, in step 9.
 Tell them the privacy policy is a template, not legal advice: the business
 should have its lawyer read it at `/privacy` before launch.
 
-**Where the QR codes will be**
-- The business card is built in. Ask about other places: a sticker on the lot,
-  flyers, an ad. Each gets a short id and a name, e.g.
-  `parking:Parking lot,flyer:Flyers` (`SOURCE_LABELS`), so statistics show
-  which places bring sellers.
+**Where sellers will find the form**
+- The windshield card is built in and stays the main channel. Then go through
+  these places with the person, one at a time, and note the ones the business
+  will use:
+  - a sticker on the buyer's own car (`sticker`);
+  - posters or cards at partners: repair shops, tow companies, car washes,
+    tire shops, one label per partner (`shop_<name>`, `tow_<name>`), so each
+    one's sellers are counted;
+  - road signs and banners (`sign`, or one per spot);
+  - the Google Maps or Yandex Maps listing (`maps`);
+  - social profiles (`instagram`, `facebook`, `vk`);
+  - a messenger auto-reply (`autoreply`) and a text after a missed call
+    (`missed_call`): the business sets these up in its messenger or phone
+    service, and the system gives the link;
+  - ads, one label per campaign (`ads_<campaign>`).
+- Write each into `SOURCE_LABELS` now, label and the name the owner will read
+  in statistics: `sticker:Car sticker,shop_lone_star:Lone Star Auto Repair,maps:Google Maps`.
+  Labels are lowercase letters, digits, `-` and `_`; names have no commas or
+  quotes. A place added later is one more entry and a deploy.
+- Printed places get a QR code in step 9. Online places (maps, social
+  profiles, auto-replies, online ads) get a link, `https://<domain>/?src=<label>`,
+  not a QR code: also in step 9, once the domain is connected.
 
 **Address**
 - Which domain will the cards use? If the business has a website, a
