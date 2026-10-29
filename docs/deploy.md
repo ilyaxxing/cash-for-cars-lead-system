@@ -9,7 +9,8 @@ creates or updates it.
 ## Before you start
 
 - A [Railway](https://railway.com) account on the Hobby plan, and the
-  [Railway CLI](https://docs.railway.com/cli), signed in with `railway login`.
+  [Railway CLI](https://docs.railway.com/cli), signed in with `railway login`
+  (`railway login --browserless` where no browser opens: a link and a code).
   The instance is built here and then handed over to the client's own
   Railway account (see [Hand over](#hand-over)).
 - The client's own Railway account on the Hobby plan, with the client's

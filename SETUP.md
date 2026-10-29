@@ -81,9 +81,11 @@ Check what is installed and install what is missing (ask first):
   Python 3.12 from https://www.python.org/downloads/ (on Linux, the
   distribution's `python3.12` package), and `python3.12 -m venv .venv` below
   instead of the `uv venv` line.
-- **Railway CLI**: `railway --version`. macOS: `brew install railway`; with
-  Node.js on any system: `npm install -g @railway/cli`; macOS/Linux without
-  either: `bash <(curl -fsSL cli.new)`.
+- **Railway CLI**: `railway --version`. Install it the first way that works:
+  with Homebrew (`brew --version` answers), `brew install railway`; with
+  Node.js (`npm --version` answers), `npm install -g @railway/cli`; otherwise
+  Railway's own installer, `bash <(curl -fsSL cli.new)`: tell the person it is
+  Railway's script, which downloads the CLI and puts it on the path.
 
 If you are not inside this repository yet, clone it into a folder of its own,
 for example `~/car-buyout`, and work from there. Deploy the newest release
@@ -115,9 +117,13 @@ access, as in [Another country](#another-country), replace this step.
 - No account yet: send the person to https://railway.com to sign up, then to
   add a payment method (Hobby plan) in the account's billing settings. Wait
   until they confirm.
-- Sign the CLI in with `railway login`. It opens the browser. If it can't run
-  from your shell, ask the person to type `! railway login` in Claude Code (the
-  `!` runs it in their own terminal) and finish in the browser.
+- Sign the CLI in with `railway login`. It opens the browser on this
+  computer. If no browser opens from your shell, run `railway login
+  --browserless` in the background instead and read its output: it prints a
+  link and a short code. Give both to the person: they open the link on any
+  device, sign in and enter the code. Or ask them to type `! railway login`
+  in Claude Code (the `!` runs it in their own terminal) and finish in the
+  browser.
 - Check with `railway whoami`. If it lists more than one workspace, ask which
   one to build in; it goes into `RAILWAY_WORKSPACE`.
 
