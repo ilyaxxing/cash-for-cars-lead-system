@@ -547,6 +547,7 @@
       "email_short": "E-mail",
       "whatsapp": "WhatsApp",
       "telegram": "Telegram",
+      "sms": "SMS",
       "email_subject": "Votre {car}",
       "purged": "Supprimé {days} jours après la clôture",
       "notes": "Notes",

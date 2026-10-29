@@ -541,6 +541,7 @@
       "email_short": "E-mail",
       "whatsapp": "WhatsApp",
       "telegram": "Telegram",
+      "sms": "SMS",
       "email_subject": "Twoje auto: {car}",
       "purged": "Usunięto {days} dni po zamknięciu",
       "notes": "Notatki",
