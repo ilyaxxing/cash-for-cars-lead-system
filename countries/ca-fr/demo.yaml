@@ -1,0 +1,73 @@
+# The demo for this country (tools/make_demo.py, tools/make_buyer_site.py):
+# a fictional business, its leads and the page sent to a car buyer. Nothing
+# here goes into a client's instance. Phone numbers are fictional (555-01xx).
+
+# In the link maker on the project page: the country in English, the language in its own words.
+label: Canada · Français
+lang: fr
+
+business:
+  brand_name: Achat Auto Comptant
+  brand_phone: (514) 555-0100
+  operator_name: Exemple Auto inc.
+  operator_email: confidentialite@example.com
+  operator_address: 100, rue Exemple, Montréal (Québec) H2X 1Y4
+  policy_effective_date: 1er octobre 2026
+  public_url: https://buy.example.com
+  card_contact: Mathieu
+
+calls_off: Dans la démo, les appels et les messages sont désactivés.
+policy_note: Une politique d'exemple pour une entreprise fictive. Pour une vraie, elle est rédigée selon la loi de son pays et relue par son avocat.
+price_scale: 1.35
+price_step: 100
+
+featured:
+  - {make: Kia, model: Optima, location: Montréal, postal_code: 'H2S 1Z6', name: Mathieu Tremblay, vin: KNAGT41BBH5012345}
+  - {make: Hyundai, model: Kona, location: Laval, postal_code: 'H7N 5H9', name: Émilie Gagnon, email: chloe@example.com, finance_details: Il reste environ 8 000 $ sur le prêt.}
+  - {make: Hyundai, model: Accent, location: Longueuil, postal_code: 'J4K 2T4', name: Olivier Roy, accident_details: Choc à l'avant l'hiver dernier. Elle roule encore.}
+  - {make: Ford, model: F-150, location: Brossard, postal_code: 'J4W 2Y3', name: Julie Côté, vin: 1FTEW1EF5GFA12345, note: 'Vendeur appelé, visite jeudi.'}
+  - {make: Honda, model: Odyssey, location: Montréal, postal_code: 'H1M 2Y1', name: Alexandre Bouchard, email: alexandre@example.com, note: 'Offert 2 000 $ de moins que son prix; il y pense.'}
+  - {make: Hyundai, model: Genesis, location: Terrebonne, postal_code: 'J6W 3L4', name: Isabelle Gauthier, note: 'Remorquée samedi, payée comptant.'}
+phones: ['+15145550142', '+15145550117', '+15145550163', '+15145550128', '+15145550189', '+15145550104', '+15145550131', '+15145550175']
+
+cars: [[Toyota, Corolla], [Toyota, RAV4], [Honda, Civic], [Honda, CR-V], [Hyundai, Elantra], [Mazda, Mazda3], [Mazda, CX-5], [Nissan, Rogue], [Ford, Escape], [Ford, F-150], [Kia, Forte], [Chevrolet, Equinox], [Ram, '1500'], [Jeep, Compass]]
+names: [Catherine Pelletier, Gabriel Bélanger, Léa Lavoie, Félix Fortin, Maude Ouellet, William Morin, Sarah Lévesque, Samuel Bergeron, Jade Leblanc, Louis Girard, Audrey Caron, Vincent Paquette]
+cities: [[Montréal, 'H2X 1Y4'], [Laval, 'H7T 2Z3'], [Longueuil, 'J4H 3M6'], [Repentigny, 'J6A 2T2']]
+
+page:
+  title: Achat Auto Comptant · Des demandes grâce à vos cartes
+  description: 'Une démo qui fonctionne : le formulaire que remplit un vendeur après avoir scanné votre carte, et l''app où la demande arrive par notification.'
+  badge: Démo
+  kicker_hero: Pour les acheteurs de véhicules d'occasion
+  h1: Chaque carte sous un essuie-glace <em>peut vous amener un vendeur.</em>
+  lead: Beaucoup de gens qui n'appelleraient jamais un inconnu scannent volontiers un code. Ils répondent à quelques questions sur leur téléphone en quelques minutes, et vous recevez une notification avec l'auto, le prix et les photos, prête pour le premier appel.
+  try_button: Essayez vous-même ↓
+  card_front_alt: 'Une carte d''exemple, recto : On rachète votre auto, avec un QR code'
+  card_back_alt: 'Une carte d''exemple, verso : ce que nous rachetons, le QR code à nouveau et le numéro de téléphone'
+  card_caption: Une carte d'exemple. La vôtre porte votre nom, votre numéro et votre couleur.
+  kicker_demo: Démo en direct
+  h2_demo: Soyez le vendeur. Puis l'acheteur.
+  sub_demo: Sur le premier téléphone, répondez comme le ferait quelqu'un qui a trouvé votre carte. Dès que ses coordonnées sont saisies, la demande arrive sur le second téléphone par notification. Touchez-la, changez le statut, ajoutez une note.
+  seller_frame_title: Le formulaire du vendeur, une démo qui fonctionne
+  seller_title: Le vendeur
+  seller_caption: Il a trouvé votre carte et l'a scannée. Sans app, sans compte.
+  buyer_frame_title: Votre app, une démo qui fonctionne
+  buyer_title: Vous
+  buyer_caption: Une notification en quelques secondes, puis un geste pour appeler.
+  demo_note: Une démo qui fonctionne, avec des demandes inventées et des photos d'autos générées par IA. Rien de ce que vous saisissez ne quitte cette page.
+  start_over: Recommencer
+  kicker_get: Ce que vous obtenez
+  h2_get: Tout ce qu'il y a entre la carte et l'appel.
+  p1_title: Des cartes avec votre QR code
+  p1_text: Un fichier prêt à imprimer à vos couleurs, pour n'importe quel imprimeur. Chaque emplacement peut avoir son propre code, pour voir quelles cartes et quels quartiers vous amènent des autos.
+  p2_title: Un formulaire que les vendeurs terminent
+  p2_text: Une question par écran, sans app ni compte, des photos prises directement avec le téléphone. Un formulaire laissé en route les attend une semaine.
+  p3_title: Une notification en quelques secondes
+  p3_text: L'auto, le prix et les photos sur votre téléphone. Le nom et le numéro du vendeur n'apparaissent jamais sur l'écran verrouillé.
+  p4_title: Toutes les demandes dans une app
+  p4_text: Nouvelles, en cours, achetées, refusées. Des notes, un geste pour appeler ou écrire, et des statistiques sur ce qui vous amène des autos.
+  kicker_yours: À vous
+  h2_yours: Votre nom, vos couleurs, votre adresse web.
+  sub_yours: Le formulaire, l'app et les cartes portent le nom, la couleur et le logo de votre entreprise, à votre propre adresse web. Tout fonctionne sur votre propre compte, et les demandes vous appartiennent. Les données personnelles des vendeurs sont effacées automatiquement 90 jours après la clôture d'une affaire.
+  footer: Des questions ? Demandez à la personne qui vous a envoyé ce lien.
+  toast: Nouvelle demande sur votre téléphone ↓
