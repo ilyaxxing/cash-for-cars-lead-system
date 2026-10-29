@@ -244,3 +244,53 @@ def test_the_summary_cannot_be_missed_when_backups_are_off(capsys):
     out = capsys.readouterr().out
     assert "backups:         OFF" in out
     assert "#" * 60 in out and "Backups are OFF" in out
+
+
+def test_backups_that_are_off_are_turned_on_and_checked(monkeypatch):
+    # Railway takes a moment to report the change; only its own answer counts.
+    railway = FakeRailway(monkeypatch, BACKUPS_OFF, BACKUPS_OFF, {**BACKUPS_ON, "live": {}})
+    summary = deploy.ensure_backups()
+    assert railway.enabled
+    assert summary.startswith("on (point-in-time recovery; the archive has not reported yet")
+
+
+def test_a_deploy_stops_when_backups_cannot_be_turned_on(monkeypatch):
+    failed = deploy.DeployError("`railway postgres pitr enable` failed: not allowed")
+    FakeRailway(monkeypatch, BACKUPS_OFF, enable_error=failed)
+    with pytest.raises(deploy.DeployError) as caught:
+        deploy.ensure_backups()
+    message = str(caught.value)
+    assert "backups are not on" in message and "not allowed" in message
+    # It says what to do: update the CLI, turn them on by hand, or the flag.
+    assert "railway upgrade" in message and "Enable PITR" in message
+    assert "--no-backups" in message
+
+
+@pytest.mark.parametrize(
+    "answer",
+    [
+        deploy.DeployError("`railway postgres pitr status` failed: unrecognized subcommand"),
+        ValueError("Expecting value"),
+        {"message": "no state here"},
+    ],
+)
+def test_a_deploy_stops_when_the_backup_state_cannot_be_read(monkeypatch, answer):
+    railway = FakeRailway(monkeypatch, answer)
+    with pytest.raises(deploy.DeployError, match="status could not be read"):
+        deploy.ensure_backups()
+    assert not railway.enabled
+
+
+def test_a_deploy_stops_when_railway_still_reports_backups_off(monkeypatch):
+    FakeRailway(monkeypatch, *[BACKUPS_OFF] * (1 + deploy.BACKUP_CHECKS))
+    with pytest.raises(deploy.DeployError, match="still reports them off"):
+        deploy.ensure_backups()
+
+
+def test_no_backups_goes_on_without_them_only_when_asked(monkeypatch):
+    failed = deploy.DeployError("`railway postgres pitr enable` failed: not allowed")
+    FakeRailway(monkeypatch, BACKUPS_OFF, enable_error=failed)
+    assert deploy.ensure_backups(required=False) is None
+    # The flag never turns backups off: where they come on, the summary says so.
+    FakeRailway(monkeypatch, BACKUPS_ON)
+    assert deploy.ensure_backups(required=False).startswith("on")
