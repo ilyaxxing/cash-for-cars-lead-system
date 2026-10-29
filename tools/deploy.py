@@ -24,8 +24,8 @@ the same project. Every run:
    the env file (logo, icon, photo), which live outside git in clients/.
 7. Waits until https://<domain>/healthz reports this commit and the latest
    migration. The deploy is done when the new code answers, not when the
-   build ends: the Telegram bot this grew out of once "deployed" and then
-   stayed down for an hour because nobody looked.
+   build ends: a container can be running while the app in it failed at
+   startup and answers nobody.
 
 Secrets reach Railway on stdin, never on a command line, and are never printed.
 """

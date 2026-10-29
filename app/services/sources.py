@@ -4,7 +4,7 @@ The business card QR code points at /v, which tags the visit as "card". Any
 other placement uses its own ?src= label (a parking lot sticker, a flyer)
 and gets a readable name through SOURCE_LABELS.
 
-Two rules carried over from the Telegram bot:
+Two rules:
 - The first meaningful source wins. A later visit with a label only replaces
   the default "direct", never another label: someone who scanned the business
   card and later came back by a typed address still counts as "card".
