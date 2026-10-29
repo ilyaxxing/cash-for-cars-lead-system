@@ -30,7 +30,8 @@ client's own ([deploy-vps.md](deploy-vps.md)).
 
 ## Local setup
 
-Requirements: Python 3.12, Node.js 22+, Docker (or a local PostgreSQL), and
+Requirements: macOS or Linux (on Windows, WSL), Python 3.12, Node.js 22+,
+Docker (or a local PostgreSQL), and
 [gitleaks](https://github.com/gitleaks/gitleaks#installing).
 
 ```bash

@@ -48,7 +48,8 @@ server, without changing its code.
 
 Tell the person briefly what they will need:
 
-1. This computer (macOS, Windows or Linux), for about an hour the first time.
+1. This computer: a Mac or a Linux computer; on Windows, WSL (step 1). For
+   about an hour the first time.
 2. Facts about the business (asked in step 3); they can ask the client as you go.
 3. Two Railway accounts, each on the Hobby plan ($5 a month, with a payment
    card): their own, where the instance is built and tested, and the
@@ -69,6 +70,12 @@ data, with the business named as its operator in the privacy policy. Whatever
 happens between the person and the business later, everything keeps working.
 
 ## Step 1. Tools and code
+
+The commands in this guide are for a bash shell on macOS or Linux. On Windows,
+everything runs inside WSL, the Linux that Windows can install (Ubuntu, from
+Microsoft's guide: https://learn.microsoft.com/windows/wsl/install): start
+Claude Code inside it and follow the Linux notes. Windows itself, outside WSL,
+is not supported.
 
 Check what is installed and install what is missing (ask first):
 
@@ -405,7 +412,7 @@ Make it once as it is:
 ```
 
 Open `cards/<brand>-preview.png` for the person to look at (macOS: `open`,
-Windows: `start`, Linux: `xdg-open`). Then go through the design with them,
+Linux: `xdg-open`, WSL: `explorer.exe`). Then go through the design with them,
 one item at a time: say what is there now and ask whether to change it.
 
 1. The headline, two lines, the first in the accent color (`card.front_hot`,

@@ -66,7 +66,8 @@ and Poland.
 ## Get started
 
 Open [Claude Code](https://claude.com/product/claude-code) (for example the
-Code tab in the Claude desktop app) in an empty folder and send:
+Code tab in the Claude desktop app) in an empty folder on a Mac or a Linux
+computer (on Windows, inside WSL) and send:
 
 ```text
 Set up https://github.com/ilyaxxing/cash-for-cars-lead-system for my client.
