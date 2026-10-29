@@ -146,7 +146,7 @@ async def session(clean_db: AsyncEngine) -> AsyncIterator[AsyncSession]:
 @pytest.fixture
 def frontend_dist(tmp_path: Path) -> Path:
     """A stand-in for the Vite build: just the two HTML entry points."""
-    page = '<html lang="en"><head><!--app-config--></head><body>{}</body></html>'
+    page = '<html lang="en"><head><title>Page</title><!--app-config--></head><body>{}</body></html>'
     (tmp_path / "app").mkdir()
     (tmp_path / "index.html").write_text(page.format("form"), encoding="utf-8")
     (tmp_path / "app" / "index.html").write_text(page.format("dashboard"), encoding="utf-8")
