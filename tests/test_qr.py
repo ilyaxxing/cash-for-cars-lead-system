@@ -2,6 +2,7 @@ import pytest
 from PIL import Image
 
 from app import qr
+from app.cli import qr as qr_command
 
 BASE = "https://buy.example.com"
 
@@ -64,3 +65,34 @@ def test_files_are_written_with_quiet_zone(tmp_path):
     assert svg.read_text().startswith("<?xml")
     side = (checked.modules + 2 * qr.BORDER) * qr.PNG_SCALE
     assert Image.open(png).size == (side, side)
+
+
+def client_file(tmp_path):
+    path = tmp_path / "acme.env"
+    path.write_text(
+        f"BRAND_NAME=Acme\nPUBLIC_URL={BASE}\nSOURCE_LABELS=sticker:Car sticker,maps:Google Maps\n",
+        encoding="utf-8",
+    )
+    return path
+
+
+def test_the_command_reads_the_client_file_for_any_place(tmp_path, capsys):
+    out = tmp_path / "qr"
+    for source in ("card", "sticker", "shop_mikes"):
+        qr_command(client_file(tmp_path), source, qr.DEFAULT_SIZE_MM, None, out)
+    printed = capsys.readouterr().out
+    assert f"link:    {BASE}/v" in printed and f"link:    {BASE}/?src=sticker" in printed
+    # Only the place the file does not name is flagged, with a name to give it.
+    assert printed.count("WARNING") == 1
+    assert "SOURCE_LABELS=shop_mikes:Shop mikes" in printed
+    assert sorted(path.name for path in out.glob("*.svg")) == [
+        "buy.example.com-card.svg",
+        "buy.example.com-shop_mikes.svg",
+        "buy.example.com-sticker.svg",
+    ]
+
+
+def test_an_online_place_gets_the_link_alone(tmp_path, capsys):
+    qr_command(client_file(tmp_path), "maps", qr.DEFAULT_SIZE_MM, None, tmp_path / "qr", True)
+    assert capsys.readouterr().out == f"link:    {BASE}/?src=maps\n"
+    assert not (tmp_path / "qr").exists()

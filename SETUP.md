@@ -400,18 +400,32 @@ For printing, tell the person:
 - Screen colors print a little duller. Order a proof first and scan its
   QR code with a phone before the full run.
 
-**QR codes** for anything else (a sticker on the lot, flyers):
+**QR codes** for every printed place from step 3 (a sticker, a partner's
+poster, a sign), one per label:
 
 ```bash
-.venv/bin/python -m app.cli qr --url https://buy.<domain>
-.venv/bin/python -m app.cli qr --url https://buy.<domain> --source parking
+.venv/bin/python -m app.cli qr --env-file clients/<id>.env --source sticker --size-mm 60
 ```
 
 The files land in `qr/`: the `.svg` is for the printer, the `.png` for a quick
-look. Tell the person: send the SVG to the print shop, ask them not to crop the
-white margin around the code, and scan a printed proof before ordering a batch.
-If the command refuses (the code would print too small), it says why: print it
-larger with `--size-mm` or use a shorter address.
+look. `--size-mm` is the printed side of the code: about a tenth of the
+distance it is scanned from (a poster read from a meter away: 100). Tell the
+person: send the SVG to the print shop, ask them not to crop the white margin
+around the code, and scan a printed proof before ordering a batch. If the
+command refuses (the code would print too small), it says why: print it larger
+or use a shorter address. A warning that a label would show as Other means it
+is missing from `SOURCE_LABELS`: add it and deploy again.
+
+**Links** for the online places from step 3 (maps, social profiles,
+auto-replies, online ads), one per label:
+
+```bash
+.venv/bin/python -m app.cli qr --env-file clients/<id>.env --source maps --link-only
+```
+
+Give the person each link with where it goes: the Google Maps or Yandex Maps
+listing's website field, the bio link of each social profile, the text of the
+messenger away message or the missed-call text, the ad's destination address.
 
 ## Step 10. Hand over
 

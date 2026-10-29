@@ -1,7 +1,11 @@
-"""QR codes for business cards, stickers and flyers.
+"""QR codes for business cards, stickers, posters and signs.
 
-    python -m app.cli qr                       business card: <PUBLIC_URL>/v
-    python -m app.cli qr --source parking      any other placement: <PUBLIC_URL>/?src=parking
+    python -m app.cli qr --env-file clients/acme.env                   <PUBLIC_URL>/v
+    python -m app.cli qr --env-file clients/acme.env --source sticker  <PUBLIC_URL>/?src=sticker
+
+The first is the business card's; any other place gets its own label, named
+in SOURCE_LABELS. An online place (a map listing, a social profile, an
+auto-reply) takes the link itself: --link-only prints it and writes nothing.
 
 Writes an SVG for the print shop (vector, sharp at any size) and a PNG
 preview for messengers into qr/, which is git-ignored: the files carry the
@@ -102,10 +106,14 @@ def plan(
         return result
     if source != CARD_SOURCE and source not in (labels or {}):
         result.warnings.append(
-            f"The dashboard will show {source!r} as Other. Add it to SOURCE_LABELS, "
-            f"for example SOURCE_LABELS={source}:Parking lot"
+            f"The dashboard will show {source!r} as Other. Add it to SOURCE_LABELS "
+            f"with the name the owner will read, e.g. SOURCE_LABELS={source}:{example_name(source)}"
         )
     return result
+
+
+def example_name(source: str) -> str:
+    return source.replace("_", " ").replace("-", " ").capitalize()
 
 
 def write(checked: Plan, out_dir: Path) -> tuple[Path, Path]:

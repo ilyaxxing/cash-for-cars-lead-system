@@ -155,6 +155,36 @@ async def test_notes_add_delete_and_restore(owner):
     assert empty.status_code == 422
 
 
+# The places SETUP suggests, each with its own label (docs/business.md).
+PLACES = {
+    "sticker": "Car sticker",
+    "shop_mikes": "Mike's Auto Repair",
+    "maps": "Google Maps",
+    "missed_call": "Missed call text",
+}
+
+
+async def test_stats_tell_every_place_apart(client_for, tmp_path):
+    labels = ",".join(f"{source}:{label}" for source, label in PLACES.items())
+    client = client_for(
+        owner_password=PASSWORD, local_storage_dir=tmp_path / "store", source_labels=labels
+    )
+    await sign_in(client, PASSWORD)
+    # Nine leads: one address may start ten an hour.
+    counts = {"card": 1, "sticker": 1, "shop_mikes": 2, "maps": 2, "missed_call": 3}
+    for source, count in counts.items():
+        for _ in range(count):
+            await new_lead(client, source=source)
+    rows = (await client.get("/api/owner/stats?period=30")).json()["sources"]
+    assert [(row["source"], row["label"], row["leads"]) for row in rows] == [
+        ("missed_call", "Missed call text", 3),
+        ("maps", "Google Maps", 2),
+        ("shop_mikes", "Mike's Auto Repair", 2),
+        ("card", "Business Card", 1),
+        ("sticker", "Car sticker", 1),
+    ]
+
+
 async def test_stats_use_frozen_sources_and_custom_labels(owner):
     a, _ = await new_lead(owner, source="card")
     await new_lead(owner, source="flyer")

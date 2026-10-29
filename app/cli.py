@@ -188,8 +188,17 @@ def vapid_keys() -> None:
         print(f"{name}={value}")
 
 
-def qr(source: str, size_mm: float, url: str | None, out: Path) -> None:
-    settings = get_settings()
+def qr(
+    env_file: Path | None,
+    source: str,
+    size_mm: float,
+    url: str | None,
+    out: Path,
+    link_only: bool = False,
+) -> None:
+    # The client's settings file gives the address and the place names, as
+    # for the card; it is read as for development, without a database.
+    settings = Settings(_env_file=env_file, app_env="development") if env_file else get_settings()
     checked = qr_codes.plan(
         url or settings.resolved_public_url,
         source,
@@ -200,9 +209,12 @@ def qr(source: str, size_mm: float, url: str | None, out: Path) -> None:
         print(f"WARNING: {warning}")
     if checked.problems:
         raise SystemExit("Not written: " + "; ".join(checked.problems))
+    print(f"link:    {checked.url}")
+    # Maps, social profiles and auto-replies take the link itself: nothing to print.
+    if link_only:
+        return
     svg, png = qr_codes.write(checked, out)
     side = checked.modules
-    print(f"link:    {checked.url}")
     print(f"matrix:  {side}x{side}, error correction H, quiet zone {qr_codes.BORDER} modules")
     print(
         f"module:  {checked.module_mm:.2f} mm at {size_mm:g} mm "
@@ -290,8 +302,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(prog="python -m app.cli", description=__doc__.splitlines()[0])
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("vapid-keys", help="print a new key pair for Web Push")
-    code = commands.add_parser("qr", help="QR code for business cards and stickers")
+    code = commands.add_parser("qr", help="QR code, or the link alone, for a place sellers see")
+    code.add_argument("--env-file", type=Path, help="the client's settings, e.g. clients/acme.env")
     code.add_argument("--source", default="card", help="placement label; card (default) uses /v")
+    code.add_argument(
+        "--link-only", action="store_true", help="print the link for an online place, no files"
+    )
     code.add_argument(
         "--size-mm",
         type=float,
@@ -324,7 +340,7 @@ def main() -> None:
     if args.command == "vapid-keys":
         vapid_keys()
     elif args.command == "qr":
-        qr(args.source, args.size_mm, args.url, args.out)
+        qr(args.env_file, args.source, args.size_mm, args.url, args.out, args.link_only)
     elif args.command == "card":
         card(args.env_file, args.url, args.name, args.phone, args.cmyk, args.size, args.out)
     elif args.command == "check-texts":
