@@ -387,23 +387,39 @@ def ensure_resources(env: Mapping[str, str]) -> None:
         note(f"added service {APP_SERVICE}")
 
 
-def ensure_backups() -> None:
-    """Point-in-time recovery: the database can be restored to any minute."""
+def backup_summary(state: Mapping[str, Any]) -> str:
+    """The state of the backups, as the summary at the end shows it."""
+    live = state.get("live") or {}
+    if live.get("archiverHealthy"):
+        return "on (point-in-time recovery, archive healthy)"
+    # Right after turning on, the archive needs a few minutes to report.
+    return (
+        "on (point-in-time recovery; the archive has not reported yet: check "
+        f"`railway postgres pitr status --service {DB_SERVICE}` in a few minutes)"
+    )
+
+
+def ensure_backups() -> str | None:
+    """Point-in-time recovery: the database can be restored to any minute.
+
+    Returns the state for the summary, or None when the backups are off.
+    """
     try:
         state = railway_json("postgres", "pitr", "status", "--service", DB_SERVICE)
     except DeployError as exc:
         note(f"WARNING: could not read backup status, check it by hand: {exc}")
-        return
+        return None
     if state.get("enabled") is True:
-        live = state.get("live") or {}
-        healthy = "healthy" if live.get("archiverHealthy") else "archiver not reporting yet"
-        note(f"point-in-time recovery is on ({healthy})")
-        return
+        summary = backup_summary(state)
+        note(f"backups are {summary}")
+        return summary
     try:
         railway("postgres", "pitr", "enable", "--service", DB_SERVICE, "--json")
         note("turned on point-in-time recovery")
+        return backup_summary({})
     except DeployError as exc:
         note(f"WARNING: point-in-time recovery is off and could not be turned on: {exc}")
+        return None
 
 
 def set_variables(variables: Mapping[str, str], env: Mapping[str, str]) -> None:
@@ -520,6 +536,31 @@ def wait_until_live(
     )
 
 
+def banner(text: str) -> None:
+    """A line nobody scrolls past."""
+    rule = "#" * 60
+    print(f"\n    {rule}\n    #{text.center(58)}#\n    {rule}\n", flush=True)
+
+
+def done(env: Mapping[str, str], domain: str, body: Mapping[str, Any], backups: str | None) -> None:
+    """The summary: what is live, where, and whether the database is backed up."""
+    public = env.get("PUBLIC_URL") or f"https://{domain}"
+    step("Done")
+    note(f"commit {body['version'][:12]}, migration {body['revision']}")
+    note(f"seller form:     {public}/")
+    note(f"business card:   {public}/v")
+    note(f"dashboard:       {public}/app")
+    note(f"backups:         {backups or 'OFF'}")
+    if not env.get("PUBLIC_URL"):
+        note("This is the Railway address. Connect the client's own domain next:")
+        note("QR codes and cards are made only for it (docs/deploy.md, Custom domain).")
+    if not backups:
+        banner("Backups are OFF")
+        note("If the database is lost or broken, nothing brings its leads back.")
+        note("Turn backups on in Railway (the project, Postgres, Backups, Enable PITR)")
+        note("and run this again.")
+
+
 # --- main ------------------------------------------------------------------------------
 
 
@@ -553,7 +594,7 @@ def main() -> None:
         step("Railway project")
         ensure_project(path, env)
         ensure_resources(env)
-        ensure_backups()
+        backups = ensure_backups()
 
         step("App service")
         set_variables(variables, env)
@@ -569,15 +610,7 @@ def main() -> None:
         print(f"\nDeploy stopped: {exc}", file=sys.stderr)
         raise SystemExit(1) from None
 
-    public = env.get("PUBLIC_URL") or f"https://{domain}"
-    step("Done")
-    note(f"commit {body['version'][:12]}, migration {body['revision']}")
-    note(f"seller form:     {public}/")
-    note(f"business card:   {public}/v")
-    note(f"dashboard:       {public}/app")
-    if not env.get("PUBLIC_URL"):
-        note("This is the Railway address. Connect the client's own domain next:")
-        note("QR codes and cards are made only for it (docs/deploy.md, Custom domain).")
+    done(env, domain, body, backups)
 
 
 if __name__ == "__main__":

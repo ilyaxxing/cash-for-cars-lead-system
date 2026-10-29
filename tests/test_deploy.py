@@ -184,3 +184,63 @@ def test_health_wait_gives_up(monkeypatch):
     monkeypatch.setattr(deploy.time, "sleep", lambda seconds: None)
     with pytest.raises(deploy.DeployError, match="railway logs"):
         deploy.wait_until_live("x.up.railway.app", "new", timeout=0.01)
+
+
+# What `railway postgres pitr status --json` answers (seen on a live project).
+BACKUPS_ON = {
+    "enabled": True,
+    "bucketWired": True,
+    "live": {"available": True, "archiverHealthy": True},
+}
+BACKUPS_OFF = {"enabled": False, "bucketWired": False, "live": {"available": False}}
+LIVE = {"version": "abc123def4567890", "revision": "r2"}
+
+
+class FakeRailway:
+    """The backup commands, answered in turn: a status, or an error to raise."""
+
+    def __init__(self, monkeypatch, *statuses, enable_error=None):
+        self.statuses = iter(statuses)
+        self.enable_error = enable_error
+        self.calls = []
+        monkeypatch.setattr(deploy, "railway_json", self.json)
+        monkeypatch.setattr(deploy, "railway", self.run)
+        monkeypatch.setattr(deploy.time, "sleep", lambda seconds: None)
+
+    def json(self, *args):
+        self.calls.append(args)
+        answer = next(self.statuses)
+        if isinstance(answer, Exception):
+            raise answer
+        return answer
+
+    def run(self, *args, **kwargs):
+        self.calls.append(args)
+        if self.enable_error:
+            raise self.enable_error
+        return "{}"
+
+    @property
+    def enabled(self):
+        return any("enable" in call for call in self.calls)
+
+
+def test_backups_that_are_on_are_left_alone(monkeypatch):
+    railway = FakeRailway(monkeypatch, BACKUPS_ON)
+    assert deploy.ensure_backups() == "on (point-in-time recovery, archive healthy)"
+    assert not railway.enabled
+
+
+def test_the_summary_says_whether_backups_are_on(capsys):
+    on = "on (point-in-time recovery, archive healthy)"
+    deploy.done({"PUBLIC_URL": "https://buy.example.com"}, "x.up.railway.app", LIVE, on)
+    out = capsys.readouterr().out
+    assert f"backups:         {on}" in out
+    assert "Backups are OFF" not in out
+
+
+def test_the_summary_cannot_be_missed_when_backups_are_off(capsys):
+    deploy.done({"PUBLIC_URL": "https://buy.example.com"}, "x.up.railway.app", LIVE, None)
+    out = capsys.readouterr().out
+    assert "backups:         OFF" in out
+    assert "#" * 60 in out and "Backups are OFF" in out
