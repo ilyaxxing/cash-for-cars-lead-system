@@ -1,7 +1,7 @@
 <script lang="ts">
-  // Big number entry: mileage with its unit chip, or a price with the
-  // currency symbol, before or after the amount as the country writes it.
-  // Digits are grouped as the seller types.
+  // Big number entry: mileage with its unit chip, a price with the currency
+  // symbol, before or after the amount as the country writes it, or a plain
+  // count (a client's own field). Digits are grouped as the seller types.
   import { getContext } from 'svelte'
   import type { FieldSpec } from '../../shared/config'
   import { digitsOnly, maxDigits } from '../engine'
@@ -19,6 +19,10 @@
   const t = form.t
 
   const money = $derived(field.unit === 'currency')
+  const distance = $derived(field.unit === 'distance')
+  // Help under the box is optional: a field without its text shows none.
+  const helpKey = $derived(`preset.fields.${field.id}.help`)
+  const help = $derived(money ? '' : t(helpKey, { unit_long: form.unit('long') }))
   const value = $derived(form.answers[field.id])
   const shown = $derived(typeof value === 'number' ? form.formatNumber(value) : '')
   const error = $derived(form.errorText(field.id))
@@ -51,10 +55,10 @@
       aria-invalid={Boolean(error)}
     />
     {#if money && form.currencyAfter}<span aria-hidden="true" class="symbol">{form.currencySymbol}</span>{/if}
-    {#if !money}<span class="unit">{form.unit('short')}</span>{/if}
+    {#if distance}<span class="unit">{form.unit('short')}</span>{/if}
   </span>
-  {#if !money}
-    <span class="help">{t(`preset.fields.${field.id}.help`, { unit_long: form.unit('long') })}</span>
+  {#if help && help !== helpKey}
+    <span class="help">{help}</span>
   {/if}
 </label>
 <div class="error"><ErrorText text={error} gap="10px" /></div>
