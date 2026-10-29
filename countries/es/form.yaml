@@ -1,0 +1,163 @@
+# Seller questionnaire for a car buyer in Spain (countries/es: a starting point for a client's own PRESET_FILE).
+#
+# Structure only: every label, hint and error message lives in
+# locales/<locale>.json under keys derived from the ids below.
+# See "Customize the form" in the README before editing.
+#
+# Fields whose id matches a lead column (make, model, year, mileage,
+# asking_price, location, phone, name) are stored in that column; all other
+# answers go to the lead's JSONB `answers`, so new fields need no migration.
+
+id: es-car-buyout
+version: 1
+distance_unit: km
+phone_region: ES
+postal_code_pattern: '\d{5}'
+
+steps:
+  - id: vehicle
+    fields:
+      - id: make
+        type: text
+        required: true
+        chip: true
+        max_length: 64
+        widget: tiles
+        other: true
+        suggestions: [Seat, Volkswagen, Renault, Peugeot, Toyota, Dacia, Citroën, Kia, Hyundai, Ford]
+      - id: model
+        type: text
+        required: true
+        chip: true
+        max_length: 64
+        widget: chips
+        suggestions_by: make
+        suggestions:
+          Seat: [Ibiza, León, Arona, Ateca, Tarraco]
+          Volkswagen: [Golf, Polo, T-Roc, Tiguan, Passat]
+          Renault: [Clio, Mégane, Captur, Kadjar, Austral]
+          Peugeot: ["208", "308", "2008", "3008", "5008"]
+          Toyota: [Corolla, Yaris, C-HR, RAV4, Auris]
+          Dacia: [Sandero, Duster, Logan, Jogger, Spring]
+          Citroën: [C3, C4, C3 Aircross, C5 Aircross, Berlingo]
+          Kia: [Sportage, Ceed, Niro, Rio, Stonic]
+          Hyundai: [Tucson, i30, Kona, i20, Bayon]
+          Ford: [Focus, Fiesta, Kuga, Puma, Mondeo]
+
+  - id: year_mileage
+    group: vehicle
+    show_chips: true
+    fields:
+      - id: year
+        type: number
+        required: true
+        chip: true
+        widget: year_grid
+        recent: 12
+        min: 1990
+        # Anything older is a single "Earlier" answer: the exact year matters
+        # less than knowing the car is a classic or a parts car.
+        earlier: 1990
+      - id: mileage
+        type: number
+        required: true
+        chip: true
+        unit: distance
+        min: 0
+        max: 950000
+
+  - id: condition
+    group: vehicle
+    show_chips: true
+    fields:
+      - id: condition
+        type: select
+        required: true
+        chip: true
+        options:
+          - { id: excellent, level: 4 }
+          - { id: good, level: 3 }
+          - { id: needs_repairs, level: 2 }
+          - { id: accident_damaged, level: 1 }
+          - { id: not_running, level: 0 }
+
+  - id: accident
+    group: history
+    show_chips: true
+    fields:
+      - id: accident
+        type: yes_no
+        required: true
+        unknown: true
+        flag: "yes"
+        follow_up:
+          when: "yes"
+          fields:
+            - { id: accident_details, type: text, multiline: true, max_length: 400 }
+
+  - id: finance
+    group: history
+    show_chips: true
+    fields:
+      - id: finance
+        type: yes_no
+        required: true
+        unknown: true
+        flag: "yes"
+        follow_up:
+          when: "yes"
+          fields:
+            - { id: finance_details, type: text, multiline: true, max_length: 400 }
+
+  - id: price
+    skippable: true
+    note: box
+    fields:
+      - { id: asking_price, type: number, unit: currency, min: 100, max: 5000000 }
+
+  - id: location
+    skippable: true
+    note: icon
+    fields:
+      - { id: location, type: text, required: true, max_length: 128 }
+      - { id: postal_code, type: text, required: true, format: postal_code }
+
+  - id: vin
+    skippable: true
+    note: text
+    fields:
+      - { id: vin, type: text, format: vin }
+
+  - id: contact
+    submit: true
+    consent: true
+    fields:
+      - { id: name, type: text, required: true, personal: true, max_length: 128 }
+      - { id: phone, type: phone, required: true, personal: true }
+      - id: email
+        type: text
+        format: email
+        personal: true
+        max_length: 254
+        required_when: { contact_method: email }
+      - id: contact_method
+        type: select
+        default: call
+        options:
+          - { id: call }
+          - { id: whatsapp }
+          - { id: sms }
+          - { id: email }
+
+  - id: photos
+    fields:
+      - id: photos
+        type: photos
+        extra: 4
+        slots:
+          - { id: front_left, image: guide-front-left.webp, ratio: "2336 / 1760" }
+          - { id: rear_right, image: guide-rear-right.webp, ratio: "2336 / 1760" }
+          - { id: front_right, image: guide-front-right.webp, ratio: "2336 / 1760" }
+          - { id: rear_left, image: guide-rear-left.webp, ratio: "2336 / 1760" }
+          - { id: interior, image: guide-interior.webp, ratio: "1 / 1" }
+          - { id: cluster, image: guide-cluster.webp, ratio: "1 / 1" }
