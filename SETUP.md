@@ -510,8 +510,7 @@ domain), and that you are done. Give them a short note for the owner, in
 the owner's language (English in the US):
 
 - The form address, the business card link and the dashboard address.
-- Statuses: New (not handled yet), In Progress (talking or negotiating),
-  Purchased (bought the car, counts in statistics), Rejected (passed).
+- What the statuses mean is in the app: Settings, Help.
 - Privacy: a seller's name, phone, email and photos are erased automatically
   90 days after the lead is marked Purchased or Rejected. Leads never closed
   are never erased, so close them when done.
