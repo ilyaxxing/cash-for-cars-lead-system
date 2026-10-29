@@ -62,7 +62,8 @@ production, then:
    `RAILWAY_PROJECT_NAME`) and saves its id into the file as
    `RAILWAY_PROJECT_ID`;
 2. adds PostgreSQL with point-in-time recovery, the `photos` bucket and the
-   `app` service;
+   `app` service. Without the backups it stops (see
+   [Backups and restore](#backups-and-restore));
 3. sets the app's variables. Database and bucket credentials are Railway
    references and never pass through your machine; secrets are sent over
    stdin and never printed;
@@ -70,7 +71,7 @@ production, then:
 5. uploads and builds the current commit, exactly as committed, plus the
    client's brand files (see [Client branding](configuration.md#client-branding));
 6. waits until `/healthz` reports this commit and the latest database
-   migration, then prints the addresses.
+   migration, then prints the addresses and whether the backups are on.
 
 It is safe to run again: existing resources are reused.
 
@@ -186,7 +187,18 @@ before a full run.
 ## Backups and restore
 
 PostgreSQL has point-in-time recovery: Railway archives the database
-continuously and can restore it to any minute into a **new** service:
+continuously. Every deploy turns it on if it is off, and the last lines
+of every deploy say which state it is in (`backups: on (...)` or `OFF`).
+
+The deploy stops when the backups cannot be turned on, or when their state
+cannot be read, and says what to do: update the Railway CLI
+(`railway upgrade --yes`), or turn them on in Railway (the Postgres service,
+**Backups**, **Enable PITR**), then deploy again. `--no-backups` deploys
+without them, for a business that agrees to start that way, and the summary
+then shows **Backups are OFF** in a banner. A later deploy without the flag
+stops again until they are on; the flag itself never turns backups off.
+
+Railway can restore the database to any minute into a **new** service:
 
 ```bash
 railway postgres pitr status --service Postgres

@@ -16,7 +16,10 @@ the same project. Every run:
 3. Validates the settings, the preset and the texts as production would,
    before anything is created on Railway.
 4. Creates or links the project, its Postgres, the photo bucket and the app
-   service, and turns on point-in-time recovery for the database.
+   service, and turns on point-in-time recovery for the database. If the
+   backups cannot be turned on, or their state cannot be read, the deploy
+   stops and says what to do. --no-backups goes on without them, and the
+   summary at the end then says, in large letters, that they are off.
 5. Sets the app's variables. Database and bucket credentials are Railway
    references, so their values never pass through this machine.
 6. Configures the health check, adds a domain, uploads and builds the code:
@@ -62,6 +65,17 @@ BUCKET = "photos"
 DEFAULT_BUCKET_REGION = "sjc"
 HEALTH_PATH = "/healthz"
 HEALTH_TIMEOUT = 15 * 60
+# How many times, 5 seconds apart, Railway is asked whether the backups came on.
+BACKUP_CHECKS = 6
+# Where a deploy without backups stops. The installer reads this to the
+# person, so it says what to do, not what went wrong inside Railway.
+BACKUPS_HELP = """\
+An instance without them can lose every lead for good. What to do:
+  1. Update the Railway CLI (`railway upgrade --yes`) and run this again.
+  2. Or turn them on in Railway: open the project, then Postgres, then the
+     Backups tab, then Enable PITR. Then run this again.
+  3. Only if the business agrees to start without backups for now: run this
+     again with --no-backups, and turn them on as soon as you can."""
 
 # Read by this script, never sent to the app.
 DEPLOY_KEYS = {
@@ -387,23 +401,63 @@ def ensure_resources(env: Mapping[str, str]) -> None:
         note(f"added service {APP_SERVICE}")
 
 
-def ensure_backups() -> None:
-    """Point-in-time recovery: the database can be restored to any minute."""
+def backup_summary(state: Mapping[str, Any]) -> str:
+    """The state of the backups, as the summary at the end shows it."""
+    live = state.get("live") or {}
+    if live.get("archiverHealthy"):
+        return "on (point-in-time recovery, archive healthy)"
+    # Right after turning on, the archive needs a few minutes to report.
+    return (
+        "on (point-in-time recovery; the archive has not reported yet: check "
+        f"`railway postgres pitr status --service {DB_SERVICE}` in a few minutes)"
+    )
+
+
+def backup_status() -> dict[str, Any]:
     try:
         state = railway_json("postgres", "pitr", "status", "--service", DB_SERVICE)
-    except DeployError as exc:
-        note(f"WARNING: could not read backup status, check it by hand: {exc}")
-        return
-    if state.get("enabled") is True:
-        live = state.get("live") or {}
-        healthy = "healthy" if live.get("archiverHealthy") else "archiver not reporting yet"
-        note(f"point-in-time recovery is on ({healthy})")
-        return
+    except (DeployError, ValueError) as exc:
+        raise DeployError(f"Their status could not be read: {exc}") from None
+    if not isinstance(state, dict) or "enabled" not in state:
+        raise DeployError("Their status could not be read: Railway's answer has no state.")
+    return state
+
+
+def turn_on_backups() -> dict[str, Any]:
+    """The backup status, after turning the backups on if they were off."""
+    state = backup_status()
+    if state["enabled"] is True:
+        return state
     try:
         railway("postgres", "pitr", "enable", "--service", DB_SERVICE, "--json")
-        note("turned on point-in-time recovery")
     except DeployError as exc:
-        note(f"WARNING: point-in-time recovery is off and could not be turned on: {exc}")
+        raise DeployError(f"They are off and could not be turned on: {exc}") from None
+    # Only Railway's own answer counts; it may take a moment to show the change.
+    for _ in range(BACKUP_CHECKS):
+        state = backup_status()
+        if state["enabled"] is True:
+            note("turned on point-in-time recovery")
+            return state
+        time.sleep(5)
+    raise DeployError("Railway took the request to turn them on, but still reports them off.")
+
+
+def ensure_backups(required: bool = True) -> str | None:
+    """Point-in-time recovery: the database can be restored to any minute.
+
+    Returns the state for the summary. Without backups the deploy stops,
+    unless they are not required (--no-backups): then this returns None.
+    """
+    try:
+        state = turn_on_backups()
+    except DeployError as exc:
+        if required:
+            raise DeployError(f"The database backups are not on. {exc}\n\n{BACKUPS_HELP}") from None
+        note(f"WARNING: going on without backups, as --no-backups asks. {exc}")
+        return None
+    summary = backup_summary(state)
+    note(f"backups are {summary}")
+    return summary
 
 
 def set_variables(variables: Mapping[str, str], env: Mapping[str, str]) -> None:
@@ -520,12 +574,43 @@ def wait_until_live(
     )
 
 
+def banner(text: str) -> None:
+    """A line nobody scrolls past."""
+    rule = "#" * 60
+    print(f"\n    {rule}\n    #{text.center(58)}#\n    {rule}\n", flush=True)
+
+
+def done(env: Mapping[str, str], domain: str, body: Mapping[str, Any], backups: str | None) -> None:
+    """The summary: what is live, where, and whether the database is backed up."""
+    public = env.get("PUBLIC_URL") or f"https://{domain}"
+    step("Done")
+    note(f"commit {body['version'][:12]}, migration {body['revision']}")
+    note(f"seller form:     {public}/")
+    note(f"business card:   {public}/v")
+    note(f"dashboard:       {public}/app")
+    note(f"backups:         {backups or 'OFF'}")
+    if not env.get("PUBLIC_URL"):
+        note("This is the Railway address. Connect the client's own domain next:")
+        note("QR codes and cards are made only for it (docs/deploy.md, Custom domain).")
+    if not backups:
+        banner("Backups are OFF")
+        note("If the database is lost or broken, nothing brings its leads back.")
+        note("Turn backups on in Railway (the project, Postgres, Backups, Enable PITR)")
+        note("and run this again without --no-backups.")
+
+
 # --- main ------------------------------------------------------------------------------
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("env_file", type=Path, help="the client's settings, e.g. clients/acme.env")
+    parser.add_argument(
+        "--no-backups",
+        action="store_true",
+        help="go on when the database backups cannot be turned on or checked "
+        "(the summary then says Backups are OFF)",
+    )
     args = parser.parse_args()
     path: Path = args.env_file
 
@@ -553,7 +638,7 @@ def main() -> None:
         step("Railway project")
         ensure_project(path, env)
         ensure_resources(env)
-        ensure_backups()
+        backups = ensure_backups(required=not args.no_backups)
 
         step("App service")
         set_variables(variables, env)
@@ -569,15 +654,7 @@ def main() -> None:
         print(f"\nDeploy stopped: {exc}", file=sys.stderr)
         raise SystemExit(1) from None
 
-    public = env.get("PUBLIC_URL") or f"https://{domain}"
-    step("Done")
-    note(f"commit {body['version'][:12]}, migration {body['revision']}")
-    note(f"seller form:     {public}/")
-    note(f"business card:   {public}/v")
-    note(f"dashboard:       {public}/app")
-    if not env.get("PUBLIC_URL"):
-        note("This is the Railway address. Connect the client's own domain next:")
-        note("QR codes and cards are made only for it (docs/deploy.md, Custom domain).")
+    done(env, domain, body, backups)
 
 
 if __name__ == "__main__":

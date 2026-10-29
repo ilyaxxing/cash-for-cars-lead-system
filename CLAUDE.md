@@ -65,8 +65,9 @@ The repository is public. Write everything as if strangers read it.
   (the commands refuse a `*.up.railway.app` address).
   - Railway (`tools/deploy.py`), the default. Per client: app service `app`
     (1 replica: in-memory rate limits and background jobs) + `Postgres`
-    (point-in-time recovery, turned on by the deploy script; Railway keeps
-    about 4 weeks) + bucket `photos` (S3-compatible, no Railway backups).
+    (point-in-time recovery, turned on by the deploy script, which stops
+    without it unless `--no-backups`; Railway keeps about 4 weeks) + bucket
+    `photos` (S3-compatible, no Railway backups).
     Built on the installer's Railway account, then transferred to the
     client's own (Transfer Ownership: the client pays; the installer stays an
     Editor for support).
@@ -78,8 +79,9 @@ The repository is public. Write everything as if strangers read it.
 - Deploy scripts: the client's env file in, a working URL out. Both wait for
   `/healthz` to report the uploaded git sha and the Alembic head: never
   assume a deploy came up, since the container can be running while the app
-  in it failed at startup and answers nobody. `docker-compose.dev.yml` is
-  for local development only. `tools/deploy.py` drives the Railway CLI step
+  in it failed at startup and answers nobody. Both end with a `backups:`
+  line, and a "Backups are OFF" banner when they are off.
+  `docker-compose.dev.yml` is for local development only. `tools/deploy.py` drives the Railway CLI step
   by step, not `.railway/railway.ts` IaC: IaC deletes every variable it does
   not list, secrets included, and railway.toml stops working on 2026-12-01.
   Client files live in git-ignored `clients/`; SECRET_KEY and VAPID keys are

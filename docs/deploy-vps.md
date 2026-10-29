@@ -57,8 +57,10 @@ client's own files) and that the domain points at the server; installs
 Docker if it is missing (Ubuntu's packages); uploads exactly the commit with
 the client's own files and the settings (over SSH's stdin, never on a
 command line) to `/opt/cash-for-cars/<name>/`; starts
-[deploy/vps/compose.yaml](../deploy/vps/compose.yaml); and waits until
-`https://<domain>/healthz` reports the commit and the latest migration. The
+[deploy/vps/compose.yaml](../deploy/vps/compose.yaml); waits until
+`https://<domain>/healthz` reports the commit and the latest migration; and
+checks that the daily dump runs. Its last lines say so (`backups:`), or show
+**Backups are OFF** with the command for the dump's log. The
 first run takes 5-15 minutes, most of it the build.
 
 On the server:
