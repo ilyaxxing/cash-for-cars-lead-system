@@ -1,0 +1,33 @@
+{
+  "preset": {
+    "steps": {
+      "finance": {
+        "hint": "For example, an outstanding car loan, lease buyout, or a lien registered against the car."
+      }
+    },
+    "fields": {
+      "location": {
+        "placeholder": "Toronto"
+      },
+      "postal_code": {
+        "label": "Postal code",
+        "placeholder": "M5V 2T6",
+        "errors": {
+          "required": "Enter the postal code.",
+          "format": "Enter a postal code like M5V 2T6."
+        }
+      },
+      "phone": {
+        "placeholder": "(416) 555-0142"
+      }
+    }
+  },
+  "units": {
+    "km": {
+      "long": "kilometres"
+    }
+  },
+  "card": {
+    "back_list_3": "High mileage, any year"
+  }
+}
