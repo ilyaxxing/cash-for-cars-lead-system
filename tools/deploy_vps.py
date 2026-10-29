@@ -26,7 +26,8 @@ Every run:
 5. Builds and starts deploy/vps/compose.yaml: the app, PostgreSQL with a
    daily dump, and Caddy for HTTPS.
 6. Waits until https://<domain>/healthz reports this commit and the latest
-   migration, as tools/deploy.py does.
+   migration, as tools/deploy.py does, and checks that the daily dump runs:
+   the summary says whether the database is backed up.
 """
 
 from __future__ import annotations
@@ -245,6 +246,41 @@ def start(host: str, folder: str, name: str) -> None:
     remote(host, command)
 
 
+def backups_running(host: str, folder: str, name: str) -> bool:
+    """Whether the daily dump runs: compose.yaml's backup service is up."""
+    command = (
+        f"cd {folder} && docker compose -p {name} --project-directory . -f {COMPOSE} "
+        "ps --status running --services"
+    )
+    return "backup" in remote(host, command, check=False).split()
+
+
+def logs_command(host: str, name: str, service: str) -> str:
+    """How to read a service's log from this computer."""
+    sudo = "" if host.startswith("root@") else "sudo "
+    return f"ssh {host} '{sudo}docker compose -p {name} logs {service}'"
+
+
+def done(env: Mapping[str, str], body: Mapping[str, str], name: str, backups: bool) -> None:
+    """The summary: what is live, where, and whether the database is backed up."""
+    host, public = env["VPS_HOST"], env["PUBLIC_URL"].rstrip("/")
+    step("Done")
+    note(f"commit {body['version'][:12]}, migration {body['revision']}")
+    note(f"seller form:     {public}/")
+    note(f"business card:   {public}/v")
+    note(f"dashboard:       {public}/app")
+    note(f"logs:            {logs_command(host, name, 'app')}")
+    if backups:
+        days = env.get("BACKUP_DAYS") or "14"
+        note(f"backups:         a database dump a day, kept {days} days on the server")
+        note("                 (keep a copy off it too: docs/deploy-vps.md)")
+        return
+    note("backups:         OFF")
+    deploy.banner("Backups are OFF")
+    note("The daily dump is not running: if the database is lost, nothing brings")
+    note(f"its leads back. Its log: {logs_command(host, name, 'backup')}")
+
+
 # --- main -----------------------------------------------------------------------------
 
 
@@ -284,20 +320,13 @@ def main() -> None:
         start(host, folder, name)
 
         step("Waiting for the new code to answer")
-        sudo = "" if host.startswith("root@") else "sudo "
-        logs = f"ssh {host} '{sudo}docker compose -p {name} logs app'"
-        body = deploy.wait_until_live(domain, sha, logs=logs)
+        body = deploy.wait_until_live(domain, sha, logs=logs_command(host, name, "app"))
+        backups = backups_running(host, folder, name)
     except DeployError as exc:
         print(f"\nDeploy stopped: {exc}", file=sys.stderr)
         raise SystemExit(1) from None
 
-    public = env["PUBLIC_URL"].rstrip("/")
-    step("Done")
-    note(f"commit {body['version'][:12]}, migration {body['revision']}")
-    note(f"seller form:     {public}/")
-    note(f"business card:   {public}/v")
-    note(f"dashboard:       {public}/app")
-    note(f"logs:            {logs}")
+    done(env, body, name, backups)
 
 
 if __name__ == "__main__":

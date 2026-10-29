@@ -108,3 +108,36 @@ def test_the_compose_file_is_valid(tmp_path):
         cwd=tmp_path, capture_output=True, text=True, check=False,
     )  # fmt: skip
     assert result.returncode == 0, result.stderr
+
+
+@pytest.mark.parametrize(
+    ("services", "running"), [("app\nbackup\ncaddy\ndb\n", True), ("app\ndb\n", False)]
+)
+def test_the_backups_count_only_while_the_daily_dump_runs(monkeypatch, services, running):
+    commands = []
+
+    def remote(host, command, **kwargs):
+        commands.append(command)
+        return services
+
+    monkeypatch.setattr(deploy_vps, "remote", remote)
+    folder = "/opt/cash-for-cars/acme"
+    assert deploy_vps.backups_running("root@203.0.113.10", folder, "acme") is running
+    assert "ps --status running --services" in commands[0]
+
+
+LIVE = {"version": SHA, "revision": "r2"}
+
+
+def test_the_summary_says_how_the_database_is_backed_up(env, capsys):
+    deploy_vps.done({**env, "BACKUP_DAYS": "21"}, LIVE, "acme", backups=True)
+    out = capsys.readouterr().out
+    assert "backups:         a database dump a day, kept 21 days on the server" in out
+    assert "Backups are OFF" not in out
+
+
+def test_the_summary_cannot_be_missed_when_the_dump_is_not_running(env, capsys):
+    deploy_vps.done(env, LIVE, "acme", backups=False)
+    out = capsys.readouterr().out
+    assert "backups:         OFF" in out and "Backups are OFF" in out
+    assert "ssh root@203.0.113.10 'docker compose -p acme logs backup'" in out
