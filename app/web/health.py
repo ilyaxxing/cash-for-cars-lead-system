@@ -1,10 +1,10 @@
 """Health check that a deploy can wait on.
 
-"The container is running" proves nothing: the Telegram bot this project
-grew out of once went down at startup and stayed down for an hour because
-nobody checked. The deploy script waits until this endpoint reports the
-commit it just shipped and the latest migration, and only then calls the
-deploy done.
+"The container is running" proves nothing: the app in it can fail at
+startup (a bad setting, a migration that did not apply) and answer nobody,
+and nothing says so unless someone checks. The deploy script waits until
+this endpoint reports the commit it just shipped and the latest migration,
+and only then calls the deploy done.
 """
 
 from __future__ import annotations

@@ -32,8 +32,6 @@ The repository is public. Write everything as if strangers read it.
 - `main` always works. Every change on its own branch, merged via PR after
   the tests pass (CI runs them) and, for UI, a browser check. Installers
   deploy release tags, not `main`. No force push unless the user asks.
-- Some logic and many lessons come from an earlier Telegram bot by the same
-  author (not public); they are written down where they apply.
 - Default brand "Car Buyout"; `BRAND_NAME` overrides.
   The privacy-consent operator is the client (`OPERATOR_NAME`).
 - Installers are usually not technical and follow SETUP.md through Claude
@@ -78,13 +76,14 @@ The repository is public. Write everything as if strangers read it.
     with a daily dump on the same server (`BACKUP_DAYS`, 14), and Caddy for
     HTTPS (Let's Encrypt); photos on a volume.
 - Deploy scripts: the client's env file in, a working URL out. Both wait for
-  `/healthz` to report the uploaded git sha and the Alembic head (lesson from
-  the bot: never assume a deploy came up). `docker-compose.dev.yml` is
+  `/healthz` to report the uploaded git sha and the Alembic head: never
+  assume a deploy came up, since the container can be running while the app
+  in it failed at startup and answers nobody. `docker-compose.dev.yml` is
   for local development only. `tools/deploy.py` drives the Railway CLI step
   by step, not `.railway/railway.ts` IaC: IaC deletes every variable it does
-  not list (the bot nearly lost its secrets that way) and railway.toml stops
-  working on 2026-12-01. Client files live in git-ignored `clients/`;
-  SECRET_KEY and VAPID keys are generated once and written back there.
+  not list, secrets included, and railway.toml stops working on 2026-12-01.
+  Client files live in git-ignored `clients/`; SECRET_KEY and VAPID keys are
+  generated once and written back there.
   Database and bucket credentials are Railway references (`${{Postgres...}}`,
   `${{photos...}}`); secrets go over stdin. GIT_SHA is a service variable that
   the Dockerfile reads as a build arg (`railway up` sets no commit sha).
@@ -159,18 +158,18 @@ name, status, source, has_photos, created_at, closed_at. Everything else from
 the form goes to `answers` JSONB, so a new preset field needs no migration.
 Technical columns: preset_id, viewed_at, submitted_at, status_changed_at,
 purged_at, updated_at. Notes, activity events and photos are separate tables.
-Statuses (from the bot, stored as text, not enum): new, in_work, bought, rejected.
+Statuses (stored as text, not enum): new, in_work, bought, rejected.
 Labels from the design: New, In Progress, Purchased, Rejected.
 
-## Logic carried over from the bot
+## Lead logic
 - Source label: first meaningful source wins; a new label only overwrites the
   default `direct`. Frozen on the lead at creation. Format `[A-Za-z0-9_-]{1,64}`,
   lowercased. `/v` → `card` ("Business Card"), `?src=` for others, labels via
   `SOURCE_LABELS`; unknown labels show as "Other" and log a warning.
 - Retention: 90 days after closing (not creation), name, phone, every preset
   field marked `personal: true` and the photos (objects, then rows) are wiped;
-  rows stay for statistics. Photos were added to the bot's scope: plates, faces
-  and driveways identify the seller. VIN stays (car data); a number plate
+  rows stay for statistics. Photos are wiped as well: plates, faces and
+  driveways identify the seller. VIN stays (car data); a number plate
   (`registration`, asked instead of the VIN in some countries) is personal:
   a registry ties it to the owner. Owner notes stay
   (the help says not to put contacts there). `purged_at`
