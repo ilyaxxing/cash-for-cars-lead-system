@@ -78,6 +78,10 @@ It is safe to run again: existing resources are reused.
 
 ## 3. Set up the owner's phone
 
+Connect the client's domain first when it is ready ([Custom domain](#custom-domain)):
+notifications belong to the address they were turned on at, so the owner then
+sets them up once, at the address the cards carry.
+
 On the owner's iPhone, open `https://<address>/app` in **Safari**, tap
 **Share → Add to Home Screen**, and open the app from the home screen
 (iPhone only delivers notifications to home-screen apps). Sign in with
@@ -131,9 +135,9 @@ Required before any QR code or card: the commands refuse the
 good and it must be the business's own. Use a subdomain of the client's site
 (`buy.example.com`), or a domain bought in the client's name.
 
-1. Set `PUBLIC_URL=https://buy.example.com` in the client's file and deploy
-   again. The script adds the domain and prints the DNS records to create at
-   the client's domain registrar.
+1. Set `PUBLIC_URL=https://buy.example.com` in the client's file, best
+   before the first deploy, or deploy again. The script adds the domain and
+   prints the DNS records to create at the client's domain registrar.
 2. Wait until Railway shows the domain as active (`railway domain list
    --service app`) and the address opens with a valid certificate.
 3. Owners who installed the app from the old address should install it again

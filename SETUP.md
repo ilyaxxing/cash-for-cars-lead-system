@@ -29,7 +29,7 @@ app, and a push notification on that phone for every new lead.
 - The client's settings file holds passwords and keys. Never paste its contents
   into the chat, never commit it, never send it anywhere: only the deploy
   script reads it. The one exception is the owner's first password, which
-  you show once, in the message for the owner (step 7). It stays in this chat,
+  you show once, in the message for the owner (step 8). It stays in this chat,
   so it opens the dashboard only until the owner sets their own.
 - Never push to GitHub. Change tracked files only as described in
   [Customizing the form](#customizing-the-form).
@@ -233,8 +233,10 @@ should have its lawyer read it at `/privacy` before launch.
 **Address**
 - Which domain will the cards use? If the business has a website, a
   subdomain of it such as `buy.example.com` costs nothing. If not, it buys one
-  in its own name (about $10-15 a year). The first deploy runs on the Railway
-  address; the domain is connected in step 8, before anything is printed.
+  in its own name (about $10-15 a year). If the domain exists and someone
+  can change its DNS today, its address goes into the settings now (step 4)
+  and is connected right after the first deploy (step 6), before the owner's
+  phone and before anything is printed.
 
 **Owner's password**
 - Generate a strong, typeable one (three random words and a number) unless the
@@ -255,8 +257,10 @@ should have its lawyer read it at `/privacy` before launch.
 3. The look from step 3: `BRAND_COLOR`, and the files as paths from the
    repository, e.g. `BRAND_LOGO=clients/<id>/logo.png`. Leave empty whatever
    they keep.
-4. Leave these empty: `PUBLIC_URL` (unless the domain is already set up),
-   `SECRET_KEY`, `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `RAILWAY_PROJECT_ID`.
+4. `PUBLIC_URL=https://buy.<domain>` if the domain from step 3 is ready for
+   its DNS records today; otherwise leave it empty for now (step 6). Leave
+   these empty: `SECRET_KEY`, `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`,
+   `RAILWAY_PROJECT_ID`.
    The deploy script generates the keys, writes them into the file, and adds
    the project id after the first run. Local-only values copied from
    `.env.example` (database, storage) are ignored on Railway.
@@ -270,8 +274,8 @@ should have its lawyer read it at `/privacy` before launch.
 ## Step 5. Deploy
 
 On a server of the business's own: `.venv/bin/python tools/deploy_vps.py
-clients/<id>.env` instead, once the domain points at the server (step 8
-comes first there); the rest of this step reads the same.
+clients/<id>.env` instead, once the domain points at the server (its DNS
+record, step 6, comes first there); the rest of this step reads the same.
 
 Ask for the go-ahead: this creates the Railway project on the person's own
 account; it moves to the business's account in step 10. Then:
@@ -314,22 +318,50 @@ script's message with them, in this order:
 
 Never add `--no-backups` yourself just to get past the stop.
 
-## Step 6. Test it together
+## Step 6. The business's own domain
 
-1. Ask the person to open the seller form on their own phone and send a test
-   car (any car; a 555 number like 512-555-0100 is fine).
+Required: the QR and card commands refuse the Railway address. Explain why: a
+code printed on cards points to one address for good, so it must be the
+business's own, not the Railway one, which belongs to one Railway project.
+
+It comes before the owner's phone on purpose: notifications belong to the
+address they were turned on at, so the owner sets them up once, at the
+address the cards will carry.
+
+1. If the business has a domain, use a subdomain such as `buy.<domain>`. If
+   not, the business buys one in its own name (for example at Cloudflare or
+   Namecheap, about $10-15 a year); ask before anyone pays.
+2. If `PUBLIC_URL` is not in the settings file yet, set
+   `PUBLIC_URL=https://buy.<domain>` and run the deploy again. The deploy
+   prints the DNS records to add at the registrar (the first one already did,
+   if the address was set in step 4).
+3. Walk the person, or the business's web person, through adding them at the
+   registrar. Check `railway domain list --service app` until the domain is
+   active, then open the address and confirm the padlock (certificate) shows.
+
+A DNS change usually shows within an hour, and can take up to a day. While it
+does, test on the Railway address (step 7), and give the owner the message of
+step 8 only once the domain works. If the domain can't be ready today, stop
+after step 7 and come back: nothing reaches sellers before the cards and codes
+of step 9, which need the domain anyway.
+
+## Step 7. Test it together
+
+1. Ask the person to open the seller form on their own phone, at the
+   business's address (or the Railway one while the domain is on its way),
+   and send a test car (any car; a 555 number like 512-555-0100 is fine).
 2. Don't sign in to the dashboard yourself. The first sign-in sets the
    owner's own password, and that belongs to the owner, on their phone
-   (step 7). The test lead waits for them there.
+   (step 8). The test lead waits for them there.
 3. Ask whether the look is right: color, logo, the first screen's photo.
    Anything to change: update the settings file or the files in
    `clients/<id>/` and deploy again.
 
-## Step 7. The owner's phone
+## Step 8. The owner's phone
 
-Give the person this message for the business owner, filled in, in the
-owner's language (English in the US; elsewhere translate it, as the
-dashboard's texts are):
+Once the business's address works (step 6), give the person this message for
+the business owner, filled in with that address, in the owner's language
+(English in the US; elsewhere translate it, as the dashboard's texts are):
 
 > Your new lead system is ready. To get a notification for every car seller:
 >
@@ -353,27 +385,9 @@ send another test lead and confirm the owner got the notification. If it
 didn't arrive, see [Troubleshooting](#troubleshooting). From now on nobody
 but the owner knows the password, and updates don't need it.
 
-## Step 8. The business's own domain
-
-Required: the QR and card commands refuse the Railway address. Explain why: a
-code printed on cards points to one address for good, so it must be the
-business's own, not the Railway one, which belongs to one Railway project.
-
-1. If the business has a domain, use a subdomain such as `buy.<domain>`. If
-   not, the business buys one in its own name (for example at Cloudflare or
-   Namecheap, about $10-15 a year); ask before anyone pays.
-2. Set `PUBLIC_URL=https://buy.<domain>` in the settings file and run the deploy
-   again. It prints the DNS records to add at the registrar.
-3. Walk the person, or the business's web person, through adding them at the
-   registrar. Check `railway domain list --service app` until the domain is
-   active, then open the address and confirm the padlock (certificate) shows.
-4. The owner opens the dashboard at the new address and does step 7 again,
-   signing in with their own password: notifications belong to the address
-   they were turned on at.
-
 ## Step 9. Business card and QR codes
 
-Do this after step 8: the commands make codes only for the business's own
+Do this after step 6: the commands make codes only for the business's own
 domain.
 
 **Business card.** These cards are mostly left under the windshield wipers
@@ -594,7 +608,7 @@ public IPv4 address. Give the person this computer's SSH public key
 none) to add when the server is created, or run `! ssh-copy-id
 root@<address>` with them once, with the root password from the provider.
 Then `VPS_HOST=root@<address>` in the settings file. The domain gets an A
-record pointing at the server's address before the first deploy (step 8
+record pointing at the server's address before the first deploy (step 6
 moves before step 5). Where Docker Hub is slow or closed, set
 `DOCKER_MIRROR` (the provider's mirror, or `https://mirror.gcr.io`). The
 daily dumps stay on that same server: have the business turn on the
