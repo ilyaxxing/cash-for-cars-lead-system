@@ -352,3 +352,16 @@ def test_capitals_follow_the_language():
     printed = {run.text for run in runs(card)}
     assert {"NAKİT", "FİYAT"} <= printed
     assert cards.capitals("fiyat", "en") == "FIYAT"
+
+
+def test_the_card_prints_the_phone_as_people_there_write_it(tmp_path, monkeypatch):
+    env = tmp_path / "acme.env"
+    env.write_text(
+        f"BRAND_NAME=Acme\nBRAND_PHONE=+1 512-555-0100\nPUBLIC_URL={URL}\n", encoding="utf-8"
+    )
+    printed = []
+    make = cards.make
+    monkeypatch.setattr(cards, "make", lambda text: printed.append(text.phone) or make(text))
+    card_command(env, None, "", None, None, None, tmp_path / "cards")
+    card_command(env, None, "", "512.555.0199", None, None, tmp_path / "cards")
+    assert printed == ["(512) 555-0100", "(512) 555-0199"]

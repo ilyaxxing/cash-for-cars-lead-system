@@ -33,6 +33,7 @@ from app.i18n import LocaleError, load_messages, text_keys, translation_problems
 from app.preset.loader import PresetError, check_texts, load_preset
 from app.services.images import process_upload
 from app.services.leads import apply_status
+from app.services.validation import format_phone
 from app.storage import create_storage
 
 CARS = [
@@ -248,11 +249,14 @@ def card(
     try:
         brand = Brand.load(settings)
         messages = load_messages(settings.locales_dir, settings.locale, settings.locale_file)
+        # The phone reads as people there write it, however it was typed.
+        preset = load_preset(settings.presets_dir, settings.preset, settings.preset_file)
+        given = settings.brand_phone if phone is None else phone
         text = cards.CardText(
             brand_name=settings.brand_name,
             accent=cards.accent_ink(brand.palette.accent, cmyk),
             base_url=base_url,
-            phone=settings.brand_phone if phone is None else phone,
+            phone=format_phone(given, preset.phone_region),
             name=name,
             logo=cards.logo_image(brand.logo.asset.body) if brand.logo else None,
             texts={
@@ -265,7 +269,7 @@ def card(
             locale=settings.locale,
         )
         made = cards.make(text)
-    except (BrandError, cards.CardError, LocaleError) as exc:
+    except (BrandError, cards.CardError, LocaleError, PresetError) as exc:
         raise SystemExit(f"Not written: {exc}") from None
     for warning in made.warnings:
         print(f"WARNING: {warning}")

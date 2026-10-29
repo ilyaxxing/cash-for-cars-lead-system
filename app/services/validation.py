@@ -78,6 +78,24 @@ def normalize_phone(raw: str, region: str = "US") -> str:
     return phonenumbers.format_number(number, phonenumbers.PhoneNumberFormat.E164)
 
 
+def format_phone(raw: str, region: str = "US") -> str:
+    """How a number reads: (415) 555-0142 in the US, 8 (912) 345-67-89 in Russia.
+
+    The country's national format, as formatPhone in frontend/src/shared/region.ts
+    shows it; a number from another country reads in international form, and
+    anything that is not a phone number stays as it was written.
+    """
+    try:
+        number = phonenumbers.parse(raw, region)
+    except phonenumbers.NumberParseException:
+        return raw
+    if not phonenumbers.is_possible_number(number):
+        return raw
+    style = phonenumbers.PhoneNumberFormat
+    home = number.country_code == phonenumbers.country_code_for_region(region)
+    return phonenumbers.format_number(number, style.NATIONAL if home else style.INTERNATIONAL)
+
+
 def normalize_postal_code(raw: str, rule: re.Pattern[str] = US_ZIP_RE) -> str:
     """A postal code that matches the preset's rule (a US ZIP code by default)."""
     value = raw.strip()

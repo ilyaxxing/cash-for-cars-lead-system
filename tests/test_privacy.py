@@ -21,7 +21,8 @@ async def test_policy_page_is_filled_from_settings(client_for):
     client = client_for(
         operator_name="Example Auto LLC",
         operator_email="privacy@example.com",
-        brand_phone="(415) 555-0142",
+        # Typed with the country code, shown as people here write it.
+        brand_phone="+1 415-555-0142",
         policy_effective_date="2026-11-01",
         public_url="https://buyer.example.com",
     )

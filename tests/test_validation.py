@@ -4,6 +4,7 @@ import pytest
 
 from app.services.validation import (
     FieldError,
+    format_phone,
     normalize_email,
     normalize_phone,
     normalize_postal_code,
@@ -103,3 +104,19 @@ def test_parse_int_accepts_grouped_digits(raw, expected):
 def test_parse_int_rejects_everything_else(raw):
     with pytest.raises(FieldError):
         parse_int(raw)
+
+
+@pytest.mark.parametrize(
+    ("raw", "region", "shown"),
+    [
+        ("+1 512-555-0100", "US", "(512) 555-0100"),
+        ("512.555.0100", "US", "(512) 555-0100"),
+        ("+79123456789", "RU", "8 (912) 345-67-89"),  # pii-allow: fake number
+        ("+44 7700 900123", "GB", "07700 900123"),  # pii-allow: Ofcom drama range
+        ("+442079460958", "US", "+44 20 7946 0958"),  # pii-allow: UK drama range
+        ("call the office", "US", "call the office"),
+    ],
+)
+def test_a_phone_reads_in_the_country_format(raw, region, shown):
+    # The same as formatPhone in the browser, so a number reads one way everywhere.
+    assert format_phone(raw, region) == shown

@@ -2,6 +2,7 @@
   // Done: a summary of the car with its photos and what happens next.
   import { getContext } from 'svelte'
   import type { FieldSpec } from '../shared/config'
+  import { formatPhone } from '../shared/region'
   import type { FormState } from './state.svelte'
 
   const form = getContext<FormState>('form')
@@ -37,7 +38,8 @@
 
   const method = String(answer('contact_method') ?? field('contact_method')?.default ?? 'call')
   const methodBy = t(`preset.options.contact_method.${method}.by`)
-  const contact = method === 'email' ? String(answer('email') ?? '') : String(answer('phone') ?? '')
+  // The number as the review showed it, not as it was typed.
+  const contact = method === 'email' ? String(answer('email') ?? '') : formatPhone(String(answer('phone') ?? ''))
   const next = [
     { n: '1', title: t('form.success.next1_title'), text: t('form.success.next1_text'), lit: true },
     {
