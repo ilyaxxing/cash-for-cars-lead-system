@@ -30,7 +30,8 @@ client's own ([deploy-vps.md](deploy-vps.md)).
 
 ## Local setup
 
-Requirements: Python 3.12, Node.js 22+, Docker (or a local PostgreSQL), and
+Requirements: macOS or Linux (on Windows, WSL), Python 3.12, Node.js 22+,
+Docker (or a local PostgreSQL), and
 [gitleaks](https://github.com/gitleaks/gitleaks#installing).
 
 ```bash
@@ -38,7 +39,7 @@ Requirements: Python 3.12, Node.js 22+, Docker (or a local PostgreSQL), and
 git config core.hooksPath .githooks
 
 # Backend
-python3.12 -m venv .venv
+uv venv --python 3.12 --seed .venv   # or: python3.12 -m venv .venv
 .venv/bin/pip install -r requirements-dev.txt
 cp .env.example .env
 
