@@ -1,7 +1,10 @@
-// The leads a visitor finds in the demo dashboard. All fictional: 555-01xx
-// phone numbers, example.com addresses, AI-generated car photos with the
-// makers' badges painted out. Times count back from the moment the page
-// opens, so the newest lead always arrived today.
+// The leads a visitor finds in the demo dashboard. The shape of each one (its
+// car photos, status, age and condition) is here; everything that depends on
+// the country (names, cities, phones, prices, notes) comes from
+// countries/<code>/demo.yaml, which tools/make_demo.py puts into the page.
+// All fictional: made-up people, example.com addresses, AI-generated car
+// photos with the makers' badges painted out. Times count back from the
+// moment the page opens, so the newest lead always arrived today.
 
 import type { LeadEvent, Status } from '../dashboard/api'
 import type { Value } from '../form/engine'
@@ -25,7 +28,28 @@ import suvThumb from './photos/suv-thumb.webp'
 import truck from './photos/truck.webp'
 import truckThumb from './photos/truck-thumb.webp'
 
+// A country's part of the demo, as tools/make_demo.py writes it into the page.
+export interface DemoCountry {
+  // Names of the made-up business, replaced by a named link's (browser.ts).
+  business_names: string[]
+  sources: Record<string, string>
+  calls_off: string
+  price_scale: number
+  price_step: number
+  distance_unit: 'mi' | 'km'
+  // One per lead in FEATURED, in that order: what the seller wrote (the
+  // country's own fields too), and a note.
+  featured: Record<string, Value>[]
+  // The country's own fields for the older leads: one value picked from each list.
+  extra: Record<string, Value[]>
+  phones: string[]
+  cars: [string, string][]
+  names: string[]
+  cities: [string, string][]
+}
+
 const HOUR = 36e5
+const KM_PER_MILE = 1.609
 
 interface Featured {
   hoursAgo: number
@@ -33,20 +57,17 @@ interface Featured {
   source: string
   answers: Record<string, Value>
   photos: [string | null, string, string][]
-  notes?: [number, string][]
+  noteHoursAgo?: number
 }
 
-// Leads with photos, newest first: the ones a visitor opens.
+// Leads with photos, newest first: the ones a visitor opens. Prices in US
+// dollars and mileage in miles; the country converts them.
 const FEATURED: Featured[] = [
   {
     hoursAgo: 0.6,
     status: 'new',
     source: 'card',
-    answers: {
-      make: 'Kia', model: 'Optima', year: 2017, mileage: 78400, condition: 'good', accident: 'no',
-      finance: 'no', asking_price: 9800, location: 'Austin', postal_code: '78704', vin: '5XXGT4L32HG123456',
-      name: 'Jordan Reyes', phone: '+15125550142', contact_method: 'call',
-    },
+    answers: { year: 2017, mileage: 78400, condition: 'good', accident: 'no', finance: 'no', asking_price: 9800, contact_method: 'call' },
     photos: [
       ['front_left', sedanFrontThumb, sedanFront],
       ['rear_right', sedanRearThumb, sedanRear],
@@ -58,73 +79,42 @@ const FEATURED: Featured[] = [
     hoursAgo: 5,
     status: 'new',
     source: 'parking',
-    answers: {
-      make: 'Hyundai', model: 'Kona', year: 2019, mileage: 46200, condition: 'excellent', accident: 'no',
-      finance: 'yes', finance_details: 'About $6,000 left on the loan.', asking_price: 14200,
-      location: 'Round Rock', postal_code: '78664', name: 'Avery Brooks', phone: '+15125550117',
-      email: 'avery@example.com', contact_method: 'sms',
-    },
+    answers: { year: 2019, mileage: 46200, condition: 'excellent', accident: 'no', finance: 'yes', asking_price: 14200, contact_method: 'sms' },
     photos: [['rear_right', suvThumb, suv]],
   },
   {
     hoursAgo: 26,
     status: 'new',
     source: 'card',
-    answers: {
-      make: 'Hyundai', model: 'Accent', year: 2014, mileage: 131000, condition: 'accident_damaged',
-      accident: 'yes', accident_details: 'Front-end collision last spring. It still drives.', finance: 'no',
-      asking_price: 2900, location: 'Pflugerville', postal_code: '78660', name: 'Casey Hayes',
-      phone: '+15125550163', contact_method: 'whatsapp',
-    },
+    answers: { year: 2014, mileage: 131000, condition: 'accident_damaged', accident: 'yes', finance: 'no', asking_price: 2900, contact_method: 'whatsapp' },
     photos: [['front_left', hatchbackThumb, hatchback]],
   },
   {
     hoursAgo: 50,
     status: 'in_work',
     source: 'card',
-    answers: {
-      make: 'Ford', model: 'F-150', year: 2016, mileage: 121500, condition: 'good', accident: 'no',
-      finance: 'no', asking_price: 18500, location: 'Cedar Park', postal_code: '78613',
-      vin: '1FTEW1EF5GFA12345', name: 'Morgan Price', phone: '+15125550128', contact_method: 'call',
-    },
+    answers: { year: 2016, mileage: 121500, condition: 'good', accident: 'no', finance: 'no', asking_price: 18500, contact_method: 'call' },
     photos: [['front_left', truckThumb, truck]],
-    notes: [[30, 'Called the seller, viewing booked for Thursday.']],
+    noteHoursAgo: 30,
   },
   {
     hoursAgo: 74,
     status: 'in_work',
     source: 'flyer',
-    answers: {
-      make: 'Honda', model: 'Odyssey', year: 2017, mileage: 88000, condition: 'good', accident: 'unknown',
-      finance: 'no', asking_price: 16900, location: 'Austin', postal_code: '78745', name: 'Taylor Ellis',
-      phone: '+15125550189', email: 'taylor@example.com', contact_method: 'email',
-    },
+    answers: { year: 2017, mileage: 88000, condition: 'good', accident: 'unknown', finance: 'no', asking_price: 16900, contact_method: 'email' },
     photos: [['front_left', minivanThumb, minivan]],
-    notes: [[52, 'Offered 1,500 under asking; seller is thinking it over.']],
+    noteHoursAgo: 52,
   },
   {
     hoursAgo: 150,
     status: 'bought',
     source: 'card',
-    answers: {
-      make: 'Hyundai', model: 'Genesis', year: 2013, mileage: 162000, condition: 'not_running', accident: 'no',
-      finance: 'no', location: 'Austin', postal_code: '78723', name: 'Riley Grant', phone: '+15125550104',
-      contact_method: 'call',
-    },
+    answers: { year: 2013, mileage: 162000, condition: 'not_running', accident: 'no', finance: 'no', contact_method: 'call' },
     photos: [['front_right', blackSedanThumb, blackSedan]],
-    notes: [[120, 'Towed on Saturday, paid in cash.']],
+    noteHoursAgo: 120,
   },
 ]
 
-// Older leads without photos, so the lists and statistics look lived in.
-const CARS: [string, string][] = [
-  ['Toyota', 'Camry'], ['Toyota', 'RAV4'], ['Ford', 'Escape'], ['Chevrolet', 'Silverado'], ['Honda', 'Civic'],
-  ['Honda', 'CR-V'], ['Nissan', 'Altima'], ['Jeep', 'Wrangler'], ['Kia', 'Sorento'], ['Subaru', 'Outback'],
-  ['Ram', '1500'], ['Mazda', 'CX-5'], ['Chevrolet', 'Malibu'], ['Toyota', 'Corolla'],
-]
-const FIRST = ['Jordan', 'Taylor', 'Morgan', 'Casey', 'Riley', 'Avery', 'Quinn', 'Jamie', 'Drew', 'Sam']
-const LAST = ['Lee', 'Parker', 'Reed', 'Brooks', 'Hayes', 'Price', 'Ellis', 'Grant', 'Shaw', 'Cole']
-const CITIES: [string, string][] = [['Austin', '78701'], ['Round Rock', '78681'], ['San Marcos', '78666'], ['Georgetown', '78626']]
 const CONDITIONS = ['excellent', 'good', 'good', 'needs_repairs', 'accident_damaged', 'not_running']
 const SOURCES = ['card', 'card', 'card', 'card', 'parking', 'flyer', 'direct']
 // Older leads mostly reached an outcome; the recent ones are still open.
@@ -139,9 +129,19 @@ function sequence(seed: number) {
   }
 }
 
-export function seed(now: Date): DemoData {
+export function seed(now: Date, country: DemoCountry): DemoData {
   const data: DemoData = { leads: [], nextId: 1000, signedIn: true, pushOn: true }
   const at = (hoursAgo: number) => new Date(now.getTime() - hoursAgo * HOUR).toISOString()
+  const price = (dollars: number) =>
+    Math.max(country.price_step, Math.round((dollars * country.price_scale) / country.price_step) * country.price_step)
+  const distance = (miles: number) =>
+    country.distance_unit === 'km' ? Math.round((miles * KM_PER_MILE) / 100) * 100 : miles
+  const local = (answers: Record<string, Value>) => {
+    const result = { ...answers }
+    if (typeof result.asking_price === 'number') result.asking_price = price(result.asking_price)
+    if (typeof result.mileage === 'number') result.mileage = distance(result.mileage)
+    return result
+  }
   const add = (lead: Omit<DemoLead, 'id' | 'events' | 'statusChangedAt' | 'closedAt'>, changedHoursAgo: number) => {
     const id = data.nextId++
     const events: LeadEvent[] = []
@@ -162,8 +162,8 @@ export function seed(now: Date): DemoData {
   const pick = <T,>(items: T[]) => items[Math.floor(random() * items.length)]
   for (let index = 40; index >= 0; index--) {
     const hoursAgo = 96 + index * 30 + Math.floor(random() * 12)
-    const [make, model] = pick(CARS)
-    const [location, postal] = pick(CITIES)
+    const [make, model] = pick(country.cars)
+    const [location, postal] = pick(country.cities)
     const hasPrice = random() < 0.75
     add(
       {
@@ -171,7 +171,7 @@ export function seed(now: Date): DemoData {
         createdAt: at(hoursAgo),
         submittedAt: at(hoursAgo - 0.05),
         source: pick(SOURCES),
-        answers: {
+        answers: local({
           make, model,
           year: 2006 + Math.floor(random() * 19),
           mileage: (20 + Math.floor(random() * 170)) * 1000,
@@ -180,10 +180,11 @@ export function seed(now: Date): DemoData {
           finance: pick(['no', 'no', 'yes']),
           ...(hasPrice ? { asking_price: (25 + Math.floor(random() * 300)) * 100 } : {}),
           location, postal_code: postal,
-          name: `${pick(FIRST)} ${pick(LAST)}`,
-          phone: `+1512555${String(100 + Math.floor(random() * 100)).padStart(4, '0')}`,
+          name: pick(country.names),
+          phone: pick(country.phones),
           contact_method: pick(['call', 'call', 'sms', 'whatsapp']),
-        },
+          ...Object.fromEntries(Object.entries(country.extra).map(([key, values]) => [key, pick(values)])),
+        }),
         photos: [],
         notes: [],
       },
@@ -191,17 +192,22 @@ export function seed(now: Date): DemoData {
     )
   }
 
-  for (const lead of [...FEATURED].reverse()) {
+  for (let index = FEATURED.length - 1; index >= 0; index--) {
+    const lead = FEATURED[index]
+    const { note, ...seller } = country.featured[index] ?? {}
     const photos: DemoPhoto[] = lead.photos.map(([slot, thumb, full]) => ({ id: data.nextId++, slot, thumb, full }))
+    const notes = typeof note === 'string' && lead.noteHoursAgo !== undefined
+      ? [{ id: data.nextId++, text: note, createdAt: at(lead.noteHoursAgo), deleted: false }]
+      : []
     add(
       {
         status: lead.status,
         createdAt: at(lead.hoursAgo),
         submittedAt: at(lead.hoursAgo - 0.05),
         source: lead.source,
-        answers: lead.answers,
+        answers: local({ ...lead.answers, ...seller, phone: country.phones[index % country.phones.length] }),
         photos,
-        notes: (lead.notes ?? []).map(([hoursAgo, text]) => ({ id: data.nextId++, text, createdAt: at(hoursAgo), deleted: false })),
+        notes,
       },
       lead.hoursAgo - 2,
     )

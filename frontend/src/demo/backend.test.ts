@@ -1,11 +1,11 @@
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 import { parse } from 'yaml'
 import type { Card, Detail, LeadList, Stats } from '../dashboard/api'
 import type { AppConfig, Preset } from '../shared/config'
 import { normalizeUsPhone } from '../shared/region'
 import { Backend, computeStats, midnight, type DemoData, type Notice } from './backend'
-import { seed } from './seed'
+import { seed, type DemoCountry } from './seed'
 
 const read = (path: string) => readFileSync(new URL(path, import.meta.url), 'utf8')
 
@@ -204,16 +204,58 @@ describe('statistics, as the server computes them', () => {
   })
 })
 
+// The form a country's clients start from: its own, or the shipped US one.
+function presetOf(code: string): string {
+  const settings = read(`../../../countries/${code}/settings.env`)
+  return /^PRESET_FILE=(.*)$/m.exec(settings)?.[1] ?? 'presets/us-car-buyout.yaml'
+}
+
+// A country's demo part, as tools/make_demo.py writes it into the page.
+function country(code: string): DemoCountry {
+  const demo = parse(read(`../../../countries/${code}/demo.yaml`))
+  const settings = read(`../../../countries/${code}/settings.env`)
+  const labels = /^SOURCE_LABELS=(.*)$/m.exec(settings)?.[1] ?? ''
+  const preset = presetOf(code)
+  return {
+    ...demo,
+    extra: demo.extra ?? {},
+    business_names: [demo.business.operator_name, 'Car Buyout'],
+    sources: Object.fromEntries(labels.split(',').filter(Boolean).map((pair) => pair.split(':'))),
+    distance_unit: parse(read(`../../../${preset}`)).distance_unit,
+  }
+}
+
+const CODES = readdirSync(new URL('../../../countries', import.meta.url))
+
 describe('the demo leads', () => {
-  it('are the same on every visit, fictional, and include today', () => {
-    const first = seed(NOW)
-    expect(seed(NOW)).toEqual(first)
-    for (const lead of first.leads) {
-      expect(String(lead.answers.phone)).toMatch(/^\+151255501\d\d$/)
-      expect(lead.answers.make).toBeTruthy()
-    }
+  it('are the same on every visit, and include today', () => {
+    const first = seed(NOW, country('us'))
+    expect(seed(NOW, country('us'))).toEqual(first)
     const today = first.leads.filter((lead) => NOW.getTime() - new Date(lead.createdAt).getTime() < 864e5)
     expect(today.length).toBeGreaterThan(0)
     expect(first.leads.filter((lead) => lead.photos.length).length).toBe(6)
+  })
+
+  it.each(CODES)('%s: every lead has a car, a seller and a phone, in local units', (code) => {
+    const local = country(code)
+    expect(local.featured).toHaveLength(6)
+    for (const lead of seed(NOW, local).leads) {
+      expect(lead.answers.make).toBeTruthy()
+      expect(lead.answers.name).toBeTruthy()
+      expect(local.phones).toContain(lead.answers.phone)
+    }
+    // The questions every seller answers in this country's form, its own included.
+    const form = parse(read(`../../../${presetOf(code)}`))
+    const asked = form.steps
+      .filter((step: { skippable?: boolean }) => !step.skippable)
+      .flatMap((step: { fields: { id: string; type: string; required?: boolean }[] }) => step.fields)
+      .filter((field: { type: string; required?: boolean }) => field.required && field.type !== 'photos')
+      .map((field: { id: string }) => field.id)
+    for (const lead of seed(NOW, local).leads) {
+      for (const id of asked) expect(lead.answers[id], `${code} ${id}`).not.toBeUndefined()
+    }
+    const optima = seed(NOW, local).leads.find((lead) => lead.photos.length === 4)!
+    expect(optima.answers.mileage).toBe(local.distance_unit === 'km' ? 126100 : 78400)
+    expect(optima.answers.asking_price! as number % local.price_step).toBe(0)
   })
 })
