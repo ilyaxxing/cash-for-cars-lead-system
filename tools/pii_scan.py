@@ -49,11 +49,13 @@ ALLOWED_EMAIL_DOMAINS = re.compile(
 )
 
 # North American numbers with separators: (415) 555-0142, 415-555-0142, +1 415 555 0142.
+# A number ends where a word or more digits do not go on; a full stop after
+# it ends the sentence ("for example +7 912 345-67-89.").
 NANP_PHONE = re.compile(
-    r"(?<![\w.])(?:\+?1[\s.-]?)?\(?(\d{3})\)?[\s.-](\d{3})[\s.-](\d{4})(?![\w.])"
+    r"(?<![\w.])(?:\+?1[\s.-]?)?\(?(\d{3})\)?[\s.-](\d{3})[\s.-](\d{4})(?!\w|\.\d)"
 )
 # Any other international number written with a leading plus.
-INTL_PHONE = re.compile(r"(?<![\w.])\+\d[\d\s().-]{9,}\d(?![\w.])")
+INTL_PHONE = re.compile(r"(?<![\w.])\+\d[\d\s().-]{9,}\d(?!\w|\.\d)")
 # 555-0100 through 555-0199 are reserved for fiction in North America.
 FICTIONAL_NANP = re.compile(r"555[\s.)-]*01\d\d\b")
 # Elsewhere: Ofcom's drama range (07700 900000-900999), ARCEP's (01 99 00 ..),
