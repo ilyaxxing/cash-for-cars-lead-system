@@ -45,8 +45,4 @@ export function isPhotoFile(file: File): boolean {
   return file.type.startsWith('image/') || /\.(heic|heif)$/i.test(file.name)
 }
 
-export function isPlainImage(file: File): boolean {
-  return /^image\/(jpeg|png|webp)$/.test(file.type) || /\.(jpe?g|png|webp)$/i.test(file.name)
-}
-
 export const MAX_FILE_BYTES = 15 * 1024 * 1024

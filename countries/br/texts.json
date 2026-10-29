@@ -83,7 +83,7 @@
       "add_more_title": "MAIS FOTOS",
       "add_more_text": "Outros ângulos ou detalhes (opcional)",
       "add_more_aria": "Adicionar mais fotos. Outros ângulos ou detalhes, opcional.",
-      "footnote": "JPG, PNG ou HEIC, até 15 MB cada. Fotos extras: JPG, PNG ou WEBP. As fotos só são enviadas depois que você as escolhe.",
+      "footnote": "JPG, PNG, HEIC ou WEBP, até 15 MB cada. As fotos só são enviadas depois que você as escolhe.",
       "aria_add": "Adicionar foto: {label}",
       "aria_replace": "Substituir foto: {label}",
       "aria_remove": "Remover foto: {label}",
@@ -91,9 +91,8 @@
       "extra_alt": "Foto extra {n}",
       "extra_remove": "Remover foto extra {n}",
       "errors": {
-        "not_photo": "Esse arquivo não é uma foto. Tente JPG, PNG ou HEIC.",
+        "not_photo": "Esse arquivo não é uma foto. Tente JPG, PNG, HEIC ou WEBP.",
         "too_big": "Essa foto tem {size} MB. O limite é 15 MB.",
-        "extra_type": "Use JPG, PNG ou WEBP.",
         "wait": "Espere os envios terminarem ou remova as fotos.",
         "failed": "Falha no envio. Tente de novo.",
         "limit": "Você pode adicionar até {max} fotos extras."

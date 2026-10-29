@@ -83,7 +83,7 @@
       "add_more_title": "ADD MORE PHOTOS",
       "add_more_text": "Any additional angles or details (optional)",
       "add_more_aria": "Add more photos. Any additional angles or details, optional.",
-      "footnote": "JPG, PNG or HEIC, up to 15 MB each. Additional photos: JPG, PNG or WEBP. Photos upload only after you pick them.",
+      "footnote": "JPG, PNG, HEIC or WEBP, up to 15 MB each. Photos upload only after you pick them.",
       "aria_add": "Add {label} photo",
       "aria_replace": "Replace {label} photo",
       "aria_remove": "Remove {label} photo",
@@ -91,9 +91,8 @@
       "extra_alt": "Additional photo {n}",
       "extra_remove": "Remove additional photo {n}",
       "errors": {
-        "not_photo": "That file isn't a photo. Try a JPG, PNG or HEIC.",
+        "not_photo": "That file isn't a photo. Try a JPG, PNG, HEIC or WEBP.",
         "too_big": "That photo is {size} MB. The limit is 15 MB.",
-        "extra_type": "Use JPG, PNG or WEBP.",
         "wait": "Wait for uploads to finish, or remove them.",
         "failed": "Upload failed. Try again.",
         "limit": "You can add up to {max} additional photos."

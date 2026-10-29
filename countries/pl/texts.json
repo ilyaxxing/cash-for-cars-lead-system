@@ -83,7 +83,7 @@
       "add_more_title": "WIĘCEJ ZDJĘĆ",
       "add_more_text": "Inne ujęcia lub szczegóły (opcjonalnie)",
       "add_more_aria": "Dodaj więcej zdjęć. Inne ujęcia lub szczegóły, opcjonalnie.",
-      "footnote": "JPG, PNG lub HEIC, do 15 MB każde. Dodatkowe zdjęcia: JPG, PNG lub WEBP. Zdjęcia wysyłają się dopiero po wybraniu.",
+      "footnote": "JPG, PNG, HEIC lub WEBP, do 15 MB każde. Zdjęcia wysyłają się dopiero po wybraniu.",
       "aria_add": "Dodaj zdjęcie: {label}",
       "aria_replace": "Zamień zdjęcie: {label}",
       "aria_remove": "Usuń zdjęcie: {label}",
@@ -91,9 +91,8 @@
       "extra_alt": "Dodatkowe zdjęcie {n}",
       "extra_remove": "Usuń dodatkowe zdjęcie {n}",
       "errors": {
-        "not_photo": "Ten plik to nie zdjęcie. Spróbuj JPG, PNG lub HEIC.",
+        "not_photo": "Ten plik to nie zdjęcie. Spróbuj JPG, PNG, HEIC lub WEBP.",
         "too_big": "To zdjęcie ma {size} MB. Limit to 15 MB.",
-        "extra_type": "Użyj JPG, PNG lub WEBP.",
         "wait": "Poczekaj, aż zdjęcia się wyślą, albo je usuń.",
         "failed": "Wysyłanie nie powiodło się. Spróbuj ponownie.",
         "limit": "Możesz dodać do {max} dodatkowych zdjęć."

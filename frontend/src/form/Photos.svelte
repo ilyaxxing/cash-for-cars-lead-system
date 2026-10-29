@@ -160,7 +160,7 @@
 <div data-st class="footnote">{t('form.photos.footnote')}</div>
 
 <input bind:this={libraryInput} type="file" accept="image/*,.heic,.heif" tabindex="-1" aria-hidden="true" class="hidden" onchange={(event) => onFiles(event, pendingSlot)} />
-<input bind:this={moreInput} type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" multiple tabindex="-1" aria-hidden="true" class="hidden" onchange={(event) => onFiles(event, null)} />
+<input bind:this={moreInput} type="file" accept="image/*,.heic,.heif" multiple tabindex="-1" aria-hidden="true" class="hidden" onchange={(event) => onFiles(event, null)} />
 
 <style>
   .top {

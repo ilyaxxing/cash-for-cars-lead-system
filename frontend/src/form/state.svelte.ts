@@ -9,7 +9,7 @@ import type { AppConfig, FieldSpec, Preset, Step } from '../shared/config'
 import type { Translate } from '../shared/i18n'
 import { createPresenter, type Presenter } from '../shared/present'
 import * as api from './api'
-import { MAX_FILE_BYTES, compressPhoto, isPhotoFile, isPlainImage } from './compress'
+import { MAX_FILE_BYTES, compressPhoto, isPhotoFile } from './compress'
 import {
   RETURN_KEY,
   REVIEW,
@@ -424,18 +424,18 @@ export class FormState {
   addPhotos = async (slot: string | null, files: File[]) => {
     const field = this.photosField
     if (!field || !files.length) return
-    if (slot) return this.addPhoto(slot, slot, files[0], false)
+    if (slot) return this.addPhoto(slot, slot, files[0])
     const room = field.extra - Object.values(this.photos).filter((p) => p.slot === null).length
     if (room <= 0) {
       this.errors = { photos: { code: 'limit', params: { max: field.extra } } }
       return
     }
     for (const file of files.slice(0, room)) {
-      await this.addPhoto(`x${this.extraCounter++}`, null, file, true)
+      await this.addPhoto(`x${this.extraCounter++}`, null, file)
     }
   }
 
-  private async addPhoto(key: string, slot: string | null, file: File, extra: boolean) {
+  private async addPhoto(key: string, slot: string | null, file: File) {
     const errors = { ...this.errors }
     delete errors.photos
     this.errors = errors
@@ -443,7 +443,6 @@ export class FormState {
     const fail = (error: string, errorParams?: Record<string, string | number>) => {
       this.photos = { ...this.photos, [key]: { slot, status: 'error', progress: 0, url: '', error, errorParams } }
     }
-    if (extra && !isPlainImage(file)) return fail('extra_type')
     if (!isPhotoFile(file)) return fail('not_photo')
     if (file.size > MAX_FILE_BYTES) return fail('too_big', { size: Math.round(file.size / 1048576) })
 

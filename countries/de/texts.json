@@ -83,7 +83,7 @@
       "add_more_title": "WEITERE FOTOS",
       "add_more_text": "Weitere Ansichten oder Details (optional)",
       "add_more_aria": "Weitere Fotos hinzufügen. Weitere Ansichten oder Details, optional.",
-      "footnote": "JPG, PNG oder HEIC, je bis 15 MB. Weitere Fotos: JPG, PNG oder WEBP. Fotos werden erst hochgeladen, wenn Sie sie auswählen.",
+      "footnote": "JPG, PNG, HEIC oder WEBP, je bis 15 MB. Fotos werden erst hochgeladen, wenn Sie sie auswählen.",
       "aria_add": "Foto hinzufügen: {label}",
       "aria_replace": "Foto ersetzen: {label}",
       "aria_remove": "Foto entfernen: {label}",
@@ -91,9 +91,8 @@
       "extra_alt": "Weiteres Foto {n}",
       "extra_remove": "Weiteres Foto {n} entfernen",
       "errors": {
-        "not_photo": "Diese Datei ist kein Foto. Versuchen Sie JPG, PNG oder HEIC.",
+        "not_photo": "Diese Datei ist kein Foto. Versuchen Sie JPG, PNG, HEIC oder WEBP.",
         "too_big": "Dieses Foto hat {size} MB. Erlaubt sind 15 MB.",
-        "extra_type": "Bitte JPG, PNG oder WEBP verwenden.",
         "wait": "Warten Sie, bis die Fotos hochgeladen sind, oder entfernen Sie sie.",
         "failed": "Hochladen fehlgeschlagen. Bitte erneut versuchen.",
         "limit": "Sie können bis zu {max} weitere Fotos hinzufügen."
