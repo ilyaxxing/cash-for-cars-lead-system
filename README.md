@@ -104,8 +104,9 @@ and what does not work yet, such as languages written right to left.
 - One language per instance. Languages written right to left (Arabic, Hebrew,
   Persian, Urdu) are not supported yet, and on the business card, scripts
   whose letters join (Arabic, Hindi, Thai) are refused.
-- The chat button in a lead opens WhatsApp or Telegram; another messenger can
-  only be the seller's stated preference.
+- Next to Call, a lead's second button opens a text, an email, WhatsApp or
+  Telegram, whichever the seller chose; another messenger can only be the
+  seller's stated preference.
 - Restoring the database from a backup has not been rehearsed yet. On Railway,
   photos are not backed up.
 - Handing a Railway project over to the client's own account follows

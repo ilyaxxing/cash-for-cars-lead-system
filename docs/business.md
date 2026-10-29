@@ -48,7 +48,8 @@ flyers on cars, so the client should check the local rules.
 - **A push notification** to the owner's phone for every new lead, within
   seconds. iPhone and Android.
 - **An app on the owner's phone**: leads by status (New, In Progress,
-  Purchased, Rejected), photos, notes, one-tap call, text or WhatsApp, and
+  Purchased, Rejected), photos, notes, a one-tap call and a second button
+  for the way the seller asked to be reached (a text, WhatsApp or email), and
   statistics: how many sellers came, how many cars were bought, from cards,
   signs or ads.
 - **Their own brand and their own accounts**: their name, color, logo and

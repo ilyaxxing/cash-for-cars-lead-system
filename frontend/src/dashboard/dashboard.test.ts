@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { formatPhone, prepareRegion } from '../shared/region'
-import { messenger } from './contact'
+import { reply } from './contact'
 import { createFormatter } from './format'
 
 const fmt = createFormatter('en-US', 'America/New_York', {
@@ -46,13 +46,20 @@ describe('phone numbers', () => {
   })
 })
 
-describe('messenger button', () => {
-  it('opens WhatsApp by default', () => {
-    expect(messenger('call', '(415) 555-0142')).toEqual({ key: 'whatsapp', href: 'https://wa.me/4155550142' })
-    expect(messenger(undefined, '+1 415 555 0142').href).toBe('https://wa.me/14155550142')
+describe('the second contact button', () => {
+  it('follows the way the seller asked to be reached', () => {
+    expect(reply('sms', '+14155550142')).toEqual({ key: 'sms', href: 'sms:+14155550142' })
+    expect(reply('email', '+14155550142', 'sam@example.com', 'Your 2019 Toyota Camry')).toEqual({
+      key: 'email',
+      href: 'mailto:sam@example.com?subject=Your%202019%20Toyota%20Camry',
+    })
+    expect(reply('telegram', '+79055550142')).toEqual({ key: 'telegram', href: 'https://t.me/+79055550142' }) // pii-allow (made-up number)
+    expect(reply('whatsapp', '+14155550142').href).toBe('https://wa.me/14155550142')
   })
 
-  it('opens Telegram for a seller who asked for it', () => {
-    expect(messenger('telegram', '+7 905 555-01-42')).toEqual({ key: 'telegram', href: 'https://t.me/+79055550142' }) // pii-allow (made-up number)
+  it('opens WhatsApp for a call, no answer, or an email that is missing', () => {
+    expect(reply('call', '+14155550142')).toEqual({ key: 'whatsapp', href: 'https://wa.me/14155550142' })
+    expect(reply(undefined, '+14155550142').key).toBe('whatsapp')
+    expect(reply('email', '+14155550142', '').key).toBe('whatsapp')
   })
 })

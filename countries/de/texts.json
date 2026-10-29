@@ -73,7 +73,7 @@
     "photos": {
       "summary": "{added} von {total} Fotos hinzugefügt",
       "summary_more": "{summary} · {count} weitere",
-      "saved": "Anfrage Nr. {id} gespeichert",
+      "saved": "Anfrage gespeichert",
       "not_saved": "Noch nicht gespeichert",
       "add": "Foto hinzufügen",
       "retry": "Erneut versuchen",
@@ -83,7 +83,7 @@
       "add_more_title": "WEITERE FOTOS",
       "add_more_text": "Weitere Ansichten oder Details (optional)",
       "add_more_aria": "Weitere Fotos hinzufügen. Weitere Ansichten oder Details, optional.",
-      "footnote": "JPG, PNG oder HEIC, je bis 15 MB. Weitere Fotos: JPG, PNG oder WEBP. Fotos werden erst hochgeladen, wenn Sie sie auswählen.",
+      "footnote": "JPG, PNG, HEIC oder WEBP, je bis 15 MB. Fotos werden erst hochgeladen, wenn Sie sie auswählen.",
       "aria_add": "Foto hinzufügen: {label}",
       "aria_replace": "Foto ersetzen: {label}",
       "aria_remove": "Foto entfernen: {label}",
@@ -91,9 +91,8 @@
       "extra_alt": "Weiteres Foto {n}",
       "extra_remove": "Weiteres Foto {n} entfernen",
       "errors": {
-        "not_photo": "Diese Datei ist kein Foto. Versuchen Sie JPG, PNG oder HEIC.",
+        "not_photo": "Diese Datei ist kein Foto. Versuchen Sie JPG, PNG, HEIC oder WEBP.",
         "too_big": "Dieses Foto hat {size} MB. Erlaubt sind 15 MB.",
-        "extra_type": "Bitte JPG, PNG oder WEBP verwenden.",
         "wait": "Warten Sie, bis die Fotos hochgeladen sind, oder entfernen Sie sie.",
         "failed": "Hochladen fehlgeschlagen. Bitte erneut versuchen.",
         "limit": "Sie können bis zu {max} weitere Fotos hinzufügen."
@@ -110,11 +109,11 @@
       "edit_photos_aria": "Fotos ändern",
       "no_photos": "Keine Fotos hinzugefügt. Sie können trotzdem senden.",
       "failed_title": "Ihre Anfrage wurde nicht gesendet",
-      "failed_text": "Die Verbindung ist abgebrochen. Ihre Angaben und Fotos sind weiter in Anfrage Nr. {id} gespeichert. Versuchen Sie es erneut, wann Sie möchten.",
-      "limited_text": "Zu viele Anfragen aus diesem Netz. Ihre Angaben und Fotos sind in Anfrage Nr. {id} gespeichert. Warten Sie ein paar Minuten und versuchen Sie es erneut."
+      "failed_text": "Die Verbindung ist abgebrochen. Ihre Angaben und Fotos sind weiter gespeichert. Versuchen Sie es erneut, wann Sie möchten.",
+      "limited_text": "Zu viele Anfragen aus diesem Netz. Ihre Angaben und Fotos sind gespeichert. Warten Sie ein paar Minuten und versuchen Sie es erneut."
     },
     "success": {
-      "status": "Anfrage gesendet · Nr. {id}",
+      "status": "Anfrage gesendet",
       "title": "Geschafft.",
       "text": "Die Angaben zu Ihrem Auto wurden gesendet. Ein Käufer prüft Ihre Anfrage und meldet sich auf dem Weg, den Sie bevorzugen.",
       "your_car": "Ihr Auto",
@@ -541,6 +540,7 @@
       "email_short": "E-Mail",
       "whatsapp": "WhatsApp",
       "telegram": "Telegram",
+      "sms": "SMS",
       "email_subject": "Ihr {car}",
       "purged": "{days} Tage nach Abschluss gelöscht",
       "notes": "Notizen",

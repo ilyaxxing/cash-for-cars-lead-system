@@ -73,7 +73,7 @@
     "photos": {
       "summary": "{added} photo(s) sur {total}",
       "summary_more": "{summary} · {count} de plus",
-      "saved": "Demande n° {id} enregistrée",
+      "saved": "Demande enregistrée",
       "not_saved": "Pas encore enregistrée",
       "add": "Ajouter une photo",
       "retry": "Réessayer",
@@ -83,7 +83,7 @@
       "add_more_title": "AJOUTER D'AUTRES PHOTOS",
       "add_more_text": "D'autres angles ou détails (facultatif)",
       "add_more_aria": "Ajouter d'autres photos. D'autres angles ou détails, facultatif.",
-      "footnote": "JPG, PNG ou HEIC, jusqu'à 15 Mo chacune. Photos supplémentaires : JPG, PNG ou WEBP. Les photos ne sont envoyées qu'une fois choisies.",
+      "footnote": "JPG, PNG, HEIC ou WEBP, jusqu'à 15 Mo chacune. Les photos ne sont envoyées qu'une fois choisies.",
       "aria_add": "Ajouter la photo : {label}",
       "aria_replace": "Remplacer la photo : {label}",
       "aria_remove": "Retirer la photo : {label}",
@@ -91,9 +91,8 @@
       "extra_alt": "Photo supplémentaire {n}",
       "extra_remove": "Retirer la photo supplémentaire {n}",
       "errors": {
-        "not_photo": "Ce fichier n'est pas une photo. Essayez un JPG, un PNG ou un HEIC.",
+        "not_photo": "Ce fichier n'est pas une photo. Essayez un JPG, un PNG, un HEIC ou un WEBP.",
         "too_big": "Cette photo fait {size} Mo. La limite est de 15 Mo.",
-        "extra_type": "Utilisez JPG, PNG ou WEBP.",
         "wait": "Attendez la fin des envois, ou retirez les photos.",
         "failed": "L'envoi a échoué. Réessayez.",
         "limit": "Vous pouvez ajouter jusqu'à {max} photos supplémentaires."
@@ -110,11 +109,11 @@
       "edit_photos_aria": "Modifier les photos",
       "no_photos": "Aucune photo ajoutée. Vous pouvez quand même envoyer la demande.",
       "failed_title": "Votre demande n'a pas été envoyée",
-      "failed_text": "La connexion a été coupée. Vos informations et vos photos restent enregistrées dans la demande n° {id}. Réessayez quand vous voulez.",
-      "limited_text": "Trop de demandes depuis ce réseau. Vos informations et vos photos sont enregistrées dans la demande n° {id}. Patientez quelques minutes et réessayez."
+      "failed_text": "La connexion a été coupée. Vos informations et vos photos restent enregistrées. Réessayez quand vous voulez.",
+      "limited_text": "Trop de demandes depuis ce réseau. Vos informations et vos photos sont enregistrées. Patientez quelques minutes et réessayez."
     },
     "success": {
-      "status": "Demande envoyée · n° {id}",
+      "status": "Demande envoyée",
       "title": "C'est fait.",
       "text": "Les informations sur votre voiture ont bien été envoyées. Un acheteur va étudier votre demande et vous contacter par le moyen que vous préférez.",
       "your_car": "Votre voiture",
@@ -541,6 +540,7 @@
       "email_short": "Courriel",
       "whatsapp": "WhatsApp",
       "telegram": "Telegram",
+      "sms": "Texto",
       "email_subject": "Votre {car}",
       "purged": "Supprimé {days} jours après la clôture",
       "notes": "Notes",

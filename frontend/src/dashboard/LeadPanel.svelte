@@ -6,7 +6,7 @@
   import { formatPhone } from '../shared/region'
   import type { Status } from './api'
   import { summarize } from './car'
-  import { messenger } from './contact'
+  import { reply } from './contact'
   import type { DashboardState } from './state.svelte'
 
   const dash = getContext<DashboardState>('dashboard')
@@ -60,7 +60,11 @@
   const phone = $derived(String(lead?.answers[phoneField?.id ?? ''] ?? ''))
   const email = $derived(String(lead?.answers[emailField?.id ?? ''] ?? ''))
   const name = $derived(String(lead?.answers[nameField?.id ?? ''] ?? ''))
-  const chat = $derived(messenger(lead?.answers[methodField?.id ?? ''], phone))
+  const subject = $derived(car ? t('dashboard.lead.email_subject', { car: car.title }) : '')
+  const mail = $derived(`mailto:${email}?subject=${encodeURIComponent(subject)}`)
+  const answer = $derived(reply(lead?.answers[methodField?.id ?? ''], phone, email, subject))
+  // A web link opens in a new tab; a text or an email opens the phone's own app.
+  const target = $derived(answer.href.startsWith('https:') ? '_blank' : undefined)
   const lastChange = $derived(lead?.events[0])
 
   async function copyPhone() {
@@ -223,9 +227,11 @@
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.2 2.5H3.4a1 1 0 00-1 1.1c.5 5.3 4.7 9.5 10 10a1 1 0 001.1-1v-1.8a1 1 0 00-.8-1l-2-.5a1 1 0 00-1 .3l-.8.8a8 8 0 01-3.5-3.5l.8-.8a1 1 0 00.3-1l-.5-2a1 1 0 00-1-.8z" style="stroke: var(--on-accent)" stroke-width="1.4" stroke-linejoin="round" /></svg>
                     {t('dashboard.lead.call_seller')}
                   </a>
-                  <a class="secondary" href={chat.href} target="_blank" rel="noopener">{t(`dashboard.lead.${chat.key}`)}</a>
+                  {#if answer.key !== 'email'}
+                    <a class="secondary" href={answer.href} {target} rel="noopener">{t(`dashboard.lead.${answer.key}`)}</a>
+                  {/if}
                   {#if email}
-                    <a class="secondary" href="mailto:{email}?subject={encodeURIComponent(t('dashboard.lead.email_subject', { car: car.title }))}">
+                    <a class="secondary" href={mail}>
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2" y="3.5" width="12" height="9" rx="1.5" stroke="#F4F3EE" stroke-width="1.4" /><path d="M2.5 4.5L8 8.5l5.5-4" stroke="#F4F3EE" stroke-width="1.4" stroke-linejoin="round" /></svg>
                       {t('dashboard.lead.email_seller')}
                     </a>
@@ -295,9 +301,11 @@
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.2 2.5H3.4a1 1 0 00-1 1.1c.5 5.3 4.7 9.5 10 10a1 1 0 001.1-1v-1.8a1 1 0 00-.8-1l-2-.5a1 1 0 00-1 .3l-.8.8a8 8 0 01-3.5-3.5l.8-.8a1 1 0 00.3-1l-.5-2a1 1 0 00-1-.8z" style="stroke: var(--on-accent)" stroke-width="1.4" stroke-linejoin="round" /></svg>
           {t('dashboard.lead.call')}
         </a>
-        <a class="secondary mobile" href={chat.href} target="_blank" rel="noopener">{t(`dashboard.lead.${chat.key}`)}</a>
-        {#if email && car}
-          <a class="secondary mobile" href="mailto:{email}?subject={encodeURIComponent(t('dashboard.lead.email_subject', { car: car.title }))}">{t('dashboard.lead.email_short')}</a>
+        {#if answer.key !== 'email'}
+          <a class="secondary mobile" href={answer.href} {target} rel="noopener">{t(`dashboard.lead.${answer.key}`)}</a>
+        {/if}
+        {#if email}
+          <a class="secondary mobile" href={mail}>{t('dashboard.lead.email_short')}</a>
         {/if}
       </div>
     {/if}

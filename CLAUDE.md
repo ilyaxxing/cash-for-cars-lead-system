@@ -136,8 +136,9 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   before it is converted.
 - Contact: name, phone (required), email (optional, personal data), preferred
   contact method (call, SMS, WhatsApp, email). Telegram is opt-in per client
-  (one line in the preset; texts ship), and the lead's messenger button opens
-  Telegram instead of WhatsApp for a seller who chose it.
+  (one line in the preset; texts ship). The lead's second button, next to
+  Call, follows the chosen method: sms: for SMS, mailto: for email, t.me for
+  Telegram, WhatsApp for WhatsApp, a call or anything else.
 - Status: design's 4-way switch; confirmation dialog for Purchased and Rejected,
   undo toast for others. Any transition allowed; `closed_at` set on entering a
   closed status, cleared on leaving it.
@@ -152,7 +153,7 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   Settings has no "Backup email" section.
 - Not in the design, built in the same visual system and shown for approval:
   login, onboarding (Add to Home Screen for iOS/Android, enable push, test push),
-  Help in Settings, privacy policy page, WhatsApp button in the lead.
+  Help in Settings, privacy policy page, the lead's second contact button.
 
 ## Data model
 `leads` fixed columns: make, model, year, mileage, asking_price, location, phone,

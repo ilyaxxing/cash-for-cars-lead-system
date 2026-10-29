@@ -78,8 +78,12 @@
     }
     if (step?.skippable) {
       secondary = { label: t('form.buttons.skip'), run: form.skip }
+      // An empty price: one button that says what it does, not two that do the same.
       const money = step.fields.some((f) => f.unit === 'currency')
-      if (money && isStepBlank(step, form.answers)) label = t('form.buttons.continue_without_price')
+      if (money && isStepBlank(step, form.answers)) {
+        label = t('form.buttons.continue_without_price')
+        secondary = null
+      }
     }
     if (step?.submit) {
       label = form.busy ? t('form.buttons.saving') : form.saveFailed ? t('form.buttons.try_again') : t('form.buttons.save')

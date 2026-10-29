@@ -73,7 +73,7 @@
     "photos": {
       "summary": "{added} de {total} fotos añadidas",
       "summary_more": "{summary} · {count} más",
-      "saved": "Solicitud n.º {id} guardada",
+      "saved": "Solicitud guardada",
       "not_saved": "Aún sin guardar",
       "add": "Añadir foto",
       "retry": "Reintentar",
@@ -83,7 +83,7 @@
       "add_more_title": "AÑADIR MÁS FOTOS",
       "add_more_text": "Otros ángulos o detalles (opcional)",
       "add_more_aria": "Añadir más fotos. Otros ángulos o detalles, opcional.",
-      "footnote": "JPG, PNG o HEIC, hasta 15 MB cada una. Fotos adicionales: JPG, PNG o WEBP. Las fotos se suben solo cuando las eliges.",
+      "footnote": "JPG, PNG, HEIC o WEBP, hasta 15 MB cada una. Las fotos se suben solo cuando las eliges.",
       "aria_add": "Añadir foto: {label}",
       "aria_replace": "Sustituir foto: {label}",
       "aria_remove": "Quitar foto: {label}",
@@ -91,9 +91,8 @@
       "extra_alt": "Foto adicional {n}",
       "extra_remove": "Quitar foto adicional {n}",
       "errors": {
-        "not_photo": "Ese archivo no es una foto. Prueba con JPG, PNG o HEIC.",
+        "not_photo": "Ese archivo no es una foto. Prueba con JPG, PNG, HEIC o WEBP.",
         "too_big": "Esa foto ocupa {size} MB. El límite es 15 MB.",
-        "extra_type": "Usa JPG, PNG o WEBP.",
         "wait": "Espera a que terminen de subirse o quítalas.",
         "failed": "No se ha podido subir. Vuelve a intentarlo.",
         "limit": "Puedes añadir hasta {max} fotos adicionales."
@@ -110,11 +109,11 @@
       "edit_photos_aria": "Editar fotos",
       "no_photos": "No has añadido fotos. Aun así puedes enviarla.",
       "failed_title": "Tu solicitud no se ha enviado",
-      "failed_text": "Se ha cortado la conexión. Tus datos y fotos siguen guardados en la solicitud n.º {id}. Vuelve a intentarlo cuando quieras.",
-      "limited_text": "Demasiadas solicitudes desde esta red. Tus datos y fotos están guardados en la solicitud n.º {id}. Espera unos minutos y vuelve a intentarlo."
+      "failed_text": "Se ha cortado la conexión. Tus datos y fotos siguen guardados. Vuelve a intentarlo cuando quieras.",
+      "limited_text": "Demasiadas solicitudes desde esta red. Tus datos y fotos están guardados. Espera unos minutos y vuelve a intentarlo."
     },
     "success": {
-      "status": "Solicitud enviada · n.º {id}",
+      "status": "Solicitud enviada",
       "title": "¡Listo!",
       "text": "Los datos de tu coche se han enviado correctamente. Un comprador revisará tu solicitud y te contactará por el medio que prefieras.",
       "your_car": "Tu coche",
@@ -547,6 +546,7 @@
       "email_short": "Email",
       "whatsapp": "WhatsApp",
       "telegram": "Telegram",
+      "sms": "SMS",
       "email_subject": "Tu {car}",
       "purged": "Borrado {days} días después del cierre",
       "notes": "Notas",

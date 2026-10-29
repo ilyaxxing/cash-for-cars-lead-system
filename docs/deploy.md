@@ -33,7 +33,7 @@ somewhere safe, such as a password manager. Fill in at least:
 | Setting | What to put there |
 |---|---|
 | `PUBLIC_URL` | Empty for now (the Railway address is used), or the client's own `https://` domain. See [Custom domain](#custom-domain). |
-| `BRAND_NAME`, `BRAND_PHONE` | Shown to sellers and in the dashboard. |
+| `BRAND_NAME`, `BRAND_PHONE` | Shown to sellers and in the dashboard; the phone in the country's own format, however it is typed. |
 | `OPERATOR_NAME`, `OPERATOR_EMAIL`, `OPERATOR_ADDRESS` | The business that receives the leads, for the privacy policy and the consent text. |
 | `POLICY_EFFECTIVE_DATE` | The date the client's privacy policy takes effect. |
 | `OWNER_PASSWORD` | The owner's first dashboard password. |

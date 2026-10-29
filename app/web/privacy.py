@@ -20,6 +20,7 @@ from markdown_it import MarkdownIt
 
 from app.config import Settings
 from app.services.retention import RETENTION_DAYS
+from app.services.validation import format_phone
 
 router = APIRouter()
 
@@ -43,12 +44,13 @@ def fill(template: str, values: dict[str, str]) -> str:
 
 def policy_values(request: Request) -> dict[str, str]:
     settings = request.app.state.settings
+    region = request.app.state.preset.phone_region
     return {
         "operator_name": settings.operator_name or settings.brand_name,
         "brand_name": settings.brand_name,
         "operator_email": settings.operator_email,
         "operator_address": settings.operator_address,
-        "brand_phone": settings.brand_phone,
+        "brand_phone": format_phone(settings.brand_phone, region),
         "effective_date": settings.policy_effective_date,
         "site_url": settings.resolved_public_url or str(request.base_url).rstrip("/"),
         "retention_days": str(RETENTION_DAYS),

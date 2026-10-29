@@ -73,7 +73,7 @@
     "photos": {
       "summary": "Dodano {added} z {total} zdjęć",
       "summary_more": "{summary} · i {count} więcej",
-      "saved": "Zgłoszenie nr {id} zapisane",
+      "saved": "Zgłoszenie zapisane",
       "not_saved": "Jeszcze nie zapisane",
       "add": "Dodaj zdjęcie",
       "retry": "Spróbuj ponownie",
@@ -83,7 +83,7 @@
       "add_more_title": "WIĘCEJ ZDJĘĆ",
       "add_more_text": "Inne ujęcia lub szczegóły (opcjonalnie)",
       "add_more_aria": "Dodaj więcej zdjęć. Inne ujęcia lub szczegóły, opcjonalnie.",
-      "footnote": "JPG, PNG lub HEIC, do 15 MB każde. Dodatkowe zdjęcia: JPG, PNG lub WEBP. Zdjęcia wysyłają się dopiero po wybraniu.",
+      "footnote": "JPG, PNG, HEIC lub WEBP, do 15 MB każde. Zdjęcia wysyłają się dopiero po wybraniu.",
       "aria_add": "Dodaj zdjęcie: {label}",
       "aria_replace": "Zamień zdjęcie: {label}",
       "aria_remove": "Usuń zdjęcie: {label}",
@@ -91,9 +91,8 @@
       "extra_alt": "Dodatkowe zdjęcie {n}",
       "extra_remove": "Usuń dodatkowe zdjęcie {n}",
       "errors": {
-        "not_photo": "Ten plik to nie zdjęcie. Spróbuj JPG, PNG lub HEIC.",
+        "not_photo": "Ten plik to nie zdjęcie. Spróbuj JPG, PNG, HEIC lub WEBP.",
         "too_big": "To zdjęcie ma {size} MB. Limit to 15 MB.",
-        "extra_type": "Użyj JPG, PNG lub WEBP.",
         "wait": "Poczekaj, aż zdjęcia się wyślą, albo je usuń.",
         "failed": "Wysyłanie nie powiodło się. Spróbuj ponownie.",
         "limit": "Możesz dodać do {max} dodatkowych zdjęć."
@@ -110,11 +109,11 @@
       "edit_photos_aria": "Zmień zdjęcia",
       "no_photos": "Nie dodano zdjęć. Możesz mimo to wysłać zgłoszenie.",
       "failed_title": "Zgłoszenie nie zostało wysłane",
-      "failed_text": "Połączenie zostało przerwane. Twoje dane i zdjęcia są nadal zapisane w zgłoszeniu nr {id}. Spróbuj ponownie, kiedy chcesz.",
-      "limited_text": "Zbyt wiele zgłoszeń z tej sieci. Twoje dane i zdjęcia są zapisane w zgłoszeniu nr {id}. Poczekaj kilka minut i spróbuj ponownie."
+      "failed_text": "Połączenie zostało przerwane. Twoje dane i zdjęcia są nadal zapisane. Spróbuj ponownie, kiedy chcesz.",
+      "limited_text": "Zbyt wiele zgłoszeń z tej sieci. Twoje dane i zdjęcia są zapisane. Poczekaj kilka minut i spróbuj ponownie."
     },
     "success": {
-      "status": "Zgłoszenie wysłane · nr {id}",
+      "status": "Zgłoszenie wysłane",
       "title": "Gotowe.",
       "text": "Dane Twojego auta zostały wysłane. Kupujący przejrzy zgłoszenie i skontaktuje się z Tobą w wybrany przez Ciebie sposób.",
       "your_car": "Twoje auto",
@@ -541,6 +540,7 @@
       "email_short": "E-mail",
       "whatsapp": "WhatsApp",
       "telegram": "Telegram",
+      "sms": "SMS",
       "email_subject": "Twoje auto: {car}",
       "purged": "Usunięto {days} dni po zamknięciu",
       "notes": "Notatki",

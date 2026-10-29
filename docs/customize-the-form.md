@@ -68,9 +68,11 @@ is built in as well (texts included) for businesses whose sellers use it:
           - { id: email }
 ```
 
-In the lead, the messenger button next to Call opens WhatsApp, or Telegram
-for a seller who chose it (`t.me/+<number>`: Telegram finds the seller by
-phone unless they have turned that off).
+In the lead, the button next to Call follows the seller's choice: a text
+(`sms:`) for `sms`, an email for `email`, Telegram for `telegram`
+(`t.me/+<number>`: Telegram finds the seller by phone unless they have
+turned that off), and WhatsApp for `whatsapp`, `call` and any other
+option. An email given with another choice gets an Email button as well.
 
 **Country.** The top of the preset says where the sellers are:
 

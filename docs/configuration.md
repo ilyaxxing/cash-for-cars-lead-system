@@ -15,7 +15,7 @@ service, set by the deploy script from the client's file.
 | `PRESET`, `LOCALE` | `us-car-buyout`, `en` | Files in `presets/` and `locales/`. |
 | `PRESET_FILE`, `LOCALE_FILE`, `PRIVACY_POLICY_FILE` | | A client's own form, texts and privacy policy, for a market the shipped files don't cover; see [Customize the form](customize-the-form.md#another-country). |
 | `CURRENCY`, `TIMEZONE` | `USD`, `America/New_York` | |
-| `BRAND_NAME`, `BRAND_PHONE` | `Car Buyout` | |
+| `BRAND_NAME`, `BRAND_PHONE` | `Car Buyout` | The phone may be written any way; the privacy policy and the business card show it as people in the form's country write it, e.g. (512) 555-0100. |
 | `BRAND_COLOR` | `#C7F747` | Accent color. Refused if too dark for the dark screens; the error suggests a lighter shade. |
 | `BRAND_LOGO`, `BRAND_ICON`, `BRAND_PHOTO` | | Image files (PNG, JPEG, WebP), relative to the repository. Checked at startup; see [Client branding](#client-branding). |
 | `CARD_SIZE` | `3.5x2in` | The business card's size: `3.5x2in` (US), `90x50mm` (Russia), `85x55mm` (Europe), each with the bleed shops there ask for, or any card from `85x50mm` to `92x56mm` (3 mm bleed), e.g. `91x55mm` in Japan. |

@@ -506,11 +506,12 @@ throughout.
      texts must be in another script, or the print shop sets the card from
      the QR code (step 9).
    - One language per instance: the one most sellers read.
-   - The chat button in a lead opens WhatsApp, or Telegram for a seller who
-     chose it. Where sellers use another messenger (WeChat in China, LINE in
-     Japan and Thailand, KakaoTalk in Korea, Viber in some countries), it can
-     be added as a contact method the seller picks; the owner then reaches
-     them by the phone number, and the WhatsApp button stays.
+   - Next to Call, a lead's second button follows the seller's choice: a
+     text, an email, WhatsApp, or Telegram for a seller who chose it. Where
+     sellers use another messenger (WeChat in China, LINE in Japan and
+     Thailand, KakaoTalk in Korea, Viber in some countries), it can be added
+     as a contact method the seller picks; the owner then reaches them by
+     the phone number, and the button opens WhatsApp.
    - Notifications reach the owner through the phone maker's push service:
      an iPhone, or an Android phone with Google's services (in mainland
      China, usually an iPhone).

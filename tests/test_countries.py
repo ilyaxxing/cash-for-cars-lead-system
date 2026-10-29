@@ -76,6 +76,21 @@ def test_a_country_has_every_text_its_form_needs(code):
 
 
 @pytest.mark.parametrize("code", CODES)
+def test_a_seller_never_sees_the_lead_number(code):
+    # Leads are numbered in order: the number would tell anyone how many
+    # sellers the business has had.
+    settings = make_settings(**settings_of(code))
+    messages = load_messages(settings.locales_dir, settings.locale, settings.locale_file)
+
+    def texts(node: Any, path: str) -> list[tuple[str, str]]:
+        if isinstance(node, dict):
+            return [pair for key, value in node.items() for pair in texts(value, f"{path}.{key}")]
+        return [(path, node)]
+
+    assert [path for path, text in texts(messages.data["form"], "form") if "{id}" in text] == []
+
+
+@pytest.mark.parametrize("code", CODES)
 async def test_a_country_pages_come_in_its_language(client_for, code):
     overrides = settings_of(code)
     business = demo_of(code)["business"]

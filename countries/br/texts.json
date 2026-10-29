@@ -73,7 +73,7 @@
     "photos": {
       "summary": "{added} de {total} fotos adicionadas",
       "summary_more": "{summary} · mais {count}",
-      "saved": "Pedido nº {id} salvo",
+      "saved": "Pedido salvo",
       "not_saved": "Ainda não salvo",
       "add": "Adicionar foto",
       "retry": "Tentar de novo",
@@ -83,7 +83,7 @@
       "add_more_title": "MAIS FOTOS",
       "add_more_text": "Outros ângulos ou detalhes (opcional)",
       "add_more_aria": "Adicionar mais fotos. Outros ângulos ou detalhes, opcional.",
-      "footnote": "JPG, PNG ou HEIC, até 15 MB cada. Fotos extras: JPG, PNG ou WEBP. As fotos só são enviadas depois que você as escolhe.",
+      "footnote": "JPG, PNG, HEIC ou WEBP, até 15 MB cada. As fotos só são enviadas depois que você as escolhe.",
       "aria_add": "Adicionar foto: {label}",
       "aria_replace": "Substituir foto: {label}",
       "aria_remove": "Remover foto: {label}",
@@ -91,9 +91,8 @@
       "extra_alt": "Foto extra {n}",
       "extra_remove": "Remover foto extra {n}",
       "errors": {
-        "not_photo": "Esse arquivo não é uma foto. Tente JPG, PNG ou HEIC.",
+        "not_photo": "Esse arquivo não é uma foto. Tente JPG, PNG, HEIC ou WEBP.",
         "too_big": "Essa foto tem {size} MB. O limite é 15 MB.",
-        "extra_type": "Use JPG, PNG ou WEBP.",
         "wait": "Espere os envios terminarem ou remova as fotos.",
         "failed": "Falha no envio. Tente de novo.",
         "limit": "Você pode adicionar até {max} fotos extras."
@@ -110,11 +109,11 @@
       "edit_photos_aria": "Editar fotos",
       "no_photos": "Nenhuma foto adicionada. Você ainda pode enviar.",
       "failed_title": "Seu pedido não foi enviado",
-      "failed_text": "A conexão caiu. Seus dados e fotos continuam salvos no pedido nº {id}. Tente de novo quando quiser.",
-      "limited_text": "Pedidos demais vindos desta rede. Seus dados e fotos estão salvos no pedido nº {id}. Espere alguns minutos e tente de novo."
+      "failed_text": "A conexão caiu. Seus dados e fotos continuam salvos. Tente de novo quando quiser.",
+      "limited_text": "Pedidos demais vindos desta rede. Seus dados e fotos estão salvos. Espere alguns minutos e tente de novo."
     },
     "success": {
-      "status": "Pedido enviado · nº {id}",
+      "status": "Pedido enviado",
       "title": "Pronto.",
       "text": "Os dados do seu carro foram enviados. Um comprador vai analisar seu pedido e entrar em contato pelo meio que você preferir.",
       "your_car": "Seu carro",
@@ -547,6 +546,7 @@
       "email_short": "E-mail",
       "whatsapp": "WhatsApp",
       "telegram": "Telegram",
+      "sms": "SMS",
       "email_subject": "Seu {car}",
       "purged": "Apagado {days} dias depois do encerramento",
       "notes": "Anotações",

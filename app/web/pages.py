@@ -28,6 +28,7 @@ from fastapi.responses import (
 
 from app.services.retention import RETENTION_DAYS
 from app.services.sources import CARD_SOURCE
+from app.services.validation import format_phone
 
 router = APIRouter()
 
@@ -41,7 +42,7 @@ def public_config(request: Request) -> dict[str, Any]:
     return {
         "brand": {
             "name": settings.brand_name,
-            "phone": settings.brand_phone,
+            "phone": format_phone(settings.brand_phone, preset.phone_region),
             **request.app.state.brand.public(),
         },
         # Named in the consent text: the business that receives the data.
