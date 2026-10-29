@@ -230,13 +230,14 @@ export class Backend {
 
   private me(): Reply {
     if (!this.data.signedIn) return { status: 401 }
-    return { status: 200, body: { authenticated: true, passwordChangedAt: null } }
+    return { status: 200, body: { authenticated: true, mustChangePassword: false, passwordChangedAt: null } }
   }
 
-  // Any password opens the demo.
+  // Any password opens the demo, and it never asks for an own one: a visitor
+  // has nothing to protect and should see the leads at once.
   private signIn(on: boolean): Reply {
     this.data.signedIn = on
-    return { status: 200, body: { ok: true } }
+    return { status: 200, body: { ok: true, mustChangePassword: false } }
   }
 
   private owner(run: () => Reply): Reply {

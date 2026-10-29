@@ -28,8 +28,9 @@ app, and a push notification on that phone for every new lead.
   domain), say what it costs and wait for a clear yes.
 - The client's settings file holds passwords and keys. Never paste its contents
   into the chat, never commit it, never send it anywhere: only the deploy
-  script reads it. The one exception is the owner's password, which you show
-  when handing over.
+  script reads it. The one exception is the owner's first password, which
+  you show once, in the message for the owner (step 7). It stays in this chat,
+  so it opens the dashboard only until the owner sets their own.
 - Never push to GitHub. Change tracked files only as described in
   [Customizing the form](#customizing-the-form).
 - When something fails, read the error, fix what you can, and tell the person
@@ -209,8 +210,9 @@ should have its lawyer read it at `/privacy` before launch.
 
 **Owner's password**
 - Generate a strong, typeable one (three random words and a number) unless the
-  person wants to choose it (`OWNER_PASSWORD`). The owner can change it later
-  in the dashboard.
+  person wants to choose it (`OWNER_PASSWORD`). It is for the first sign-in
+  only: the dashboard then asks the owner to set a password of their own
+  before anything else, and the one from this chat stops working.
 
 **Photo storage location**
 - West of the Rockies: `sjc`; otherwise `iad` (`RAILWAY_BUCKET_REGION`). It
@@ -288,10 +290,10 @@ Never add `--no-backups` yourself just to get past the stop.
 
 1. Ask the person to open the seller form on their own phone and send a test
    car (any car; a 555 number like 512-555-0100 is fine).
-2. Open the dashboard on the computer, sign in with the owner's password, and
-   check that the lead is there with its photos.
-3. Mark the test lead Rejected so it doesn't count as a real one.
-4. Ask whether the look is right: color, logo, the first screen's photo.
+2. Don't sign in to the dashboard yourself. The first sign-in sets the
+   owner's own password, and that belongs to the owner, on their phone
+   (step 7). The test lead waits for them there.
+3. Ask whether the look is right: color, logo, the first screen's photo.
    Anything to change: update the settings file or the files in
    `clients/<id>/` and deploy again.
 
@@ -306,16 +308,22 @@ dashboard's texts are):
 > 1. On your iPhone, open **Safari** and go to <dashboard address>.
 >    (Android: open it in **Chrome** and tap **Install app**.)
 > 2. Tap **Share**, then **Add to Home Screen**, then **Add**.
-> 3. Open the new icon on your home screen and sign in with the password:
->    <password>
-> 4. Tap **Turn on notifications** and allow them, then **Send test
+> 3. Open the new icon on your home screen and sign in with this one-time
+>    password: <password>
+> 4. Choose a password of your own when asked. Only you will know it; the
+>    one above stops working.
+> 5. Tap **Turn on notifications** and allow them, then **Send test
 >    notification**.
+> 6. The car in **New** is our test: open it and mark it **Rejected**.
 >
 > iPhone shows notifications only for the home-screen app, and needs iOS 16.4
 > or newer. Make sure Focus or Do Not Disturb isn't hiding them.
 
-Then ask the person to send another test lead and confirm the owner got the
-notification. If it didn't arrive, see [Troubleshooting](#troubleshooting).
+Send it to the owner privately, and ask them to do it soon: until they set
+their own password, anyone with this message could. Then ask the person to
+send another test lead and confirm the owner got the notification. If it
+didn't arrive, see [Troubleshooting](#troubleshooting). From now on nobody
+but the owner knows the password, and updates don't need it.
 
 ## Step 8. The business's own domain
 
@@ -331,8 +339,9 @@ business's own, not the Railway one, which belongs to one Railway project.
 3. Walk the person, or the business's web person, through adding them at the
    registrar. Check `railway domain list --service app` until the domain is
    active, then open the address and confirm the padlock (certificate) shows.
-4. The owner opens the dashboard at the new address and does step 7 again:
-   notifications belong to the address they were turned on at.
+4. The owner opens the dashboard at the new address and does step 7 again,
+   signing in with their own password: notifications belong to the address
+   they were turned on at.
 
 ## Step 9. Business card and QR codes
 
@@ -441,15 +450,18 @@ the owner's language (English in the US):
 - Privacy: a seller's name, phone, email and photos are erased automatically
   90 days after the lead is marked Purchased or Rejected. Leads never closed
   are never erased, so close them when done.
-- The password can be changed in Settings; if it is forgotten, the person who
-  installed the system can reset it.
+- The password is the owner's own: nobody else knows it. It can be changed in
+  Settings; if it is forgotten, the person who installed the system can reset
+  it, and the owner chooses a new one at the next sign-in.
 
 And remind the person:
 - Updates: move to the newest release (`git fetch --tags`, then
   `git checkout` the newest `v*` tag), then the same deploy command, while
   they are an Editor on the business's project (docs/deploy.md, Updating).
 - Forgotten owner password: change `OWNER_PASSWORD` in the settings file and
-  deploy again; that resets it.
+  deploy again. That signs every device out; give the owner the new password
+  privately, like the first one: it works for one sign-in, then they set
+  their own again.
 - Backups: Railway keeps about 4 weeks of continuous database backups
   (point-in-time recovery). Photos are not backed up, which is fine: they are
   working material that is erased anyway. On a server of the business's own,

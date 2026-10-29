@@ -650,6 +650,7 @@
         "wrong_current": "Das ist nicht Ihr aktuelles Passwort.",
         "weak": "Mindestens 8 Zeichen, darunter eine Ziffer.",
         "same": "Wählen Sie ein anderes Passwort als das aktuelle.",
+        "given": "Wählen Sie ein anderes Passwort als das, das Sie bekommen haben.",
         "confirm_required": "Bestätigen Sie Ihr neues Passwort.",
         "mismatch": "Die Passwörter stimmen nicht überein."
       },
@@ -685,6 +686,12 @@
       "done_title": "Sie sind abgemeldet.",
       "done_text": "Ihre Anfragen sind sicher. Melden Sie sich wieder an, um weiterzumachen.",
       "again": "Wieder anmelden"
+    },
+    "new_password": {
+      "title": "Eigenes Passwort festlegen",
+      "text": "Das Passwort, mit dem Sie sich gerade angemeldet haben, galt nur für die erste Anmeldung. Legen Sie eines fest, das nur Sie kennen.",
+      "submit": "Speichern und weiter",
+      "saving": "Wird gespeichert…"
     },
     "login": {
       "title": "Anmelden",

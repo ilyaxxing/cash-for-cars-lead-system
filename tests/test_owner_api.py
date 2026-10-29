@@ -2,6 +2,7 @@ from datetime import UTC, datetime, timedelta
 
 import pytest
 
+from tests.conftest import sign_in
 from tests.test_answers import COMPLETE
 from tests.test_seller_api import jpeg, upload
 
@@ -18,7 +19,7 @@ async def owner(client_for, tmp_path):
         secret_key="k" * 40,
         source_labels="flyer:Flyers",
     )
-    assert (await client.post("/api/auth/login", json={"password": PASSWORD})).status_code == 200
+    await sign_in(client, PASSWORD)
     return client
 
 

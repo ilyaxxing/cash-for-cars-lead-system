@@ -656,6 +656,7 @@
         "wrong_current": "Essa não é sua senha atual.",
         "weak": "Use pelo menos 8 caracteres, com um número.",
         "same": "Escolha uma senha diferente da atual.",
+        "given": "Escolha uma senha diferente da que você recebeu.",
         "confirm_required": "Confirme sua nova senha.",
         "mismatch": "As senhas não são iguais."
       },
@@ -691,6 +692,12 @@
       "done_title": "Você saiu.",
       "done_text": "Seus pedidos estão seguros. Entre de novo para continuar.",
       "again": "Entrar de novo"
+    },
+    "new_password": {
+      "title": "Crie sua senha",
+      "text": "A senha que você acabou de usar servia só para o primeiro acesso. Crie uma que só você saiba.",
+      "submit": "Salvar e continuar",
+      "saving": "Salvando…"
     },
     "login": {
       "title": "Entrar",

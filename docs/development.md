@@ -55,7 +55,8 @@ npm run build --prefix frontend
 ```
 
 Open http://localhost:8000 for the seller form and http://localhost:8000/app
-for the dashboard (sign in with `OWNER_PASSWORD` from `.env`). To see the
+for the dashboard (sign in with `OWNER_PASSWORD` from `.env`, then choose a
+password of your own, as the first sign-in asks). To see the
 dashboard with data, fill the development database with fictional leads:
 
 ```bash

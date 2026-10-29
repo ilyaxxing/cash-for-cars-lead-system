@@ -35,6 +35,17 @@ def vapid_keys() -> dict[str, str]:
     return {**keys, "vapid_subject": "mailto:owner@example.com"}
 
 
+# The password an owner sets for themselves on first sign-in.
+OWN_PASSWORD = "owners-own-2026"  # gitleaks:allow (test-only password)
+
+
+async def sign_in(client: AsyncClient, password: str) -> None:
+    """Sign in with OWNER_PASSWORD and set an own password, as the dashboard asks first."""
+    assert (await client.post("/api/auth/login", json={"password": password})).status_code == 200
+    response = await client.post("/api/auth/password", json={"new": OWN_PASSWORD})
+    assert response.status_code == 200
+
+
 def make_settings(**overrides: Any) -> Settings:
     """Settings built only from the arguments: no .env, no process environment."""
     defaults: dict[str, Any] = {

@@ -36,7 +36,7 @@ somewhere safe, such as a password manager. Fill in at least:
 | `BRAND_NAME`, `BRAND_PHONE` | Shown to sellers and in the dashboard; the phone in the country's own format, however it is typed. |
 | `OPERATOR_NAME`, `OPERATOR_EMAIL`, `OPERATOR_ADDRESS` | The business that receives the leads, for the privacy policy and the consent text. |
 | `POLICY_EFFECTIVE_DATE` | The date the client's privacy policy takes effect. |
-| `OWNER_PASSWORD` | The owner's first dashboard password. |
+| `OWNER_PASSWORD` | The owner's first dashboard password, for one sign-in: the dashboard then asks for one of their own. |
 | `TIMEZONE` | The owner's time zone, for dates and statistics. |
 | `VAPID_SUBJECT` | `mailto:` the client's email. Push services use it to report problems. |
 | `SOURCE_LABELS` | Names for the client's own QR placements, e.g. `parking:Parking lot,flyer:Flyers`. |
@@ -80,8 +80,10 @@ It is safe to run again: existing resources are reused.
 On the owner's iPhone, open `https://<address>/app` in **Safari**, tap
 **Share → Add to Home Screen**, and open the app from the home screen
 (iPhone only delivers notifications to home-screen apps). Sign in with
-`OWNER_PASSWORD`, turn on notifications when asked, and send the test
-notification. On Android, Chrome offers to install the app; then do the same.
+`OWNER_PASSWORD`, choose a password of your own when asked (nothing else opens
+until then), turn on notifications, and send the test notification. On
+Android, Chrome offers to install the app; then do the same. Leave the first
+sign-in to the owner: whoever does it chooses the password.
 
 Then submit a test lead through the form from another phone and check that the
 notification arrives and opens the lead.
