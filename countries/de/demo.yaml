@@ -37,7 +37,7 @@ cities: [[Köln, '50667'], [Pulheim, '50259'], [Frechen, '50226'], [Brühl, '503
 
 page:
   title: Autoankauf Sofort · Anfragen über Ihre Visitenkarten
-  description: 'Eine funktionierende Demo: das Formular, das ein Verkäufer nach dem Scannen Ihrer Karte ausfüllt, und die App, in der die Anfrage per Push ankommt.'
+  description: 'Eine funktionierende Demo: das Formular, das ein Verkäufer nach dem Scannen Ihres Codes oder einem Tipp auf Ihren Link ausfüllt, und die App, in der die Anfrage per Push ankommt.'
   badge: Demo
   kicker_hero: Für Autoankäufer
   h1: Jede Karte unterm Scheibenwischer <em>kann Ihnen einen Verkäufer bringen.</em>
@@ -60,7 +60,7 @@ page:
   kicker_get: Was Sie bekommen
   h2_get: Alles zwischen der Karte und dem Anruf.
   p1_title: Karten mit Ihrem QR-Code
-  p1_text: Eine druckfertige Datei in Ihren Farben für jede Druckerei. Jeder Standort kann einen eigenen Code bekommen, so sehen Sie, welche Karten und Gegenden Autos bringen.
+  p1_text: Eine druckfertige Datei in Ihren Farben für jede Druckerei. Jeder Standort kann einen eigenen Code bekommen, so sehen Sie, welche Orte Autos bringen.
   p2_title: Ein Formular, das Verkäufer zu Ende bringen
   p2_text: Eine Frage pro Bildschirm, ohne App und Konto, Fotos direkt vom Handy. Ein halb ausgefülltes Formular wartet eine Woche auf sie.
   p3_title: Eine Push-Meldung in Sekunden

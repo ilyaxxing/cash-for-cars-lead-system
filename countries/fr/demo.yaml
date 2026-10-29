@@ -37,7 +37,7 @@ cities: [[Lyon, '69003'], [Vaulx-en-Velin, '69120'], [Décines-Charpieu, '69150'
 
 page:
   title: Cash Auto · Des demandes grâce à vos cartes
-  description: 'Une démo qui fonctionne : le formulaire que remplit un vendeur après avoir scanné votre carte, et l''app où la demande arrive par notification.'
+  description: 'Une démo qui fonctionne : le formulaire que remplit un vendeur après avoir scanné votre code ou touché votre lien, et l''app où la demande arrive par notification.'
   badge: Démo
   kicker_hero: Pour les acheteurs de voitures d'occasion
   h1: Chaque carte sous un essuie-glace <em>peut vous amener un vendeur.</em>
@@ -60,7 +60,7 @@ page:
   kicker_get: Ce que vous obtenez
   h2_get: Tout ce qu'il y a entre la carte et l'appel.
   p1_title: Des cartes avec votre QR code
-  p1_text: Un fichier prêt à imprimer à vos couleurs, pour n'importe quel imprimeur. Chaque emplacement peut avoir son propre code, pour voir quelles cartes et quels quartiers vous amènent des voitures.
+  p1_text: Un fichier prêt à imprimer à vos couleurs, pour n'importe quel imprimeur. Chaque emplacement peut avoir son propre code, pour voir quels endroits vous amènent des voitures.
   p2_title: Un formulaire que les vendeurs terminent
   p2_text: Une question par écran, sans app ni compte, des photos prises directement avec le téléphone. Un formulaire laissé en route les attend une semaine.
   p3_title: Une notification en quelques secondes

@@ -37,7 +37,7 @@ cities: [[Warszawa, 00-950], [Marki, 05-270], [Ząbki, 05-091], [Józefów, 05-4
 
 page:
   title: Skup Aut Ekspres · Zgłoszenia z Twoich wizytówek
-  description: 'Działające demo: formularz, który sprzedający wypełnia po zeskanowaniu Twojej wizytówki, i aplikacja, w której zgłoszenie przychodzi jako powiadomienie.'
+  description: 'Działające demo: formularz, który sprzedający wypełnia po zeskanowaniu Twojego kodu lub kliknięciu Twojego linku, i aplikacja, w której zgłoszenie przychodzi jako powiadomienie.'
   badge: Demo
   kicker_hero: Dla skupów samochodów
   h1: Każda wizytówka za wycieraczką <em>może przynieść sprzedającego.</em>
@@ -60,7 +60,7 @@ page:
   kicker_get: Co dostajesz
   h2_get: Wszystko między wizytówką a telefonem.
   p1_title: Wizytówki z Twoim kodem QR
-  p1_text: Plik gotowy do druku w Twoich kolorach, dla każdej drukarni. Każde miejsce może mieć własny kod, więc widzisz, które wizytówki i okolice przynoszą auta.
+  p1_text: Plik gotowy do druku w Twoich kolorach, dla każdej drukarni. Każde miejsce może mieć własny kod, więc widzisz, które miejsca przynoszą auta.
   p2_title: Formularz, który sprzedający kończą
   p2_text: Jedno pytanie na ekran, bez aplikacji i konta, zdjęcia prosto z telefonu. Przerwany w połowie formularz czeka na nich tydzień.
   p3_title: Powiadomienie w kilka sekund

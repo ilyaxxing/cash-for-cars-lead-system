@@ -37,7 +37,7 @@ cities: [[São Paulo, 01310-100], [Barueri, 06401-000], [Diadema, 09910-000], [M
 
 page:
   title: Venda Já · Pedidos vindos dos seus cartões
-  description: 'Uma demo que funciona: o formulário que o vendedor preenche depois de escanear seu cartão, e o app onde o pedido chega com uma notificação.'
+  description: 'Uma demo que funciona: o formulário que o vendedor preenche depois de escanear seu código ou tocar no seu link, e o app onde o pedido chega com uma notificação.'
   badge: Demo
   kicker_hero: Para quem compra carros usados
   h1: Cada cartão no para-brisa <em>pode trazer um vendedor.</em>
@@ -60,7 +60,7 @@ page:
   kicker_get: O que você recebe
   h2_get: Tudo entre o cartão e a ligação.
   p1_title: Cartões com o seu QR code
-  p1_text: Um arquivo pronto para imprimir nas suas cores, para qualquer gráfica. Cada ponto pode ter o seu código, assim você vê quais cartões e quais regiões trazem carros.
+  p1_text: Um arquivo pronto para imprimir nas suas cores, para qualquer gráfica. Cada ponto pode ter o seu código, assim você vê quais lugares trazem carros.
   p2_title: Um formulário que o vendedor termina
   p2_text: Uma pergunta por tela, sem app nem cadastro, fotos direto do celular. Um formulário parado no meio espera por ele uma semana.
   p3_title: Uma notificação em segundos
