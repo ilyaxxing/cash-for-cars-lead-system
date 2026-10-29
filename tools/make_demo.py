@@ -185,6 +185,7 @@ def draw_cards(code: str, settings: Settings, demo: dict[str, Any], messages: An
     texts = {
         key: messages.t(f"card.{key}") for key in cards.TEXT_KEYS if messages.has(f"card.{key}")
     }
+    warnings = set()
     for name, color in CARD_COLORS.items():
         text = cards.CardText(
             brand_name=settings.brand_name,
@@ -198,9 +199,12 @@ def draw_cards(code: str, settings: Settings, demo: dict[str, Any], messages: An
             locale=settings.locale,
         )
         made = cards.make(text)
+        warnings.update(made.warnings)
         for side, ops in (("front", made.front), ("back", made.back)):
             image = cards.render(ops, made.format, dpi=288)
             image.save(out / f"{name}-{side}.webp", quality=90, method=6)
+    for warning in sorted(warnings):
+        print(f"WARNING: {code} card: {warning}")
 
 
 def main() -> None:
