@@ -152,7 +152,9 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   when there is no working push subscription or the last push failed.
   Settings has no "Backup email" section.
 - Not in the design, built in the same visual system and shown for approval:
-  login, onboarding (Add to Home Screen for iOS/Android, enable push, test push),
+  login, the first sign-in's own-password screen (OWNER_PASSWORD was handed
+  over in a chat, so it opens nothing else until replaced; a reset asks
+  again), onboarding (Add to Home Screen for iOS/Android, enable push, test push),
   Help in Settings, privacy policy page, the lead's second contact button.
 
 ## Data model

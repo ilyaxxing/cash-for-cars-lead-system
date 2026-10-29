@@ -21,7 +21,7 @@ service, set by the deploy script from the client's file.
 | `CARD_SIZE` | `3.5x2in` | The business card's size: `3.5x2in` (US), `90x50mm` (Russia), `85x55mm` (Europe), each with the bleed shops there ask for, or any card from `85x50mm` to `92x56mm` (3 mm bleed), e.g. `91x55mm` in Japan. |
 | `CARD_FONT` | | A font for card text in scripts the card's own font (Geist: Latin, Cyrillic) lacks, such as Chinese, Korean, Japanese or Greek: a static TrueType `.ttf` file, e.g. Noto Sans SC Bold from Google Fonts. Used by the card command only; never sent to the server. |
 | `OPERATOR_NAME`, `OPERATOR_EMAIL`, `OPERATOR_ADDRESS`, `POLICY_EFFECTIVE_DATE` | | Privacy policy and consent. Name and email are required in production. |
-| `OWNER_PASSWORD` | | The dashboard password. Changing it here and restarting resets a password changed in the dashboard: the way back in when it is forgotten. |
+| `OWNER_PASSWORD` | | The owner's first dashboard password: it opens the dashboard until the owner sets a password of their own, which the first sign-in asks for before anything else. Changing it here and restarting resets the owner's password to it, signs every device out and asks again: the way back in when it is forgotten. |
 | `DATABASE_URL` | local | Any PostgreSQL URL; converted to the async driver. |
 | `STORAGE_BACKEND` | `local` | `local` for development. In production `s3` (Railway), with `S3_ENDPOINT_URL`, `S3_REGION`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`; or `volume`, a disk that outlives deploys (a server of the client's own, set by `tools/deploy_vps.py`). |
 | `NOTIFY_CHANNELS` | `push` | |
