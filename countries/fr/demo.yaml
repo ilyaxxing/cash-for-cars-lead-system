@@ -23,10 +23,10 @@ price_scale: 0.95
 price_step: 100
 
 featured:
-  - {make: Kia, model: Optima, location: Lyon, postal_code: '69007', name: Julien Bernard, vin: KNAGT41BBH5012345}
+  - {make: Kia, model: Optima, location: Lyon, postal_code: '69007', name: Julien Bernard}
   - {make: Hyundai, model: Kona, location: Villeurbanne, postal_code: '69100', name: Chloé Dubois, email: chloe@example.com, finance_details: Il reste environ 6 000 € de crédit.}
   - {make: Renault, model: Clio, location: Vénissieux, postal_code: '69200', name: Thomas Petit, accident_details: Choc à l'avant au printemps dernier. Elle roule encore.}
-  - {make: Ford, model: Ranger, location: Bron, postal_code: '69500', name: Sophie Laurent, vin: WF0LXXTTGLHA12345, note: 'Vendeur appelé, visite jeudi.'}
+  - {make: Ford, model: Ranger, location: Bron, postal_code: '69500', name: Sophie Laurent, note: 'Vendeur appelé, visite jeudi.'}
   - {make: Citroën, model: Berlingo, location: Lyon, postal_code: '69008', name: Nicolas Moreau, email: nicolas@example.com, note: 'Proposé 1 500 € de moins que son prix ; il réfléchit.'}
   - {make: Hyundai, model: Genesis, location: Caluire-et-Cuire, postal_code: '69300', name: Isabelle Roux, note: 'Enlevée en dépanneuse samedi, payée comptant.'}
 phones: ['+33199001234', '+33199002145', '+33199003256', '+33199004367', '+33199005478', '+33199006589', '+33199007690', '+33199008701']

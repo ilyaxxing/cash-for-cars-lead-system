@@ -115,18 +115,23 @@ steps:
     fields:
       - { id: asking_price, type: number, unit: currency, min: 100, max: 5000000 }
 
+  # The postal code narrows down a big city, but a seller who doesn't know it
+  # gives the city alone.
   - id: location
     skippable: true
     note: icon
     fields:
       - { id: location, type: text, required: true, max_length: 128 }
-      - { id: postal_code, type: text, required: true, format: postal_code }
+      - { id: postal_code, type: text, format: postal_code }
 
+  # Buyers here look a car up by its number plate, which few sellers mistake,
+  # rather than the VIN. A registry can tie a plate to its owner, so it is
+  # erased with the contact details after a lead closes (personal).
   - id: vin
     skippable: true
     note: text
     fields:
-      - { id: registration, type: text, max_length: 10 }
+      - { id: registration, type: text, personal: true, max_length: 10 }
 
   - id: contact
     submit: true

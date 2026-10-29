@@ -547,9 +547,14 @@ provider's server backups if it offers them, or copy a dump off now and then
   to add, drop or change: in Russia, for example, the vehicle title (ПТС,
   original or duplicate), the number of owners, and whether the car is
   pledged (залог). Car makes common there go into the make suggestions.
-  Ask what a seller might not know offhand, and make that optional: in
-  Russia the title and the owners are a step the seller may skip, and the
-  postal code is optional, since many don't know theirs.
+  Ask what a seller might not know offhand, and make that optional or drop
+  it: in Russia the title and the owners are a step the seller may skip, and
+  the form asks for the city alone (few know their postal code); elsewhere
+  outside the US the postal code is optional. Where buyers look a car up by
+  its number plate rather than the VIN (the UK, France, Spain, Brazil), the
+  form asks for the plate (`registration`), marked `personal: true`: a
+  registry ties a plate to its owner, so it is erased with the contact
+  details.
 - **How sellers like to be reached**: in Russia Telegram is common, so add
   it to the contact methods (see point 1 for others).
 - **The card's size** print shops there use (`CARD_SIZE`): `3.5x2in` in the

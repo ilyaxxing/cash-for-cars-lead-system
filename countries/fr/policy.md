@@ -22,8 +22,8 @@ Pour nous joindre :
 En remplissant le formulaire, vous nous indiquez :
 
 - **Sur votre voiture :** marque, modèle, année, kilométrage, état,
-  accidents, crédit ou gage en cours, le prix que vous avez en tête, le
-  VIN, la ville et le code postal où elle se trouve, et des photos. Les
+  accidents, crédit ou gage en cours, le prix que vous avez en tête, son
+  immatriculation, la ville et le code postal où elle se trouve, et des photos. Les
   questions facultatives peuvent être passées.
 - **Sur vous :** vos nom et prénom et votre numéro de téléphone, et si vous
   le souhaitez, votre e-mail et le moyen de contact que vous préférez.
@@ -89,8 +89,8 @@ des effets juridiques ou d'importance comparable.
 
 ## Combien de temps nous les gardons
 
-Nous gardons vos nom, téléphone, e-mail et les photos de votre voiture le
-temps de traiter votre demande.
+Nous gardons vos nom, téléphone, e-mail, l'immatriculation et les photos de
+votre voiture le temps de traiter votre demande.
 **{retention_days} jours après la clôture de la demande**, que nous ayons
 acheté la voiture ou non, ils sont effacés automatiquement. Nous conservons
 les autres informations sur la voiture et le résultat, qui ne vous

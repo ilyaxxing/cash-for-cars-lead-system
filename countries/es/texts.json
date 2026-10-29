@@ -174,13 +174,13 @@
         "tag": "Ubicación",
         "title": "¿Dónde está el coche?",
         "hint": "Así el comprador sabe si puede ir a verlo o recogerlo.",
-        "note": "De momento no hace falta la dirección exacta."
+        "note": "De momento no hace falta la dirección exacta, y el código postal es opcional."
       },
       "vin": {
-        "tag": "VIN",
-        "title": "¿TIENES EL VIN?",
-        "hint": "El número de bastidor nos ayuda a identificar el coche con más precisión.",
-        "note": "Suele estar en la ficha técnica, en el permiso de circulación o en la base del parabrisas. También puedes saltar este paso."
+        "tag": "Matrícula",
+        "title": "¿TIENES LA MATRÍCULA?",
+        "hint": "Con la matrícula, el comprador consulta los datos exactos del coche.",
+        "note": "Está en las placas delantera y trasera y en el permiso de circulación. También puedes saltar este paso."
       },
       "contact": {
         "tag": "Contacto",
@@ -294,6 +294,12 @@
           "length": "Un VIN tiene 17 caracteres. Este tiene {count}.",
           "format": "Un VIN usa letras y números, pero nunca I, O ni Q."
         }
+      },
+      "registration": {
+        "label": "Matrícula",
+        "placeholder": "p. ej., 1234 BCD",
+        "review_label": "Matrícula",
+        "review_empty": "Sin indicar"
       },
       "name": {
         "label": "Nombre y apellidos",
@@ -414,7 +420,7 @@
       "history": "Historial",
       "price": "Precio",
       "location": "Ubicación",
-      "vin": "VIN",
+      "vin": "Matrícula",
       "contact": "Contacto"
     }
   },

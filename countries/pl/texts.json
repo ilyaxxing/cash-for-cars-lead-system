@@ -174,7 +174,7 @@
         "tag": "Lokalizacja",
         "title": "Gdzie jest auto?",
         "hint": "Kupujący będzie wiedział, czy może je obejrzeć lub odebrać.",
-        "note": "Dokładny adres nie jest jeszcze potrzebny."
+        "note": "Dokładny adres nie jest jeszcze potrzebny, a kod pocztowy jest opcjonalny."
       },
       "vin": {
         "tag": "VIN",

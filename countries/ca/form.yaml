@@ -115,12 +115,14 @@ steps:
     fields:
       - { id: asking_price, type: number, unit: currency, min: 100, max: 5000000 }
 
+  # The postal code narrows down a big city, but a seller who doesn't know it
+  # gives the city alone.
   - id: location
     skippable: true
     note: icon
     fields:
       - { id: location, type: text, required: true, max_length: 128 }
-      - { id: postal_code, type: text, required: true, format: postal_code }
+      - { id: postal_code, type: text, format: postal_code }
 
   - id: vin
     skippable: true

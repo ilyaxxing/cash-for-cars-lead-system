@@ -82,8 +82,8 @@ don't make decisions about you based solely on automated processing.
 
 ## How long we keep it
 
-We keep your name, phone number, email address and the photos of your car
-while we work on your enquiry.
+We keep your name, phone number, email address, your car's registration
+number and its photos while we work on your enquiry.
 **{retention_days} days after the enquiry is closed**, whether we bought the
 car or not, they are erased automatically. We keep the other details of the
 car and the outcome, which no longer identify you, for our records. If we

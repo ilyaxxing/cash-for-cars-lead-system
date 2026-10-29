@@ -23,7 +23,7 @@ Cuando rellenas el formulario, nos indicas:
 
 - **Sobre tu coche:** marca, modelo, año, kilometraje, estado, si ha tenido
   accidentes, si tiene financiación pendiente o alguna carga, el precio que
-  tienes en mente, el VIN, la localidad y el código postal donde está, y
+  tienes en mente, la matrícula, la localidad y el código postal donde está, y
   fotos del coche. Las preguntas opcionales se pueden saltar.
 - **Sobre ti:** tu nombre y tu teléfono y, si quieres, tu email y cómo
   prefieres que te contactemos.
@@ -85,8 +85,8 @@ importancia similar.
 
 ## Cuánto tiempo los guardamos
 
-Guardamos tu nombre, tu teléfono, tu email y las fotos de tu coche mientras
-gestionamos tu solicitud.
+Guardamos tu nombre, tu teléfono, tu email, la matrícula y las fotos de tu
+coche mientras gestionamos tu solicitud.
 **{retention_days} días después de cerrar la solicitud**, te hayamos
 comprado el coche o no, se borran automáticamente. Conservamos el resto de
 datos del coche y el resultado, que ya no te identifican, para nuestros

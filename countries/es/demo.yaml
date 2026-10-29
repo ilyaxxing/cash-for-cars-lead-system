@@ -23,10 +23,10 @@ price_scale: 0.95
 price_step: 100
 
 featured:
-  - {make: Kia, model: Optima, location: Madrid, postal_code: '28039', name: Javier Moreno, vin: KNAGT41BBH5012345}
+  - {make: Kia, model: Optima, location: Madrid, postal_code: '28039', name: Javier Moreno}
   - {make: Hyundai, model: Kona, location: Alcalá de Henares, postal_code: '28801', name: Laura Jiménez, email: laura@example.com, finance_details: Quedan unos 6.000 € del préstamo.}
   - {make: Seat, model: Ibiza, location: Getafe, postal_code: '28901', name: Pablo Romero, accident_details: Golpe en el frontal la primavera pasada. Sigue andando.}
-  - {make: Ford, model: Ranger, location: Móstoles, postal_code: '28931', name: Marta Navarro, vin: WF0LXXTTGLHA12345, note: 'He llamado al vendedor, la visita es el jueves.'}
+  - {make: Ford, model: Ranger, location: Móstoles, postal_code: '28931', name: Marta Navarro, note: 'He llamado al vendedor, la visita es el jueves.'}
   - {make: Citroën, model: Berlingo, location: Madrid, postal_code: '28045', name: Diego Torres, email: diego@example.com, note: 'Le he ofrecido 1.500 € menos; se lo está pensando.'}
   - {make: Hyundai, model: Genesis, location: Leganés, postal_code: '28911', name: Carmen Ruiz, note: 'Se llevó en grúa el sábado, pagado en efectivo.'}
 phones: ['+34612345678', '+34712345678', '+34623456789', '+34723456789']

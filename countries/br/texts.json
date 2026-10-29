@@ -174,13 +174,13 @@
         "tag": "Local",
         "title": "Onde o carro está?",
         "hint": "Assim o comprador sabe se pode ver ou buscar o carro.",
-        "note": "Ainda não precisa do endereço completo."
+        "note": "Ainda não precisa do endereço completo, e o CEP é opcional."
       },
       "vin": {
-        "tag": "Chassi",
-        "title": "TEM O CHASSI?",
-        "hint": "O número do chassi ajuda a identificar o carro com mais precisão.",
-        "note": "Ele aparece no CRLV, gravado no vidro e na coluna da porta. Você também pode pular esta etapa."
+        "tag": "Placa",
+        "title": "TEM A PLACA?",
+        "hint": "Com a placa, o comprador consulta os dados exatos do carro.",
+        "note": "Está nas placas da frente e de trás e no CRLV. Você também pode pular esta etapa."
       },
       "contact": {
         "tag": "Contato",
@@ -294,6 +294,12 @@
           "length": "O chassi tem 17 caracteres. Este tem {count}.",
           "format": "O chassi usa letras e números, mas nunca I, O ou Q."
         }
+      },
+      "registration": {
+        "label": "Placa",
+        "placeholder": "ex.: BRA2E19",
+        "review_label": "Placa",
+        "review_empty": "Não informada"
       },
       "name": {
         "label": "Nome completo",
@@ -414,7 +420,7 @@
       "history": "Histórico",
       "price": "Preço",
       "location": "Local",
-      "vin": "Chassi",
+      "vin": "Placa",
       "contact": "Contato"
     }
   },

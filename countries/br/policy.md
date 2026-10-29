@@ -21,8 +21,8 @@ Nosso encarregado pelo tratamento de dados pessoais atende por aqui:
 Ao preencher o formulário, você nos diz:
 
 - **Sobre o carro:** marca, modelo, ano, quilometragem, estado, acidentes,
-  financiamento ou alienação em aberto, o preço que você tem em mente, o
-  número do chassi, a cidade e o CEP onde ele está, e fotos. As perguntas
+  financiamento ou alienação em aberto, o preço que você tem em mente, a
+  placa, a cidade e o CEP onde ele está, e fotos. As perguntas
   opcionais podem ser puladas.
 - **Sobre você:** seu nome e seu celular e, se quiser, seu e-mail e a forma
   de contato que prefere.
@@ -80,8 +80,8 @@ tomamos decisões sobre você baseadas unicamente em tratamento automatizado.
 
 ## Por quanto tempo guardamos
 
-Guardamos seu nome, celular, e-mail e as fotos do carro enquanto atendemos o
-pedido.
+Guardamos seu nome, celular, e-mail, a placa e as fotos do carro enquanto
+atendemos o pedido.
 **{retention_days} dias depois que o pedido é encerrado**, tenhamos comprado
 o carro ou não, eles são apagados automaticamente. Mantemos os demais dados
 do carro e o resultado, que não identificam mais você, para nossos

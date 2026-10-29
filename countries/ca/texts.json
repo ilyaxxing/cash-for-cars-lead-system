@@ -3,6 +3,9 @@
     "steps": {
       "finance": {
         "hint": "For example, an outstanding car loan, lease buyout, or a lien registered against the car."
+      },
+      "location": {
+        "note": "No street address needed at this stage, and the postal code is optional."
       }
     },
     "fields": {

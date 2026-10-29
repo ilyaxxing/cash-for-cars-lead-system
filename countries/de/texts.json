@@ -174,7 +174,7 @@
         "tag": "Standort",
         "title": "Wo steht das Auto?",
         "hint": "So sieht der Käufer, ob er es besichtigen oder abholen kann.",
-        "note": "Die genaue Adresse brauchen wir noch nicht."
+        "note": "Die genaue Adresse brauchen wir noch nicht, die PLZ ist freiwillig."
       },
       "vin": {
         "tag": "FIN",

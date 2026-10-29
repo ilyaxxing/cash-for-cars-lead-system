@@ -174,7 +174,7 @@
         "tag": "Lieu",
         "title": "Où se trouve la voiture ?",
         "hint": "L'acheteur saura ainsi s'il peut venir la voir ou la récupérer.",
-        "note": "Pas besoin de l'adresse exacte pour l'instant."
+        "note": "Pas besoin de l'adresse exacte pour l'instant, et le code postal est facultatif."
       },
       "vin": {
         "tag": "VIN",

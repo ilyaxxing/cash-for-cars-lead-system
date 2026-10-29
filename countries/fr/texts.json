@@ -174,13 +174,13 @@
         "tag": "Lieu",
         "title": "Où se trouve la voiture ?",
         "hint": "L'acheteur saura ainsi s'il peut venir la voir ou la récupérer.",
-        "note": "Pas besoin de l'adresse exacte pour l'instant."
+        "note": "Pas besoin de l'adresse exacte pour l'instant, et le code postal est facultatif."
       },
       "vin": {
-        "tag": "VIN",
-        "title": "VOUS AVEZ LE VIN ?",
-        "hint": "Le numéro d'identification nous aide à identifier votre voiture plus précisément.",
-        "note": "Il figure sur la carte grise (case E), sur le montant de la portière ou au pied du pare-brise. Vous pouvez aussi passer cette étape."
+        "tag": "Immatriculation",
+        "title": "VOUS AVEZ LA PLAQUE ?",
+        "hint": "Avec l'immatriculation, l'acheteur retrouve les caractéristiques exactes de la voiture.",
+        "note": "Elle figure sur les plaques avant et arrière et sur la carte grise (case A). Vous pouvez aussi passer cette étape."
       },
       "contact": {
         "tag": "Coordonnées",
@@ -294,6 +294,12 @@
           "length": "Un VIN compte 17 caractères. Celui-ci en a {count}.",
           "format": "Un VIN contient des lettres et des chiffres, mais jamais I, O ni Q."
         }
+      },
+      "registration": {
+        "label": "Immatriculation",
+        "placeholder": "ex. AB-123-CD",
+        "review_label": "Immatriculation",
+        "review_empty": "Non indiquée"
       },
       "name": {
         "label": "Nom et prénom",
@@ -414,7 +420,7 @@
       "history": "Historique",
       "price": "Prix",
       "location": "Lieu",
-      "vin": "VIN",
+      "vin": "Immatriculation",
       "contact": "Coordonnées"
     }
   },

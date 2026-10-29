@@ -23,10 +23,10 @@ price_scale: 5
 price_step: 500
 
 featured:
-  - {make: Kia, model: Optima, location: São Paulo, postal_code: 04538-132, name: Rafael Oliveira, vin: KNAGT41BBH5012345}
+  - {make: Kia, model: Optima, location: São Paulo, postal_code: 04538-132, name: Rafael Oliveira}
   - {make: Hyundai, model: Creta, location: Guarulhos, postal_code: 07010-000, name: Juliana Santos, email: juliana@example.com, finance_details: Faltam umas 18 parcelas de R$ 1.200.}
   - {make: Hyundai, model: HB20, location: Osasco, postal_code: 06010-000, name: Bruno Costa, accident_details: Batida na frente no começo do ano. Ainda anda.}
-  - {make: Chevrolet, model: S10, location: Santo André, postal_code: 09010-000, name: Fernanda Lima, vin: 9BG148FK0JC012345, note: 'Liguei para o vendedor, vistoria na quinta.'}
+  - {make: Chevrolet, model: S10, location: Santo André, postal_code: 09010-000, name: Fernanda Lima, note: 'Liguei para o vendedor, vistoria na quinta.'}
   - {make: Chevrolet, model: Spin, location: São Paulo, postal_code: 03310-000, name: Marcelo Pereira, email: marcelo@example.com, note: 'Ofereci R$ 5.000 a menos; ele vai pensar.'}
   - {make: Toyota, model: Corolla, location: São Bernardo do Campo, postal_code: 09710-000, name: Patrícia Alves, note: 'Guinchado no sábado, pago à vista.'}
 phones: ['+5511912345678', '+5512912345678', '+5513912345678', '+5515912345678', '+5519912345678', '+5511923456789', '+5513923456789', '+5519923456789']

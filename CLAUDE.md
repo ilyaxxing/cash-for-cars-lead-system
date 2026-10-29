@@ -170,7 +170,9 @@ Labels from the design: New, In Progress, Purchased, Rejected.
 - Retention: 90 days after closing (not creation), name, phone, every preset
   field marked `personal: true` and the photos (objects, then rows) are wiped;
   rows stay for statistics. Photos were added to the bot's scope: plates, faces
-  and driveways identify the seller. VIN stays (car data). Owner notes stay
+  and driveways identify the seller. VIN stays (car data); a number plate
+  (`registration`, asked instead of the VIN in some countries) is personal:
+  a registry ties it to the owner. Owner notes stay
   (the help says not to put contacts there). `purged_at`
   distinguishes "never given" from "deleted by retention". Daily background pass,
   first pass at startup, one log line per pass even when nothing was purged,
