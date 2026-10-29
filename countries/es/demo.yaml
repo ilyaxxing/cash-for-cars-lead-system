@@ -37,7 +37,7 @@ cities: [[Madrid, '28001'], [Alcalá de Henares, '28803'], [Fuenlabrada, '28941'
 
 page:
   title: Coches al Contado · Solicitudes desde tus tarjetas
-  description: 'Una demo que funciona: el formulario que rellena un vendedor al escanear tu tarjeta, y la app donde llega la solicitud con una notificación.'
+  description: 'Una demo que funciona: el formulario que rellena un vendedor al escanear tu código o tocar tu enlace, y la app donde llega la solicitud con una notificación.'
   badge: Demo
   kicker_hero: Para compradores de coches usados
   h1: Cada tarjeta en un parabrisas <em>puede traerte un vendedor.</em>
@@ -60,7 +60,7 @@ page:
   kicker_get: Lo que recibes
   h2_get: Todo lo que hay entre la tarjeta y la llamada.
   p1_title: Tarjetas con tu código QR
-  p1_text: Un archivo listo para imprimir en tus colores, para cualquier imprenta. Cada sitio puede tener su propio código, así ves qué tarjetas y qué zonas te traen coches.
+  p1_text: Un archivo listo para imprimir en tus colores, para cualquier imprenta. Cada sitio puede tener su propio código, así ves qué sitios te traen coches.
   p2_title: Un formulario que los vendedores terminan
   p2_text: Una pregunta por pantalla, sin app ni cuenta, fotos directamente desde el móvil. Si lo dejan a medias, les espera una semana.
   p3_title: Una notificación en segundos

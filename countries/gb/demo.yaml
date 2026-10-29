@@ -52,7 +52,7 @@ extra:
 # The page for car buyers (buyer-site/index.html). h1 may hold an <em>.
 page:
   title: Car Buyout · Leads from your windshield cards
-  description: 'A working demo: the form a seller fills in after scanning your card, and the app where the lead arrives with a push.'
+  description: 'A working demo: the form a seller fills in after scanning your code or tapping your link, and the app where the lead arrives with a push.'
   badge: Demo
   kicker_hero: For car buyers and traders
   h1: Every card under a wiper <em>can bring you a seller.</em>
@@ -75,7 +75,7 @@ page:
   kicker_get: What you get
   h2_get: Everything between the card and the call.
   p1_title: Cards with your QR code
-  p1_text: A print-ready file in your colours for any print shop. Each placement can get its own code, so you see which cards and spots bring cars.
+  p1_text: A print-ready file in your colours for any print shop. Each placement can get its own code, so you see which places bring cars.
   p2_title: A form sellers finish
   p2_text: One question per screen, no app, no account, photos straight from the phone. A form left halfway waits for them for a week.
   p3_title: A push in seconds

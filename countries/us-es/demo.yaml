@@ -36,7 +36,7 @@ cities: [[Houston, '77002'], [Pasadena, '77502'], [Baytown, '77520'], [Pearland,
 
 page:
   title: Autos al Contado · Prospectos desde sus tarjetas
-  description: 'Una demo que funciona: el formulario que llena un vendedor al escanear su tarjeta, y la app donde llega el prospecto con una notificación.'
+  description: 'Una demo que funciona: el formulario que llena un vendedor al escanear su código o tocar su enlace, y la app donde llega el prospecto con una notificación.'
   badge: Demo
   kicker_hero: Para compradores de autos usados
   h1: Cada tarjeta en un parabrisas <em>puede traerle un vendedor.</em>
@@ -59,7 +59,7 @@ page:
   kicker_get: Lo que recibe
   h2_get: Todo lo que hay entre la tarjeta y la llamada.
   p1_title: Tarjetas con su código QR
-  p1_text: Un archivo listo para imprimir en sus colores, para cualquier imprenta. Cada lugar puede tener su propio código, así ve qué tarjetas y qué zonas le traen autos.
+  p1_text: Un archivo listo para imprimir en sus colores, para cualquier imprenta. Cada lugar puede tener su propio código, así ve qué lugares le traen autos.
   p2_title: Un formulario que los vendedores terminan
   p2_text: Una pregunta por pantalla, sin app ni cuenta, fotos directo del teléfono. Si lo dejan a medias, los espera una semana.
   p3_title: Una notificación en segundos
