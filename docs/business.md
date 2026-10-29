@@ -39,8 +39,8 @@ flyers on cars, so the client should check the local rules.
 
 - **Windshield cards with a QR code** on both sides: business-card size (3.5 x 2 in in the US), made
   to be left under wipers, generated in their color with their logo and
-  phone. A print-ready PDF (bleed, CMYK) for any print shop. Separate QR codes
-  for road signs, flyers and ads, each counted separately.
+  phone. A print-ready PDF (bleed, CMYK) for any print shop. A QR code or a
+  link for every other place sellers see, each counted separately (below).
 - **A form for sellers** that collects the year, make, model, mileage,
   condition, accident and loan history, asking price, location, VIN, contact
   details and guided photos. A few minutes on a phone. A seller who stops
@@ -59,6 +59,25 @@ flyers on cars, so the client should check the local rules.
 - **Privacy built in**: a privacy policy template, a consent checkbox, and
   sellers' names, phones and photos erased automatically 90 days after a lead
   is closed.
+
+## Where leads come from
+
+The windshield card is the main channel. Every other place gets its own QR
+code (printed) or link (online), and statistics show how many sellers and
+bought cars each one brings:
+
+- **Cards under windshield wipers**: the card's own code.
+- **A sticker on the buyer's own car**: seen in traffic and parking lots.
+- **Partners**: a poster or a stack of cards at repair shops, tow companies,
+  car washes and tire shops, one code per partner, so each one's sellers are
+  counted.
+- **Road signs and banners**: a large code for people who stop, and the
+  address in large letters (a typed address counts as Other).
+- **Google Maps or Yandex Maps listing**: the link in the website field.
+- **Social profiles**: the link in the bio.
+- **Messenger auto-reply and a text after a missed call**: the link in the
+  away message, so a seller who couldn't get through still sends the car.
+- **Ads**: a link per online campaign, a code on printed ones.
 
 ## Pricing
 

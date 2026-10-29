@@ -39,7 +39,7 @@ somewhere safe, such as a password manager. Fill in at least:
 | `OWNER_PASSWORD` | The owner's first dashboard password, for one sign-in: the dashboard then asks for one of their own. |
 | `TIMEZONE` | The owner's time zone, for dates and statistics. |
 | `VAPID_SUBJECT` | `mailto:` the client's email. Push services use it to report problems. |
-| `SOURCE_LABELS` | Names for the client's own QR placements, e.g. `parking:Parking lot,flyer:Flyers`. |
+| `SOURCE_LABELS` | Names for every place besides the business card, printed (a QR code) or online (a link), e.g. `sticker:Car sticker,maps:Google Maps`. See [QR codes](#qr-codes). |
 
 Leave `SECRET_KEY`, `VAPID_PUBLIC_KEY` and `VAPID_PRIVATE_KEY` empty: the
 first deploy generates them and saves them into the file. Never change them
@@ -141,17 +141,22 @@ good and it must be the business's own. Use a subdomain of the client's site
 ## QR codes
 
 ```bash
-.venv/bin/python -m app.cli qr --url https://buy.example.com                    # business card
-.venv/bin/python -m app.cli qr --url https://buy.example.com --source parking   # any other placement
+.venv/bin/python -m app.cli qr --env-file clients/acme.env                             # business card
+.venv/bin/python -m app.cli qr --env-file clients/acme.env --source sticker            # any printed place
+.venv/bin/python -m app.cli qr --env-file clients/acme.env --source maps --link-only   # an online place
 ```
 
 This writes `qr/<domain>-<source>.svg` for the print shop and a `.png`
-preview. Business card codes point at `/v`, which labels the lead "Business
-Card"; other placements use `/?src=<source>`, labelled through
-`SOURCE_LABELS`. The command uses error correction H and the standard quiet
-zone, and refuses a code whose modules would print smaller than 0.4 mm at
-the card size (20 mm by default, `--size-mm` to change). Tell the designer not
-to crop the white margin around the code.
+preview; `--link-only` prints the link and writes nothing, for a map listing,
+a social profile or an auto-reply. The address comes from the file's
+`PUBLIC_URL` (`--url` overrides it) and the place names from its
+`SOURCE_LABELS`: a label the file does not name is flagged, since the
+dashboard would show it as Other. Business card codes point at `/v`, which
+labels the lead "Business Card"; every other place uses `/?src=<source>`, so
+statistics count each one apart. The command uses error correction H and the
+standard quiet zone, and refuses a code whose modules would print smaller
+than 0.4 mm at the card size (20 mm by default, `--size-mm` to change). Tell
+the designer not to crop the white margin around the code.
 
 ## Business card
 

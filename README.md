@@ -20,9 +20,13 @@ up with Claude Code, and you charge for the setup.
 
 ## How it works
 
-1. **QR cards.** The business leaves cards with a QR code under windshield
-   wipers and puts the code on signs. The card comes as a print-ready file in
-   their color, with their logo.
+1. **QR codes and links.** Cards with a QR code under windshield wipers are
+   the main channel; the card comes as a print-ready file in their color,
+   with their logo. The same works wherever else sellers look: a sticker on
+   the buyer's own car, posters and cards at repair shops, tow companies, car
+   washes and tire shops, road signs and banners, the Google Maps listing,
+   social profiles, a messenger auto-reply or a text after a missed call, and
+   ads. Each place gets its own code or link, so statistics tell them apart.
 2. **The seller's form.** Car, condition, price, photos, contact. A few
    minutes, no app, no account.
 3. **A push to the buyer** on their iPhone or Android, within seconds.

@@ -26,7 +26,7 @@ service, set by the deploy script from the client's file.
 | `STORAGE_BACKEND` | `local` | `local` for development. In production `s3` (Railway), with `S3_ENDPOINT_URL`, `S3_REGION`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`; or `volume`, a disk that outlives deploys (a server of the client's own, set by `tools/deploy_vps.py`). |
 | `NOTIFY_CHANNELS` | `push` | |
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | | Web Push keys: `python -m app.cli vapid-keys`. |
-| `SOURCE_LABELS` | | `id:Label` pairs for `?src=` placements. |
+| `SOURCE_LABELS` | | `id:Label` pairs for `?src=` places: every place besides the business card, printed or online ([where leads come from](business.md#where-leads-come-from)). Names without commas or quotes. |
 | `LOG_LEVEL` | `INFO` | Logs carry ids, never personal data. |
 
 The app runs as a single replica: rate limits and background jobs
