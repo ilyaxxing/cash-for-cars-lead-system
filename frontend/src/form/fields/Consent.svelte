@@ -1,6 +1,7 @@
 <script lang="ts">
   // Consent to processing, required before the lead is saved. Names the
-  // operator from the instance settings and links to the privacy policy.
+  // operator from the instance settings and links to the privacy policy, in
+  // the same tab: a second tab's "back to the form" would start it over.
   import { getContext } from 'svelte'
   import ErrorText from '../ErrorText.svelte'
   import type { FormState } from '../state.svelte'
@@ -45,7 +46,7 @@
   </span>
   <span id="consent-text" class="text">
     {t('form.contact.consent', { operator: form.config.operator })}
-    <a href={form.config.privacyUrl} target="_blank" rel="noopener">{t('form.contact.consent_link')}</a>.
+    <a href={form.config.privacyUrl} onclick={form.leaveForPolicy}>{t('form.contact.consent_link')}</a>.
   </span>
 </label>
 {#if invalid}

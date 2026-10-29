@@ -9,7 +9,7 @@
 // The country's part (its leads, the made-up business) comes from the page:
 // tools/make_demo.py writes countries/<code>/demo.yaml into it as #demo-data.
 
-import type { Value } from '../form/engine'
+import { RETURN_KEY, type Value } from '../form/engine'
 import type { AppConfig } from '../shared/config'
 import { normalizePhone } from '../shared/region'
 import { Backend, type DemoData, type Notice, type Reply } from './backend'
@@ -46,6 +46,14 @@ function sharedData(country: DemoCountry): DemoData {
   const top = host()
   top[STORE] ??= seed(new Date(), country)
   return top[STORE]
+}
+
+function returning(): boolean {
+  try {
+    return Boolean(window.sessionStorage.getItem(RETURN_KEY))
+  } catch {
+    return false
+  }
 }
 
 function storage(action: (store: Storage) => void) {
@@ -283,7 +291,8 @@ export function install() {
       showBanner(event.data, post, now)
     })
   } else {
-    storage((store) => store.removeItem(FORM_DRAFT))
+    // Back from the privacy policy, the seller carries on with their answers.
+    if (!returning()) storage((store) => store.removeItem(FORM_DRAFT))
     routeUploads(backend)
   }
 }

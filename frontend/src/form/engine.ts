@@ -245,6 +245,9 @@ export function rememberSource(stored: string | null, incoming: string | null): 
 
 export const SAVE_KEY = 'car-buyout-inquiry'
 export const SOURCE_KEY = 'car-buyout-source'
+// Set in this tab's sessionStorage while the seller reads the privacy policy
+// the consent step links to: back on the form, they carry on from that step.
+export const RETURN_KEY = 'car-buyout-policy'
 export const SAVE_TTL_MS = 7 * 24 * 60 * 60 * 1000
 
 export interface Saved {

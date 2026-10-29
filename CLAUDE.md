@@ -98,7 +98,9 @@ miles, USD, ZIP, US phone format). Agreed deviations:
 - After Contact the lead is saved and the owner is notified ("no photos").
   Photos upload right after picking; skip label "I'll send later". Final
   submit on Review marks the lead submitted (one more push if it has photos).
-  Unfinished form resumes on the same device (localStorage, max 7 days).
+  Unfinished form resumes on the same device (localStorage, max 7 days);
+  the consent step's policy link opens in the same tab, and back from it
+  the form goes straight to that step (sessionStorage flag).
 - Accident and lien: Yes / No / Don't know (third tile added in design style).
 - Photo tiles open the system picker directly (iOS offers camera or library
   there); the design's action sheet is unused in the prototype, so it is not built.

@@ -11,6 +11,7 @@ import { createPresenter, type Presenter } from '../shared/present'
 import * as api from './api'
 import { MAX_FILE_BYTES, compressPhoto, isPhotoFile, isPlainImage } from './compress'
 import {
+  RETURN_KEY,
   REVIEW,
   SAVE_KEY,
   SOURCE_KEY,
@@ -50,6 +51,14 @@ function storage(): Storage | null {
     return window.localStorage
   } catch {
     return null // private mode or blocked storage: the form still works
+  }
+}
+
+function session(): Storage | null {
+  try {
+    return window.sessionStorage
+  } catch {
+    return null
   }
 }
 
@@ -104,6 +113,14 @@ export class FormState {
     this.ids = screenIds(config.preset)
     this.saved = loadSaved(storage()?.getItem(SAVE_KEY) ?? null, Date.now())
     this.trackSource()
+    // Back from the privacy policy: the step the seller left, not the welcome.
+    if (this.saved && session()?.getItem(RETURN_KEY)) void this.resume()
+    session()?.removeItem(RETURN_KEY)
+  }
+
+  // The consent step's policy link opens in this tab; the answers are saved.
+  leaveForPolicy = () => {
+    session()?.setItem(RETURN_KEY, '1')
   }
 
   // --- formatting (shared with the dashboard) ---------------------------------
