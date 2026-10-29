@@ -73,7 +73,7 @@
     "photos": {
       "summary": "Dodano {added} z {total} zdjęć",
       "summary_more": "{summary} · i {count} więcej",
-      "saved": "Zgłoszenie nr {id} zapisane",
+      "saved": "Zgłoszenie zapisane",
       "not_saved": "Jeszcze nie zapisane",
       "add": "Dodaj zdjęcie",
       "retry": "Spróbuj ponownie",
@@ -110,11 +110,11 @@
       "edit_photos_aria": "Zmień zdjęcia",
       "no_photos": "Nie dodano zdjęć. Możesz mimo to wysłać zgłoszenie.",
       "failed_title": "Zgłoszenie nie zostało wysłane",
-      "failed_text": "Połączenie zostało przerwane. Twoje dane i zdjęcia są nadal zapisane w zgłoszeniu nr {id}. Spróbuj ponownie, kiedy chcesz.",
-      "limited_text": "Zbyt wiele zgłoszeń z tej sieci. Twoje dane i zdjęcia są zapisane w zgłoszeniu nr {id}. Poczekaj kilka minut i spróbuj ponownie."
+      "failed_text": "Połączenie zostało przerwane. Twoje dane i zdjęcia są nadal zapisane. Spróbuj ponownie, kiedy chcesz.",
+      "limited_text": "Zbyt wiele zgłoszeń z tej sieci. Twoje dane i zdjęcia są zapisane. Poczekaj kilka minut i spróbuj ponownie."
     },
     "success": {
-      "status": "Zgłoszenie wysłane · nr {id}",
+      "status": "Zgłoszenie wysłane",
       "title": "Gotowe.",
       "text": "Dane Twojego auta zostały wysłane. Kupujący przejrzy zgłoszenie i skontaktuje się z Tobą w wybrany przez Ciebie sposób.",
       "your_car": "Twoje auto",

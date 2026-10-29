@@ -73,7 +73,7 @@
     "photos": {
       "summary": "{added} de {total} fotos agregadas",
       "summary_more": "{summary} · {count} más",
-      "saved": "Solicitud #{id} guardada",
+      "saved": "Solicitud guardada",
       "not_saved": "Aún no guardada",
       "add": "Agregar foto",
       "retry": "Intentar de nuevo",
@@ -110,11 +110,11 @@
       "edit_photos_aria": "Editar fotos",
       "no_photos": "No agregó fotos. Aun así puede enviar.",
       "failed_title": "Su solicitud no se envió",
-      "failed_text": "Se perdió la conexión. Sus datos y fotos siguen guardados en la solicitud #{id}. Inténtelo de nuevo cuando quiera.",
-      "limited_text": "Demasiadas solicitudes desde esta red. Sus datos y fotos están guardados en la solicitud #{id}. Espere unos minutos e inténtelo de nuevo."
+      "failed_text": "Se perdió la conexión. Sus datos y fotos siguen guardados. Inténtelo de nuevo cuando quiera.",
+      "limited_text": "Demasiadas solicitudes desde esta red. Sus datos y fotos están guardados. Espere unos minutos e inténtelo de nuevo."
     },
     "success": {
-      "status": "Solicitud enviada · #{id}",
+      "status": "Solicitud enviada",
       "title": "Listo.",
       "text": "Los datos de su auto se enviaron correctamente. Un comprador revisará su solicitud y lo contactará por el medio que prefiera.",
       "your_car": "Su auto",

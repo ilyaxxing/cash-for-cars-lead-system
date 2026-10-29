@@ -61,7 +61,7 @@
 
 <div data-st class="top">
   <span class="summary">{summary}</span>
-  <span class="saved"><span class="saved-dot"></span>{form.leadId ? t('form.photos.saved', { id: form.leadId }) : t('form.photos.not_saved')}</span>
+  <span class="saved"><span class="saved-dot"></span>{form.leadId ? t('form.photos.saved') : t('form.photos.not_saved')}</span>
 </div>
 
 <div class="grid">

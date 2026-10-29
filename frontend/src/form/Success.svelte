@@ -63,7 +63,7 @@
       </svg>
     </span>
   </div>
-  <div role="status" class="status"><span class="dot"></span>{t('form.success.status', { id: form.leadId ?? '' })}</div>
+  <div role="status" class="status"><span class="dot"></span>{t('form.success.status')}</div>
   <h1 style:font-size={form.wide ? '72px' : '48px'}>{t('form.success.title')}</h1>
   <p class="lead">{t('form.success.text')}</p>
 

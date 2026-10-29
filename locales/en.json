@@ -73,7 +73,7 @@
     "photos": {
       "summary": "{added} of {total} photos added",
       "summary_more": "{summary} · {count} more",
-      "saved": "Inquiry #{id} saved",
+      "saved": "Inquiry saved",
       "not_saved": "Not saved yet",
       "add": "Add photo",
       "retry": "Try again",
@@ -110,11 +110,11 @@
       "edit_photos_aria": "Edit photos",
       "no_photos": "No photos added. You can still submit.",
       "failed_title": "Your inquiry wasn't submitted",
-      "failed_text": "The connection dropped. Your details and photos are still saved to inquiry #{id}. Try again when you're ready.",
-      "limited_text": "Too many requests from this network. Your details and photos are saved to inquiry #{id}. Wait a few minutes and try again."
+      "failed_text": "The connection dropped. Your details and photos are still saved. Try again when you're ready.",
+      "limited_text": "Too many requests from this network. Your details and photos are saved. Wait a few minutes and try again."
     },
     "success": {
-      "status": "Inquiry submitted · #{id}",
+      "status": "Inquiry submitted",
       "title": "You're all set.",
       "text": "Your car details have been submitted successfully. A buyer can now review your inquiry and contact you using your preferred contact method.",
       "your_car": "Your car",

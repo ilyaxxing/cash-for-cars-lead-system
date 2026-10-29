@@ -73,7 +73,7 @@
     "photos": {
       "summary": "{added} de {total} fotos añadidas",
       "summary_more": "{summary} · {count} más",
-      "saved": "Solicitud n.º {id} guardada",
+      "saved": "Solicitud guardada",
       "not_saved": "Aún sin guardar",
       "add": "Añadir foto",
       "retry": "Reintentar",
@@ -110,11 +110,11 @@
       "edit_photos_aria": "Editar fotos",
       "no_photos": "No has añadido fotos. Aun así puedes enviarla.",
       "failed_title": "Tu solicitud no se ha enviado",
-      "failed_text": "Se ha cortado la conexión. Tus datos y fotos siguen guardados en la solicitud n.º {id}. Vuelve a intentarlo cuando quieras.",
-      "limited_text": "Demasiadas solicitudes desde esta red. Tus datos y fotos están guardados en la solicitud n.º {id}. Espera unos minutos y vuelve a intentarlo."
+      "failed_text": "Se ha cortado la conexión. Tus datos y fotos siguen guardados. Vuelve a intentarlo cuando quieras.",
+      "limited_text": "Demasiadas solicitudes desde esta red. Tus datos y fotos están guardados. Espera unos minutos y vuelve a intentarlo."
     },
     "success": {
-      "status": "Solicitud enviada · n.º {id}",
+      "status": "Solicitud enviada",
       "title": "¡Listo!",
       "text": "Los datos de tu coche se han enviado correctamente. Un comprador revisará tu solicitud y te contactará por el medio que prefieras.",
       "your_car": "Tu coche",

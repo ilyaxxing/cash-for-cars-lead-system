@@ -64,7 +64,7 @@
     <span aria-hidden="true" class="badge">!</span>
     <span class="banner-text">
       <span class="banner-title">{t('form.review.failed_title')}</span>
-      <span class="banner-body">{t(form.limited ? 'form.review.limited_text' : 'form.review.failed_text', { id: form.leadId ?? '' })}</span>
+      <span class="banner-body">{t(form.limited ? 'form.review.limited_text' : 'form.review.failed_text')}</span>
     </span>
   </div>
 {/if}

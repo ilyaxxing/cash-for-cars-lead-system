@@ -73,7 +73,7 @@
     "photos": {
       "summary": "{added} photo(s) sur {total}",
       "summary_more": "{summary} · {count} de plus",
-      "saved": "Demande n° {id} enregistrée",
+      "saved": "Demande enregistrée",
       "not_saved": "Pas encore enregistrée",
       "add": "Ajouter une photo",
       "retry": "Réessayer",
@@ -110,11 +110,11 @@
       "edit_photos_aria": "Modifier les photos",
       "no_photos": "Aucune photo ajoutée. Vous pouvez quand même envoyer la demande.",
       "failed_title": "Votre demande n'a pas été envoyée",
-      "failed_text": "La connexion a été coupée. Vos informations et vos photos restent enregistrées dans la demande n° {id}. Réessayez quand vous voulez.",
-      "limited_text": "Trop de demandes depuis ce réseau. Vos informations et vos photos sont enregistrées dans la demande n° {id}. Patientez quelques minutes et réessayez."
+      "failed_text": "La connexion a été coupée. Vos informations et vos photos restent enregistrées. Réessayez quand vous voulez.",
+      "limited_text": "Trop de demandes depuis ce réseau. Vos informations et vos photos sont enregistrées. Patientez quelques minutes et réessayez."
     },
     "success": {
-      "status": "Demande envoyée · n° {id}",
+      "status": "Demande envoyée",
       "title": "C'est fait.",
       "text": "Les informations sur votre voiture ont bien été envoyées. Un acheteur va étudier votre demande et vous contacter par le moyen que vous préférez.",
       "your_car": "Votre voiture",

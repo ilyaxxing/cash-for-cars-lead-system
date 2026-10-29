@@ -73,7 +73,7 @@
     "photos": {
       "summary": "{added} von {total} Fotos hinzugefügt",
       "summary_more": "{summary} · {count} weitere",
-      "saved": "Anfrage Nr. {id} gespeichert",
+      "saved": "Anfrage gespeichert",
       "not_saved": "Noch nicht gespeichert",
       "add": "Foto hinzufügen",
       "retry": "Erneut versuchen",
@@ -110,11 +110,11 @@
       "edit_photos_aria": "Fotos ändern",
       "no_photos": "Keine Fotos hinzugefügt. Sie können trotzdem senden.",
       "failed_title": "Ihre Anfrage wurde nicht gesendet",
-      "failed_text": "Die Verbindung ist abgebrochen. Ihre Angaben und Fotos sind weiter in Anfrage Nr. {id} gespeichert. Versuchen Sie es erneut, wann Sie möchten.",
-      "limited_text": "Zu viele Anfragen aus diesem Netz. Ihre Angaben und Fotos sind in Anfrage Nr. {id} gespeichert. Warten Sie ein paar Minuten und versuchen Sie es erneut."
+      "failed_text": "Die Verbindung ist abgebrochen. Ihre Angaben und Fotos sind weiter gespeichert. Versuchen Sie es erneut, wann Sie möchten.",
+      "limited_text": "Zu viele Anfragen aus diesem Netz. Ihre Angaben und Fotos sind gespeichert. Warten Sie ein paar Minuten und versuchen Sie es erneut."
     },
     "success": {
-      "status": "Anfrage gesendet · Nr. {id}",
+      "status": "Anfrage gesendet",
       "title": "Geschafft.",
       "text": "Die Angaben zu Ihrem Auto wurden gesendet. Ein Käufer prüft Ihre Anfrage und meldet sich auf dem Weg, den Sie bevorzugen.",
       "your_car": "Ihr Auto",

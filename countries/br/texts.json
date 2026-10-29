@@ -73,7 +73,7 @@
     "photos": {
       "summary": "{added} de {total} fotos adicionadas",
       "summary_more": "{summary} · mais {count}",
-      "saved": "Pedido nº {id} salvo",
+      "saved": "Pedido salvo",
       "not_saved": "Ainda não salvo",
       "add": "Adicionar foto",
       "retry": "Tentar de novo",
@@ -110,11 +110,11 @@
       "edit_photos_aria": "Editar fotos",
       "no_photos": "Nenhuma foto adicionada. Você ainda pode enviar.",
       "failed_title": "Seu pedido não foi enviado",
-      "failed_text": "A conexão caiu. Seus dados e fotos continuam salvos no pedido nº {id}. Tente de novo quando quiser.",
-      "limited_text": "Pedidos demais vindos desta rede. Seus dados e fotos estão salvos no pedido nº {id}. Espere alguns minutos e tente de novo."
+      "failed_text": "A conexão caiu. Seus dados e fotos continuam salvos. Tente de novo quando quiser.",
+      "limited_text": "Pedidos demais vindos desta rede. Seus dados e fotos estão salvos. Espere alguns minutos e tente de novo."
     },
     "success": {
-      "status": "Pedido enviado · nº {id}",
+      "status": "Pedido enviado",
       "title": "Pronto.",
       "text": "Os dados do seu carro foram enviados. Um comprador vai analisar seu pedido e entrar em contato pelo meio que você preferir.",
       "your_car": "Seu carro",
