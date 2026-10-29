@@ -22,8 +22,9 @@ async function call<T>(method: string, url: string, body?: unknown): Promise<T> 
   })
   if (response.status === 401 && !url.endsWith('/login')) throw new Unauthorized()
   if (!response.ok) {
-    const data = (await response.json().catch(() => ({}))) as { error?: string }
-    throw new RequestFailed(response.status, data.error)
+    // Our own errors say { error }; FastAPI's own say { detail }.
+    const data = (await response.json().catch(() => ({}))) as { error?: string; detail?: unknown }
+    throw new RequestFailed(response.status, data.error ?? (typeof data.detail === 'string' ? data.detail : undefined))
   }
   return response.status === 204 ? (undefined as T) : ((await response.json()) as T)
 }
@@ -90,9 +91,14 @@ export interface Stats {
   buckets: { start: string; leads: number; purchased: number }[]
 }
 
-export const me = () => call<{ authenticated: boolean; passwordChangedAt: string | null }>('GET', '/api/auth/me')
-export const login = (password: string) => call<{ ok: boolean }>('POST', '/api/auth/login', { password })
+// mustChangePassword: the owner signed in with OWNER_PASSWORD, which was handed
+// over, and must set an own password before anything else (app/services/auth.py).
+export const me = () =>
+  call<{ authenticated: boolean; mustChangePassword: boolean; passwordChangedAt: string | null }>('GET', '/api/auth/me')
+export const login = (password: string) =>
+  call<{ ok: boolean; mustChangePassword: boolean }>('POST', '/api/auth/login', { password })
 export const logout = () => call<{ ok: boolean }>('POST', '/api/auth/logout')
+/** `current` stays empty when replacing the password that was handed over. */
 export const changePassword = (current: string, next: string) =>
   call<{ ok: boolean }>('POST', '/api/auth/password', { current, new: next })
 

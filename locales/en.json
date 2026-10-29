@@ -650,6 +650,7 @@
         "wrong_current": "That's not your current password.",
         "weak": "Use at least 8 characters, including a number.",
         "same": "Choose a password different from your current one.",
+        "given": "Choose a password different from the one you were given.",
         "confirm_required": "Confirm your new password.",
         "mismatch": "Passwords don't match."
       },
@@ -685,6 +686,12 @@
       "done_title": "You're logged out.",
       "done_text": "Your leads are safe. Log in again to continue.",
       "again": "Log in again"
+    },
+    "new_password": {
+      "title": "Choose your password",
+      "text": "The password you just used was for the first sign-in only. Set one that only you know.",
+      "submit": "Save and continue",
+      "saving": "Saving…"
     },
     "login": {
       "title": "Sign in",

@@ -49,7 +49,7 @@
       show = false
       values.current = values.next = values.confirm = ''
     } else if (problem === 'wrong_current') errors = { current: problem }
-    else if (problem === 'weak' || problem === 'same') errors = { next: problem }
+    else if (problem === 'weak' || problem === 'same' || problem === 'given') errors = { next: problem }
     else failed = true
   }
 

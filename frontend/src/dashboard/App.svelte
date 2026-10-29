@@ -1,5 +1,6 @@
 <script lang="ts">
-  // Gate: sign-in, the one-time setup, then the dashboard itself.
+  // Gate: sign-in, an own password in place of the one handed over, the
+  // one-time setup, then the dashboard itself.
   import { onMount, setContext } from 'svelte'
   import type { AppConfig } from '../shared/config'
   import Login from './Login.svelte'
@@ -24,8 +25,8 @@
     {:else}
       <Onboarding />
     {/if}
-  {:else if dash.auth === 'signed_out' || dash.auth === 'logged_out'}
-    <Login loggedOut={dash.auth === 'logged_out'} />
+  {:else if dash.auth === 'signed_out' || dash.auth === 'logged_out' || dash.auth === 'new_password'}
+    <Login loggedOut={dash.auth === 'logged_out'} choose={dash.auth === 'new_password'} />
   {/if}
 </div>
 

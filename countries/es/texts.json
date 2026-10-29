@@ -656,6 +656,7 @@
         "wrong_current": "Esa no es tu contraseña actual.",
         "weak": "Usa al menos 8 caracteres, con algún número.",
         "same": "Elige una contraseña distinta de la actual.",
+        "given": "Elige una contraseña distinta de la que te dieron.",
         "confirm_required": "Repite tu contraseña nueva.",
         "mismatch": "Las contraseñas no coinciden."
       },
@@ -691,6 +692,12 @@
       "done_title": "Has cerrado sesión.",
       "done_text": "Tus solicitudes están a salvo. Vuelve a iniciar sesión para continuar.",
       "again": "Iniciar sesión de nuevo"
+    },
+    "new_password": {
+      "title": "Elige tu contraseña",
+      "text": "La contraseña que acabas de usar solo servía para el primer inicio de sesión. Pon una que solo conozcas tú.",
+      "submit": "Guardar y continuar",
+      "saving": "Guardando…"
     },
     "login": {
       "title": "Iniciar sesión",

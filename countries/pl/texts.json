@@ -650,6 +650,7 @@
         "wrong_current": "To nie jest obecne hasło.",
         "weak": "Użyj co najmniej 8 znaków, w tym cyfry.",
         "same": "Wybierz hasło inne niż obecne.",
+        "given": "Wybierz hasło inne niż to, które otrzymano.",
         "confirm_required": "Powtórz nowe hasło.",
         "mismatch": "Hasła się nie zgadzają."
       },
@@ -685,6 +686,12 @@
       "done_title": "Wylogowano.",
       "done_text": "Twoje zgłoszenia są bezpieczne. Zaloguj się ponownie, aby kontynuować.",
       "again": "Zaloguj się ponownie"
+    },
+    "new_password": {
+      "title": "Ustaw własne hasło",
+      "text": "Hasło, którego właśnie użyto, służyło tylko do pierwszego logowania. Ustaw takie, które znasz tylko Ty.",
+      "submit": "Zapisz i dalej",
+      "saving": "Zapisywanie…"
     },
     "login": {
       "title": "Logowanie",

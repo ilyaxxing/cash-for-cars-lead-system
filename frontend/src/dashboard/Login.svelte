@@ -1,11 +1,13 @@
 <script lang="ts">
-  // Sign-in. Not in the design; built from its log-out screen and form fields.
+  // Sign-in, and the password of the owner's own that replaces the one handed
+  // over. Not in the design; built from its log-out screen and form fields,
+  // with the password rules of Settings.
   import { getContext } from 'svelte'
   import BrandMark from '../shared/BrandMark.svelte'
   import TagGlyph from '../shared/TagGlyph.svelte'
   import type { DashboardState } from './state.svelte'
 
-  let { loggedOut = false }: { loggedOut?: boolean } = $props()
+  let { loggedOut = false, choose = false }: { loggedOut?: boolean; choose?: boolean } = $props()
   const dash = getContext<DashboardState>('dashboard')
   const t = dash.t
   const brand = dash.config.brand
@@ -27,6 +29,30 @@
     error = (await dash.signIn(password)) ?? ''
     busy = false
   }
+
+  // The owner's own password, with the rules the server applies.
+  let next = $state('')
+  let confirm = $state('')
+  let errors = $state<{ next?: string; confirm?: string; form?: string }>({})
+  const requirements = $derived([
+    { text: t('dashboard.settings.req_length'), ok: next.length >= 8 },
+    { text: t('dashboard.settings.req_number'), ok: /\d/.test(next) },
+  ])
+
+  async function save(event: SubmitEvent) {
+    event.preventDefault()
+    const found: typeof errors = {}
+    if (next.length < 8 || !/\d/.test(next)) found.next = 'weak'
+    if (!confirm) found.confirm = 'confirm_required'
+    else if (confirm !== next) found.confirm = 'mismatch'
+    errors = found
+    if (found.next || found.confirm) return
+    busy = true
+    const problem = await dash.setOwnPassword(next)
+    busy = false
+    if (problem === 'weak' || problem === 'given' || problem === 'same') errors = { next: problem === 'same' ? 'given' : problem }
+    else if (problem) errors = { form: 'network' }
+  }
 </script>
 
 {#snippet logo()}
@@ -37,8 +63,64 @@
   {/if}
 {/snippet}
 
+{#snippet problem(code: string | undefined, key: string)}
+  {#if code}
+    <span role="alert" class="error"><span aria-hidden="true" class="badge">!</span>{t(`${key}.${code}`)}</span>
+  {/if}
+{/snippet}
+
 <div class="screen">
-  {#if !showForm}
+  {#if choose}
+    <form class="center form" onsubmit={save} novalidate>
+      {@render logo()}
+      <div class="words">
+        <h1 class="title">{t('dashboard.new_password.title')}</h1>
+        <span class="text">{t('dashboard.new_password.text')}</span>
+      </div>
+      <label class="field">
+        <span class="label">{t('dashboard.settings.new')}</span>
+        <span class="input-row">
+          <!-- svelte-ignore a11y_autofocus -->
+          <input
+            type={show ? 'text' : 'password'}
+            bind:value={next}
+            oninput={() => (errors = { ...errors, next: undefined, form: undefined })}
+            autocomplete="new-password"
+            autofocus
+            aria-invalid={Boolean(errors.next)}
+            class:invalid={errors.next}
+            disabled={busy}
+          />
+          <button type="button" class="toggle" onclick={() => (show = !show)}>{show ? t('dashboard.login.hide') : t('dashboard.login.show')}</button>
+        </span>
+        {@render problem(errors.next, 'dashboard.settings.errors')}
+        <span class="reqs">
+          {#each requirements as requirement (requirement.text)}
+            <span class="req" class:met={requirement.ok}><span class="req-dot"></span>{requirement.text}</span>
+          {/each}
+        </span>
+      </label>
+      <label class="field">
+        <span class="label">{t('dashboard.settings.confirm')}</span>
+        <input
+          type={show ? 'text' : 'password'}
+          bind:value={confirm}
+          oninput={() => (errors = { ...errors, confirm: undefined, form: undefined })}
+          autocomplete="new-password"
+          enterkeyhint="done"
+          aria-invalid={Boolean(errors.confirm)}
+          class:invalid={errors.confirm}
+          disabled={busy}
+        />
+        {@render problem(errors.confirm, 'dashboard.settings.errors')}
+      </label>
+      {@render problem(errors.form, 'dashboard.login.errors')}
+      <button type="submit" class="primary" disabled={busy}>
+        {#if busy}<span aria-hidden="true" class="spinner"></span>{/if}
+        {busy ? t('dashboard.new_password.saving') : t('dashboard.new_password.submit')}
+      </button>
+    </form>
+  {:else if !showForm}
     <div class="center">
       {@render logo()}
       <div class="words">
@@ -202,8 +284,43 @@
       box-shadow 0.15s;
   }
 
+  /* The confirm field stands alone, without the Show button's row. */
+  .field > input {
+    flex: none;
+    padding-right: 14px;
+  }
+
   input.invalid {
     border-color: var(--error);
+  }
+
+  .reqs {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    font: 500 11.5px/1 var(--font-mono);
+  }
+
+  .req {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-faint);
+  }
+
+  .req.met {
+    color: var(--text);
+  }
+
+  .req-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 2px;
+    background: #3a3c3c;
+  }
+
+  .req.met .req-dot {
+    background: var(--accent);
   }
 
   input:focus {

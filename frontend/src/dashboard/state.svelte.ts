@@ -10,7 +10,9 @@ import { createFormatter, type Formatter } from './format'
 import * as push from './push'
 
 export type Screen = 'leads' | 'stats' | 'settings'
-export type AuthState = 'checking' | 'signed_out' | 'signed_in' | 'logged_out'
+// new_password: signed in with the password that was handed over, which has to
+// be replaced first.
+export type AuthState = 'checking' | 'signed_out' | 'new_password' | 'signed_in' | 'logged_out'
 
 const SCREEN_KEY = 'dashboard-screen'
 const ONBOARDED_KEY = 'dashboard-onboarded'
@@ -107,6 +109,10 @@ export class DashboardState {
     try {
       const me = await api.me()
       this.passwordChangedAt = me.passwordChangedAt
+      if (me.mustChangePassword) {
+        this.auth = 'new_password'
+        return
+      }
       this.auth = 'signed_in'
       this.applyLocation()
       void this.loadPush(true)
@@ -122,6 +128,22 @@ export class DashboardState {
       await api.login(password)
     } catch (error) {
       return error instanceof api.RequestFailed && error.code ? error.code : 'network'
+    }
+    this.auth = 'checking'
+    await this.start()
+    return null
+  }
+
+  /** Replace the password that was handed over; then the dashboard opens. */
+  async setOwnPassword(next: string): Promise<string | null> {
+    try {
+      await api.changePassword('', next)
+    } catch (error) {
+      if (error instanceof api.Unauthorized) {
+        this.auth = 'signed_out'
+        return null
+      }
+      return error instanceof api.RequestFailed && error.status === 422 ? (error.code ?? 'failed') : 'failed'
     }
     this.auth = 'checking'
     await this.start()
@@ -147,13 +169,18 @@ export class DashboardState {
     this.onboarded = true
   }
 
-  // Any call that finds the session gone sends the owner back to sign in.
+  // Any call that finds the session gone sends the owner back to sign in,
+  // and one refused for the password handed over (after a reset) to replacing it.
   private async guard<T>(run: () => Promise<T>): Promise<T | undefined> {
     try {
       return await run()
     } catch (error) {
       if (error instanceof api.Unauthorized) {
         this.auth = 'signed_out'
+        return undefined
+      }
+      if (error instanceof api.RequestFailed && error.code === 'password_change_required') {
+        this.auth = 'new_password'
         return undefined
       }
       throw error

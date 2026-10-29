@@ -650,6 +650,7 @@
         "wrong_current": "Esa no es su contraseña actual.",
         "weak": "Use al menos 8 caracteres, incluido un número.",
         "same": "Elija una contraseña distinta de la actual.",
+        "given": "Elija una contraseña distinta de la que le dieron.",
         "confirm_required": "Confirme su contraseña nueva.",
         "mismatch": "Las contraseñas no coinciden."
       },
@@ -685,6 +686,12 @@
       "done_title": "Cerró sesión.",
       "done_text": "Sus prospectos están a salvo. Inicie sesión de nuevo para continuar.",
       "again": "Iniciar sesión de nuevo"
+    },
+    "new_password": {
+      "title": "Elija su contraseña",
+      "text": "La contraseña que acaba de usar solo servía para el primer inicio de sesión. Ponga una que solo usted conozca.",
+      "submit": "Guardar y continuar",
+      "saving": "Guardando…"
     },
     "login": {
       "title": "Iniciar sesión",

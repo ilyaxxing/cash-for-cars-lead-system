@@ -650,6 +650,7 @@
         "wrong_current": "Ce n'est pas votre mot de passe actuel.",
         "weak": "Utilisez au moins 8 caractères, dont un chiffre.",
         "same": "Choisissez un mot de passe différent de l'actuel.",
+        "given": "Choisissez un mot de passe différent de celui qu'on vous a donné.",
         "confirm_required": "Confirmez votre nouveau mot de passe.",
         "mismatch": "Les mots de passe ne correspondent pas."
       },
@@ -685,6 +686,12 @@
       "done_title": "Vous êtes déconnecté.",
       "done_text": "Vos demandes sont en sécurité. Reconnectez-vous pour continuer.",
       "again": "Se reconnecter"
+    },
+    "new_password": {
+      "title": "Choisissez votre mot de passe",
+      "text": "Le mot de passe que vous venez d'utiliser ne servait qu'à la première connexion. Choisissez-en un que vous seul connaissez.",
+      "submit": "Enregistrer et continuer",
+      "saving": "Enregistrement…"
     },
     "login": {
       "title": "Connexion",
