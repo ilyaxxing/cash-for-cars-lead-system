@@ -23,10 +23,13 @@ import shutil
 import sys
 from pathlib import Path
 
-from make_demo import CARDS, DEFAULT, country_codes, load_demo
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+
+from tools.make_demo import CARDS, DEFAULT, country_codes, load_demo  # noqa: E402
+
 DOCS = ROOT / "docs"
 TEMPLATE = ROOT / "buyer-site" / "index.html"
 TOKEN = re.compile(r"\{\{(\w+)\}\}")
