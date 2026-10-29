@@ -259,10 +259,30 @@ that would look broken (a dark logo, a small or portrait photo) stops it
 before anything is created, with a message saying what to ask the client for.
 
 At the end it prints three addresses: the seller form, the business card link
-(`/v`) and the dashboard (`/app`). Note them for the person.
+(`/v`) and the dashboard (`/app`). Note them for the person. The line under
+them, `backups:`, should say `on`; on the first run "the archive has not
+reported yet" is normal.
 
 If it stops: read its message; `railway logs --service app` shows the app's own
 log. The script never prints secrets, so you can show its output.
+
+**If it stops because the database backups are not on.** The script does not
+finish without them: without backups, a lost or broken database loses every
+lead in it for good. Tell the person that in plain words, then go through the
+script's message with them, in this order:
+
+1. Update the Railway CLI (`railway upgrade --yes`) and run the deploy again.
+2. If it stops again, the person turns the backups on in Railway: the
+   project, the **Postgres** service, the **Backups** tab, **Enable PITR**.
+   When the tab shows them on, run the deploy again.
+3. If Railway will not turn them on either, explain what starting without
+   them means: until they are on, a lost database cannot be brought back.
+   Only if the person agrees, for the business, run the deploy again with
+   `--no-backups` at the end. Its last lines then show **Backups are OFF**:
+   say so to the person, put it in the note for the owner, and turn the
+   backups on as soon as Railway allows, then deploy again without the flag.
+
+Never add `--no-backups` yourself just to get past the stop.
 
 ## Step 6. Test it together
 
@@ -434,6 +454,7 @@ And remind the person:
   (point-in-time recovery). Photos are not backed up, which is fine: they are
   working material that is erased anyway. On a server of the business's own,
   the dumps sit on that server: keep a copy off it (docs/deploy-vps.md).
+  Every deploy's last lines say whether the backups are on (`backups:`).
 - Changing the look later: change the settings file or the files in
   `clients/<id>/`, then deploy again. A phone keeps the app icon it was added
   with: to see a new icon, remove the app from the home screen and add it
