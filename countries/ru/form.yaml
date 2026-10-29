@@ -109,19 +109,21 @@ steps:
           fields:
             - { id: finance_details, type: text, multiline: true, max_length: 400 }
 
+  # Not every seller has the title at hand or remembers the owners: either
+  # answer, both or neither.
   - id: documents
     group: history
     show_chips: true
+    skippable: true
     fields:
       - id: pts
         type: select
-        required: true
         chip: true
         options:
           - { id: original }
           - { id: duplicate }
           - { id: electronic }
-      - { id: owners, type: number, required: true, chip: true, min: 1, max: 20 }
+      - { id: owners, type: number, chip: true, min: 1, max: 20 }
 
   - id: price
     skippable: true
@@ -134,7 +136,8 @@ steps:
     note: icon
     fields:
       - { id: location, type: text, required: true, max_length: 128 }
-      - { id: postal_code, type: text, required: true, format: postal_code }
+      # Many sellers here don't know their postal code by heart; the city is enough.
+      - { id: postal_code, type: text, format: postal_code }
 
   - id: vin
     skippable: true
