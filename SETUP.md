@@ -73,9 +73,14 @@ happens between the person and the business later, everything keeps working.
 Check what is installed and install what is missing (ask first):
 
 - **git**: `git --version`. On macOS, `xcode-select --install` provides it.
-- **Python 3.12**: `python3.12 --version` (Windows: `py -3.12 --version`).
-  macOS: `brew install python@3.12`; Windows: `winget install Python.Python.3.12`;
-  Linux: the distribution's package or python.org.
+- **Python 3.12, through uv**: `uv --version`. If it is missing, install it
+  with Astral's own installer (the makers of uv; it goes into the person's
+  home folder and asks for no admin password), then open a new shell:
+  `curl -LsSf https://astral.sh/uv/install.sh | sh`. uv fetches Python 3.12
+  by itself below, so nothing else is needed. Only if uv can't be installed:
+  Python 3.12 from https://www.python.org/downloads/ (on Linux, the
+  distribution's `python3.12` package), and `python3.12 -m venv .venv` below
+  instead of the `uv venv` line.
 - **Railway CLI**: `railway --version`. macOS: `brew install railway`; with
   Node.js on any system: `npm install -g @railway/cli`; macOS/Linux without
   either: `bash <(curl -fsSL cli.new)`.
@@ -90,11 +95,11 @@ cd ~/car-buyout
 git checkout "$(git tag --list 'v*' --sort=-v:refname | head -n 1)"
 ```
 
-Then the Python environment (Windows: `.venv\Scripts\python` instead of
-`.venv/bin/python` here and below):
+Then the Python environment. `--seed` puts pip into it, which installing and
+updating use:
 
 ```bash
-python3.12 -m venv .venv
+uv venv --python 3.12 --seed .venv
 .venv/bin/python -m pip install -r requirements.txt
 ```
 
