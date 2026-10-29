@@ -194,10 +194,12 @@ class LeadEvent(Base):
 class OwnerAccount(Base):
     """The single owner login of this instance (one row, id 1).
 
-    The password starts as OWNER_PASSWORD and can be changed in the
-    dashboard. The hash of the environment value is kept separately: when
-    OWNER_PASSWORD is changed and the app restarted, the dashboard password is
-    reset to it, which is the way back in after a forgotten password.
+    The password starts as OWNER_PASSWORD, and the dashboard asks the owner to
+    replace it at the first sign-in: while both hashes are the same, the
+    password is the one that was handed over (app/services/auth.py). The hash
+    of the environment value is kept separately: when OWNER_PASSWORD is changed
+    and the app restarted, the dashboard password is reset to it, which is the
+    way back in after a forgotten password.
     """
 
     __tablename__ = "owner_account"

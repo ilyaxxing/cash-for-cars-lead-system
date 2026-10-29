@@ -1,8 +1,11 @@
 """The owner's password and signed-in devices.
 
-One owner per instance. The password starts as OWNER_PASSWORD; changing it
-in the dashboard signs every other device out. Changing OWNER_PASSWORD and
-restarting resets the dashboard password to it.
+One owner per instance. The password starts as OWNER_PASSWORD, which whoever
+set the system up has seen and often left in a chat history. So it opens the
+dashboard once: until the owner sets a password of their own, nothing but
+that change is allowed. Changing it signs every other device out. Changing
+OWNER_PASSWORD and restarting resets the dashboard password to it, signs
+every device out, and asks for an own password again.
 
 Sessions last a year and are extended on use: the dashboard is installed on
 the owner's phone and must keep receiving leads without asking to sign in.
@@ -71,6 +74,15 @@ async def ensure_account(session: AsyncSession, env_password: str, now: datetime
     return account
 
 
+def uses_given_password(account: OwnerAccount | None) -> bool:
+    """Whether the dashboard password is still OWNER_PASSWORD, as handed over."""
+    return account is None or account.password_hash == account.env_password_hash
+
+
+async def must_change_password(session: AsyncSession) -> bool:
+    return uses_given_password(await session.get(OwnerAccount, 1))
+
+
 async def check_password(
     session: AsyncSession, env_password: str, password: str, now: datetime
 ) -> bool:
@@ -131,13 +143,19 @@ async def change_password(
     keep_token: str,
     now: datetime,
 ) -> str | None:
-    """Change the password. Returns an error code, or None on success."""
+    """Change the password. Returns an error code, or None on success.
+
+    Replacing the password that was handed over needs no current password:
+    the owner has just signed in with it.
+    """
     account = await ensure_account(session, env_password, now)
-    if not _verify(account.password_hash, current):
+    if not uses_given_password(account) and not _verify(account.password_hash, current):
         return "wrong_current"
     problem = password_problem(current, new)
     if problem:
         return problem
+    if _verify(account.env_password_hash, new):
+        return "given"
     account.password_hash = hasher.hash(new)
     account.password_changed_at = now
     await session.execute(delete(OwnerSession).where(OwnerSession.id != _token_id(keep_token)))

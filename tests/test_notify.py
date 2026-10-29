@@ -14,7 +14,7 @@ from app.notify import push as push_module
 from app.notify.push import PushChannel, allowed_endpoint
 from app.notify.registry import UnknownChannel, create_channels
 from app.services.leads import create_lead, submit
-from tests.conftest import make_settings, vapid_keys
+from tests.conftest import make_settings, sign_in, vapid_keys
 from tests.test_answers import COMPLETE
 
 MESSAGES = load_messages(BASE_DIR / "locales", "en")
@@ -270,7 +270,7 @@ def test_malformed_vapid_keys_are_rejected():
 @pytest.fixture
 async def owner(client_for):
     client = client_for(owner_password=PASSWORD, **KEYS)
-    await client.post("/api/auth/login", json={"password": PASSWORD})
+    await sign_in(client, PASSWORD)
     return client
 
 

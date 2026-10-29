@@ -2,6 +2,7 @@ import pytest
 
 from app.services import auth
 from app.services.ratelimit import RateLimiter
+from tests.conftest import OWN_PASSWORD, sign_in
 
 pytestmark = pytest.mark.usefixtures("clean_db")
 
@@ -74,16 +75,38 @@ async def test_password_change_signs_out_other_devices(client_for):
     ("current", "new", "error"),
     [
         ("wrong", "brand-new-7", "wrong_current"),
-        (PASSWORD, "short1", "weak"),
-        (PASSWORD, "no-digits-here", "weak"),
-        (PASSWORD, PASSWORD, "same"),
+        (OWN_PASSWORD, "short1", "weak"),
+        (OWN_PASSWORD, "no-digits-here", "weak"),
+        (OWN_PASSWORD, OWN_PASSWORD, "same"),
+        # The password that was handed over never comes back.
+        (OWN_PASSWORD, PASSWORD, "given"),
     ],
 )
 async def test_password_rules(client, current, new, error):
-    await login(client)
+    await sign_in(client, PASSWORD)
     response = await client.post("/api/auth/password", json={"current": current, "new": new})
     assert response.status_code == 422
     assert response.json() == {"error": error}
+
+
+async def test_the_password_handed_over_opens_only_the_password_change(client):
+    response = await login(client)
+    assert response.json() == {"ok": True, "mustChangePassword": True}
+    assert (await client.get("/api/auth/me")).json()["mustChangePassword"] is True
+    for path in ("/api/owner/leads", "/api/owner/stats", "/api/owner/push"):
+        response = await client.get(path)
+        assert response.status_code == 403
+        assert response.json() == {"detail": "password_change_required"}
+
+    # No current password asked: the owner has just signed in with it.
+    for new, error in (("short1", "weak"), (PASSWORD, "given")):
+        response = await client.post("/api/auth/password", json={"new": new})
+        assert response.json() == {"error": error}
+    assert (await client.post("/api/auth/password", json={"new": OWN_PASSWORD})).status_code == 200
+    assert (await client.get("/api/auth/me")).json()["mustChangePassword"] is False
+    assert (await client.get("/api/owner/leads")).status_code == 200
+    assert (await login(client, PASSWORD)).status_code == 401
+    assert (await login(client, OWN_PASSWORD)).json() == {"ok": True, "mustChangePassword": False}
 
 
 async def test_changing_owner_password_env_resets_the_dashboard_password(client_for):
@@ -94,8 +117,19 @@ async def test_changing_owner_password_env_resets_the_dashboard_password(client_
     # The owner forgot the new password; the operator sets a fresh one in .env.
     restarted = client_for(owner_password="fresh-start-2")
     assert (await login(restarted, "forgotten-1")).status_code == 401
-    assert (await login(restarted, "fresh-start-2")).status_code == 200
+    # The fresh one is handed over too, so it asks for an own password again.
+    assert (await login(restarted, "fresh-start-2")).json()["mustChangePassword"] is True
+    assert (await restarted.get("/api/owner/leads")).status_code == 403
     assert (await first.get("/api/auth/me")).status_code == 401
+
+
+async def test_a_reset_signs_every_device_out_when_the_app_restarts(client_for):
+    phone = client_for(owner_password=PASSWORD)
+    await sign_in(phone, PASSWORD)
+    # The same phone after a deploy with a new OWNER_PASSWORD, before anyone signs in.
+    restarted = client_for(owner_password="fresh-start-2")
+    restarted.cookies = phone.cookies
+    assert (await restarted.get("/api/owner/leads")).status_code == 401
 
 
 async def test_cross_site_posts_are_refused(client):

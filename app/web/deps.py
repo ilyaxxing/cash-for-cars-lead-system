@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import ipaddress
 from collections.abc import AsyncIterator
 from typing import Annotated
@@ -46,15 +47,33 @@ def client_ip(request: Request) -> str:
     return request.client.host if request.client else "unknown"
 
 
-async def owner_session(
+async def signed_in_session(
+    request: Request,
     session: Session,
     session_token: Annotated[str | None, Cookie(alias=SESSION_COOKIE)] = None,
 ) -> OwnerSession:
+    """A signed-in device, whatever its password; for sign-in and password change."""
+    if not request.app.state.owner_checked:
+        # Once per start: a new OWNER_PASSWORD resets the dashboard password
+        # and signs every device out right away, not at the next sign-in.
+        with contextlib.suppress(auth.PasswordNotConfigured):
+            await auth.ensure_account(session, request.app.state.settings.owner_password, utcnow())
+        request.app.state.owner_checked = True
     if not session_token:
         raise HTTPException(status_code=401)
     record = await auth.resume_session(session, session_token, utcnow())
     if record is None:
         raise HTTPException(status_code=401)
+    return record
+
+
+SignedIn = Annotated[OwnerSession, Depends(signed_in_session)]
+
+
+async def owner_session(record: SignedIn, session: Session) -> OwnerSession:
+    """A signed-in owner who has replaced the password that was handed over."""
+    if await auth.must_change_password(session):
+        raise HTTPException(status_code=403, detail="password_change_required")
     return record
 
 

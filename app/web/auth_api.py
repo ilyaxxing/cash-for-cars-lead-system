@@ -11,7 +11,7 @@ from pydantic import BaseModel
 from app.services import auth
 from app.services.leads import utcnow
 from app.services.ratelimit import RateLimiter
-from app.web.deps import SESSION_COOKIE, Owner, Session, client_ip
+from app.web.deps import SESSION_COOKIE, Session, SignedIn, client_ip
 
 router = APIRouter(prefix="/api/auth")
 
@@ -25,7 +25,8 @@ class LoginBody(BaseModel):
 
 
 class PasswordBody(BaseModel):
-    current: str
+    # Empty when replacing the password that was handed over (auth.change_password).
+    current: str = ""
     new: str
 
 
@@ -56,7 +57,8 @@ async def login(body: LoginBody, request: Request, session: Session) -> Response
         return JSONResponse({"error": "wrong_password"}, status_code=401)
     login_attempts.reset(ip)
     token = await auth.start_session(session, request.headers.get("user-agent"), utcnow())
-    response = JSONResponse({"ok": True})
+    must_change = await auth.must_change_password(session)
+    response = JSONResponse({"ok": True, "mustChangePassword": must_change})
     set_session_cookie(response, request, token)
     return response
 
@@ -74,15 +76,19 @@ async def logout(
 
 
 @router.get("/me")
-async def me(owner: Owner, session: Session) -> dict[str, Any]:
+async def me(owner: SignedIn, session: Session) -> dict[str, Any]:
     changed = await auth.password_changed_at(session)
-    return {"authenticated": True, "passwordChangedAt": changed.isoformat() if changed else None}
+    return {
+        "authenticated": True,
+        "mustChangePassword": await auth.must_change_password(session),
+        "passwordChangedAt": changed.isoformat() if changed else None,
+    }
 
 
 @router.post("/password")
 async def change_password(
     body: PasswordBody,
-    owner: Owner,
+    owner: SignedIn,
     request: Request,
     session: Session,
     session_token: Annotated[str | None, Cookie(alias=SESSION_COOKIE)] = None,

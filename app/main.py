@@ -105,6 +105,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.state.channels = channels
     app.state.wake_outbox = outbox_wakeup.set
     app.state.storage = storage
+    # Set by the first signed-in request (app.web.deps), once OWNER_PASSWORD is checked.
+    app.state.owner_checked = False
 
     app.include_router(health.router)
     app.include_router(seller_api.router)
