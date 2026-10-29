@@ -75,8 +75,9 @@ Set up https://github.com/ilyaxxing/cash-for-cars-lead-system for my client.
 
 Claude asks about the business, deploys it, connects the owner's phone and
 makes the card and the QR codes. It tells you when a step needs a person:
-signing in, payment, the domain's DNS settings. About an hour once the
-accounts and the domain are ready.
+signing in, payment, the domain's DNS settings. About an hour for the setup
+itself once the accounts are ready; handing the project over to the business
+and the domain's DNS can take up to a day.
 
 - **You bring** Claude Code, which needs a paid Claude plan (Pro or higher)
   or an Anthropic API account, and your own [Railway](https://railway.com)

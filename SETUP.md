@@ -48,8 +48,10 @@ server, without changing its code.
 
 Tell the person briefly what they will need:
 
-1. This computer: a Mac or a Linux computer; on Windows, WSL (step 1). For
-   about an hour the first time.
+1. This computer: a Mac or a Linux computer; on Windows, WSL (step 1).
+   About an hour for the setup itself, once the accounts are ready; handing
+   the project over to the business and the domain's DNS can take up to a
+   day.
 2. Facts about the business (asked in step 3); they can ask the client as you go.
 3. Two Railway accounts, each on the Hobby plan ($5 a month, with a payment
    card): their own, where the instance is built and tested, and the
