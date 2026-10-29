@@ -45,7 +45,8 @@ export interface DemoCountry {
   phones: string[]
   cars: [string, string][]
   names: string[]
-  cities: [string, string][]
+  // A city, with its postal code where the country's form asks for one.
+  cities: ([string] | [string, string])[]
 }
 
 const HOUR = 36e5
@@ -179,7 +180,8 @@ export function seed(now: Date, country: DemoCountry): DemoData {
           accident: pick(['no', 'no', 'yes', 'unknown']),
           finance: pick(['no', 'no', 'yes']),
           ...(hasPrice ? { asking_price: (25 + Math.floor(random() * 300)) * 100 } : {}),
-          location, postal_code: postal,
+          location,
+          ...(postal ? { postal_code: postal } : {}),
           name: pick(country.names),
           phone: pick(country.phones),
           contact_method: pick(['call', 'call', 'sms', 'whatsapp']),

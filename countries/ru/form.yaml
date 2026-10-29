@@ -12,7 +12,6 @@ id: ru-car-buyout
 version: 1
 distance_unit: km
 phone_region: RU
-postal_code_pattern: '\d{6}'
 
 steps:
   - id: vehicle
@@ -131,13 +130,12 @@ steps:
     fields:
       - { id: asking_price, type: number, unit: currency, min: 1000, max: 50000000 }
 
+  # The city is enough: many sellers here don't know their postal code.
   - id: location
     skippable: true
     note: icon
     fields:
       - { id: location, type: text, required: true, max_length: 128 }
-      # Many sellers here don't know their postal code by heart; the city is enough.
-      - { id: postal_code, type: text, format: postal_code }
 
   - id: vin
     skippable: true
