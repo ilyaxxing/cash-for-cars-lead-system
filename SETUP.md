@@ -447,6 +447,24 @@ runs. Everything country-specific goes into the business's own files in
 `clients/<id>/`, next to its settings, never into `presets/` or `locales/`:
 then a new release applies to every client without conflicts.
 
+**Start from `countries/` when the country is there.** For these countries
+and languages the files are already made: `us-es` (the United States in
+Spanish), `ca` and `ca-fr` (Canada in English and in French), `br` (Brazil),
+`ru` (Russia), `gb` (the United Kingdom), `de` (Germany), `fr` (France), `es`
+(Spain) and `pl` (Poland). Each folder has `settings.env`, the country's
+lines for the settings file, and where the shipped files don't fit,
+`texts.json`, `form.yaml` and `policy.md`. Copy those three into
+`clients/<id>/`, add the lines of `settings.env` to the business's settings
+file with the paths changed to `clients/<id>/...`, and leave `demo.yaml`: it
+is only for the demo. Then go through the list below to check the files with
+the business rather than to write them: the questions, how sellers like to
+be reached, the card's size, where it runs. Say plainly that the texts were
+written without a native speaker's review: read the form back with the
+person, in the sellers' language, before the owner sees it. The policies are
+drafts for the business's lawyer. For a country not in the list, the folder
+nearest to it (the same language, or the same law, such as the GDPR in the
+EU) is still a better start than the US files.
+
 Go through the list below for the business's country. For each point, use
 what you know and look up what you are not sure of (a web search, when you
 have one): the country's rules change, and a wrong guess ends up printed on
@@ -529,6 +547,14 @@ provider's server backups if it offers them, or copy a dump off now and then
   to add, drop or change: in Russia, for example, the vehicle title (ПТС,
   original or duplicate), the number of owners, and whether the car is
   pledged (залог). Car makes common there go into the make suggestions.
+  Ask what a seller might not know offhand, and make that optional or drop
+  it: in Russia the title and the owners are a step the seller may skip, and
+  the form asks for the city alone (few know their postal code); elsewhere
+  outside the US the postal code is optional. Where buyers look a car up by
+  its number plate rather than the VIN (the UK, France, Spain, Brazil), the
+  form asks for the plate (`registration`), marked `personal: true`: a
+  registry ties a plate to its owner, so it is erased with the contact
+  details.
 - **How sellers like to be reached**: in Russia Telegram is common, so add
   it to the contact methods (see point 1 for others).
 - **The card's size** print shops there use (`CARD_SIZE`): `3.5x2in` in the

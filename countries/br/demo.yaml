@@ -1,0 +1,74 @@
+# The demo for this country (tools/make_demo.py, tools/make_buyer_site.py):
+# a fictional business, its leads and the page sent to a car buyer. Nothing
+# here goes into a client's instance. Brazil has no range of numbers kept
+# for fiction, so the phones are made of digits in a row (tools/pii_scan.py).
+
+# In the link maker on the project page: the country in English, the language in its own words.
+label: Brazil · Português
+lang: pt
+
+business:
+  brand_name: Venda Já
+  brand_phone: (11) 91234-5678
+  operator_name: Exemplo Automóveis Ltda.
+  operator_email: privacidade@example.com
+  operator_address: Rua Exemplo, 100, São Paulo, SP, 01310-100
+  policy_effective_date: 1º de outubro de 2026
+  public_url: https://buy.example.com
+  card_contact: Rafael
+
+calls_off: Na demo, ligações e mensagens estão desativadas.
+policy_note: Uma política de exemplo para uma empresa fictícia. Para uma real, ela é escrita conforme a lei do país e revisada pelo advogado da empresa.
+price_scale: 5
+price_step: 500
+
+featured:
+  - {make: Kia, model: Optima, location: São Paulo, postal_code: 04538-132, name: Rafael Oliveira}
+  - {make: Hyundai, model: Creta, location: Guarulhos, postal_code: 07010-000, name: Juliana Santos, email: juliana@example.com, finance_details: Faltam umas 18 parcelas de R$ 1.200.}
+  - {make: Hyundai, model: HB20, location: Osasco, postal_code: 06010-000, name: Bruno Costa, accident_details: Batida na frente no começo do ano. Ainda anda.}
+  - {make: Chevrolet, model: S10, location: Santo André, postal_code: 09010-000, name: Fernanda Lima, note: 'Liguei para o vendedor, vistoria na quinta.'}
+  - {make: Chevrolet, model: Spin, location: São Paulo, postal_code: 03310-000, name: Marcelo Pereira, email: marcelo@example.com, note: 'Ofereci R$ 5.000 a menos; ele vai pensar.'}
+  - {make: Toyota, model: Corolla, location: São Bernardo do Campo, postal_code: 09710-000, name: Patrícia Alves, note: 'Guinchado no sábado, pago à vista.'}
+phones: ['+5511912345678', '+5512912345678', '+5513912345678', '+5515912345678', '+5519912345678', '+5511923456789', '+5513923456789', '+5519923456789']
+
+cars: [[Fiat, Strada], [Fiat, Argo], [Fiat, Mobi], [Volkswagen, Gol], [Volkswagen, Polo], [Volkswagen, T-Cross], [Chevrolet, Onix], [Chevrolet, Tracker], [Hyundai, HB20], [Toyota, Corolla], [Renault, Kwid], [Jeep, Renegade], [Honda, HR-V], [Nissan, Kicks]]
+names: [Ana Souza, Lucas Silva, Mariana Rodrigues, Pedro Ferreira, Camila Gomes, Gabriel Martins, Beatriz Ribeiro, Rodrigo Carvalho, Larissa Almeida, Thiago Araújo, Aline Barbosa, Diego Rocha]
+cities: [[São Paulo, 01310-100], [Barueri, 06401-000], [Diadema, 09910-000], [Mauá, 09310-000]]
+
+page:
+  title: Venda Já · Pedidos vindos dos seus cartões
+  description: 'Uma demo que funciona: o formulário que o vendedor preenche depois de escanear seu cartão, e o app onde o pedido chega com uma notificação.'
+  badge: Demo
+  kicker_hero: Para quem compra carros usados
+  h1: Cada cartão no para-brisa <em>pode trazer um vendedor.</em>
+  lead: Muita gente que nunca ligaria para um desconhecido escaneia um código sem pensar. Responde algumas perguntas no celular em poucos minutos, e você recebe uma notificação com o carro, o preço e as fotos, pronto para a primeira ligação.
+  try_button: Experimente ↓
+  card_front_alt: 'Um cartão de exemplo, frente: Compramos seu carro, com um QR code'
+  card_back_alt: 'Um cartão de exemplo, verso: o que compramos, o QR code de novo e o telefone'
+  card_caption: Um cartão de exemplo. O seu leva seu nome, seu telefone e sua cor.
+  kicker_demo: Demo ao vivo
+  h2_demo: Seja o vendedor. Depois, o comprador.
+  sub_demo: No primeiro celular, responda como alguém que achou seu cartão. Assim que o contato é preenchido, o pedido chega ao segundo celular com uma notificação. Toque nela, mude o status, adicione uma anotação.
+  seller_frame_title: O formulário do vendedor, uma demo que funciona
+  seller_title: O vendedor
+  seller_caption: Achou seu cartão e escaneou. Sem app, sem cadastro.
+  buyer_frame_title: Seu app, uma demo que funciona
+  buyer_title: Você
+  buyer_caption: Uma notificação em segundos e um toque para ligar.
+  demo_note: Uma demo que funciona, com pedidos inventados e fotos de carros geradas por IA. Nada do que você digita sai desta página.
+  start_over: Começar de novo
+  kicker_get: O que você recebe
+  h2_get: Tudo entre o cartão e a ligação.
+  p1_title: Cartões com o seu QR code
+  p1_text: Um arquivo pronto para imprimir nas suas cores, para qualquer gráfica. Cada ponto pode ter o seu código, assim você vê quais cartões e quais regiões trazem carros.
+  p2_title: Um formulário que o vendedor termina
+  p2_text: Uma pergunta por tela, sem app nem cadastro, fotos direto do celular. Um formulário parado no meio espera por ele uma semana.
+  p3_title: Uma notificação em segundos
+  p3_text: O carro, o preço e as fotos no seu celular. O nome e o número do vendedor nunca aparecem na tela bloqueada.
+  p4_title: Todos os pedidos num app
+  p4_text: Novos, em andamento, comprados, recusados. Anotações, um toque para ligar ou chamar no WhatsApp, e estatísticas do que traz carros.
+  kicker_yours: Seu
+  h2_yours: Seu nome, suas cores, seu endereço.
+  sub_yours: O formulário, o app e os cartões levam o nome, a cor e o logo da sua empresa, no seu próprio endereço na web. Tudo roda na sua própria conta, e os pedidos são seus. Os dados pessoais dos vendedores são apagados sozinhos 90 dias depois que o negócio é encerrado.
+  footer: Dúvidas? Fale com quem mandou este link.
+  toast: Novo pedido no seu celular ↓

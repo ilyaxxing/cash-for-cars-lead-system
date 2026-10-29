@@ -1,0 +1,83 @@
+# The demo for this country (tools/make_demo.py, tools/make_buyer_site.py):
+# a fictional business, its leads and the page sent to a car buyer. Nothing
+# here goes into a client's instance. Phone numbers are fictional (555-01xx).
+
+# In the link maker on the project page: the country in English, the language in its own words.
+label: United States · English
+lang: en
+
+# The made-up business the demo pages name, and the contact on its sample card.
+business:
+  brand_name: Car Buyout
+  brand_phone: (512) 555-0100
+  operator_name: Example Auto LLC
+  operator_email: privacy@example.com
+  operator_address: 100 Example St, Austin, TX 78701
+  policy_effective_date: October 1, 2026
+  public_url: https://buy.example.com
+  card_contact: Mike
+
+# Shown instead of dialing when a visitor taps Call or a messenger in the demo.
+calls_off: In the demo, calls and messages are turned off.
+# Shown at the top of the demo's privacy policy.
+policy_note: A sample policy for a made-up business. For a real one it is written for its country's law and checked by its lawyer.
+# Prices below are in US dollars; this converts them, rounded to price_step.
+price_scale: 1
+price_step: 100
+
+# The six leads with photos, newest first, in the order of frontend/src/demo/seed.ts:
+# what each seller wrote, any of this country's own questions too, and a note.
+featured:
+  - {make: Kia, model: Optima, location: Austin, postal_code: '78704', name: Jordan Reyes, vin: 5XXGT4L32HG123456}
+  - {make: Hyundai, model: Kona, location: Round Rock, postal_code: '78664', name: Avery Brooks, email: avery@example.com, finance_details: About $6,000 left on the loan.}
+  - {make: Hyundai, model: Accent, location: Pflugerville, postal_code: '78660', name: Casey Hayes, accident_details: Front-end collision last spring. It still drives.}
+  - {make: Ford, model: F-150, location: Cedar Park, postal_code: '78613', name: Morgan Price, vin: 1FTEW1EF5GFA12345, note: 'Called the seller, viewing booked for Thursday.'}
+  - {make: Honda, model: Odyssey, location: Austin, postal_code: '78745', name: Taylor Ellis, email: taylor@example.com, note: 'Offered 1,500 under asking; seller is thinking it over.'}
+  - {make: Hyundai, model: Genesis, location: Austin, postal_code: '78723', name: Riley Grant, note: 'Towed on Saturday, paid in cash.'}
+phones: ['+15125550142', '+15125550117', '+15125550163', '+15125550128', '+15125550189', '+15125550104', '+15125550131', '+15125550175']
+
+# The older leads without photos.
+cars: [[Toyota, Camry], [Toyota, RAV4], [Ford, Escape], [Chevrolet, Silverado], [Honda, Civic], [Honda, CR-V], [Nissan, Altima], [Jeep, Wrangler], [Kia, Sorento], [Subaru, Outback], [Ram, '1500'], [Mazda, CX-5], [Chevrolet, Malibu], [Toyota, Corolla]]
+names: [Jordan Lee, Taylor Parker, Morgan Reed, Casey Brooks, Riley Hayes, Avery Price, Quinn Ellis, Jamie Grant, Drew Shaw, Sam Cole, Alex Kim, Chris Ward]
+cities: [[Austin, '78701'], [Round Rock, '78681'], [San Marcos, '78666'], [Georgetown, '78626']]
+# A country whose form asks questions of its own answers them for these leads
+# under extra: one list of values per field (countries/ru/demo.yaml).
+
+# The page for car buyers (buyer-site/index.html). h1 may hold an <em>.
+page:
+  title: Car Buyout · Leads from your windshield cards
+  description: 'A working demo: the form a seller fills in after scanning your card, and the app where the lead arrives with a push.'
+  badge: Demo
+  kicker_hero: For cash-for-cars buyers
+  h1: Every card under a wiper <em>can bring you a seller.</em>
+  lead: Many people who would never call a stranger will scan a code. They answer a few questions on their phone in a few minutes, and you get a push with the car, the price and photos, ready for the first call.
+  try_button: Try it yourself ↓
+  card_front_alt: 'A sample card, front: We buy any car, with a QR code'
+  card_back_alt: 'A sample card, back: what is bought, the QR code again and the phone number'
+  card_caption: A sample card. Yours carries your name, phone and color.
+  kicker_demo: Live demo
+  h2_demo: Be the seller. Then be the buyer.
+  sub_demo: On the first phone, answer as someone who found your card would. The moment the contact details are in, the lead lands on the second phone with a push. Tap it, change the status, add a note.
+  seller_frame_title: The seller's form, a working demo
+  seller_title: The seller
+  seller_caption: Found your card, scanned it. No app, no account.
+  buyer_frame_title: Your app, a working demo
+  buyer_title: You
+  buyer_caption: A push within seconds, then one tap to call.
+  demo_note: A working demo with made-up leads and AI-generated car photos. Nothing you type leaves this page.
+  start_over: Start over
+  kicker_get: What you get
+  h2_get: Everything between the card and the call.
+  p1_title: Cards with your QR code
+  p1_text: A print-ready file in your colors for any print shop. Each placement can get its own code, so you see which cards and spots bring cars.
+  p2_title: A form sellers finish
+  p2_text: One question per screen, no app, no account, photos straight from the phone. A form left halfway waits for them for a week.
+  p3_title: A push in seconds
+  p3_text: The car, the price and the photos on your phone. The seller's name and number never show on the lock screen.
+  p4_title: Every lead in one app
+  p4_text: New, in progress, purchased, rejected. Notes, one tap to call or message, and statistics on what brings cars.
+  kicker_yours: Yours
+  h2_yours: Your name, your colors, your address.
+  sub_yours: The form, the app and the cards carry your business's name, color and logo, at your own web address. It runs on your own account, and the leads belong to you. Sellers' personal details are deleted automatically 90 days after a deal is closed.
+  footer: Questions? Ask the person who sent you this link.
+  toast: New lead on your phone ↓

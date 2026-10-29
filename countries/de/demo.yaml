@@ -1,0 +1,74 @@
+# The demo for this country (tools/make_demo.py, tools/make_buyer_site.py):
+# a fictional business, its leads and the page sent to a car buyer. Nothing
+# here goes into a client's instance. Germany has no range of numbers kept
+# for fiction, so the phones are made of digits in a row (tools/pii_scan.py).
+
+# In the link maker on the project page: the country in English, the language in its own words.
+label: Germany · Deutsch
+lang: de
+
+business:
+  brand_name: Autoankauf Sofort
+  brand_phone: 0151 23456789
+  operator_name: Beispiel Auto GmbH
+  operator_email: datenschutz@example.com
+  operator_address: Beispielstraße 1, 50667 Köln
+  policy_effective_date: 1. Oktober 2026
+  public_url: https://buy.example.com
+  card_contact: Stefan
+
+calls_off: In der Demo sind Anrufe und Nachrichten ausgeschaltet.
+policy_note: Eine Beispiel-Erklärung für ein erfundenes Unternehmen. Für ein echtes wird sie nach dem Recht seines Landes verfasst und von seinem Anwalt geprüft.
+price_scale: 0.95
+price_step: 100
+
+featured:
+  - {make: Kia, model: Optima, location: Köln, postal_code: '50733', name: Stefan Müller, vin: KNAGT41BBH5012345}
+  - {make: Hyundai, model: Kona, location: Leverkusen, postal_code: '51373', name: Julia Schneider, email: julia@example.com, finance_details: Beim Kredit sind noch etwa 6.000 € offen.}
+  - {make: Volkswagen, model: Polo, location: Bonn, postal_code: '53111', name: Michael Fischer, accident_details: Frontschaden im letzten Frühjahr. Fährt noch.}
+  - {make: Ford, model: Ranger, location: Bergisch Gladbach, postal_code: '51465', name: Sabine Weber, vin: WF0LXXTTGLHA12345, note: 'Verkäufer angerufen, Besichtigung am Donnerstag.'}
+  - {make: Opel, model: Zafira, location: Köln, postal_code: '50937', name: Thomas Wagner, email: thomas@example.com, note: '1.500 € unter Preisvorstellung angeboten; er überlegt.'}
+  - {make: Hyundai, model: Genesis, location: Hürth, postal_code: '50354', name: Petra Becker, note: 'Am Samstag abgeschleppt, bar bezahlt.'}
+phones: ['+4915123456780', '+4915123456781', '+4915123456782', '+4915123456783', '+4915123456784', '+4915123456785', '+4915123456786', '+4915123456787']
+
+cars: [[Volkswagen, Golf], [Volkswagen, Passat], [Volkswagen, Tiguan], [Mercedes-Benz, C-Klasse], [BMW, 3er], [Audi, A4], [Audi, A3], [Opel, Corsa], [Opel, Astra], [Ford, Focus], [Škoda, Octavia], [Seat, Leon], [Toyota, Yaris], [Hyundai, i30]]
+names: [Anna Schmidt, Lukas Hoffmann, Laura Schulz, Jonas Koch, Lea Richter, Felix Klein, Sarah Wolf, Paul Schröder, Lena Neumann, Tim Schwarz, Katharina Braun, Jan Zimmermann]
+cities: [[Köln, '50667'], [Pulheim, '50259'], [Frechen, '50226'], [Brühl, '50321']]
+
+page:
+  title: Autoankauf Sofort · Anfragen über Ihre Visitenkarten
+  description: 'Eine funktionierende Demo: das Formular, das ein Verkäufer nach dem Scannen Ihrer Karte ausfüllt, und die App, in der die Anfrage per Push ankommt.'
+  badge: Demo
+  kicker_hero: Für Autoankäufer
+  h1: Jede Karte unterm Scheibenwischer <em>kann Ihnen einen Verkäufer bringen.</em>
+  lead: Viele, die nie einen Fremden anrufen würden, scannen gern einen Code. Sie beantworten in wenigen Minuten ein paar Fragen auf dem Handy, und Sie bekommen eine Push-Meldung mit Auto, Preis und Fotos, bereit für den ersten Anruf.
+  try_button: Selbst ausprobieren ↓
+  card_front_alt: 'Eine Beispielkarte, Vorderseite: Wir kaufen Ihr Auto, mit QR-Code'
+  card_back_alt: 'Eine Beispielkarte, Rückseite: was wir kaufen, noch einmal der QR-Code und die Telefonnummer'
+  card_caption: Eine Beispielkarte. Ihre trägt Ihren Namen, Ihre Nummer und Ihre Farbe.
+  kicker_demo: Live-Demo
+  h2_demo: Seien Sie der Verkäufer. Dann der Käufer.
+  sub_demo: Antworten Sie auf dem ersten Handy so, wie jemand, der Ihre Karte gefunden hat. Sobald die Kontaktdaten drin sind, landet die Anfrage per Push auf dem zweiten Handy. Tippen Sie darauf, ändern Sie den Status, fügen Sie eine Notiz hinzu.
+  seller_frame_title: Das Formular des Verkäufers, eine funktionierende Demo
+  seller_title: Der Verkäufer
+  seller_caption: Hat Ihre Karte gefunden und gescannt. Ohne App, ohne Konto.
+  buyer_frame_title: Ihre App, eine funktionierende Demo
+  buyer_title: Sie
+  buyer_caption: Eine Push-Meldung in Sekunden, dann ein Tipp zum Anrufen.
+  demo_note: Eine funktionierende Demo mit erfundenen Anfragen und KI-generierten Autofotos. Nichts, was Sie eingeben, verlässt diese Seite.
+  start_over: Neu starten
+  kicker_get: Was Sie bekommen
+  h2_get: Alles zwischen der Karte und dem Anruf.
+  p1_title: Karten mit Ihrem QR-Code
+  p1_text: Eine druckfertige Datei in Ihren Farben für jede Druckerei. Jeder Standort kann einen eigenen Code bekommen, so sehen Sie, welche Karten und Gegenden Autos bringen.
+  p2_title: Ein Formular, das Verkäufer zu Ende bringen
+  p2_text: Eine Frage pro Bildschirm, ohne App und Konto, Fotos direkt vom Handy. Ein halb ausgefülltes Formular wartet eine Woche auf sie.
+  p3_title: Eine Push-Meldung in Sekunden
+  p3_text: Auto, Preis und Fotos auf Ihrem Handy. Name und Nummer des Verkäufers erscheinen nie auf dem Sperrbildschirm.
+  p4_title: Alle Anfragen in einer App
+  p4_text: Neu, in Bearbeitung, gekauft, abgelehnt. Notizen, ein Tipp zum Anrufen oder Schreiben und eine Statistik, was Ihnen Autos bringt.
+  kicker_yours: Ihres
+  h2_yours: Ihr Name, Ihre Farben, Ihre Adresse.
+  sub_yours: Formular, App und Karten tragen Namen, Farbe und Logo Ihres Unternehmens, unter Ihrer eigenen Webadresse. Alles läuft in Ihrem eigenen Konto, und die Anfragen gehören Ihnen. Personenbezogene Daten der Verkäufer werden 90 Tage nach Abschluss automatisch gelöscht.
+  footer: Fragen? Wenden Sie sich an die Person, die Ihnen diesen Link geschickt hat.
+  toast: Neue Anfrage auf Ihrem Handy ↓

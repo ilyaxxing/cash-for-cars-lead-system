@@ -61,8 +61,6 @@ const NOTE_MAX_LENGTH = 1000
 const CLOSED: Status[] = ['bought', 'rejected']
 const STATUSES: Status[] = ['new', 'in_work', 'bought', 'rejected']
 const TABS: Record<Tab, Status[] | null> = { new: ['new'], in_work: ['in_work'], all: null }
-// The demo business's own placements (SOURCE_LABELS on a real instance).
-export const SOURCE_LABELS: Record<string, string> = { parking: 'Parking lot', flyer: 'Flyers' }
 
 type Handler = (match: RegExpMatchArray, query: URLSearchParams, body: Record<string, unknown>) => Reply
 
@@ -79,6 +77,8 @@ export class Backend {
     private readonly notify: (notice: Notice) => void,
     private readonly normalize: (answers: Record<string, Value>) => Record<string, Value> = (a) => a,
     private readonly now: () => Date = () => new Date(),
+    // The demo business's own placements (SOURCE_LABELS on a real instance).
+    private readonly sourceLabels: Record<string, string> = {},
   ) {
     this.t = createTranslator(config.messages)
     this.money = new Intl.NumberFormat(`${config.locale}-${config.preset.phone_region}`, {
@@ -418,7 +418,7 @@ export class Backend {
   }
 
   private sourceLabel(source: string): string {
-    if (source in SOURCE_LABELS) return SOURCE_LABELS[source]
+    if (source in this.sourceLabels) return this.sourceLabels[source]
     const label = this.t(`sources.${source}`)
     return label === `sources.${source}` ? this.t('sources.other') : label
   }

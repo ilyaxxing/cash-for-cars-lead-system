@@ -20,6 +20,7 @@ FLAGGED = [
     ("call me at (415) 867-5309", "phone number"),  # pii-allow
     ("+1 212 734 2291", "phone number"),  # pii-allow
     ("+7 916 123-45-67", "phone number"),  # pii-allow
+    ("call +7 916 123-45-67.", "phone number"),  # pii-allow
     ("write to someone@gmail.com", "email address"),  # pii-allow
     ("ssn 123-45-6789", "social security number"),  # pii-allow
     ("INN 7701234567", "tax identification number"),  # pii-allow
@@ -33,6 +34,10 @@ ALLOWED = [
     "released 2026-10-19 at 10:00 on port 5432",
     "price 21,500 and mileage 78,400",
     "build 1792420739013883",
+    "placeholder +7 912 345-67-89",
+    "for example +7 912 345-67-89.",
+    "demo +49 151 2345 6789 and +55 11 91234-5678",
+    "drama +44 7700 900123 and +33 1 99 00 12 34",
 ]
 
 

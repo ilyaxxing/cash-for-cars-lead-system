@@ -6,13 +6,15 @@
 // notifications over a BroadcastChannel. A demo link can name the business
 // it is shown to (?name=Rapid+Cash+Cars&color=ff8a00): the apps and the
 // policy then wear that name and color, as that business's instance would.
+// The country's part (its leads, the made-up business) comes from the page:
+// tools/make_demo.py writes countries/<code>/demo.yaml into it as #demo-data.
 
-import type { Value } from '../form/engine'
+import { RETURN_KEY, type Value } from '../form/engine'
 import type { AppConfig } from '../shared/config'
 import { normalizePhone } from '../shared/region'
 import { Backend, type DemoData, type Notice, type Reply } from './backend'
 import { business, wear, type Business } from './business'
-import { seed } from './seed'
+import { seed, type DemoCountry } from './seed'
 
 const CHANNEL = 'car-buyout-demo'
 const STORE = '__carBuyoutDemo'
@@ -20,8 +22,9 @@ const STORE = '__carBuyoutDemo'
 const FORM_DRAFT = 'car-buyout-inquiry'
 const ONBOARDED = 'dashboard-onboarded'
 const LATENCY_MS = 180
-// The fictional business tools/make_demo.py builds the pages for.
-const DEMO_NAMES = ['Example Auto LLC', 'Car Buyout']
+// Links the dashboard would hand to the phone: no real calls from a demo,
+// whose numbers are made up and may belong to someone outside North America.
+const DIALING = /^(tel:|sms:|mailto:)|^https:\/\/(wa\.me|api\.whatsapp\.com|t\.me)\//
 
 type Host = Window & { [STORE]?: DemoData }
 
@@ -35,10 +38,22 @@ function host(): Host {
   }
 }
 
-function sharedData(): DemoData {
+function readCountry(): DemoCountry {
+  return JSON.parse(document.getElementById('demo-data')!.textContent!) as DemoCountry
+}
+
+function sharedData(country: DemoCountry): DemoData {
   const top = host()
-  top[STORE] ??= seed(new Date())
+  top[STORE] ??= seed(new Date(), country)
   return top[STORE]
+}
+
+function returning(): boolean {
+  try {
+    return Boolean(window.sessionStorage.getItem(RETURN_KEY))
+  } catch {
+    return false
+  }
 }
 
 function storage(action: (store: Storage) => void) {
@@ -49,7 +64,7 @@ function storage(action: (store: Storage) => void) {
   }
 }
 
-function readConfig(visitor: Business): AppConfig {
+function readConfig(visitor: Business, isDashboard: boolean): AppConfig {
   const block = document.getElementById('app-config')!
   const config = JSON.parse(block.textContent!) as AppConfig
   if (visitor.name) {
@@ -58,9 +73,9 @@ function readConfig(visitor: Business): AppConfig {
     config.operator = visitor.name
   }
   if (visitor.colors) wear(visitor.colors)
-  // The policy sits next to the demo pages. An absolute address keeps the
-  // link working after the dashboard changes its path (/app/leads/42).
-  config.privacyUrl = new URL(/* @vite-ignore */ `../privacy.html${visitor.query}`, import.meta.url).href
+  // The policy sits next to the country's form. An absolute address, taken
+  // now, keeps the link working after the dashboard changes its path.
+  config.privacyUrl = new URL(`${isDashboard ? '../' : ''}privacy.html${visitor.query}`, location.href).href
   block.textContent = JSON.stringify(config)
   return config
 }
@@ -73,13 +88,14 @@ export function personalizePolicy() {
   const back = document.querySelector<HTMLAnchorElement>('header a')
   if (back) back.href = `index.html${visitor.query}`
   if (!visitor.name) return
+  const names = readCountry().business_names
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT)
   for (let node = walker.nextNode(); node; node = walker.nextNode()) {
     let text = node.nodeValue ?? ''
-    for (const demo of DEMO_NAMES) text = text.split(demo).join(visitor.name)
+    for (const demo of names) text = text.split(demo).join(visitor.name)
     node.nodeValue = text
   }
-  document.title = document.title.split(DEMO_NAMES[1]).join(visitor.name)
+  for (const demo of names) document.title = document.title.split(demo).join(visitor.name)
 }
 
 function respond(reply: Reply): Response {
@@ -194,7 +210,7 @@ function standInForPush(data: DemoData) {
   }
 }
 
-function showBanner(notice: Notice, post: (data: unknown) => void) {
+function showBanner(notice: Notice, post: (data: unknown) => void, now: string) {
   document.querySelector('.demo-banner')?.remove()
   const banner = document.createElement('button')
   banner.type = 'button'
@@ -202,12 +218,15 @@ function showBanner(notice: Notice, post: (data: unknown) => void) {
   banner.innerHTML = `
     <span class="demo-banner-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6.8v4.6c0 .5.2 1 .6 1.4l6.1 6.1c.8.8 2 .8 2.8 0l4.1-4.1c.8-.8.8-2 0-2.8l-6.1-6.1c-.4-.4-.9-.6-1.4-.6H6.8C5.8 5.3 5 6 5 6.8z" fill="var(--on-accent)"/><circle cx="8.4" cy="8.6" r="1.3" fill="var(--accent)"/></svg></span>
     <span class="demo-banner-text"><b></b><span></span></span>
-    <span class="demo-banner-time">now</span>`
-  banner.querySelector('b')!.textContent = notice.title
+    <span class="demo-banner-time"></span>`
+  // A notice without a title is a remark of the demo's own, in lines that wrap.
+  if (notice.title) banner.querySelector('b')!.textContent = notice.title
+  else banner.querySelector('b')!.remove()
   banner.querySelector('.demo-banner-text span')!.textContent = notice.body
+  banner.querySelector('.demo-banner-time')!.textContent = now
   banner.addEventListener('click', () => {
     banner.remove()
-    post({ type: 'open', path: notice.path })
+    if (notice.path) post({ type: 'open', path: notice.path })
   })
   document.body.append(banner)
   setTimeout(() => banner.classList.add('shown'), 20)
@@ -232,21 +251,34 @@ transform:translateY(-130%);transition:transform .35s var(--ease-out)}
 .demo-banner-time{align-self:flex-start;color:var(--text-muted);font-size:12px}`
 
 export function install() {
-  const config = readConfig(business())
-  const data = sharedData()
   const isDashboard = location.pathname.includes('/app/')
+  const config = readConfig(business(), isDashboard)
+  const country = readCountry()
+  const data = sharedData(country)
   const channel = new BroadcastChannel(CHANNEL)
+  // "now" on the banner, as the phone would say it in this language.
+  const now = new Intl.RelativeTimeFormat(config.locale, { numeric: 'auto' }).format(0, 'second')
   let post: (data: unknown) => void = () => {}
 
   const announce = (notice: Notice) => {
     channel.postMessage(notice)
     // A test push from the dashboard itself never comes back over the channel.
-    if (isDashboard) showBanner(notice, post)
+    if (isDashboard) showBanner(notice, post, now)
   }
   const normalize = (answers: Record<string, Value>) =>
     typeof answers.phone === 'string' ? { ...answers, phone: normalizePhone(answers.phone) ?? answers.phone } : answers
-  const backend = new Backend(data, config, announce, normalize)
+  const backend = new Backend(data, config, announce, normalize, () => new Date(), country.sources)
   routeFetch(backend)
+  document.addEventListener(
+    'click',
+    (event) => {
+      const link = (event.target as Element | null)?.closest?.('a[href]') as HTMLAnchorElement | null
+      if (!link || !DIALING.test(link.href)) return
+      event.preventDefault()
+      showBanner({ title: '', body: country.calls_off, path: '' }, post, now)
+    },
+    true,
+  )
 
   if (isDashboard) {
     storage((store) => store.setItem(ONBOARDED, '1'))
@@ -256,10 +288,11 @@ export function install() {
     document.head.append(style)
     channel.addEventListener('message', (event: MessageEvent<Notice>) => {
       post({ type: 'refresh' })
-      showBanner(event.data, post)
+      showBanner(event.data, post, now)
     })
   } else {
-    storage((store) => store.removeItem(FORM_DRAFT))
+    // Back from the privacy policy, the seller carries on with their answers.
+    if (!returning()) storage((store) => store.removeItem(FORM_DRAFT))
     routeUploads(backend)
   }
 }

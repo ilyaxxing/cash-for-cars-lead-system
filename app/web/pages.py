@@ -10,6 +10,7 @@ the app fetches the same data from /api/config instead.
 from __future__ import annotations
 
 import json
+import re
 from functools import lru_cache
 from html import escape
 from pathlib import Path
@@ -81,6 +82,10 @@ def _read_cached(path: Path, modified: int) -> str:
     return path.read_text(encoding="utf-8")
 
 
+# Each page's name in a browser tab or on an iPhone's home screen bookmark.
+PAGE_TITLES = {"index.html": "form.page_title", "app/index.html": "dashboard.leads.title"}
+
+
 def render_page(request: Request, relative: str) -> Response:
     template = read_template(request.app.state.settings.frontend_dist / relative)
     if template is None:
@@ -94,6 +99,8 @@ def render_page(request: Request, relative: str) -> Response:
     state = request.app.state
     locale = escape(f"{state.settings.locale}-{state.preset.phone_region}")
     html = html.replace('<html lang="en">', f'<html lang="{locale}">', 1)
+    title = escape(state.messages.t(PAGE_TITLES[relative]))
+    html = re.sub(r"<title>[^<]*</title>", lambda _: f"<title>{title}</title>", html, count=1)
     # Always revalidate: the HTML is tiny and must point at the current bundle.
     return HTMLResponse(html, headers={"Cache-Control": "no-cache"})
 

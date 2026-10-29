@@ -39,8 +39,11 @@ The live demo is the real seller's form and owner dashboard, built from
 `frontend/` with a stand-in for the server that runs in the visitor's browser
 (`frontend/src/demo`): a lead sent from the form arrives in the dashboard
 with a push banner, and nothing typed leaves the page. The pages come from
-the app itself, with the default brand and a fictional business. After a
-change to the form or the dashboard, rebuild it and commit `demo/`:
+the app itself, with a fictional business. There is one demo per country in
+`../countries/`: the US at `demo/`, which this page shows, and every other
+country at `demo/<code>/`, each with that country's language, form, prices,
+units and made-up leads from its `demo.yaml`. After a change to the form,
+the dashboard or a country, rebuild it and commit `demo/` and `assets/card/`:
 
 ```bash
 .venv/bin/python tools/make_demo.py
@@ -57,9 +60,12 @@ https://car-buyer-demo.github.io/, a site of its own (the `car-buyer-demo`
 organization's GitHub Pages), so a buyer who shortens the address cannot
 reach this project's page and its prices. It shows the same demo in that business's
 name and color from the link (`?name=...&color=...`), with no prices, setup
-details or links back here. Its source is `buyer-site/index.html`; to publish
-a change (or a rebuilt demo), build it into a clone of the site's repository
-and push, with a neutral commit message:
+details or links back here, in the buyer's language: the US page at the
+root, every other country at `/<code>/` (`/de/?name=...`), as the link maker
+on this page picks it. Its source is the template `buyer-site/index.html`,
+filled in from each country's `demo.yaml`; to publish a change (or a rebuilt
+demo), build it into a clone of the site's repository and push, with a
+neutral commit message:
 
 ```bash
 git clone https://github.com/car-buyer-demo/car-buyer-demo.github.io.git /tmp/buyer-site
@@ -68,5 +74,6 @@ git -C /tmp/buyer-site add -A && git -C /tmp/buyer-site commit -m "Update the de
 ```
 
 The card images on the page come from the card generator
-(`app/branding/card.py`, rendered at 288 dpi as WebP), so they are exactly
-what a client's print file looks like, in six accent colors.
+(`app/branding/card.py`, rendered at 288 dpi as WebP by `tools/make_demo.py`),
+so they are exactly what a client's print file looks like, in six accent
+colors, in each country's language and card size (`assets/card/<code>/`).

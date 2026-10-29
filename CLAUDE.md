@@ -14,10 +14,13 @@ One instance per client (separate Railway project), not multi-tenant.
 The repository is public. Write everything as if strangers read it.
 
 ## Hard rules
-- Code, comments, README, commits: English. UI text only in `locales/en.json`
-  (or a client's own `LOCALE_FILE` for another country); code uses keys.
-  Target market and reader: US; other countries through client files
-  (docs/customize-the-form.md, Another country), never by forking the code.
+- Code, comments, README, commits: English. UI text only in `locales/en.json`,
+  a client's own `LOCALE_FILE`, or a country's starting files in
+  `countries/<code>/` (its texts, and the demo's in `demo.yaml`); code uses
+  keys. Target market and reader: US; other countries through client files
+  started from `countries/` (docs/customize-the-form.md, Another country),
+  never by forking the code. Their translations had no native speaker's
+  review yet; say so wherever they are offered.
 - Never commit `.env`, secrets (tokens, passwords, VAPID keys, bucket keys),
   DB dumps/backups, uploaded photos, real client data (names, phones,
   domains, tax IDs). Client-specific values come only from env and the preset.
@@ -48,11 +51,17 @@ The repository is public. Write everything as if strangers read it.
   the real bundles plus a stand-in server that runs in the browser
   (`frontend/src/demo`, typed against the API modules, never part of an
   instance), built by `tools/make_demo.py`. Rebuild it after UI changes.
-  The page installers send a car buyer (`buyer-site/`, built by
-  `tools/make_buyer_site.py`) is a site of its own, https://car-buyer-demo.github.io/ (the
+  One demo per country in `countries/` (the US at `docs/demo`, the others at
+  `docs/demo/<code>/`), each with that country's settings and the fictional
+  business, leads, prices and units of its `demo.yaml`; calls and messages
+  show a notice instead of dialing. Demo phone numbers must be ones
+  `tools/pii_scan.py` knows to be fictional (tests/test_countries.py).
+  The page installers send a car buyer (`buyer-site/index.html`, a template
+  filled per country by `tools/make_buyer_site.py`: the US at the root, the
+  others at `/<code>/`) is a site of its own, https://car-buyer-demo.github.io/ (the
   `car-buyer-demo` organization's Pages), so its address cannot be shortened
-  to the project page: the same demo in that business's name and color from
-  the link, no prices, setup or links back to this repository.
+  to the project page: the same demo in that business's name, color and
+  language from the link, no prices, setup or links back to this repository.
 - Hosting, one instance per client, two ways. The domain is the client's
   own, in their name, and required: QR codes and cards are made only for it
   (the commands refuse a `*.up.railway.app` address).
@@ -89,7 +98,9 @@ miles, USD, ZIP, US phone format). Agreed deviations:
 - After Contact the lead is saved and the owner is notified ("no photos").
   Photos upload right after picking; skip label "I'll send later". Final
   submit on Review marks the lead submitted (one more push if it has photos).
-  Unfinished form resumes on the same device (localStorage, max 7 days).
+  Unfinished form resumes on the same device (localStorage, max 7 days);
+  the consent step's policy link opens in the same tab, and back from it
+  the form goes straight to that step (sessionStorage flag).
 - Accident and lien: Yes / No / Don't know (third tile added in design style).
 - Photo tiles open the system picker directly (iOS offers camera or library
   there); the design's action sheet is unused in the prototype, so it is not built.
@@ -159,7 +170,9 @@ Labels from the design: New, In Progress, Purchased, Rejected.
 - Retention: 90 days after closing (not creation), name, phone, every preset
   field marked `personal: true` and the photos (objects, then rows) are wiped;
   rows stay for statistics. Photos were added to the bot's scope: plates, faces
-  and driveways identify the seller. VIN stays (car data). Owner notes stay
+  and driveways identify the seller. VIN stays (car data); a number plate
+  (`registration`, asked instead of the VIN in some countries) is personal:
+  a registry ties it to the owner. Owner notes stay
   (the help says not to put contacts there). `purged_at`
   distinguishes "never given" from "deleted by retention". Daily background pass,
   first pass at startup, one log line per pass even when nothing was purged,

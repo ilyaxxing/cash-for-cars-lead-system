@@ -10,6 +10,25 @@
   const form = getContext<FormState>('form')
   // The client's own photo (BRAND_PHOTO) replaces the designs' car.
   const own = form.config.brand.photo
+
+  // A headline longer than the design's (German, Polish) shrinks to the
+  // phone's width instead of running off it; the design's size is the most.
+  function fit(node: HTMLElement) {
+    const size = () => {
+      node.style.fontSize = ''
+      const room = node.clientWidth
+      const need = node.scrollWidth
+      if (need > room) {
+        const base = parseFloat(getComputedStyle(node).fontSize)
+        node.style.fontSize = `${Math.floor((base * room) / need)}px`
+      }
+    }
+    const observer = new ResizeObserver(size)
+    observer.observe(node)
+    // The width is right only once the self-hosted font has loaded.
+    document.fonts?.ready.then(size)
+    return { destroy: () => observer.disconnect() }
+  }
 </script>
 
 <div class="backdrop">
@@ -22,7 +41,7 @@
     <div aria-hidden="true" class="fade-top"></div>
     <div aria-hidden="true" class="fade-bottom"></div>
   </div>
-  <h1 class="headline">{form.t('form.welcome.headline1')}<br />{form.t('form.welcome.headline2')}</h1>
+  <h1 class="headline" use:fit>{form.t('form.welcome.headline1')}<br />{form.t('form.welcome.headline2')}</h1>
 </div>
 
 <style>

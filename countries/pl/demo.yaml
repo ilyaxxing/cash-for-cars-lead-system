@@ -1,0 +1,74 @@
+# The demo for this country (tools/make_demo.py, tools/make_buyer_site.py):
+# a fictional business, its leads and the page sent to a car buyer. Nothing
+# here goes into a client's instance. Poland has no range of numbers kept
+# for fiction, so the phones are made of digits in a row (tools/pii_scan.py).
+
+# In the link maker on the project page: the country in English, the language in its own words.
+label: Poland · Polski
+lang: pl
+
+business:
+  brand_name: Skup Aut Ekspres
+  brand_phone: 512 345 678
+  operator_name: Przykład Auto Sp. z o.o.
+  operator_email: prywatnosc@example.com
+  operator_address: ul. Przykładowa 1, 00-950 Warszawa
+  policy_effective_date: 1 października 2026
+  public_url: https://buy.example.com
+  card_contact: Marek
+
+calls_off: W demo połączenia i wiadomości są wyłączone.
+policy_note: Przykładowa polityka dla zmyślonej firmy. Dla prawdziwej pisze się ją według prawa danego kraju i sprawdza ją prawnik firmy.
+price_scale: 4
+price_step: 500
+
+featured:
+  - {make: Kia, model: Optima, location: Warszawa, postal_code: 02-495, name: Marek Nowak, vin: KNAGT41BBH5012345}
+  - {make: Hyundai, model: Kona, location: Piaseczno, postal_code: 05-500, name: Agnieszka Wiśniewska, email: agnieszka@example.com, finance_details: Do spłaty zostało ok. 25 000 zł kredytu.}
+  - {make: Opel, model: Corsa, location: Pruszków, postal_code: 05-800, name: Tomasz Wójcik, accident_details: Uderzenie w przód zeszłej wiosny. Nadal jeździ.}
+  - {make: Ford, model: Ranger, location: Legionowo, postal_code: 05-120, name: Katarzyna Kamińska, vin: WF0LXXTTGLHA12345, note: 'Zadzwoniłem do sprzedającego, oględziny w czwartek.'}
+  - {make: Opel, model: Zafira, location: Warszawa, postal_code: 03-984, name: Piotr Lewandowski, email: piotr@example.com, note: 'Zaproponowałem 6 000 zł mniej; sprzedający się zastanawia.'}
+  - {make: Hyundai, model: Genesis, location: Otwock, postal_code: 05-400, name: Małgorzata Zielińska, note: 'Odholowane w sobotę, zapłacone gotówką.'}
+phones: ['+48512345678', '+48612345678', '+48712345678', '+48523456789', '+48623456789', '+48723456789']
+
+cars: [[Toyota, Corolla], [Toyota, Yaris], [Škoda, Octavia], [Škoda, Fabia], [Volkswagen, Golf], [Volkswagen, Passat], [Opel, Astra], [Ford, Focus], [Audi, A4], [BMW, Seria 3], [Kia, Sportage], [Hyundai, Tucson], [Renault, Clio], [Toyota, RAV4]]
+names: [Anna Kowalska, Paweł Szymański, Joanna Woźniak, Krzysztof Dąbrowski, Ewa Kozłowska, Michał Jankowski, Magdalena Mazur, Jakub Kwiatkowski, Monika Krawczyk, Adam Piotrowski, Natalia Grabowska, Łukasz Pawłowski]
+cities: [[Warszawa, 00-950], [Marki, 05-270], [Ząbki, 05-091], [Józefów, 05-420]]
+
+page:
+  title: Skup Aut Ekspres · Zgłoszenia z Twoich wizytówek
+  description: 'Działające demo: formularz, który sprzedający wypełnia po zeskanowaniu Twojej wizytówki, i aplikacja, w której zgłoszenie przychodzi jako powiadomienie.'
+  badge: Demo
+  kicker_hero: Dla skupów samochodów
+  h1: Każda wizytówka za wycieraczką <em>może przynieść sprzedającego.</em>
+  lead: Wiele osób, które nigdy nie zadzwoniłyby do obcego, chętnie zeskanuje kod. W kilka minut odpowiadają w telefonie na parę pytań, a Ty dostajesz powiadomienie z autem, ceną i zdjęciami, gotowe do pierwszego telefonu.
+  try_button: Wypróbuj sam ↓
+  card_front_alt: 'Przykładowa wizytówka, przód: Kupimy Twoje auto, z kodem QR'
+  card_back_alt: 'Przykładowa wizytówka, tył: co kupujemy, znowu kod QR i numer telefonu'
+  card_caption: Przykładowa wizytówka. Twoja ma Twoje imię, numer i kolor.
+  kicker_demo: Demo na żywo
+  h2_demo: Bądź sprzedającym. Potem kupującym.
+  sub_demo: Na pierwszym telefonie odpowiedz tak, jak ktoś, kto znalazł Twoją wizytówkę. Gdy tylko poda dane kontaktowe, zgłoszenie trafia na drugi telefon jako powiadomienie. Stuknij je, zmień status, dodaj notatkę.
+  seller_frame_title: Formularz sprzedającego, działające demo
+  seller_title: Sprzedający
+  seller_caption: Znalazł Twoją wizytówkę i ją zeskanował. Bez aplikacji i konta.
+  buyer_frame_title: Twoja aplikacja, działające demo
+  buyer_title: Ty
+  buyer_caption: Powiadomienie w kilka sekund, potem jedno stuknięcie, by zadzwonić.
+  demo_note: Działające demo ze zmyślonymi zgłoszeniami i zdjęciami aut wygenerowanymi przez AI. Nic, co wpiszesz, nie opuszcza tej strony.
+  start_over: Zacznij od nowa
+  kicker_get: Co dostajesz
+  h2_get: Wszystko między wizytówką a telefonem.
+  p1_title: Wizytówki z Twoim kodem QR
+  p1_text: Plik gotowy do druku w Twoich kolorach, dla każdej drukarni. Każde miejsce może mieć własny kod, więc widzisz, które wizytówki i okolice przynoszą auta.
+  p2_title: Formularz, który sprzedający kończą
+  p2_text: Jedno pytanie na ekran, bez aplikacji i konta, zdjęcia prosto z telefonu. Przerwany w połowie formularz czeka na nich tydzień.
+  p3_title: Powiadomienie w kilka sekund
+  p3_text: Auto, cena i zdjęcia na Twoim telefonie. Imię i numer sprzedającego nigdy nie pojawiają się na ekranie blokady.
+  p4_title: Wszystkie zgłoszenia w jednej aplikacji
+  p4_text: Nowe, w toku, kupione, odrzucone. Notatki, jedno stuknięcie, by zadzwonić lub napisać, i statystyki tego, co przynosi auta.
+  kicker_yours: Twoje
+  h2_yours: Twoja nazwa, Twoje kolory, Twój adres.
+  sub_yours: Formularz, aplikacja i wizytówki mają nazwę, kolor i logo Twojej firmy, pod Twoim własnym adresem. Wszystko działa na Twoim własnym koncie, a zgłoszenia należą do Ciebie. Dane osobowe sprzedających są usuwane automatycznie 90 dni po zamknięciu transakcji.
+  footer: Pytania? Napisz do osoby, która wysłała Ci ten link.
+  toast: Nowe zgłoszenie na Twoim telefonie ↓

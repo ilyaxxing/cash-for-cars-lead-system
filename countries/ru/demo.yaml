@@ -1,0 +1,78 @@
+# The demo for this country (tools/make_demo.py, tools/make_buyer_site.py):
+# a fictional business, its leads and the page sent to a car buyer. Nothing
+# here goes into a client's instance. Phone numbers are fictional examples.
+
+# In the link maker on the project page: the country in English, the language in its own words.
+label: Russia · Русский
+lang: ru
+
+business:
+  brand_name: Выкуп авто
+  brand_phone: +7 912 345-67-89
+  operator_name: ООО «Пример Авто»
+  operator_email: privacy@example.com
+  operator_address: г. Москва, ул. Примерная, д. 1
+  policy_effective_date: 1 октября 2026 г.
+  public_url: https://buy.example.ru
+  card_contact: Михаил
+
+calls_off: В демо звонки и сообщения отключены.
+policy_note: Образец политики для вымышленной компании. Для настоящей её пишут под закон страны, и её проверяет юрист компании.
+price_scale: 150
+price_step: 10000
+
+featured:
+  - {make: Kia, model: Optima, location: Москва, name: Дмитрий Орлов, vin: XWEGU411BH0012345, pts: original, owners: 2}
+  - {make: Hyundai, model: Kona, location: Химки, name: Анна Соколова, email: anna@example.com, finance_details: По кредиту осталось около 450 000 ₽., pts: electronic, owners: 1}
+  - {make: Hyundai, model: Solaris, location: Мытищи, name: Сергей Волков, accident_details: Удар в передний бампер прошлой весной. На ходу., pts: original, owners: 3}
+  - {make: Ford, model: F-150, location: Балашиха, name: Алексей Морозов, vin: 1FTEW1EF5GFA12345, pts: duplicate, owners: 2, note: Позвонил продавцу, осмотр в четверг.}
+  - {make: Kia, model: Carnival, location: Москва, name: Елена Кузнецова, email: elena@example.com, pts: original, owners: 1, note: Предложил на 150 000 ₽ меньше, продавец думает.}
+  - {make: Hyundai, model: Genesis, location: Подольск, name: Игорь Лебедев, pts: original, owners: 4, note: Забрали эвакуатором в субботу, оплата наличными.}
+phones: ['+79123456780', '+79123456781', '+79123456782', '+79123456783', '+79123456784', '+79123456785', '+79123456786', '+79123456787']
+
+cars: [[Lada, Granta], [Lada, Vesta], [Kia, Rio], [Hyundai, Solaris], [Toyota, Camry], [Volkswagen, Polo], [Škoda, Octavia], [Renault, Logan], [Renault, Duster], [Kia, Sportage], [Hyundai, Creta], [Toyota, RAV4], [Lada, Niva Legend], [Chery, Tiggo 7 Pro]]
+names: [Иван Петров, Ольга Смирнова, Андрей Попов, Мария Васильева, Павел Новиков, Наталья Фёдорова, Максим Егоров, Татьяна Козлова, Николай Степанов, Юлия Павлова, Артём Николаев, Светлана Орлова]
+cities: [[Москва], [Химки], [Мытищи], [Люберцы]]
+
+# This country's own questions (countries/ru/form.yaml), one value picked for each older lead.
+extra:
+  pts: [original, original, original, duplicate, electronic]
+  owners: [1, 2, 2, 3, 4]
+
+page:
+  title: Выкуп авто · Заявки с ваших визиток
+  description: 'Рабочее демо: анкета, которую продавец заполняет после скана визитки, и приложение, куда заявка приходит пушем.'
+  badge: Демо
+  kicker_hero: Для автовыкупа
+  h1: Каждая визитка под дворником <em>может привести продавца.</em>
+  lead: Многие, кто ни за что не позвонит незнакомцу, отсканируют код. Они за несколько минут ответят на вопросы с телефона, а вам придёт пуш с машиной, ценой и фото, всё готово к первому звонку.
+  try_button: Попробовать ↓
+  card_front_alt: 'Образец визитки, лицевая сторона: выкупим любое авто, с QR-кодом'
+  card_back_alt: 'Образец визитки, обратная сторона: что выкупаем, снова QR-код и телефон'
+  card_caption: Образец визитки. На вашей будут ваше название, телефон и цвет.
+  kicker_demo: Живое демо
+  h2_demo: Побудьте продавцом. Потом покупателем.
+  sub_demo: На первом телефоне ответьте так, как ответил бы человек, нашедший вашу визитку. Как только он оставит контакты, заявка придёт на второй телефон пушем. Нажмите на него, смените статус, добавьте заметку.
+  seller_frame_title: Анкета продавца, рабочее демо
+  seller_title: Продавец
+  seller_caption: Нашёл визитку, отсканировал. Без приложений и регистрации.
+  buyer_frame_title: Ваше приложение, рабочее демо
+  buyer_title: Вы
+  buyer_caption: Пуш через секунды, звонок в одно касание.
+  demo_note: Рабочее демо с выдуманными заявками и фото машин, созданными ИИ. Ничего из введённого не покидает эту страницу.
+  start_over: Начать заново
+  kicker_get: Что вы получаете
+  h2_get: Всё между визиткой и звонком.
+  p1_title: Визитки с вашим QR-кодом
+  p1_text: Готовый к печати файл в ваших цветах для любой типографии. У каждого места может быть свой код, и видно, какие визитки и места приводят машины.
+  p2_title: Анкета, которую заполняют до конца
+  p2_text: Один вопрос на экран, без приложений и регистрации, фото прямо с телефона. Брошенная анкета ждёт продавца неделю.
+  p3_title: Пуш за секунды
+  p3_text: Машина, цена и фото у вас в телефоне. Имя и номер продавца на экране блокировки не показываются.
+  p4_title: Все заявки в одном приложении
+  p4_text: Новые, в работе, выкуплены, отказ. Заметки, звонок или сообщение в одно касание и статистика того, что приводит машины.
+  kicker_yours: Всё ваше
+  h2_yours: Ваше название, ваши цвета, ваш адрес.
+  sub_yours: Анкета, приложение и визитки несут название, цвет и логотип вашей компании, на вашем собственном адресе. Всё работает на вашем аккаунте, и заявки принадлежат вам. Личные данные продавцов удаляются автоматически через 90 дней после закрытия сделки.
+  footer: Вопросы? Спросите того, кто прислал вам эту ссылку.
+  toast: Новая заявка на телефоне ↓

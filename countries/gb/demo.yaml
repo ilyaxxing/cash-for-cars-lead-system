@@ -1,0 +1,89 @@
+# The demo for this country (tools/make_demo.py, tools/make_buyer_site.py):
+# a fictional business, its leads and the page sent to a car buyer. Nothing
+# here goes into a client's instance. Phone numbers are in Ofcom's range kept
+# for drama (07700 900xxx), and number plates start with ZZ, which the DVLA
+# never issues.
+
+# In the link maker on the project page: the country in English, the language in its own words.
+label: United Kingdom · English
+lang: en
+
+# The made-up business the demo pages name, and the contact on its sample card.
+business:
+  brand_name: Car Buyout
+  brand_phone: 07700 900100
+  operator_name: Example Motors Ltd
+  operator_email: privacy@example.com
+  operator_address: 1 Example Street, Manchester M1 1AE
+  policy_effective_date: 1 October 2026
+  public_url: https://buy.example.com
+  card_contact: Dave
+
+# Shown instead of dialing when a visitor taps Call or a messenger in the demo.
+calls_off: In the demo, calls and messages are turned off.
+# Shown at the top of the demo's privacy policy.
+policy_note: A sample policy for a made-up business. For a real one it is written for its country's law and checked by its lawyer.
+# Prices below are in US dollars; this converts them, rounded to price_step.
+price_scale: 0.8
+price_step: 100
+
+# The six leads with photos, newest first, in the order of frontend/src/demo/seed.ts:
+# what each seller wrote, any of this country's own questions too, and a note.
+featured:
+  - {make: Kia, model: Optima, location: Manchester, postal_code: 'M14 5RL', name: James Wilson, registration: ZZ17 KOP}
+  - {make: Hyundai, model: Kona, location: Salford, postal_code: 'M5 4WT', name: Emily Clarke, email: emily@example.com, finance_details: About £4,500 left on the PCP.}
+  - {make: Ford, model: Fiesta, location: Stockport, postal_code: 'SK1 3XE', name: Oliver Hughes, accident_details: Front-end shunt last spring. It still drives.}
+  - {make: Ford, model: Ranger, location: Oldham, postal_code: 'OL1 1HL', name: Sophie Turner, registration: ZZ66 RNG, note: 'Called the seller, viewing booked for Thursday.'}
+  - {make: Vauxhall, model: Zafira, location: Manchester, postal_code: 'M20 2RN', name: Harry Evans, email: harry@example.com, note: 'Offered £1,200 under asking; seller is thinking it over.'}
+  - {make: Hyundai, model: Genesis, location: Bolton, postal_code: 'BL1 1RU', name: Charlotte Hall, note: 'Collected on a trailer on Saturday, paid by bank transfer.'}
+phones: ['+447700900142', '+447700900117', '+447700900163', '+447700900128', '+447700900189', '+447700900104', '+447700900131', '+447700900175']
+
+# The older leads without photos.
+cars: [[Ford, Focus], [Ford, Kuga], [Vauxhall, Corsa], [Vauxhall, Astra], [Volkswagen, Golf], [Volkswagen, Polo], [BMW, 3 Series], [Audi, A3], [Mercedes-Benz, A-Class], [Toyota, Yaris], [Nissan, Qashqai], [Nissan, Juke], [Kia, Sportage], [Hyundai, Tucson]]
+names: [Jack Thompson, Amelia Roberts, George Walker, Isla Wright, Thomas Green, Grace Edwards, William Hill, Mia Harris, Jacob Wood, Poppy Martin, Daniel Scott, Lily Baker]
+cities: [[Manchester, 'M1 1AE'], [Trafford, 'M32 0SR'], [Bury, 'BL9 0EY'], [Rochdale, 'OL16 1XU']]
+
+# This country's own questions (countries/gb/form.yaml), one value picked for each older lead.
+extra:
+  registration: [ZZ15 BXT, ZZ18 KLM, ZZ65 RTP, ZZ70 HJW, ZZ12 DFN]
+# A country whose form asks questions of its own answers them for these leads
+# under extra: one list of values per field (countries/ru/demo.yaml).
+
+# The page for car buyers (buyer-site/index.html). h1 may hold an <em>.
+page:
+  title: Car Buyout · Leads from your windshield cards
+  description: 'A working demo: the form a seller fills in after scanning your card, and the app where the lead arrives with a push.'
+  badge: Demo
+  kicker_hero: For car buyers and traders
+  h1: Every card under a wiper <em>can bring you a seller.</em>
+  lead: Many people who would never call a stranger will scan a code. They answer a few questions on their phone in a few minutes, and you get a push with the car, the price and photos, ready for the first call.
+  try_button: Try it yourself ↓
+  card_front_alt: 'A sample card, front: We buy your car, with a QR code'
+  card_back_alt: 'A sample card, back: what is bought, the QR code again and the phone number'
+  card_caption: A sample card. Yours carries your name, phone and colour.
+  kicker_demo: Live demo
+  h2_demo: Be the seller. Then be the buyer.
+  sub_demo: On the first phone, answer as someone who found your card would. The moment the contact details are in, the lead lands on the second phone with a push. Tap it, change the status, add a note.
+  seller_frame_title: The seller's form, a working demo
+  seller_title: The seller
+  seller_caption: Found your card, scanned it. No app, no account.
+  buyer_frame_title: Your app, a working demo
+  buyer_title: You
+  buyer_caption: A push within seconds, then one tap to call.
+  demo_note: A working demo with made-up leads and AI-generated car photos. Nothing you type leaves this page.
+  start_over: Start over
+  kicker_get: What you get
+  h2_get: Everything between the card and the call.
+  p1_title: Cards with your QR code
+  p1_text: A print-ready file in your colours for any print shop. Each placement can get its own code, so you see which cards and spots bring cars.
+  p2_title: A form sellers finish
+  p2_text: One question per screen, no app, no account, photos straight from the phone. A form left halfway waits for them for a week.
+  p3_title: A push in seconds
+  p3_text: The car, the price and the photos on your phone. The seller's name and number never show on the lock screen.
+  p4_title: Every lead in one app
+  p4_text: New, in progress, purchased, rejected. Notes, one tap to call or message, and statistics on what brings cars.
+  kicker_yours: Yours
+  h2_yours: Your name, your colours, your address.
+  sub_yours: The form, the app and the cards carry your business's name, colour and logo, at your own web address. It runs on your own account, and the leads belong to you. Sellers' personal details are deleted automatically 90 days after a deal is closed.
+  footer: Questions? Ask the person who sent you this link.
+  toast: New lead on your phone ↓

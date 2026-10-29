@@ -95,11 +95,13 @@
     .maker .fields { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
     .maker label { display: grid; gap: 6px; color: var(--muted); font-size: 14px; }
     .maker input[type="text"] { width: min(320px, 70vw); min-height: 46px; padding: 0 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: 400 16px Geist, sans-serif; }
+    .maker select { min-height: 46px; padding: 0 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--text); font: 400 16px Geist, sans-serif; }
     .maker input[type="color"] { width: 64px; height: 46px; padding: 4px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); cursor: pointer; }
     .maker .link { margin-top: 16px; font: 500 14px/1.6 "Geist Mono", ui-monospace, monospace; overflow-wrap: anywhere; color: var(--text); }
     .maker .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
     .maker .actions .button { min-height: 46px; padding: 0 18px; font-size: 15px; border: 0; cursor: pointer; }
     .maker .warn { margin: 10px 0 0; color: #ffb4a6; font-size: 14px; }
+    .maker .hint { text-align: left; margin: 14px 0 0; color: var(--muted); font: 400 14px/1.5 Geist, sans-serif; }
     .needs { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
     .needs .point ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: 15.5px; }
     .needs .point li + li { margin-top: 4px; }
@@ -197,12 +199,27 @@
     <section id="show">
       <div class="kicker">Show it to a client</div>
       <h2>A demo in the buyer's own name.</h2>
-      <p class="sub">The page to send a car buyer you are talking to: the same live demo in their business's name and color, and what it does for them. No prices, no setup details, no GitHub.</p>
+      <p class="sub">The page to send a car buyer you are talking to: the same live demo in their business's name, color and language, and what it does for them. No prices, no setup details, no GitHub.</p>
       <div class="maker">
         <div class="fields">
           <label>Business name<input type="text" id="maker-name" maxlength="40" placeholder="Rapid Cash Cars" autocomplete="off"></label>
           <label>Color<input type="color" id="maker-color" value="#c7f747"></label>
+          <!-- One option per folder in countries/ (tests/test_countries.py checks). -->
+          <label>Country and language<select id="maker-country">
+            <option value="us">United States · English</option>
+            <option value="us-es">United States · Español</option>
+            <option value="ca">Canada · English</option>
+            <option value="ca-fr">Canada · Français</option>
+            <option value="br">Brazil · Português</option>
+            <option value="ru">Russia · Русский</option>
+            <option value="gb">United Kingdom · English</option>
+            <option value="de">Germany · Deutsch</option>
+            <option value="fr">France · Français</option>
+            <option value="es">Spain · Español</option>
+            <option value="pl">Poland · Polski</option>
+          </select></label>
         </div>
+        <p class="hint">Every language but English was translated by AI and not yet checked by a native speaker: read the page before you send it.</p>
         <div class="link" id="maker-link"></div>
         <p class="warn" id="maker-warn" hidden>Too dark for the app's dark screens, so the link leaves it out. Pick a lighter shade.</p>
         <div class="actions">
@@ -401,12 +418,14 @@
 
     const name = document.getElementById('maker-name');
     const color = document.getElementById('maker-color');
+    const country = document.getElementById('maker-country');
     const output = document.getElementById('maker-link');
     const open = document.getElementById('maker-open');
     const copy = document.getElementById('maker-copy');
     const warn = document.getElementById('maker-warn');
     function update() {
-      const url = new URL(BUYER_SITE);
+      // The United States is the site's root, every other country a folder.
+      const url = new URL(country.value === 'us' ? '' : `${country.value}/`, BUYER_SITE);
       if (name.value.trim()) url.searchParams.set('name', name.value.trim());
       const usable = accentVariables(color.value) !== null;
       if (usable && color.value.toLowerCase() !== '#c7f747') url.searchParams.set('color', color.value.slice(1));
@@ -417,6 +436,7 @@
     }
     name.addEventListener('input', update);
     color.addEventListener('input', update);
+    country.addEventListener('change', update);
     copy.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(output.textContent);

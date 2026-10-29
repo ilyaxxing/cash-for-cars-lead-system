@@ -130,7 +130,7 @@
     {:else if field.widget === 'year_grid'}
       <YearGrid {field} onPicked={() => focusNextNumber(field)} />
     {:else if field.type === 'number'}
-      <NumberField {field} {scroller} gap={previous?.widget === 'year_grid' ? '18px' : '0'} />
+      <NumberField {field} {scroller} gap={previous ? '18px' : '0'} />
     {:else if field.type === 'select' && field.options.some((o) => o.level !== undefined)}
       <LevelSelect {field} />
     {:else if field.type === 'select'}

@@ -10,7 +10,9 @@ Usage:
     python3 tools/pii_scan.py --tracked   # every tracked file
 
 Deliberate fake data is allowed in two ways:
-    - use reserved values: example.com / .test emails, 555-01xx phone numbers
+    - use reserved values: example.com / .test emails, 555-01xx phone numbers,
+      the UK's and France's ranges for fiction, or a number with an obvious
+      run of digits such as +49 151 2345 6789 (the demo countries use these)
     - or put the marker "pii-allow" on the line, with a reason nearby
 
 Runs on the system Python, so it sticks to the standard library and to
@@ -47,13 +49,25 @@ ALLOWED_EMAIL_DOMAINS = re.compile(
 )
 
 # North American numbers with separators: (415) 555-0142, 415-555-0142, +1 415 555 0142.
+# A number ends where a word or more digits do not go on; a full stop after
+# it ends the sentence ("for example +7 912 345-67-89.").
 NANP_PHONE = re.compile(
-    r"(?<![\w.])(?:\+?1[\s.-]?)?\(?(\d{3})\)?[\s.-](\d{3})[\s.-](\d{4})(?![\w.])"
+    r"(?<![\w.])(?:\+?1[\s.-]?)?\(?(\d{3})\)?[\s.-](\d{3})[\s.-](\d{4})(?!\w|\.\d)"
 )
 # Any other international number written with a leading plus.
-INTL_PHONE = re.compile(r"(?<![\w.])\+\d[\d\s().-]{9,}\d(?![\w.])")
+INTL_PHONE = re.compile(r"(?<![\w.])\+\d[\d\s().-]{9,}\d(?!\w|\.\d)")
 # 555-0100 through 555-0199 are reserved for fiction in North America.
 FICTIONAL_NANP = re.compile(r"555[\s.)-]*01\d\d\b")
+# Elsewhere: Ofcom's drama range (07700 900000-900999), ARCEP's (01 99 00 ..),
+# and numbers written as obvious examples, with eight ascending digits in a row.
+FICTIONAL_INTL = re.compile(r"\+44[\s.-]?7700[\s.-]?900[\s.-]?\d{3}|\+33[\s.-]?1[\s.-]?99[\s.-]?00")
+EXAMPLE_RUNS = ("12345678", "23456789")
+
+
+def fictional_intl(number: str) -> bool:
+    digits = re.sub(r"\D", "", number)
+    return bool(FICTIONAL_INTL.search(number)) or any(run in digits for run in EXAMPLE_RUNS)
+
 
 SSN = re.compile(r"(?<![\w-])\d{3}-\d{2}-\d{4}(?![\w-])")
 TAX_ID = re.compile(r"\b(?:INN|ИНН)\D{0,3}\d{10,12}\b", re.IGNORECASE)
@@ -90,6 +104,8 @@ def scan_line(text: str) -> Iterator[tuple[str, str]]:
     for match in INTL_PHONE.finditer(text):
         if NANP_PHONE.search(match.group(0)) or FICTIONAL_NANP.search(match.group(0)):
             continue  # already judged by the NANP rule above
+        if fictional_intl(match.group(0)):
+            continue
         yield "phone number", redact(match.group(0))
     for match in SSN.finditer(text):
         yield "social security number", redact(match.group(0))

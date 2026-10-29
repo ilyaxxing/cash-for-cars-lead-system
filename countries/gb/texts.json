@@ -1,0 +1,67 @@
+{
+  "preset": {
+    "steps": {
+      "finance": {
+        "title": "Is there any outstanding finance on the car?",
+        "hint": "For example, a car loan, hire purchase (HP) or PCP agreement that isn't paid off yet."
+      },
+      "vin": {
+        "tag": "Reg",
+        "title": "WHAT'S THE REG?",
+        "hint": "The number plate lets the buyer check the car's details and MOT history.",
+        "note": "It's on the front and rear number plates and on the V5C logbook. You can also skip this step."
+      },
+      "location": {
+        "note": "No street address needed at this stage, and the postcode is optional."
+      }
+    },
+    "fields": {
+      "finance": {
+        "label": "Outstanding finance",
+        "review_label": "Finance"
+      },
+      "finance_details": {
+        "placeholder": "e.g. PCP with about £5,000 left to pay"
+      },
+      "location": {
+        "label": "Town or city",
+        "placeholder": "Manchester",
+        "errors": {
+          "required": "Enter the town or city where the car is."
+        }
+      },
+      "postal_code": {
+        "label": "Postcode",
+        "placeholder": "M1 1AE",
+        "errors": {
+          "required": "Enter the postcode.",
+          "format": "Enter a postcode like M1 1AE."
+        }
+      },
+      "registration": {
+        "label": "Registration number",
+        "placeholder": "e.g. AB12 CDE",
+        "review_label": "Reg",
+        "review_empty": "Not provided"
+      },
+      "phone": {
+        "placeholder": "07700 900123"
+      }
+    },
+    "flags": {
+      "finance": "Finance"
+    },
+    "photos": {
+      "rear_right": {
+        "tip": "Stand at the rear right corner so the boot, rear lights, rear wheel and right side are in the frame."
+      }
+    },
+    "groups": {
+      "vin": "Reg"
+    }
+  },
+  "card": {
+    "front_rest": "your car",
+    "back_list_2": "Outstanding finance"
+  }
+}

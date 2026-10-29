@@ -1,0 +1,74 @@
+# The demo for this country (tools/make_demo.py, tools/make_buyer_site.py):
+# a fictional business, its leads and the page sent to a car buyer. Nothing
+# here goes into a client's instance. Spain has no range of numbers kept for
+# fiction, so the phones are made of digits in a row (tools/pii_scan.py).
+
+# In the link maker on the project page: the country in English, the language in its own words.
+label: Spain · Español
+lang: es
+
+business:
+  brand_name: Coches al Contado
+  brand_phone: 612 345 678
+  operator_name: Ejemplo Motor S.L.
+  operator_email: privacidad@example.com
+  operator_address: Calle Ejemplo 1, 28001 Madrid
+  policy_effective_date: 1 de octubre de 2026
+  public_url: https://buy.example.com
+  card_contact: Javier
+
+calls_off: En la demo, las llamadas y los mensajes están desactivados.
+policy_note: Una política de ejemplo para una empresa inventada. Para una real se redacta según la ley de su país y la revisa su abogado.
+price_scale: 0.95
+price_step: 100
+
+featured:
+  - {make: Kia, model: Optima, location: Madrid, postal_code: '28039', name: Javier Moreno}
+  - {make: Hyundai, model: Kona, location: Alcalá de Henares, postal_code: '28801', name: Laura Jiménez, email: laura@example.com, finance_details: Quedan unos 6.000 € del préstamo.}
+  - {make: Seat, model: Ibiza, location: Getafe, postal_code: '28901', name: Pablo Romero, accident_details: Golpe en el frontal la primavera pasada. Sigue andando.}
+  - {make: Ford, model: Ranger, location: Móstoles, postal_code: '28931', name: Marta Navarro, note: 'He llamado al vendedor, la visita es el jueves.'}
+  - {make: Citroën, model: Berlingo, location: Madrid, postal_code: '28045', name: Diego Torres, email: diego@example.com, note: 'Le he ofrecido 1.500 € menos; se lo está pensando.'}
+  - {make: Hyundai, model: Genesis, location: Leganés, postal_code: '28911', name: Carmen Ruiz, note: 'Se llevó en grúa el sábado, pagado en efectivo.'}
+phones: ['+34612345678', '+34712345678', '+34623456789', '+34723456789']
+
+cars: [[Seat, León], [Seat, Arona], [Volkswagen, Golf], [Renault, Clio], [Peugeot, '308'], [Toyota, Corolla], [Dacia, Sandero], [Kia, Sportage], [Hyundai, Tucson], [Ford, Focus], [Citroën, C4], [Peugeot, '2008'], [Volkswagen, Polo], [Renault, Captur]]
+names: [Lucía García, Antonio Martín, Paula Sánchez, Manuel López, Sara Fernández, David González, Elena Pérez, Sergio Gómez, Alba Díaz, Raúl Hernández, Nuria Muñoz, Álvaro Álvarez]
+cities: [[Madrid, '28001'], [Alcalá de Henares, '28803'], [Fuenlabrada, '28941'], [Alcorcón, '28921']]
+
+page:
+  title: Coches al Contado · Solicitudes desde tus tarjetas
+  description: 'Una demo que funciona: el formulario que rellena un vendedor al escanear tu tarjeta, y la app donde llega la solicitud con una notificación.'
+  badge: Demo
+  kicker_hero: Para compradores de coches usados
+  h1: Cada tarjeta en un parabrisas <em>puede traerte un vendedor.</em>
+  lead: Mucha gente que nunca llamaría a un desconocido sí escanea un código. Responde unas preguntas en el móvil en pocos minutos, y a ti te llega una notificación con el coche, el precio y las fotos, lista para la primera llamada.
+  try_button: Pruébalo tú mismo ↓
+  card_front_alt: 'Una tarjeta de ejemplo, anverso: Compramos tu coche, con un código QR'
+  card_back_alt: 'Una tarjeta de ejemplo, reverso: qué compramos, el código QR otra vez y el teléfono'
+  card_caption: Una tarjeta de ejemplo. La tuya lleva tu nombre, tu teléfono y tu color.
+  kicker_demo: Demo en directo
+  h2_demo: Sé el vendedor. Luego sé el comprador.
+  sub_demo: En el primer móvil, responde como lo haría quien encontró tu tarjeta. En cuanto deja sus datos de contacto, la solicitud llega al segundo móvil con una notificación. Tócala, cambia el estado, añade una nota.
+  seller_frame_title: El formulario del vendedor, una demo que funciona
+  seller_title: El vendedor
+  seller_caption: Encontró tu tarjeta y la escaneó. Sin app ni cuenta.
+  buyer_frame_title: Tu app, una demo que funciona
+  buyer_title: Tú
+  buyer_caption: Una notificación en segundos y un toque para llamar.
+  demo_note: Una demo que funciona, con solicitudes inventadas y fotos de coches generadas por IA. Nada de lo que escribas sale de esta página.
+  start_over: Empezar de nuevo
+  kicker_get: Lo que recibes
+  h2_get: Todo lo que hay entre la tarjeta y la llamada.
+  p1_title: Tarjetas con tu código QR
+  p1_text: Un archivo listo para imprimir en tus colores, para cualquier imprenta. Cada sitio puede tener su propio código, así ves qué tarjetas y qué zonas te traen coches.
+  p2_title: Un formulario que los vendedores terminan
+  p2_text: Una pregunta por pantalla, sin app ni cuenta, fotos directamente desde el móvil. Si lo dejan a medias, les espera una semana.
+  p3_title: Una notificación en segundos
+  p3_text: El coche, el precio y las fotos en tu móvil. El nombre y el número del vendedor nunca aparecen en la pantalla de bloqueo.
+  p4_title: Todas las solicitudes en una app
+  p4_text: Nuevas, en curso, compradas, descartadas. Notas, un toque para llamar o escribir, y estadísticas de qué te trae coches.
+  kicker_yours: Tuyo
+  h2_yours: Tu nombre, tus colores, tu dirección web.
+  sub_yours: El formulario, la app y las tarjetas llevan el nombre, el color y el logo de tu negocio, en tu propia dirección web. Funciona en tu propia cuenta y las solicitudes son tuyas. Los datos personales de los vendedores se borran solos 90 días después de cerrar un trato.
+  footer: ¿Dudas? Pregunta a quien te envió este enlace.
+  toast: Nueva solicitud en tu móvil ↓

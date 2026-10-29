@@ -49,7 +49,7 @@
       aria-pressed={on}
       onclick={(event) => choose(event, tile)}
     >
-      <span class="name">{tile === OTHER ? t('form.labels.other') : tile}</span>
+      <span class="name" class:long={tile !== OTHER && tile.length > 9}>{tile === OTHER ? t('form.labels.other') : tile}</span>
       <span class="tick"><Check {on} /></span>
     </button>
   {/each}
@@ -117,6 +117,12 @@
   .name {
     min-width: 0;
     overflow-wrap: anywhere;
+  }
+
+  /* A long make (Volkswagen) fits a third of a phone without breaking. */
+  .name.long {
+    font-size: 12.5px;
+    letter-spacing: -0.01em;
   }
 
   .tick {

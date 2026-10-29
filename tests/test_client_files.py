@@ -79,7 +79,10 @@ def test_the_app_does_not_start_without_a_privacy_policy(tmp_path):
 
 
 async def test_pages_and_policy_come_in_the_client_language(client_for, tmp_path):
-    texts = write_json(tmp_path / "ru.json", english())
+    data = english()
+    data["form"]["page_title"] = "Продать машину"
+    data["dashboard"]["leads"]["title"] = "Заявки"
+    texts = write_json(tmp_path / "ru.json", data)
     policy = tmp_path / "policy.md"
     policy.write_text("# Политика\n\nОператор: {operator}\n", encoding="utf-8")
     client = client_for(
@@ -88,6 +91,9 @@ async def test_pages_and_policy_come_in_the_client_language(client_for, tmp_path
     form = await client.get("/")
     # The shipped preset is the US one: the country comes from its phone_region.
     assert form.text.startswith('<html lang="ru-US">')
+    # The name in a browser tab and on a home screen bookmark.
+    assert "<title>Продать машину</title>" in form.text
+    assert "<title>Заявки</title>" in (await client.get("/app/")).text
     page = await client.get("/privacy")
     assert page.status_code == 200
     assert 'lang="ru-US"' in page.text
