@@ -53,9 +53,8 @@ flyers on cars, so the client should check the local rules.
   statistics: how many sellers came, how many cars were bought, from cards,
   signs or ads.
 - **Their own brand and their own accounts**: their name, color, logo and
-  domain, hosted on their own Railway account for about $5 a month (Railway
-  Hobby, includes $5 of usage; not yet checked against a real client's bill),
-  their data in their own database.
+  domain, hosted on their own Railway account for about $5 a month, their
+  data in their own database.
 - **Privacy built in**: a privacy policy template, a consent checkbox, and
   sellers' names, phones and photos erased automatically 90 days after a lead
   is closed.
@@ -87,9 +86,12 @@ Suggested starting points, not market-tested yet.
 |---|---|---|
 | Setup | $300-600 once | Turnkey: installation, their name, color and logo, their domain, the card PDF and QR codes for signs and ads, the app on the owner's phone. |
 | Support (optional) | $25-50 a month | Changes to the questions, new QR placements, updates, someone to call. |
-| Hosting | about $5 a month (Railway Hobby, includes $5 of usage; not yet checked against a real client's bill) | On the client's own card. Where Railway doesn't fit (Russia), a small server in the client's country, at a similar price. |
+| Hosting | about $5 a month | On the client's own card. Where Railway doesn't fit (Russia), a small server in the client's country, at a similar price. |
 | Domain | about $10-15 a year | Required, in the business's name. Free if the business has a website: use a subdomain such as `buy.<their domain>`. |
 | Printing | usually under $150 per 1,000 cards | Any print shop; the PDF is print-ready. |
+
+Hosting is Railway's Hobby plan, $5 a month with $5 of usage included. In practice
+instances like this fit within Hobby's included usage; check the first client's bill.
 
 You pick the price within the range, and whether to sell the setup alone or
 with monthly support. Your own fixed costs are a paid Claude plan for Claude

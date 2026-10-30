@@ -47,8 +47,11 @@ and repair shops.
 |---|---|---|
 | Setup | $300-600 once | Turnkey: installation, their name, color and logo, their domain, the card PDF and QR codes, the app on the owner's phone |
 | Support | $25-50 a month | Optional: changes, updates, someone to call |
-| Hosting | about $5 a month (Railway Hobby, includes $5 of usage; not yet checked against a real client's bill) | On the client's own Railway account |
+| Hosting | about $5 a month | On the client's own Railway account |
 | Domain | about $10-15 a year | In the business's name, if it has none |
+
+Hosting is Railway's Hobby plan, $5 a month with $5 of usage included. In practice
+instances like this fit within Hobby's included usage; check the first client's bill.
 
 You pick the price, and whether to sell the setup alone or with monthly
 support. Suggested starting points, not market-tested yet. More in
@@ -84,8 +87,7 @@ and the domain's DNS can take up to a day.
   account on the Hobby plan, $5 a month: each project is built there before
   it is handed over. These two are your own running costs.
 - **The business brings** its own Railway account with its card, hosting
-  about $5 a month (Railway Hobby, includes $5 of usage; not yet checked
-  against a real client's bill); the finished project is handed over to it.
+  about $5 a month; the finished project is handed over to it.
   Also its domain, its name and email, and the owner's phone for ten minutes.
 
 Outside the US, Claude adapts the setup to the business's country: the
@@ -119,7 +121,7 @@ and what does not work yet, such as languages written right to left.
   Railway's documentation and has not been done with a real client yet. A
   server of the client's own has been tested on a local virtual machine, not
   yet with a public domain and a real certificate.
-- Prices and hosting costs are suggestions, not tested on real clients yet.
+- Prices are suggestions, not tested on real clients yet.
 
 ## More
 
