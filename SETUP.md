@@ -150,7 +150,9 @@ brackets are the settings they fill in step 4.
 **What sellers see**
 - The business name as sellers should see it, e.g. "Lone Star Car Buyers"
   (`BRAND_NAME`).
-- A business phone for the privacy policy, optional (`BRAND_PHONE`).
+- The business phone sellers can call (`BRAND_PHONE`): it is printed on the
+  back of the business card and named in the privacy policy. Any way of
+  writing it works; both show it in the country's own format.
 - Where the business is, to pick its time zone, e.g. Texas → `America/Chicago`
   (`TIMEZONE`). Confirm the zone with the person.
 - How sellers may ask to be contacted: phone call, SMS, WhatsApp and email
