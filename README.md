@@ -14,7 +14,8 @@ yours to sell. By [@ilyaxxing](https://instagram.com/ilyaxxing).
 A lead system for businesses that buy used cars for cash. A seller scans a
 QR code (on a card under the wiper, a sticker, a partner's poster) or taps a
 link, and fills in a short form on their phone; the buyer gets a push
-notification with the car, the price and photos. Open source, for people who set it up for local car buyers:
+notification with the car, the price and how many photos came, and the whole
+lead in an app. Open source, for people who set it up for local car buyers:
 each business gets its own copy, under its name and on its own accounts, set
 up with Claude Code, and you charge for the setup.
 
@@ -29,7 +30,7 @@ up with Claude Code, and you charge for the setup.
    ads. Each place gets its own code or link, so statistics tell them apart.
 2. **The seller's form.** Car, condition, price, photos, contact. A few
    minutes, no app, no account.
-3. **A push to the buyer** on their iPhone or Android, within seconds.
+3. **A notification to the buyer** on their iPhone or Android, within seconds.
 4. **The app.** Leads by status, photos, one tap to call, and statistics on
    which places bring cars.
 
