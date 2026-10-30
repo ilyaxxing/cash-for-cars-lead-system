@@ -64,6 +64,9 @@ dashboard with data, fill the development database with fictional leads:
 .venv/bin/python -m app.cli seed-demo
 ```
 
+Its leads come from the card and two made-up places; to see those named in
+the statistics, set `SOURCE_LABELS=parking:Parking lot,flyer:Flyers` in `.env`.
+
 While working on the frontend, `npm run dev --prefix frontend` serves it with
 hot reload on http://localhost:5173 and proxies API calls to the backend.
 
