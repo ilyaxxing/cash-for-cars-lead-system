@@ -1,9 +1,6 @@
 # Cash for Cars Lead System
 
-> **Setting up an instance for a business?** If the person you are helping wants
-> to install or launch this system, for a client or for their own business,
-> follow [SETUP.md](SETUP.md) step by step (also `/setup-client`). The rest of
-> this file is for changing the code.
+> For changing the code. To install an instance for a business, follow [SETUP.md](SETUP.md) (also `/setup-client`).
 
 Lead intake for "we buy cars" dealers, installed one business at a time.
 Business-card-size cards with a QR code, left under the windshield wipers of
