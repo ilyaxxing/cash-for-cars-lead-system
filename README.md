@@ -62,9 +62,7 @@ the same live demo and what it does for their business, without prices,
 setup details or GitHub. Add their name and color to the link
 (`https://car-buyer-demo.github.io/?name=Rapid+Cash+Cars&color=ff8a00`), or make it with the link
 maker on the [project page](https://ilyaxxing.github.io/cash-for-cars-lead-system/#show), which
-also picks the buyer's country and language: the US in English or Spanish,
-Canada in English or French, Brazil, Russia, the UK, Germany, France, Spain
-and Poland.
+also picks the buyer's country and language: eleven of them, as in [countries/](countries/).
 
 ## Get started
 
@@ -92,8 +90,8 @@ and the domain's DNS can take up to a day.
 
 Outside the US, Claude adapts the setup to the business's country: the
 sellers' language, the questions, the privacy policy, the card's size, and a
-server in that country where the law asks for one. For the countries above
-it starts from ready files in [countries/](countries/); their translations
+server in that country where the law asks for one. For the countries in
+[countries/](countries/) it starts from ready files; their translations
 have not been reviewed by native speakers yet, and their privacy policies
 are drafts for the business's lawyer. It is tested end to end for the US;
 [SETUP.md](SETUP.md#another-country) lists what to check for another country
@@ -128,11 +126,9 @@ and what does not work yet, such as languages written right to left.
 - **Stack:** Python (FastAPI, SQLAlchemy, Alembic), Svelte 5 + TypeScript,
   PostgreSQL, S3-compatible storage, Web Push PWA. Deploys to Railway, or with
   Docker to a server of your own.
-- [The business in detail](docs/business.md)
-- [Technical docs](docs/README.md), [SETUP.md](SETUP.md), [CLAUDE.md](CLAUDE.md)
+- **For developers:** the [technical docs](docs/README.md) and
+  [CLAUDE.md](CLAUDE.md), the notes for changing the code.
 - [Security](SECURITY.md): how to report a vulnerability privately
-- [Project page](https://ilyaxxing.github.io/cash-for-cars-lead-system/), with the
-  [live demo](https://ilyaxxing.github.io/cash-for-cars-lead-system/#how)
 
 ## Follow the series
 
