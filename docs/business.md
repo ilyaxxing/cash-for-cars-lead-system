@@ -137,11 +137,12 @@ To adapt it, tell Claude Code what the business buys or quotes, for example:
 model, year, mileage, title status and photos of both sides and the
 dashboard."* The questions are data (a preset file), the wording is a text
 file and the photo slots are a list, so a new niche needs no new code.
-For a business in another country, Claude Code adapts the system during
-setup: the sellers' language, the questions, the privacy policy under that
-country's law (a draft for the client's lawyer), the card's size, and a
-server in the country where the law keeps personal data at home, as in
-Russia ([SETUP.md](../SETUP.md#another-country)). For the US in Spanish,
+The system can be adapted for other countries during setup: the sellers'
+language, the questions, the privacy policy (a draft for the client's
+lawyer), the card's size and, where needed, a server in the country
+([SETUP.md](../SETUP.md#another-country)). The legal side needs a local
+check: where the data may be kept, whether it may leave the country and
+what the business must register are for its local lawyer to confirm. For the US in Spanish,
 Canada in English and French, Brazil, Russia, the UK, Germany, France, Spain
 and Poland it starts from files already made in `countries/`, and the page
 for car buyers comes in that language too.

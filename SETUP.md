@@ -539,9 +539,12 @@ And remind the person:
 
 ## Another country
 
-The system fits a business in any country without changing its code: its
-language, its form, its privacy policy, its card and, where needed, where it
-runs. Everything country-specific goes into the business's own files in
+The system can be adapted for other countries without changing its code:
+its language, its form, its privacy policy, its card and, where needed,
+where it runs. The legal side needs a local check: whether sellers' data may
+be kept where the system runs, whether it may leave the country, and what
+the business must register are for the business's local lawyer to confirm,
+not for you to decide. Everything country-specific goes into the business's own files in
 `clients/<id>/`, next to its settings, never into `presets/` or `locales/`:
 then a new release applies to every client without conflicts.
 
@@ -563,11 +566,13 @@ drafts for the business's lawyer. For a country not in the list, the folder
 nearest to it (the same language, or the same law, such as the GDPR in the
 EU) is still a better start than the US files.
 
-Go through the list below for the business's country. For each point, use
-what you know and look up what you are not sure of (a web search, when you
-have one): the country's rules change, and a wrong guess ends up printed on
-a thousand cards. Tell the person what you found in a sentence or two and
-let them confirm it with the business. Russia is the worked example
+Go through the list below for the business's country. For each practical
+point, use what you know and look up what you are not sure of (a web search,
+when you have one): the country's rules change, and a wrong guess ends up
+printed on a thousand cards. Tell the person what you found in a sentence or
+two and let them confirm it with the business. The legal points go to the
+business's local lawyer: say what is commonly known, say where you are not
+sure, and never present either as a legal answer. Russia is the worked example
 throughout.
 
 **First, what decides the plan** (before step 1):
@@ -592,15 +597,17 @@ throughout.
    - Notifications reach the owner through the phone maker's push service:
      an iPhone, or an Android phone with Google's services (in mainland
      China, usually an iPhone).
-2. **Where the data may be kept.** Look up the country's personal data law:
-   whether sellers' names and phones must stay in the country, whether
-   keeping them abroad needs extra paperwork, and whether the business must
-   register with a regulator. Russia's 152-FZ keeps them in Russia. When the
-   law keeps them at home, or you are not sure, choose a server in the
-   country (below).
-3. **Whether a site needs a permit there.** Some countries require one
-   before a server in the country may serve a site (mainland China's ICP
-   filing takes weeks). Find out before promising a launch date.
+2. **Where the data may be kept**, for the local lawyer to confirm: whether
+   sellers' names and phones must stay in the country, whether keeping them
+   abroad needs extra paperwork, and whether the business must register with
+   a regulator. Say what is commonly known (Russia's 152-FZ keeps such data
+   in Russia, which is why the Russian files run on a server there). Until
+   the lawyer has answered, choose a server in the country (below): it is
+   the safe side.
+3. **Whether a site needs a permit there**, also for the lawyer: some
+   countries require one before a server in the country may serve a site
+   (mainland China's ICP filing takes weeks). Ask before promising a launch
+   date.
 4. **Whether the business can pay Railway**: its country's cards may be
    refused. Then a server of its own.
 5. **The domain.** Any domain the business owns works. Some country domains

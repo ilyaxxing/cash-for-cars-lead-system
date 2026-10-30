@@ -1,10 +1,11 @@
 # Deploy on a server of the client's own
 
-For a client Railway does not suit: a country whose law keeps personal data
-at home (in Russia, sellers' names and phones must be stored on servers in
-Russia), a business that cannot pay Railway, or one that wants its own
-server. The instance is the same app as on Railway; only where it runs
-differs. [SETUP.md](../SETUP.md) drives these steps for an installer.
+For a client Railway does not suit: where the client's lawyer says personal
+data must stay in the country (in Russia, sellers' names and phones are
+stored on servers in Russia), a business that cannot pay Railway, or one
+that wants its own server. The instance is the same app as on Railway; only
+where it runs differs. [SETUP.md](../SETUP.md) drives these steps for an
+installer.
 
 One command deploys and updates it, `tools/deploy_vps.py`, with the client's
 settings file in and a working address out, as `tools/deploy.py` does for

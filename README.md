@@ -88,9 +88,11 @@ and the domain's DNS can take up to a day.
   about $5 a month; the finished project is handed over to it.
   Also its domain, its name and email, and the owner's phone for ten minutes.
 
-Outside the US, Claude adapts the setup to the business's country: the
-sellers' language, the questions, the privacy policy, the card's size, and a
-server in that country where the law asks for one. For the countries in
+The system can be adapted for other countries: Claude changes the sellers'
+language, the questions, the privacy policy, the card's size and, where
+needed, where it runs. The legal side needs a local check: where sellers'
+data may be kept, whether it may leave the country and what the business
+must register are for its local lawyer to confirm. For the countries in
 [countries/](countries/) it starts from ready files; their translations
 have not been reviewed by native speakers yet, and their privacy policies
 are drafts for the business's lawyer. It is tested end to end for the US;
