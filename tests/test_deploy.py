@@ -33,7 +33,8 @@ def env_file(tmp_path):
 def test_the_example_file_reads_cleanly(env_file):
     env = deploy.read_env(env_file)
     assert env["BRAND_NAME"] == "Acme Auto Buyers"
-    assert env["SOURCE_LABELS"] == "parking:Parking lot,flyer:Flyers"
+    # No places of another business: each client names its own (SETUP step 3).
+    assert env["SOURCE_LABELS"] == ""
     assert env["SECRET_KEY"] == "" and env["RAILWAY_PROJECT_ID"] == ""
 
 

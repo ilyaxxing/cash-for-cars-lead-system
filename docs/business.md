@@ -53,9 +53,8 @@ flyers on cars, so the client should check the local rules.
   statistics: how many sellers came, how many cars were bought, from cards,
   signs or ads.
 - **Their own brand and their own accounts**: their name, color, logo and
-  domain, hosted on their own Railway account for about $5 a month (Railway
-  Hobby, includes $5 of usage; not yet checked against a real client's bill),
-  their data in their own database.
+  domain, hosted on their own Railway account for about $5 a month, their
+  data in their own database.
 - **Privacy built in**: a privacy policy template, a consent checkbox, and
   sellers' names, phones and photos erased automatically 90 days after a lead
   is closed.
@@ -87,9 +86,12 @@ Suggested starting points, not market-tested yet.
 |---|---|---|
 | Setup | $300-600 once | Turnkey: installation, their name, color and logo, their domain, the card PDF and QR codes for signs and ads, the app on the owner's phone. |
 | Support (optional) | $25-50 a month | Changes to the questions, new QR placements, updates, someone to call. |
-| Hosting | about $5 a month (Railway Hobby, includes $5 of usage; not yet checked against a real client's bill) | On the client's own card. Where Railway doesn't fit (Russia), a small server in the client's country, at a similar price. |
+| Hosting | about $5 a month | On the client's own card. Where Railway doesn't fit (Russia), a small server in the client's country, at a similar price. |
 | Domain | about $10-15 a year | Required, in the business's name. Free if the business has a website: use a subdomain such as `buy.<their domain>`. |
 | Printing | usually under $150 per 1,000 cards | Any print shop; the PDF is print-ready. |
+
+Hosting is Railway's Hobby plan, $5 a month with $5 of usage included. In practice
+instances like this fit within Hobby's included usage; check the first client's bill.
 
 You pick the price within the range, and whether to sell the setup alone or
 with monthly support. Your own fixed costs are a paid Claude plan for Claude
@@ -135,11 +137,12 @@ To adapt it, tell Claude Code what the business buys or quotes, for example:
 model, year, mileage, title status and photos of both sides and the
 dashboard."* The questions are data (a preset file), the wording is a text
 file and the photo slots are a list, so a new niche needs no new code.
-For a business in another country, Claude Code adapts the system during
-setup: the sellers' language, the questions, the privacy policy under that
-country's law (a draft for the client's lawyer), the card's size, and a
-server in the country where the law keeps personal data at home, as in
-Russia ([SETUP.md](../SETUP.md#another-country)). For the US in Spanish,
+The system can be adapted for other countries during setup: the sellers'
+language, the questions, the privacy policy (a draft for the client's
+lawyer), the card's size and, where needed, a server in the country
+([SETUP.md](../SETUP.md#another-country)). The legal side needs a local
+check: where the data may be kept, whether it may leave the country and
+what the business must register are for its local lawyer to confirm. For the US in Spanish,
 Canada in English and French, Brazil, Russia, the UK, Germany, France, Spain
 and Poland it starts from files already made in `countries/`, and the page
 for car buyers comes in that language too.

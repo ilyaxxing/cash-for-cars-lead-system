@@ -47,8 +47,11 @@ and repair shops.
 |---|---|---|
 | Setup | $300-600 once | Turnkey: installation, their name, color and logo, their domain, the card PDF and QR codes, the app on the owner's phone |
 | Support | $25-50 a month | Optional: changes, updates, someone to call |
-| Hosting | about $5 a month (Railway Hobby, includes $5 of usage; not yet checked against a real client's bill) | On the client's own Railway account |
+| Hosting | about $5 a month | On the client's own Railway account |
 | Domain | about $10-15 a year | In the business's name, if it has none |
+
+Hosting is Railway's Hobby plan, $5 a month with $5 of usage included. In practice
+instances like this fit within Hobby's included usage; check the first client's bill.
 
 You pick the price, and whether to sell the setup alone or with monthly
 support. Suggested starting points, not market-tested yet. More in
@@ -59,9 +62,7 @@ the same live demo and what it does for their business, without prices,
 setup details or GitHub. Add their name and color to the link
 (`https://car-buyer-demo.github.io/?name=Rapid+Cash+Cars&color=ff8a00`), or make it with the link
 maker on the [project page](https://ilyaxxing.github.io/cash-for-cars-lead-system/#show), which
-also picks the buyer's country and language: the US in English or Spanish,
-Canada in English or French, Brazil, Russia, the UK, Germany, France, Spain
-and Poland.
+also picks the buyer's country and language: eleven of them, as in [countries/](countries/).
 
 ## Get started
 
@@ -84,14 +85,15 @@ and the domain's DNS can take up to a day.
   account on the Hobby plan, $5 a month: each project is built there before
   it is handed over. These two are your own running costs.
 - **The business brings** its own Railway account with its card, hosting
-  about $5 a month (Railway Hobby, includes $5 of usage; not yet checked
-  against a real client's bill); the finished project is handed over to it.
+  about $5 a month; the finished project is handed over to it.
   Also its domain, its name and email, and the owner's phone for ten minutes.
 
-Outside the US, Claude adapts the setup to the business's country: the
-sellers' language, the questions, the privacy policy, the card's size, and a
-server in that country where the law asks for one. For the countries above
-it starts from ready files in [countries/](countries/); their translations
+The system can be adapted for other countries: Claude changes the sellers'
+language, the questions, the privacy policy, the card's size and, where
+needed, where it runs. The legal side needs a local check: where sellers'
+data may be kept, whether it may leave the country and what the business
+must register are for its local lawyer to confirm. For the countries in
+[countries/](countries/) it starts from ready files; their translations
 have not been reviewed by native speakers yet, and their privacy policies
 are drafts for the business's lawyer. It is tested end to end for the US;
 [SETUP.md](SETUP.md#another-country) lists what to check for another country
@@ -119,18 +121,16 @@ and what does not work yet, such as languages written right to left.
   Railway's documentation and has not been done with a real client yet. A
   server of the client's own has been tested on a local virtual machine, not
   yet with a public domain and a real certificate.
-- Prices and hosting costs are suggestions, not tested on real clients yet.
+- Prices are suggestions, not tested on real clients yet.
 
 ## More
 
 - **Stack:** Python (FastAPI, SQLAlchemy, Alembic), Svelte 5 + TypeScript,
   PostgreSQL, S3-compatible storage, Web Push PWA. Deploys to Railway, or with
   Docker to a server of your own.
-- [The business in detail](docs/business.md)
-- [Technical docs](docs/README.md), [SETUP.md](SETUP.md), [CLAUDE.md](CLAUDE.md)
+- **For developers:** the [technical docs](docs/README.md) and
+  [CLAUDE.md](CLAUDE.md), the notes for changing the code.
 - [Security](SECURITY.md): how to report a vulnerability privately
-- [Project page](https://ilyaxxing.github.io/cash-for-cars-lead-system/), with the
-  [live demo](https://ilyaxxing.github.io/cash-for-cars-lead-system/#how)
 
 ## Follow the series
 
