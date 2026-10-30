@@ -166,8 +166,7 @@
         "tag": "Preis",
         "title": "Welchen Preis stellen Sie sich vor?",
         "hint": "Freiwillig. Sie können den Schritt überspringen, wenn Sie unsicher sind.",
-        "note": "Es gibt keine richtige Antwort. Der Preis gibt dem Käufer einen Anhaltspunkt, und das Feld leer zu lassen ist völlig in Ordnung.",
-        "skip": "Weiter ohne Preis"
+        "note": "Es gibt keine richtige Antwort. Der Preis gibt dem Käufer einen Anhaltspunkt, und das Feld leer zu lassen ist völlig in Ordnung."
       },
       "location": {
         "tag": "Standort",
@@ -179,8 +178,7 @@
         "tag": "FIN",
         "title": "HABEN SIE DIE FIN?",
         "hint": "Mit der Fahrzeug-Identifizierungsnummer lässt sich Ihr Auto genauer bestimmen.",
-        "note": "Sie steht in der Zulassungsbescheinigung Teil I (Feld E), am Türrahmen oder unten an der Windschutzscheibe. Sie können den Schritt auch überspringen.",
-        "skip": "Weiter ohne FIN"
+        "note": "Sie steht in der Zulassungsbescheinigung Teil I (Feld E), am Türrahmen oder unten an der Windschutzscheibe. Sie können den Schritt auch überspringen."
       },
       "contact": {
         "tag": "Kontakt",

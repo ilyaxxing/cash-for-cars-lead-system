@@ -166,8 +166,7 @@
         "tag": "Cena",
         "title": "Jaką cenę masz na myśli?",
         "hint": "To opcjonalne. Możesz pominąć, jeśli nie masz pewności.",
-        "note": "Nie ma dobrej odpowiedzi. To dla kupującego punkt wyjścia, a puste pole jest całkowicie w porządku.",
-        "skip": "Dalej bez ceny"
+        "note": "Nie ma dobrej odpowiedzi. To dla kupującego punkt wyjścia, a puste pole jest całkowicie w porządku."
       },
       "location": {
         "tag": "Lokalizacja",
@@ -179,8 +178,7 @@
         "tag": "VIN",
         "title": "MASZ NUMER VIN?",
         "hint": "Pomaga dokładniej rozpoznać Twoje auto.",
-        "note": "Znajdziesz go w dowodzie rejestracyjnym (pole E), na słupku drzwi lub u dołu przedniej szyby. Możesz też pominąć ten krok.",
-        "skip": "Dalej bez VIN"
+        "note": "Znajdziesz go w dowodzie rejestracyjnym (pole E), na słupku drzwi lub u dołu przedniej szyby. Możesz też pominąć ten krok."
       },
       "contact": {
         "tag": "Kontakt",

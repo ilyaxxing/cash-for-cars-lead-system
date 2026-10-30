@@ -166,8 +166,7 @@
         "tag": "Prix",
         "title": "Quel prix avez-vous en tête ?",
         "hint": "C'est facultatif. Vous pouvez passer cette étape si vous hésitez.",
-        "note": "Il n'y a pas de bonne réponse. Cela donne un point de départ à l'acheteur, et laisser vide est tout à fait possible.",
-        "skip": "Continuer sans prix"
+        "note": "Il n'y a pas de bonne réponse. Cela donne un point de départ à l'acheteur, et laisser vide est tout à fait possible."
       },
       "location": {
         "tag": "Lieu",
@@ -179,8 +178,7 @@
         "tag": "Immatriculation",
         "title": "VOUS AVEZ LA PLAQUE ?",
         "hint": "Avec l'immatriculation, l'acheteur retrouve les caractéristiques exactes de la voiture.",
-        "note": "Elle figure sur les plaques avant et arrière et sur la carte grise (case A). Vous pouvez aussi passer cette étape.",
-        "skip": "Continuer sans immatriculation"
+        "note": "Elle figure sur les plaques avant et arrière et sur la carte grise (case A). Vous pouvez aussi passer cette étape."
       },
       "contact": {
         "tag": "Coordonnées",

@@ -166,8 +166,7 @@
         "tag": "Precio",
         "title": "¿Qué precio tiene en mente?",
         "hint": "Es opcional. Puede omitirlo si no está seguro.",
-        "note": "No hay una respuesta correcta. Le da al comprador un punto de partida, y dejarlo en blanco está perfectamente bien.",
-        "skip": "Continuar sin precio"
+        "note": "No hay una respuesta correcta. Le da al comprador un punto de partida, y dejarlo en blanco está perfectamente bien."
       },
       "location": {
         "tag": "Ubicación",
@@ -179,8 +178,7 @@
         "tag": "VIN",
         "title": "¿TIENE EL VIN?",
         "hint": "Nos ayuda a identificar su auto con más precisión.",
-        "note": "Suele estar en el tablero, en el marco de la puerta o en los documentos del vehículo. También puede omitir este paso.",
-        "skip": "Continuar sin VIN"
+        "note": "Suele estar en el tablero, en el marco de la puerta o en los documentos del vehículo. También puede omitir este paso."
       },
       "contact": {
         "tag": "Contacto",

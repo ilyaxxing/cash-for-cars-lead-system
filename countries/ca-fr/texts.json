@@ -166,8 +166,7 @@
         "tag": "Prix",
         "title": "Quel prix avez-vous en tête ?",
         "hint": "C'est facultatif. Vous pouvez passer cette étape si vous hésitez.",
-        "note": "Il n'y a pas de bonne réponse. Cela donne un point de départ à l'acheteur, et laisser vide est tout à fait possible.",
-        "skip": "Continuer sans prix"
+        "note": "Il n'y a pas de bonne réponse. Cela donne un point de départ à l'acheteur, et laisser vide est tout à fait possible."
       },
       "location": {
         "tag": "Lieu",
@@ -179,8 +178,7 @@
         "tag": "VIN",
         "title": "VOUS AVEZ LE VIN ?",
         "hint": "Le numéro d'identification nous aide à identifier votre voiture plus précisément.",
-        "note": "Il figure sur le certificat d'immatriculation, sur le montant de la portière ou au pied du pare-brise. Vous pouvez aussi passer cette étape.",
-        "skip": "Continuer sans VIN"
+        "note": "Il figure sur le certificat d'immatriculation, sur le montant de la portière ou au pied du pare-brise. Vous pouvez aussi passer cette étape."
       },
       "contact": {
         "tag": "Coordonnées",

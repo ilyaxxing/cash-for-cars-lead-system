@@ -166,8 +166,7 @@
         "tag": "Precio",
         "title": "¿Qué precio tienes en mente?",
         "hint": "Es opcional. Puedes saltarlo si no lo tienes claro.",
-        "note": "No hay respuesta correcta. Le da al comprador un punto de partida, y dejarlo en blanco está bien.",
-        "skip": "Continuar sin precio"
+        "note": "No hay respuesta correcta. Le da al comprador un punto de partida, y dejarlo en blanco está bien."
       },
       "location": {
         "tag": "Ubicación",
@@ -179,8 +178,7 @@
         "tag": "Matrícula",
         "title": "¿TIENES LA MATRÍCULA?",
         "hint": "Con la matrícula, el comprador consulta los datos exactos del coche.",
-        "note": "Está en las placas delantera y trasera y en el permiso de circulación. También puedes saltar este paso.",
-        "skip": "Continuar sin matrícula"
+        "note": "Está en las placas delantera y trasera y en el permiso de circulación. También puedes saltar este paso."
       },
       "contact": {
         "tag": "Contacto",
