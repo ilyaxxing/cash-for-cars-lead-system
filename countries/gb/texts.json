@@ -9,7 +9,8 @@
         "tag": "Reg",
         "title": "WHAT'S THE REG?",
         "hint": "The number plate lets the buyer check the car's details and MOT history.",
-        "note": "It's on the front and rear number plates and on the V5C logbook. You can also skip this step."
+        "note": "It's on the front and rear number plates and on the V5C logbook. You can also skip this step.",
+        "skip": "Continue without the registration"
       },
       "location": {
         "note": "No street address needed at this stage, and the postcode is optional."

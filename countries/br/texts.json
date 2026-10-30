@@ -38,7 +38,6 @@
     },
     "buttons": {
       "continue": "Continuar",
-      "continue_without_price": "Continuar sem preço",
       "skip": "Pular por enquanto",
       "save": "Salvar e continuar",
       "saving": "Salvando seus dados",
@@ -167,7 +166,8 @@
         "tag": "Preço",
         "title": "Quanto você quer pelo carro?",
         "hint": "É opcional. Pode pular se não tiver certeza.",
-        "note": "Não existe resposta certa. É só um ponto de partida para o comprador, e deixar em branco não tem problema nenhum."
+        "note": "Não existe resposta certa. É só um ponto de partida para o comprador, e deixar em branco não tem problema nenhum.",
+        "skip": "Continuar sem preço"
       },
       "location": {
         "tag": "Local",
@@ -179,7 +179,8 @@
         "tag": "Placa",
         "title": "TEM A PLACA?",
         "hint": "Com a placa, o comprador consulta os dados exatos do carro.",
-        "note": "Está nas placas da frente e de trás e no CRLV. Você também pode pular esta etapa."
+        "note": "Está nas placas da frente e de trás e no CRLV. Você também pode pular esta etapa.",
+        "skip": "Continuar sem a placa"
       },
       "contact": {
         "tag": "Contato",

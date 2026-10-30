@@ -38,7 +38,6 @@
     },
     "buttons": {
       "continue": "Continue",
-      "continue_without_price": "Continue without a price",
       "skip": "Skip for now",
       "save": "Save and continue",
       "saving": "Saving your details",
@@ -167,7 +166,8 @@
         "tag": "Price",
         "title": "What price do you have in mind?",
         "hint": "This is optional. You can skip this if you're not sure.",
-        "note": "There's no right answer. It gives the buyer a starting point, and leaving it blank is completely fine."
+        "note": "There's no right answer. It gives the buyer a starting point, and leaving it blank is completely fine.",
+        "skip": "Continue without a price"
       },
       "location": {
         "tag": "Location",
@@ -179,7 +179,8 @@
         "tag": "VIN",
         "title": "GOT YOUR VIN?",
         "hint": "It helps us identify your car more accurately.",
-        "note": "You can usually find it on your dashboard, door frame, or vehicle documents. You can also skip this step."
+        "note": "You can usually find it on your dashboard, door frame, or vehicle documents. You can also skip this step.",
+        "skip": "Continue without a VIN"
       },
       "contact": {
         "tag": "Contact",

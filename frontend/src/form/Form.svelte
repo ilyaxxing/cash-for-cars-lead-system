@@ -78,10 +78,12 @@
     }
     if (step?.skippable) {
       secondary = { label: t('form.buttons.skip'), run: form.skip }
-      // An empty price: one button that says what it does, not two that do the same.
-      const money = step.fields.some((f) => f.unit === 'currency')
-      if (money && isStepBlank(step, form.answers)) {
-        label = t('form.buttons.continue_without_price')
+      // An optional step left empty: Continue and Skip would do the same, so
+      // one button says what it does ("Continue without a price"). A step
+      // with a required field keeps both: there Continue asks for it.
+      if (isStepBlank(step, form.answers) && !step.fields.some((f) => f.required)) {
+        const own = `preset.steps.${step.id}.skip`
+        label = t(own) === own ? t('form.buttons.skip') : t(own)
         secondary = null
       }
     }
