@@ -20,6 +20,7 @@ import {
   activeSteps,
   clearStep,
   isEmpty,
+  isStepBlank,
   loadSaved,
   parseSource,
   payload,
@@ -96,6 +97,13 @@ export class FormState {
 
   get step(): Step | undefined {
     return stepById(this.preset, this.screen)
+  }
+
+  /** An optional step with nothing answered: Continue waits for an answer, Skip moves on. */
+  get waitsForAnswer(): boolean {
+    const step = this.step
+    if (!step?.skippable || step.fields.some((f) => f.type === 'photos' || f.required)) return false
+    return isStepBlank(step, this.answers)
   }
 
   get progress() {
@@ -218,7 +226,7 @@ export class FormState {
     if (screen === REVIEW) return this.submit()
 
     const step = this.step
-    if (!step) return
+    if (!step || this.waitsForAnswer) return
     if (step.fields.some((field) => field.type === 'photos')) {
       if (Object.values(this.photos).some((photo) => photo.status === 'uploading')) {
         this.errors = { photos: { code: 'wait' } }

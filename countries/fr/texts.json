@@ -38,7 +38,6 @@
     },
     "buttons": {
       "continue": "Continuer",
-      "continue_without_price": "Continuer sans prix",
       "skip": "Passer pour l'instant",
       "save": "Enregistrer et continuer",
       "saving": "Enregistrement de vos coordonnées",

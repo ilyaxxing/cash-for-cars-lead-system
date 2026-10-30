@@ -38,7 +38,6 @@
     },
     "buttons": {
       "continue": "Continuar",
-      "continue_without_price": "Continuar sem preço",
       "skip": "Pular por enquanto",
       "save": "Salvar e continuar",
       "saving": "Salvando seus dados",

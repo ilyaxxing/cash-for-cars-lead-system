@@ -38,7 +38,6 @@
     },
     "buttons": {
       "continue": "Dalej",
-      "continue_without_price": "Dalej bez ceny",
       "skip": "Pomiń na razie",
       "save": "Zapisz i dalej",
       "saving": "Zapisywanie danych",

@@ -11,7 +11,7 @@ A preset is a list of steps; each step has fields:
 ```yaml
 steps:
   - id: price
-    skippable: true        # shows "Skip"
+    skippable: true        # Skip for now; Continue waits for an answer (below)
     note: box              # a note under the fields: box, icon or text
     fields:
       - { id: asking_price, type: number, unit: currency, min: 100, max: 5000000 }
@@ -47,7 +47,11 @@ Texts are looked up by ids:
 }
 ```
 
-Step titles, field labels, option labels and photo labels are required. If
+A skippable step shows Continue and Skip for now. When all its fields are
+optional, Continue stays unavailable until something is answered, so Skip
+for now is the one way on from an empty step; with a required field,
+Continue asks for it. Step titles, field labels, option labels and photo
+labels are required. If
 one is missing, or the preset is invalid, the app refuses to start and says
 which key, and the deploy script stops before deploying. Run `tools/check.sh`
 after editing: the tests load the shipped preset and texts too.

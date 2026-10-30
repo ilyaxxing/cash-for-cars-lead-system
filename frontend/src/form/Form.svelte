@@ -5,7 +5,7 @@
   import { setContext, tick } from 'svelte'
   import BrandMark from '../shared/BrandMark.svelte'
   import type { AppConfig } from '../shared/config'
-  import { REVIEW, SUCCESS, WELCOME, isStepBlank } from './engine'
+  import { REVIEW, SUCCESS, WELCOME } from './engine'
   import Header from './Header.svelte'
   import { enterStep, nudge } from './motion'
   import Photos from './Photos.svelte'
@@ -76,15 +76,7 @@
       label = t('form.welcome.cta')
       show = !wide
     }
-    if (step?.skippable) {
-      secondary = { label: t('form.buttons.skip'), run: form.skip }
-      // An empty price: one button that says what it does, not two that do the same.
-      const money = step.fields.some((f) => f.unit === 'currency')
-      if (money && isStepBlank(step, form.answers)) {
-        label = t('form.buttons.continue_without_price')
-        secondary = null
-      }
-    }
+    if (step?.skippable) secondary = { label: t('form.buttons.skip'), run: form.skip }
     if (step?.submit) {
       label = form.busy ? t('form.buttons.saving') : form.saveFailed ? t('form.buttons.try_again') : t('form.buttons.save')
       arrow = !form.busy
@@ -185,7 +177,7 @@
           class="primary"
           class:busy={form.busy}
           onclick={form.next}
-          disabled={form.busy}
+          disabled={form.busy || form.waitsForAnswer}
           aria-busy={form.busy}
         >
           {#if form.busy}<span aria-hidden="true" class="spinner"></span>{/if}
@@ -343,6 +335,20 @@
 
   .primary.busy {
     background: var(--accent-pressed);
+  }
+
+  /* An optional step with no answer yet: Skip for now is the way on. */
+  .primary:disabled:not(.busy) {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .primary:disabled:not(.busy):hover {
+    background: var(--accent);
+  }
+
+  .primary:disabled:not(.busy):active {
+    transform: none;
   }
 
   .spinner {
