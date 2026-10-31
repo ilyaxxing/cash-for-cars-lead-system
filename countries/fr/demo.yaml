@@ -35,6 +35,8 @@ cars: [[Renault, Clio], [Renault, Captur], [Peugeot, '208'], [Peugeot, '3008'], 
 names: [Camille Martin, Lucas Durand, Léa Lefebvre, Hugo Michel, Manon Garcia, Louis David, Emma Bertrand, Nathan Robert, Inès Richard, Théo Simon, Sarah Fournier, Antoine Girard]
 cities: [[Lyon, '69003'], [Vaulx-en-Velin, '69120'], [Décines-Charpieu, '69150'], [Saint-Priest, '69800']]
 
+sources: {sticker: Autocollant sur la voiture, shop: Garage partenaire, sign: Panneau routier, maps: Google Maps, missed_call: SMS après appel manqué}
+
 page:
   title: Cash Auto · Appelez le premier
   description: 'Une démo qui fonctionne : le formulaire que remplit un vendeur après avoir scanné votre code ou touché votre lien, et l''app où la demande arrive par notification.'

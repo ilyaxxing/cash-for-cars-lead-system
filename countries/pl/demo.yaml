@@ -35,6 +35,8 @@ cars: [[Toyota, Corolla], [Toyota, Yaris], [Škoda, Octavia], [Škoda, Fabia], [
 names: [Anna Kowalska, Paweł Szymański, Joanna Woźniak, Krzysztof Dąbrowski, Ewa Kozłowska, Michał Jankowski, Magdalena Mazur, Jakub Kwiatkowski, Monika Krawczyk, Adam Piotrowski, Natalia Grabowska, Łukasz Pawłowski]
 cities: [[Warszawa, 00-950], [Marki, 05-270], [Ząbki, 05-091], [Józefów, 05-420]]
 
+sources: {sticker: Naklejka na aucie, shop: Warsztat partnerski, sign: Tablica przy drodze, maps: Mapy Google, missed_call: SMS po nieodebranym połączeniu}
+
 page:
   title: Skup Aut Ekspres · Dzwoń pierwszy
   description: 'Działające demo: formularz, który sprzedający wypełnia po zeskanowaniu Twojego kodu lub kliknięciu Twojego linku, i aplikacja, w której zgłoszenie przychodzi jako powiadomienie.'

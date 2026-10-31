@@ -35,6 +35,8 @@ cars: [[Seat, León], [Seat, Arona], [Volkswagen, Golf], [Renault, Clio], [Peuge
 names: [Lucía García, Antonio Martín, Paula Sánchez, Manuel López, Sara Fernández, David González, Elena Pérez, Sergio Gómez, Alba Díaz, Raúl Hernández, Nuria Muñoz, Álvaro Álvarez]
 cities: [[Madrid, '28001'], [Alcalá de Henares, '28803'], [Fuenlabrada, '28941'], [Alcorcón, '28921']]
 
+sources: {sticker: Pegatina en el coche, shop: Taller colaborador, sign: Cartel en la calle, maps: Google Maps, missed_call: SMS tras llamada perdida}
+
 page:
   title: Coches al Contado · Llama el primero
   description: 'Una demo que funciona: el formulario que rellena un vendedor al escanear tu código o tocar tu enlace, y la app donde llega la solicitud con una notificación.'

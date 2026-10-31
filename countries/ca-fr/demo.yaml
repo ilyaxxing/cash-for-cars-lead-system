@@ -34,6 +34,8 @@ cars: [[Toyota, Corolla], [Toyota, RAV4], [Honda, Civic], [Honda, CR-V], [Hyunda
 names: [Catherine Pelletier, Gabriel Bélanger, Léa Lavoie, Félix Fortin, Maude Ouellet, William Morin, Sarah Lévesque, Samuel Bergeron, Jade Leblanc, Louis Girard, Audrey Caron, Vincent Paquette]
 cities: [[Montréal, 'H2X 1Y4'], [Laval, 'H7T 2Z3'], [Longueuil, 'J4H 3M6'], [Repentigny, 'J6A 2T2']]
 
+sources: {sticker: Autocollant sur votre auto, shop: Garage partenaire, sign: Panneau routier, maps: Google Maps, missed_call: Texto après appel manqué}
+
 page:
   title: Achat Auto Comptant · Appelez le premier
   description: 'Une démo qui fonctionne : le formulaire que remplit un vendeur après avoir scanné votre code ou touché votre lien, et l''app où la demande arrive par notification.'

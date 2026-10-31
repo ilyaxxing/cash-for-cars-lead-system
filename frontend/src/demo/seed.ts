@@ -79,7 +79,7 @@ const FEATURED: Featured[] = [
   {
     hoursAgo: 5,
     status: 'new',
-    source: 'parking',
+    source: 'maps',
     answers: { year: 2019, mileage: 46200, condition: 'excellent', accident: 'no', finance: 'yes', asking_price: 14200, contact_method: 'sms' },
     photos: [['rear_right', suvThumb, suv]],
   },
@@ -93,7 +93,7 @@ const FEATURED: Featured[] = [
   {
     hoursAgo: 50,
     status: 'in_work',
-    source: 'card',
+    source: 'sticker',
     answers: { year: 2016, mileage: 121500, condition: 'good', accident: 'no', finance: 'no', asking_price: 18500, contact_method: 'call' },
     photos: [['front_left', truckThumb, truck]],
     noteHoursAgo: 30,
@@ -101,7 +101,7 @@ const FEATURED: Featured[] = [
   {
     hoursAgo: 74,
     status: 'in_work',
-    source: 'flyer',
+    source: 'shop',
     answers: { year: 2017, mileage: 88000, condition: 'good', accident: 'unknown', finance: 'no', asking_price: 16900, contact_method: 'email' },
     photos: [['front_left', minivanThumb, minivan]],
     noteHoursAgo: 52,
@@ -117,9 +117,13 @@ const FEATURED: Featured[] = [
 ]
 
 const CONDITIONS = ['excellent', 'good', 'good', 'needs_repairs', 'accident_damaged', 'not_running']
-const SOURCES = ['card', 'card', 'card', 'card', 'parking', 'flyer', 'direct']
-// Older leads mostly reached an outcome; the recent ones are still open.
-const OUTCOMES: Status[] = ['bought', 'rejected', 'rejected', 'bought', 'rejected', 'in_work']
+// The places the older leads came from, taken in turn: the card most, then a
+// sticker, a partner repair shop, a sign, the maps listing and a text after a
+// missed call (the ids an instance names in SOURCE_LABELS; the country's
+// names are in its demo.yaml). Every third closed lead was bought, which
+// gives each place purchases within the last 30 days of the statistics.
+const SOURCES = ['card', 'maps', 'card', 'sticker', 'shop', 'sign', 'card', 'missed_call']
+const OLDER = 54
 
 // A small fixed sequence: the same demo on every visit.
 function sequence(seed: number) {
@@ -161,17 +165,19 @@ export function seed(now: Date, country: DemoCountry): DemoData {
 
   const random = sequence(7)
   const pick = <T,>(items: T[]) => items[Math.floor(random() * items.length)]
-  for (let index = 40; index >= 0; index--) {
-    const hoursAgo = 96 + index * 30 + Math.floor(random() * 12)
+  // Older leads mostly reached an outcome; the recent ones are still open.
+  for (let index = OLDER - 1; index >= 0; index--) {
+    const hoursAgo = 96 + index * 20 + Math.floor(random() * 12)
     const [make, model] = pick(country.cars)
     const [location, postal] = pick(country.cities)
     const hasPrice = random() < 0.75
+    const outcome: Status = index % 3 === 0 ? 'bought' : 'rejected'
     add(
       {
-        status: hoursAgo < 140 ? 'new' : hoursAgo < 260 ? 'in_work' : pick(OUTCOMES),
+        status: hoursAgo < 140 ? 'new' : hoursAgo < 260 ? 'in_work' : outcome,
         createdAt: at(hoursAgo),
         submittedAt: at(hoursAgo - 0.05),
-        source: pick(SOURCES),
+        source: SOURCES[index % SOURCES.length],
         answers: local({
           make, model,
           year: 2006 + Math.floor(random() * 19),

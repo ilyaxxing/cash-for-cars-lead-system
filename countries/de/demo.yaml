@@ -35,6 +35,8 @@ cars: [[Volkswagen, Golf], [Volkswagen, Passat], [Volkswagen, Tiguan], [Mercedes
 names: [Anna Schmidt, Lukas Hoffmann, Laura Schulz, Jonas Koch, Lea Richter, Felix Klein, Sarah Wolf, Paul Schröder, Lena Neumann, Tim Schwarz, Katharina Braun, Jan Zimmermann]
 cities: [[Köln, '50667'], [Pulheim, '50259'], [Frechen, '50226'], [Brühl, '50321']]
 
+sources: {sticker: Autoaufkleber, shop: Partnerwerkstatt, sign: Schild an der Straße, maps: Google Maps, missed_call: SMS nach verpasstem Anruf}
+
 page:
   title: Autoankauf Sofort · Zuerst anrufen
   description: 'Eine funktionierende Demo: das Formular, das ein Verkäufer nach dem Scannen Ihres Codes oder einem Tipp auf Ihren Link ausfüllt, und die App, in der die Anfrage per Push ankommt.'

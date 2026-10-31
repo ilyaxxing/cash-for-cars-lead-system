@@ -43,6 +43,11 @@ cities: [[Austin, '78701'], [Round Rock, '78681'], [San Marcos, '78666'], [Georg
 # A country whose form asks questions of its own answers them for these leads
 # under extra: one list of values per field (countries/ru/demo.yaml).
 
+# Where the demo's leads came from (frontend/src/demo/seed.ts), with the names
+# the statistics show, as SOURCE_LABELS gives them in an instance. The card's
+# own name comes from the texts.
+sources: {sticker: Car sticker, shop: Partner repair shop, sign: Roadside sign, maps: Google Maps, missed_call: Text after a missed call}
+
 # The page for car buyers (buyer-site/index.html). h1 may hold an <em>.
 page:
   title: Car Buyout · Be first to call
