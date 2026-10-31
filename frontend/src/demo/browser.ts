@@ -9,7 +9,7 @@
 // The country's part (its leads, the made-up business) comes from the page:
 // tools/make_demo.py writes countries/<code>/demo.yaml into it as #demo-data.
 
-import { RETURN_KEY, type Value } from '../form/engine'
+import { RETURN_KEY, SOURCE_KEY, type Value } from '../form/engine'
 import type { AppConfig } from '../shared/config'
 import { normalizePhone } from '../shared/region'
 import { Backend, type DemoData, type Notice, type Reply } from './backend'
@@ -292,7 +292,14 @@ export function install() {
     })
   } else {
     // Back from the privacy policy, the seller carries on with their answers.
-    if (!returning()) storage((store) => store.removeItem(FORM_DRAFT))
+    // Otherwise the form starts clean, and the place in its link (?src=, which
+    // the page for car buyers lets a visitor pick) counts anew.
+    if (!returning()) {
+      storage((store) => {
+        store.removeItem(FORM_DRAFT)
+        store.removeItem(SOURCE_KEY)
+      })
+    }
     routeUploads(backend)
   }
 }

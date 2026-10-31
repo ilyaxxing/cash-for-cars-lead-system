@@ -60,6 +60,11 @@ page:
   kicker_demo: Demo en directo
   h2_demo: Sé el vendedor. Luego sé el comprador.
   sub_demo: En el primer móvil, responde como lo haría un vendedor que escaneó tu código. En cuanto deja sus datos de contacto, la solicitud llega al segundo móvil con una notificación. Tócala, cambia el estado, añade una nota.
+  from_label: Dónde te encontró el vendedor
+  from_card: Tarjeta
+  from_sticker: Pegatina
+  from_shop: Taller
+  from_maps: Mapas
   seller_frame_title: El formulario del vendedor, una demo que funciona
   seller_title: El vendedor
   seller_caption: Escaneó tu código. Sin app ni cuenta.

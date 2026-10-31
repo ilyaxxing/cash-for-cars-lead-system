@@ -80,6 +80,12 @@
     .sub { color: var(--muted); max-width: 40em; margin: 14px 0 0; }
 
     .flow { display: grid; grid-template-columns: 1fr; gap: 28px; margin-top: 36px; }
+    .from { text-align: center; margin-bottom: -10px; }
+    .from-label { display: block; color: var(--muted); font: 500 12px/1.4 "Geist Mono", ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .chips { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; max-width: 340px; margin: 10px auto 0; }
+    .chips button { min-height: 40px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--text); font: 500 14px/1 Geist, sans-serif; cursor: pointer; }
+    .chips button:hover { border-color: var(--faint); }
+    .chips button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
     .phone { margin: 0; }
     .phone .screen { position: relative; width: min(330px, 84vw); aspect-ratio: 390 / 844; margin: 0 auto; border-radius: 38px; overflow: hidden; background: #111212; border: 8px solid #222424; box-shadow: 0 30px 80px rgba(0, 0, 0, .5); }
     /* The apps lay out at a phone's 390 px and are scaled to the frame (script below). */
@@ -103,6 +109,9 @@
     @media (min-width: 760px) {
       .places { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .flow { grid-template-columns: 1fr 1fr; }
+      /* The choice of place stays right above the form it reloads. */
+      .flow .phone { grid-row: 2; }
+      .chips { display: flex; flex-wrap: wrap; justify-content: center; max-width: none; }
       .points { grid-template-columns: repeat(2, 1fr); }
     }
     @media (min-width: 980px) {
@@ -157,8 +166,18 @@
       <h2>{{h2_demo}}</h2>
       <p class="sub">{{sub_demo}}</p>
       <div class="flow">
+        <!-- The form opens with ?src= of the picked place, as from that place's code or link. -->
+        <div class="from" role="group" aria-labelledby="from-label">
+          <span class="from-label" id="from-label">{{from_label}}</span>
+          <div class="chips">
+            <button type="button" aria-pressed="true" data-source="card">{{from_card}}</button>
+            <button type="button" aria-pressed="false" data-source="sticker">{{from_sticker}}</button>
+            <button type="button" aria-pressed="false" data-source="shop">{{from_shop}}</button>
+            <button type="button" aria-pressed="false" data-source="maps">{{from_maps}}</button>
+          </div>
+        </div>
         <figure class="phone">
-          <div class="screen"><iframe data-src="{{demo}}index.html?src=card" title="{{seller_frame_title}}"></iframe></div>
+          <div class="screen"><iframe data-src="{{demo}}index.html" data-seller title="{{seller_frame_title}}"></iframe></div>
           <figcaption><b>{{seller_title}}</b>{{seller_caption}}</figcaption>
         </figure>
         <figure class="phone" id="buyer">
@@ -195,13 +214,17 @@
       // The two apps get the same name and color as this page.
       var params = new URLSearchParams(location.search);
       var frames = Array.prototype.slice.call(document.querySelectorAll('iframe[data-src]'));
+      var seller = document.querySelector('iframe[data-seller]');
+      var source = 'card';
+      function address(frame, fresh) {
+        var url = new URL(frame.getAttribute('data-src'), location.href);
+        ['name', 'color'].forEach(function (key) { if (params.get(key)) url.searchParams.set(key, params.get(key)); });
+        if (frame === seller) url.searchParams.set('src', source);
+        if (fresh) url.searchParams.set('fresh', Date.now());
+        return url.href;
+      }
       function load(fresh) {
-        frames.forEach(function (frame) {
-          var url = new URL(frame.getAttribute('data-src'), location.href);
-          ['name', 'color'].forEach(function (key) { if (params.get(key)) url.searchParams.set(key, params.get(key)); });
-          if (fresh) url.searchParams.set('fresh', Date.now());
-          frame.src = url.href;
-        });
+        frames.forEach(function (frame) { frame.src = address(frame, fresh); });
       }
       function fit() {
         frames.forEach(function (frame) {
@@ -217,6 +240,18 @@
       document.getElementById('restart').addEventListener('click', function () {
         window.__carBuyoutDemo = undefined;
         load(true);
+      });
+
+      // Where the seller found the business: the form starts over from that
+      // place, and the lead it sends shows the place in the app.
+      var chips = Array.prototype.slice.call(document.querySelectorAll('[data-source]'));
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          if (chip.getAttribute('aria-pressed') === 'true') return;
+          source = chip.getAttribute('data-source');
+          chips.forEach(function (other) { other.setAttribute('aria-pressed', String(other === chip)); });
+          seller.src = address(seller, true);
+        });
       });
 
       // On a phone the app is below the form: point at it when a lead arrives.

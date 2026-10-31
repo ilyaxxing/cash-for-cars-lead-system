@@ -59,6 +59,11 @@ page:
   kicker_demo: Demo en vivo
   h2_demo: Sea el vendedor. Luego sea el comprador.
   sub_demo: En el primer teléfono, conteste como lo haría un vendedor que escaneó su código. En cuanto deja sus datos de contacto, el prospecto llega al segundo teléfono con una notificación. Tóquela, cambie el estado, agregue una nota.
+  from_label: Dónde lo encontró el vendedor
+  from_card: Tarjeta
+  from_sticker: Calcomanía
+  from_shop: Taller
+  from_maps: Mapas
   seller_frame_title: El formulario del vendedor, una demo que funciona
   seller_title: El vendedor
   seller_caption: Escaneó su código. Sin app ni cuenta.
