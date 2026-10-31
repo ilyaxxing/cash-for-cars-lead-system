@@ -213,14 +213,11 @@ function presetOf(code: string): string {
 // A country's demo part, as tools/make_demo.py writes it into the page.
 function country(code: string): DemoCountry {
   const demo = parse(read(`../../../countries/${code}/demo.yaml`))
-  const settings = read(`../../../countries/${code}/settings.env`)
-  const labels = /^SOURCE_LABELS=(.*)$/m.exec(settings)?.[1] ?? ''
   const preset = presetOf(code)
   return {
     ...demo,
     extra: demo.extra ?? {},
     business_names: [demo.business.operator_name, 'Car Buyout'],
-    sources: Object.fromEntries(labels.split(',').filter(Boolean).map((pair) => pair.split(':'))),
     distance_unit: parse(read(`../../../${preset}`)).distance_unit,
   }
 }
@@ -257,5 +254,14 @@ describe('the demo leads', () => {
     const optima = seed(NOW, local).leads.find((lead) => lead.photos.length === 4)!
     expect(optima.answers.mileage).toBe(local.distance_unit === 'km' ? 126100 : 78400)
     expect(optima.answers.asking_price! as number % local.price_step).toBe(0)
+  })
+
+  it.each(CODES)('%s: the statistics show every place, the card first, each with cars bought', (code) => {
+    const local = country(code)
+    const rows = seed(NOW, local).leads.map(({ createdAt, status, source }) => ({ createdAt, status, source }))
+    const month = computeStats(rows, '30', NOW, 'America/Chicago')
+    expect(month.sources.map((s) => s.source).sort()).toEqual(['card', ...Object.keys(local.sources)].sort())
+    expect(month.sources[0].source).toBe('card')
+    for (const place of month.sources) expect(place.purchased, `${code} ${place.source}`).toBeGreaterThan(0)
   })
 })

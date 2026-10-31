@@ -35,36 +35,47 @@ cars: [[Toyota, Corolla], [Toyota, Yaris], [Škoda, Octavia], [Škoda, Fabia], [
 names: [Anna Kowalska, Paweł Szymański, Joanna Woźniak, Krzysztof Dąbrowski, Ewa Kozłowska, Michał Jankowski, Magdalena Mazur, Jakub Kwiatkowski, Monika Krawczyk, Adam Piotrowski, Natalia Grabowska, Łukasz Pawłowski]
 cities: [[Warszawa, 00-950], [Marki, 05-270], [Ząbki, 05-091], [Józefów, 05-420]]
 
+sources: {sticker: Naklejka na aucie, shop: Warsztat partnerski, sign: Tablica przy drodze, maps: Mapy Google, missed_call: SMS po nieodebranym połączeniu}
+
 page:
-  title: Skup Aut Ekspres · Zgłoszenia z Twoich wizytówek
+  title: Skup Aut Ekspres · Dzwoń pierwszy
   description: 'Działające demo: formularz, który sprzedający wypełnia po zeskanowaniu Twojego kodu lub kliknięciu Twojego linku, i aplikacja, w której zgłoszenie przychodzi jako powiadomienie.'
   badge: Demo
   kicker_hero: Dla skupów samochodów
-  h1: Każda wizytówka za wycieraczką <em>może przynieść sprzedającego.</em>
-  lead: Wiele osób, które nigdy nie zadzwoniłyby do obcego, chętnie zeskanuje kod. W kilka minut odpowiadają w telefonie na parę pytań, a Ty dostajesz powiadomienie z autem, ceną i zdjęciami, gotowe do pierwszego telefonu.
+  h1: Dzwoń pierwszy. <em>Skupuj więcej aut.</em>
+  lead: Umieść swój kod QR na wizytówkach, naklejkach, tablicach i u warsztatów partnerskich albo dodaj link do profilu firmy w Mapach Google. Gdy tylko sprzedający zostawi kontakt, dostajesz powiadomienie na telefon i dzwonisz, póki on wciąż szuka kupca.
   try_button: Wypróbuj sam ↓
   card_front_alt: 'Przykładowa wizytówka, przód: Kupimy Twoje auto, z kodem QR'
   card_back_alt: 'Przykładowa wizytówka, tył: co kupujemy, znowu kod QR i numer telefonu'
   card_caption: Przykładowa wizytówka. Twoja ma Twoje imię, numer i kolor.
+  kicker_places: Jeden kod, dowolne miejsce
+  h2_places: Zobacz, które miejsca przynoszą sprzedających.
+  place_card: Wizytówka za wycieraczką
+  place_sticker: Naklejka na Twoim aucie
+  place_partner: "Plakat u partnera: warsztat, pomoc drogowa"
+  place_sign: Tablica lub baner
+  place_maps: Link w profilu firmy w Mapach Google
+  place_sms: SMS po nieodebranym połączeniu
+  places_note: Każde miejsce ma własny kod lub link, a aplikacja pokazuje, które przynosi auta.
   kicker_demo: Demo na żywo
   h2_demo: Bądź sprzedającym. Potem kupującym.
-  sub_demo: Na pierwszym telefonie odpowiedz tak, jak ktoś, kto znalazł Twoją wizytówkę. Gdy tylko poda dane kontaktowe, zgłoszenie trafia na drugi telefon jako powiadomienie. Stuknij je, zmień status, dodaj notatkę.
+  sub_demo: Na pierwszym telefonie odpowiedz tak, jak sprzedający, który zeskanował Twój kod. Gdy tylko poda dane kontaktowe, zgłoszenie trafia na drugi telefon jako powiadomienie. Stuknij je, zmień status, dodaj notatkę.
   seller_frame_title: Formularz sprzedającego, działające demo
   seller_title: Sprzedający
-  seller_caption: Znalazł Twoją wizytówkę i ją zeskanował. Bez aplikacji i konta.
+  seller_caption: Zeskanował Twój kod. Bez aplikacji i konta.
   buyer_frame_title: Twoja aplikacja, działające demo
   buyer_title: Ty
   buyer_caption: Powiadomienie w kilka sekund, potem jedno stuknięcie, by zadzwonić.
   demo_note: Działające demo ze zmyślonymi zgłoszeniami i zdjęciami aut wygenerowanymi przez AI. Nic, co wpiszesz, nie opuszcza tej strony.
   start_over: Zacznij od nowa
   kicker_get: Co dostajesz
-  h2_get: Wszystko między wizytówką a telefonem.
-  p1_title: Wizytówki z Twoim kodem QR
-  p1_text: Plik gotowy do druku w Twoich kolorach, dla każdej drukarni. Każde miejsce może mieć własny kod, więc widzisz, które miejsca przynoszą auta.
+  h2_get: Wszystko między skanem a telefonem.
+  p1_title: Twoje kody QR i linki
+  p1_text: Wizytówka gotowa do druku w Twoich kolorach, a dla każdego innego miejsca własny kod lub link, więc widzisz, które miejsca przynoszą auta.
   p2_title: Formularz, który sprzedający kończą
   p2_text: Jedno pytanie na ekran, bez aplikacji i konta, zdjęcia prosto z telefonu. Przerwany w połowie formularz czeka na nich tydzień.
   p3_title: Powiadomienie w kilka sekund
-  p3_text: Auto, cena i zdjęcia na Twoim telefonie. Imię i numer sprzedającego nigdy nie pojawiają się na ekranie blokady.
+  p3_text: Auto, a do tego cena i zdjęcia, jeśli sprzedający je doda. Imię i numer sprzedającego nigdy nie pojawiają się na ekranie blokady.
   p4_title: Wszystkie zgłoszenia w jednej aplikacji
   p4_text: Nowe, w toku, kupione, odrzucone. Notatki, jedno stuknięcie, by zadzwonić lub napisać, i statystyki tego, co przynosi auta.
   kicker_yours: Twoje

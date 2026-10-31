@@ -35,36 +35,47 @@ cars: [[Seat, León], [Seat, Arona], [Volkswagen, Golf], [Renault, Clio], [Peuge
 names: [Lucía García, Antonio Martín, Paula Sánchez, Manuel López, Sara Fernández, David González, Elena Pérez, Sergio Gómez, Alba Díaz, Raúl Hernández, Nuria Muñoz, Álvaro Álvarez]
 cities: [[Madrid, '28001'], [Alcalá de Henares, '28803'], [Fuenlabrada, '28941'], [Alcorcón, '28921']]
 
+sources: {sticker: Pegatina en el coche, shop: Taller colaborador, sign: Cartel en la calle, maps: Google Maps, missed_call: SMS tras llamada perdida}
+
 page:
-  title: Coches al Contado · Solicitudes desde tus tarjetas
+  title: Coches al Contado · Llama el primero
   description: 'Una demo que funciona: el formulario que rellena un vendedor al escanear tu código o tocar tu enlace, y la app donde llega la solicitud con una notificación.'
   badge: Demo
   kicker_hero: Para compradores de coches usados
-  h1: Cada tarjeta en un parabrisas <em>puede traerte un vendedor.</em>
-  lead: Mucha gente que nunca llamaría a un desconocido sí escanea un código. Responde unas preguntas en el móvil en pocos minutos, y a ti te llega una notificación con el coche, el precio y las fotos, lista para la primera llamada.
+  h1: Llama el primero. <em>Compra más coches.</em>
+  lead: Pon tu código QR en tarjetas, pegatinas, carteles y en talleres colaboradores, o añade tu enlace a tu ficha de Google Maps. En cuanto un vendedor deja sus datos, te llega una notificación al móvil y llamas mientras aún busca comprador.
   try_button: Pruébalo tú mismo ↓
   card_front_alt: 'Una tarjeta de ejemplo, anverso: Compramos tu coche, con un código QR'
   card_back_alt: 'Una tarjeta de ejemplo, reverso: qué compramos, el código QR otra vez y el teléfono'
   card_caption: Una tarjeta de ejemplo. La tuya lleva tu nombre, tu teléfono y tu color.
+  kicker_places: Un código, cualquier sitio
+  h2_places: Mira qué sitios te traen vendedores.
+  place_card: Una tarjeta en el parabrisas
+  place_sticker: Una pegatina en tu propio coche
+  place_partner: Un póster en un taller o una grúa colaboradores
+  place_sign: Un cartel o una lona
+  place_maps: Un enlace en tu ficha de Google Maps
+  place_sms: Un SMS tras una llamada perdida
+  places_note: Cada sitio tiene su propio código o enlace, y la app muestra cuál te trae coches.
   kicker_demo: Demo en directo
   h2_demo: Sé el vendedor. Luego sé el comprador.
-  sub_demo: En el primer móvil, responde como lo haría quien encontró tu tarjeta. En cuanto deja sus datos de contacto, la solicitud llega al segundo móvil con una notificación. Tócala, cambia el estado, añade una nota.
+  sub_demo: En el primer móvil, responde como lo haría un vendedor que escaneó tu código. En cuanto deja sus datos de contacto, la solicitud llega al segundo móvil con una notificación. Tócala, cambia el estado, añade una nota.
   seller_frame_title: El formulario del vendedor, una demo que funciona
   seller_title: El vendedor
-  seller_caption: Encontró tu tarjeta y la escaneó. Sin app ni cuenta.
+  seller_caption: Escaneó tu código. Sin app ni cuenta.
   buyer_frame_title: Tu app, una demo que funciona
   buyer_title: Tú
   buyer_caption: Una notificación en segundos y un toque para llamar.
   demo_note: Una demo que funciona, con solicitudes inventadas y fotos de coches generadas por IA. Nada de lo que escribas sale de esta página.
   start_over: Empezar de nuevo
   kicker_get: Lo que recibes
-  h2_get: Todo lo que hay entre la tarjeta y la llamada.
-  p1_title: Tarjetas con tu código QR
-  p1_text: Un archivo listo para imprimir en tus colores, para cualquier imprenta. Cada sitio puede tener su propio código, así ves qué sitios te traen coches.
+  h2_get: Todo lo que hay entre el escaneo y la llamada.
+  p1_title: Tus códigos QR y enlaces
+  p1_text: Una tarjeta lista para imprimir en tus colores, y un código o enlace propio para cada sitio donde te anuncies, así ves cuáles te traen coches.
   p2_title: Un formulario que los vendedores terminan
   p2_text: Una pregunta por pantalla, sin app ni cuenta, fotos directamente desde el móvil. Si lo dejan a medias, les espera una semana.
   p3_title: Una notificación en segundos
-  p3_text: El coche, el precio y las fotos en tu móvil. El nombre y el número del vendedor nunca aparecen en la pantalla de bloqueo.
+  p3_text: El coche, y también el precio y las fotos si el vendedor los añade. El nombre y el número del vendedor nunca aparecen en la pantalla de bloqueo.
   p4_title: Todas las solicitudes en una app
   p4_text: Nuevas, en curso, compradas, descartadas. Notas, un toque para llamar o escribir, y estadísticas de qué te trae coches.
   kicker_yours: Tuyo

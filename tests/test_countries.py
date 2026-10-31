@@ -32,8 +32,11 @@ DEMO_KEYS = {
     "cars",
     "names",
     "cities",
+    "sources",
     "page",
 }
+# The places frontend/src/demo/seed.ts gives the demo's leads, besides the card.
+PLACES = {"sticker", "shop", "sign", "maps", "missed_call"}
 
 
 def settings_of(code: str) -> dict[str, Any]:
@@ -112,6 +115,9 @@ def test_a_country_demo_is_complete(code):
     assert demo["business"].keys() >= {*SETTINGS, "card_contact"}
     assert len(demo["featured"]) == 6
     assert demo["phones"] and demo["cars"] and demo["names"] and demo["cities"]
+    # Named for the statistics as SOURCE_LABELS would name them: no commas or quotes.
+    assert demo["sources"].keys() == PLACES
+    assert all(label and not re.search(r"[,'\"]", label) for label in demo["sources"].values())
     # Built and committed: tools/make_demo.py ran after the country changed.
     demo_dir = BASE_DIR / "docs" / "demo" if code == DEFAULT else BASE_DIR / "docs" / "demo" / code
     card_dir = BASE_DIR / "docs" / "assets" / "card" / ("" if code == DEFAULT else code)

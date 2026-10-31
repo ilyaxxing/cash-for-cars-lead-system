@@ -120,7 +120,7 @@ def page_data(demo: dict[str, Any], settings: Settings, distance_unit: str) -> s
     """The country's part of the demo, as frontend/src/demo/seed.ts reads it."""
     data = {
         "business_names": [demo["business"]["operator_name"], settings.brand_name],
-        "sources": settings.source_labels,
+        "sources": demo["sources"],
         "calls_off": demo["calls_off"],
         "price_scale": demo["price_scale"],
         "price_step": demo["price_step"],

@@ -49,37 +49,51 @@ extra:
 # A country whose form asks questions of its own answers them for these leads
 # under extra: one list of values per field (countries/ru/demo.yaml).
 
+# Where the demo's leads came from (frontend/src/demo/seed.ts), with the names
+# the statistics show, as SOURCE_LABELS gives them in an instance. The card's
+# own name comes from the texts.
+sources: {sticker: Car sticker, shop: Partner garage, sign: Roadside sign, maps: Google Maps, missed_call: Text after a missed call}
+
 # The page for car buyers (buyer-site/index.html). h1 may hold an <em>.
 page:
-  title: Car Buyout · Leads from your windshield cards
+  title: Car Buyout · Be first to call
   description: 'A working demo: the form a seller fills in after scanning your code or tapping your link, and the app where the lead arrives with a push.'
   badge: Demo
   kicker_hero: For car buyers and traders
-  h1: Every card under a wiper <em>can bring you a seller.</em>
-  lead: Many people who would never call a stranger will scan a code. They answer a few questions on their phone in a few minutes, and you get a push with the car, the price and photos, ready for the first call.
+  h1: Be first to call. <em>Buy more cars.</em>
+  lead: Put your QR code on cards, stickers, signs and at partner garages, or add your link to your Google Maps listing. The moment a seller leaves their contacts, a push hits your phone, so you call while they're still looking for a buyer.
   try_button: Try it yourself ↓
   card_front_alt: 'A sample card, front: We buy your car, with a QR code'
   card_back_alt: 'A sample card, back: what is bought, the QR code again and the phone number'
   card_caption: A sample card. Yours carries your name, phone and colour.
+  kicker_places: One code, any place
+  h2_places: See which places bring you sellers.
+  place_card: A card under a wiper
+  place_sticker: A sticker on your own car
+  place_partner: A poster at a partner garage or recovery firm
+  place_sign: A sign or banner
+  place_maps: A link in your Google Maps listing
+  place_sms: A text after a missed call
+  places_note: Every place gets its own code or link, and the app shows which one brings cars.
   kicker_demo: Live demo
   h2_demo: Be the seller. Then be the buyer.
-  sub_demo: On the first phone, answer as someone who found your card would. The moment the contact details are in, the lead lands on the second phone with a push. Tap it, change the status, add a note.
+  sub_demo: On the first phone, answer as a seller who scanned your code would. The moment the contact details are in, the lead lands on the second phone with a push. Tap it, change the status, add a note.
   seller_frame_title: The seller's form, a working demo
   seller_title: The seller
-  seller_caption: Found your card, scanned it. No app, no account.
+  seller_caption: Scanned your code. No app, no account.
   buyer_frame_title: Your app, a working demo
   buyer_title: You
   buyer_caption: A push within seconds, then one tap to call.
   demo_note: A working demo with made-up leads and AI-generated car photos. Nothing you type leaves this page.
   start_over: Start over
   kicker_get: What you get
-  h2_get: Everything between the card and the call.
-  p1_title: Cards with your QR code
-  p1_text: A print-ready file in your colours for any print shop. Each placement can get its own code, so you see which places bring cars.
+  h2_get: Everything between the scan and the call.
+  p1_title: Your QR codes and links
+  p1_text: A print-ready card in your colours, and its own code or link for every other place, so you see which places bring cars.
   p2_title: A form sellers finish
   p2_text: One question per screen, no app, no account, photos straight from the phone. A form left halfway waits for them for a week.
   p3_title: A push in seconds
-  p3_text: The car, the price and the photos on your phone. The seller's name and number never show on the lock screen.
+  p3_text: The car, plus the asking price and photos if the seller adds them. The seller's name and number never show on the lock screen.
   p4_title: Every lead in one app
   p4_text: New, in progress, purchased, rejected. Notes, one tap to call or message, and statistics on what brings cars.
   kicker_yours: Yours
