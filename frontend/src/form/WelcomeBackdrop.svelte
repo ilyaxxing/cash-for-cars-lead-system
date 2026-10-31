@@ -34,9 +34,16 @@
 <div class="backdrop">
   <div class="picture">
     {#if own}
-      <img src={own.src} srcset={own.srcset} sizes="100vw" alt="" class="hero-img own" />
+      <img src={own.src} srcset={own.srcset} sizes="100vw" alt="" class="hero-img own" style:--ratio={own.width / own.height} />
     {:else if hero}
-      <img src={hero.src} srcset={hero.srcset} sizes="100vw" alt={form.t('form.welcome.hero_alt')} class="hero-img" />
+      <img
+        src={hero.src}
+        srcset={hero.srcset}
+        sizes="100vw"
+        alt={form.t('form.welcome.hero_alt')}
+        class="hero-img"
+        style:--ratio={hero.ratio}
+      />
     {/if}
     <div aria-hidden="true" class="fade-top"></div>
     <div aria-hidden="true" class="fade-bottom"></div>
@@ -51,7 +58,8 @@
     right: 0;
     top: 0;
     z-index: -1;
-    height: 500px;
+    --height: 500px;
+    height: var(--height);
     pointer-events: none;
   }
 
@@ -74,18 +82,23 @@
     mask-image: var(--mask);
   }
 
+  /* Covers the backdrop as object-fit: cover would, with object-position
+     24% 50%, but by the image's own box in the photo's shape: Safari on the
+     iPhone now and then ignores object-fit on an image with a srcset and
+     stretches the photo to the box (WebKit bug 227682). */
   .hero-img {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 24% 50%;
+    left: 24%;
+    top: 50%;
+    width: max(100%, var(--height) * var(--ratio));
+    aspect-ratio: var(--ratio);
+    transform: translate(-24%, -50%);
   }
 
   /* The designs' car sits left of center; a client's photo is centered. */
   .hero-img.own {
-    object-position: 50% 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .fade-top {

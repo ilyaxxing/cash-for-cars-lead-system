@@ -255,6 +255,10 @@ class Brand:
         self.palette = palette
         self.logo = logo
         self.photo = photo or {}
+        # The photo's shape, so the page can lay it out without the browser's help.
+        self.photo_size = (
+            Image.open(io.BytesIO(self.photo[max(self.photo)].body)).size if photo else None
+        )
         self.icon_source = icon_source
         self.files: dict[str, Asset] = {}
         if logo:
@@ -311,10 +315,12 @@ class Brand:
                 "wordmark": self.logo.wordmark,
             }
         photo = None
-        if self.photo:
+        if self.photo and self.photo_size:
             sources = [(self.url(f"photo-{width}.webp"), width) for width in sorted(self.photo)]
             photo = {
                 "src": sources[-1][0],
                 "srcset": ", ".join(f"{url} {width}w" for url, width in sources),
+                "width": self.photo_size[0],
+                "height": self.photo_size[1],
             }
         return {"logo": logo, "photo": photo}
