@@ -45,6 +45,15 @@ page:
   card_front_alt: 'Una tarjeta de ejemplo, frente: Compramos su auto, con un código QR'
   card_back_alt: 'Una tarjeta de ejemplo, reverso: qué compramos, el código QR otra vez y el teléfono'
   card_caption: Una tarjeta de ejemplo. La suya lleva su nombre, teléfono y color.
+  kicker_places: Un código, cualquier lugar
+  h2_places: Vea qué lugares le traen vendedores.
+  place_card: Una tarjeta en el parabrisas
+  place_sticker: Una calcomanía en su propio auto
+  place_partner: Un póster en un taller o una grúa aliados
+  place_sign: Un letrero o una lona
+  place_maps: Un enlace en su perfil de Google Maps
+  place_sms: Un mensaje de texto tras una llamada perdida
+  places_note: Cada lugar tiene su propio código o enlace, y la app muestra cuál le trae autos.
   kicker_demo: Demo en vivo
   h2_demo: Sea el vendedor. Luego sea el comprador.
   sub_demo: En el primer teléfono, conteste como lo haría un vendedor que escaneó su código. En cuanto deja sus datos de contacto, el prospecto llega al segundo teléfono con una notificación. Tóquela, cambie el estado, agregue una nota.

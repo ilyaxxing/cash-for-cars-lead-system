@@ -46,6 +46,15 @@ page:
   card_front_alt: 'Eine Beispielkarte, Vorderseite: Wir kaufen Ihr Auto, mit QR-Code'
   card_back_alt: 'Eine Beispielkarte, Rückseite: was wir kaufen, noch einmal der QR-Code und die Telefonnummer'
   card_caption: Eine Beispielkarte. Ihre trägt Ihren Namen, Ihre Nummer und Ihre Farbe.
+  kicker_places: Ein Code, jeder Ort
+  h2_places: Sehen Sie, welche Orte Ihnen Verkäufer bringen.
+  place_card: Eine Karte unterm Scheibenwischer
+  place_sticker: Ein Aufkleber auf Ihrem eigenen Auto
+  place_partner: "Ein Plakat beim Partner: Werkstatt, Abschleppdienst"
+  place_sign: Ein Schild oder Banner
+  place_maps: Ein Link in Ihrem Google-Maps-Eintrag
+  place_sms: Eine SMS nach einem verpassten Anruf
+  places_note: Jeder Ort bekommt einen eigenen Code oder Link, und die App zeigt, welcher Autos bringt.
   kicker_demo: Live-Demo
   h2_demo: Seien Sie der Verkäufer. Dann der Käufer.
   sub_demo: Antworten Sie auf dem ersten Handy so wie ein Verkäufer, der Ihren Code gescannt hat. Sobald die Kontaktdaten drin sind, landet die Anfrage per Push auf dem zweiten Handy. Tippen Sie darauf, ändern Sie den Status, fügen Sie eine Notiz hinzu.

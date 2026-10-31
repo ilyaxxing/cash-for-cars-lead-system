@@ -46,6 +46,15 @@ page:
   card_front_alt: 'Une carte d''exemple, recto : On rachète votre auto, avec un QR code'
   card_back_alt: 'Une carte d''exemple, verso : ce que nous rachetons, le QR code à nouveau et le numéro de téléphone'
   card_caption: Une carte d'exemple. La vôtre porte votre nom, votre numéro et votre couleur.
+  kicker_places: Un code, partout
+  h2_places: Voyez quels endroits vous amènent des vendeurs.
+  place_card: Une carte sous un essuie-glace
+  place_sticker: Un autocollant sur votre propre voiture
+  place_partner: Une affiche chez un garage ou un dépanneur partenaire
+  place_sign: Un panneau ou une banderole
+  place_maps: Un lien dans votre fiche Google Maps
+  place_sms: Un SMS après un appel manqué
+  places_note: Chaque endroit a son propre code ou lien, et l'app montre lequel vous amène des voitures.
   kicker_demo: Démo en direct
   h2_demo: Soyez le vendeur. Puis l'acheteur.
   sub_demo: Sur le premier téléphone, répondez comme le ferait un vendeur qui a scanné votre code. Dès que ses coordonnées sont saisies, la demande arrive sur le second téléphone par notification. Touchez-la, changez le statut, ajoutez une note.

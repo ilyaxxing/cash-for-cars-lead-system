@@ -71,6 +71,10 @@
     .cards .back { right: 0; bottom: 0; transform: rotate(3deg); }
     .caption { text-align: center; color: var(--faint); font: 500 12px/1.5 "Geist Mono", ui-monospace, monospace; margin: 14px 0 0; }
 
+    .places { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 28px 0 0; padding: 0; list-style: none; }
+    .place { display: flex; flex-direction: column; gap: 12px; border: 1px solid var(--line); border-radius: 16px; padding: 16px; background: var(--surface); font-size: 15px; line-height: 1.35; }
+    .place svg { display: block; width: 26px; height: 26px; fill: none; stroke: var(--accent); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
     section { padding: 72px 0 0; }
     h2 { margin: 0; font: 800 clamp(30px, 4.4vw, 44px)/1.04 Geist, sans-serif; letter-spacing: -.03em; }
     .sub { color: var(--muted); max-width: 40em; margin: 14px 0 0; }
@@ -97,6 +101,7 @@
     footer { padding: 72px 0 48px; color: var(--faint); font-size: 14px; }
 
     @media (min-width: 760px) {
+      .places { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .flow { grid-template-columns: 1fr 1fr; }
       .points { grid-template-columns: repeat(2, 1fr); }
     }
@@ -131,6 +136,21 @@
         <p class="caption">{{card_caption}}</p>
       </div>
     </div>
+
+    <!-- The card is one place among many: each gets its own code or link. -->
+    <section>
+      <div class="kicker">{{kicker_places}}</div>
+      <h2>{{h2_places}}</h2>
+      <ul class="places">
+        <li class="place"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="12" rx="2"/><rect x="6" y="11" width="5" height="5" rx="1"/><path d="M14 12h4M14 15h3M2.5 6 15 3.5"/></svg>{{place_card}}</li>
+        <li class="place"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 16.5v-3.2l2.6-5.1c.3-.6.9-1 1.6-1h8.4c.6 0 1.1.3 1.5.7l3.4 4 2.4.6c.6.2 1.1.7 1.1 1.4v2.6M8.6 17h6.8"/><circle cx="6" cy="17" r="2.4"/><circle cx="18" cy="17" r="2.4"/><rect x="9.3" y="9.6" width="4" height="3.4" rx=".6"/></svg>{{place_sticker}}</li>
+        <li class="place"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 4l9 6.5V20H3zM7 20v-6.5h10V20M7 16.8h10"/></svg>{{place_partner}}</li>
+        <li class="place"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="9" rx="1.5"/><path d="M12 12.5V21M8.5 21h7M7 7h6M7 9.5h9"/></svg>{{place_sign}}</li>
+        <li class="place"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg>{{place_maps}}</li>
+        <li class="place"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5h16a1 1 0 0 1 1 1V16a1 1 0 0 1-1 1h-9l-4.5 3.5V17H4a1 1 0 0 1-1-1V5.5a1 1 0 0 1 1-1zM7.5 9.5h9M7.5 12.5h5.5"/></svg>{{place_sms}}</li>
+      </ul>
+      <p class="sub">{{places_note}}</p>
+    </section>
 
     <section id="try">
       <div class="kicker">{{kicker_demo}}</div>

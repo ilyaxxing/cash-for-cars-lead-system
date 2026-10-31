@@ -61,6 +61,15 @@ page:
   card_front_alt: 'A sample card, front: We buy your car, with a QR code'
   card_back_alt: 'A sample card, back: what is bought, the QR code again and the phone number'
   card_caption: A sample card. Yours carries your name, phone and colour.
+  kicker_places: One code, any place
+  h2_places: See which places bring you sellers.
+  place_card: A card under a wiper
+  place_sticker: A sticker on your own car
+  place_partner: A poster at a partner garage or recovery firm
+  place_sign: A sign or banner
+  place_maps: A link in your Google Maps listing
+  place_sms: A text after a missed call
+  places_note: Every place gets its own code or link, and the app shows which one brings cars.
   kicker_demo: Live demo
   h2_demo: Be the seller. Then be the buyer.
   sub_demo: On the first phone, answer as a seller who scanned your code would. The moment the contact details are in, the lead lands on the second phone with a push. Tap it, change the status, add a note.

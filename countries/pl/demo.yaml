@@ -46,6 +46,15 @@ page:
   card_front_alt: 'Przykładowa wizytówka, przód: Kupimy Twoje auto, z kodem QR'
   card_back_alt: 'Przykładowa wizytówka, tył: co kupujemy, znowu kod QR i numer telefonu'
   card_caption: Przykładowa wizytówka. Twoja ma Twoje imię, numer i kolor.
+  kicker_places: Jeden kod, dowolne miejsce
+  h2_places: Zobacz, które miejsca przynoszą sprzedających.
+  place_card: Wizytówka za wycieraczką
+  place_sticker: Naklejka na Twoim aucie
+  place_partner: "Plakat u partnera: warsztat, pomoc drogowa"
+  place_sign: Tablica lub baner
+  place_maps: Link w profilu firmy w Mapach Google
+  place_sms: SMS po nieodebranym połączeniu
+  places_note: Każde miejsce ma własny kod lub link, a aplikacja pokazuje, które przynosi auta.
   kicker_demo: Demo na żywo
   h2_demo: Bądź sprzedającym. Potem kupującym.
   sub_demo: Na pierwszym telefonie odpowiedz tak, jak sprzedający, który zeskanował Twój kod. Gdy tylko poda dane kontaktowe, zgłoszenie trafia na drugi telefon jako powiadomienie. Stuknij je, zmień status, dodaj notatkę.
