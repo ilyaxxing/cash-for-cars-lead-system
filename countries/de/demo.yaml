@@ -60,11 +60,6 @@ page:
   kicker_demo: Live-Demo
   h2_demo: Seien Sie der Verkäufer. Dann der Käufer.
   sub_demo: Antworten Sie auf dem ersten Handy so wie ein Verkäufer, der Ihren Code gescannt hat. Sobald die Kontaktdaten drin sind, landet die Anfrage per Push auf dem zweiten Handy. Tippen Sie darauf, ändern Sie den Status, fügen Sie eine Notiz hinzu.
-  from_label: Wo der Verkäufer Sie gefunden hat
-  from_card: Karte
-  from_sticker: Aufkleber
-  from_shop: Werkstatt
-  from_maps: Maps
   seller_frame_title: Das Formular des Verkäufers, eine funktionierende Demo
   seller_title: Der Verkäufer
   seller_caption: Hat Ihren Code gescannt. Ohne App, ohne Konto.

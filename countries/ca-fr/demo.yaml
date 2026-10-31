@@ -59,11 +59,6 @@ page:
   kicker_demo: Démo en direct
   h2_demo: Soyez le vendeur. Puis l'acheteur.
   sub_demo: Sur le premier téléphone, répondez comme le ferait un vendeur qui a scanné votre code. Dès que ses coordonnées sont saisies, la demande arrive sur le second téléphone par notification. Touchez-la, changez le statut, ajoutez une note.
-  from_label: Où le vendeur vous a trouvé
-  from_card: Carte
-  from_sticker: Autocollant
-  from_shop: Garage
-  from_maps: Maps
   seller_frame_title: Le formulaire du vendeur, une démo qui fonctionne
   seller_title: Le vendeur
   seller_caption: Il a scanné votre code. Sans app, sans compte.

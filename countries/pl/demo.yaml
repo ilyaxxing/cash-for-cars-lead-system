@@ -60,11 +60,6 @@ page:
   kicker_demo: Demo na żywo
   h2_demo: Bądź sprzedającym. Potem kupującym.
   sub_demo: Na pierwszym telefonie odpowiedz tak, jak sprzedający, który zeskanował Twój kod. Gdy tylko poda dane kontaktowe, zgłoszenie trafia na drugi telefon jako powiadomienie. Stuknij je, zmień status, dodaj notatkę.
-  from_label: Gdzie sprzedający Cię znalazł
-  from_card: Wizytówka
-  from_sticker: Naklejka
-  from_shop: Warsztat
-  from_maps: Mapy
   seller_frame_title: Formularz sprzedającego, działające demo
   seller_title: Sprzedający
   seller_caption: Zeskanował Twój kod. Bez aplikacji i konta.

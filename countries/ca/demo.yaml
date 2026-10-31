@@ -72,11 +72,6 @@ page:
   kicker_demo: Live demo
   h2_demo: Be the seller. Then be the buyer.
   sub_demo: On the first phone, answer as a seller who scanned your code would. The moment the contact details are in, the lead lands on the second phone with a push. Tap it, change the status, add a note.
-  from_label: Where the seller found you
-  from_card: Card
-  from_sticker: Sticker
-  from_shop: Partner
-  from_maps: Maps
   seller_frame_title: The seller's form, a working demo
   seller_title: The seller
   seller_caption: Scanned your code. No app, no account.
