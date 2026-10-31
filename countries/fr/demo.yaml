@@ -36,35 +36,35 @@ names: [Camille Martin, Lucas Durand, Léa Lefebvre, Hugo Michel, Manon Garcia, 
 cities: [[Lyon, '69003'], [Vaulx-en-Velin, '69120'], [Décines-Charpieu, '69150'], [Saint-Priest, '69800']]
 
 page:
-  title: Cash Auto · Des demandes grâce à vos cartes
+  title: Cash Auto · Appelez le premier
   description: 'Une démo qui fonctionne : le formulaire que remplit un vendeur après avoir scanné votre code ou touché votre lien, et l''app où la demande arrive par notification.'
   badge: Démo
   kicker_hero: Pour les acheteurs de voitures d'occasion
-  h1: Chaque carte sous un essuie-glace <em>peut vous amener un vendeur.</em>
-  lead: Beaucoup de gens qui n'appelleraient jamais un inconnu scannent volontiers un code. Ils répondent à quelques questions sur leur téléphone en quelques minutes, et vous recevez une notification avec la voiture, le prix et les photos, prête pour le premier appel.
+  h1: Appelez le premier. <em>Achetez plus de voitures.</em>
+  lead: Mettez votre QR code sur des cartes, des autocollants, des panneaux et chez des garages partenaires, ou ajoutez votre lien à votre fiche Google Maps. Dès qu'un vendeur laisse ses coordonnées, une notification arrive sur votre téléphone, et vous l'appelez pendant qu'il cherche encore un acheteur.
   try_button: Essayez vous-même ↓
   card_front_alt: 'Une carte d''exemple, recto : On rachète votre auto, avec un QR code'
   card_back_alt: 'Une carte d''exemple, verso : ce que nous rachetons, le QR code à nouveau et le numéro de téléphone'
   card_caption: Une carte d'exemple. La vôtre porte votre nom, votre numéro et votre couleur.
   kicker_demo: Démo en direct
   h2_demo: Soyez le vendeur. Puis l'acheteur.
-  sub_demo: Sur le premier téléphone, répondez comme le ferait quelqu'un qui a trouvé votre carte. Dès que ses coordonnées sont saisies, la demande arrive sur le second téléphone par notification. Touchez-la, changez le statut, ajoutez une note.
+  sub_demo: Sur le premier téléphone, répondez comme le ferait un vendeur qui a scanné votre code. Dès que ses coordonnées sont saisies, la demande arrive sur le second téléphone par notification. Touchez-la, changez le statut, ajoutez une note.
   seller_frame_title: Le formulaire du vendeur, une démo qui fonctionne
   seller_title: Le vendeur
-  seller_caption: Il a trouvé votre carte et l'a scannée. Sans app, sans compte.
+  seller_caption: Il a scanné votre code. Sans app, sans compte.
   buyer_frame_title: Votre app, une démo qui fonctionne
   buyer_title: Vous
   buyer_caption: Une notification en quelques secondes, puis un geste pour appeler.
   demo_note: Une démo qui fonctionne, avec des demandes inventées et des photos de voitures générées par IA. Rien de ce que vous saisissez ne quitte cette page.
   start_over: Recommencer
   kicker_get: Ce que vous obtenez
-  h2_get: Tout ce qu'il y a entre la carte et l'appel.
-  p1_title: Des cartes avec votre QR code
-  p1_text: Un fichier prêt à imprimer à vos couleurs, pour n'importe quel imprimeur. Chaque emplacement peut avoir son propre code, pour voir quels endroits vous amènent des voitures.
+  h2_get: Tout ce qu'il y a entre le scan et l'appel.
+  p1_title: Vos QR codes et vos liens
+  p1_text: Une carte prête à imprimer à vos couleurs, et un code ou un lien pour chaque autre endroit, pour voir quels endroits vous amènent des voitures.
   p2_title: Un formulaire que les vendeurs terminent
   p2_text: Une question par écran, sans app ni compte, des photos prises directement avec le téléphone. Un formulaire laissé en route les attend une semaine.
   p3_title: Une notification en quelques secondes
-  p3_text: La voiture, le prix et les photos sur votre téléphone. Le nom et le numéro du vendeur n'apparaissent jamais sur l'écran verrouillé.
+  p3_text: La voiture, plus le prix et les photos si le vendeur les ajoute. Le nom et le numéro du vendeur n'apparaissent jamais sur l'écran verrouillé.
   p4_title: Toutes les demandes dans une app
   p4_text: Nouvelles, en cours, achetées, refusées. Des notes, un geste pour appeler ou écrire, et des statistiques sur ce qui vous amène des voitures.
   kicker_yours: À vous

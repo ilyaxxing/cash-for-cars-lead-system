@@ -35,35 +35,35 @@ names: [María López, Juan Martínez, Lucía Gómez, Carlos Rodríguez, Sofía 
 cities: [[Houston, '77002'], [Pasadena, '77502'], [Baytown, '77520'], [Pearland, '77581']]
 
 page:
-  title: Autos al Contado · Prospectos desde sus tarjetas
+  title: Autos al Contado · Llame primero
   description: 'Una demo que funciona: el formulario que llena un vendedor al escanear su código o tocar su enlace, y la app donde llega el prospecto con una notificación.'
   badge: Demo
   kicker_hero: Para compradores de autos usados
-  h1: Cada tarjeta en un parabrisas <em>puede traerle un vendedor.</em>
-  lead: Mucha gente que nunca llamaría a un desconocido sí escanea un código. Contesta unas preguntas en su teléfono en pocos minutos, y a usted le llega una notificación con el auto, el precio y las fotos, listo para la primera llamada.
+  h1: Llame primero. <em>Compre más autos.</em>
+  lead: Ponga su código QR en tarjetas, calcomanías, letreros y en talleres aliados, o agregue su enlace a su perfil de Google Maps. En cuanto un vendedor deja sus datos, le llega una notificación al teléfono y usted llama mientras él todavía busca comprador.
   try_button: Pruébelo usted mismo ↓
   card_front_alt: 'Una tarjeta de ejemplo, frente: Compramos su auto, con un código QR'
   card_back_alt: 'Una tarjeta de ejemplo, reverso: qué compramos, el código QR otra vez y el teléfono'
   card_caption: Una tarjeta de ejemplo. La suya lleva su nombre, teléfono y color.
   kicker_demo: Demo en vivo
   h2_demo: Sea el vendedor. Luego sea el comprador.
-  sub_demo: En el primer teléfono, conteste como lo haría alguien que encontró su tarjeta. En cuanto deja sus datos de contacto, el prospecto llega al segundo teléfono con una notificación. Tóquela, cambie el estado, agregue una nota.
+  sub_demo: En el primer teléfono, conteste como lo haría un vendedor que escaneó su código. En cuanto deja sus datos de contacto, el prospecto llega al segundo teléfono con una notificación. Tóquela, cambie el estado, agregue una nota.
   seller_frame_title: El formulario del vendedor, una demo que funciona
   seller_title: El vendedor
-  seller_caption: Encontró su tarjeta y la escaneó. Sin app ni cuenta.
+  seller_caption: Escaneó su código. Sin app ni cuenta.
   buyer_frame_title: Su app, una demo que funciona
   buyer_title: Usted
   buyer_caption: Una notificación en segundos y un toque para llamar.
   demo_note: Una demo que funciona, con prospectos inventados y fotos de autos generadas por IA. Nada de lo que escriba sale de esta página.
   start_over: Empezar de nuevo
   kicker_get: Lo que recibe
-  h2_get: Todo lo que hay entre la tarjeta y la llamada.
-  p1_title: Tarjetas con su código QR
-  p1_text: Un archivo listo para imprimir en sus colores, para cualquier imprenta. Cada lugar puede tener su propio código, así ve qué lugares le traen autos.
+  h2_get: Todo lo que hay entre el escaneo y la llamada.
+  p1_title: Sus códigos QR y enlaces
+  p1_text: Una tarjeta lista para imprimir en sus colores, y un código o enlace propio para cada lugar donde se anuncie, así ve cuáles le traen autos.
   p2_title: Un formulario que los vendedores terminan
   p2_text: Una pregunta por pantalla, sin app ni cuenta, fotos directo del teléfono. Si lo dejan a medias, los espera una semana.
   p3_title: Una notificación en segundos
-  p3_text: El auto, el precio y las fotos en su teléfono. El nombre y el número del vendedor nunca aparecen en la pantalla bloqueada.
+  p3_text: El auto, y también el precio y las fotos si el vendedor los agrega. El nombre y el número del vendedor nunca aparecen en la pantalla bloqueada.
   p4_title: Todos los prospectos en una app
   p4_text: Nuevos, en proceso, comprados, rechazados. Notas, un toque para llamar o escribir, y estadísticas de qué le trae autos.
   kicker_yours: Suyo

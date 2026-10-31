@@ -36,35 +36,35 @@ names: [Ana Souza, Lucas Silva, Mariana Rodrigues, Pedro Ferreira, Camila Gomes,
 cities: [[São Paulo, 01310-100], [Barueri, 06401-000], [Diadema, 09910-000], [Mauá, 09310-000]]
 
 page:
-  title: Venda Já · Pedidos vindos dos seus cartões
+  title: Venda Já · Ligue primeiro
   description: 'Uma demo que funciona: o formulário que o vendedor preenche depois de escanear seu código ou tocar no seu link, e o app onde o pedido chega com uma notificação.'
   badge: Demo
   kicker_hero: Para quem compra carros usados
-  h1: Cada cartão no para-brisa <em>pode trazer um vendedor.</em>
-  lead: Muita gente que nunca ligaria para um desconhecido escaneia um código sem pensar. Responde algumas perguntas no celular em poucos minutos, e você recebe uma notificação com o carro, o preço e as fotos, pronto para a primeira ligação.
+  h1: Ligue primeiro. <em>Compre mais carros.</em>
+  lead: Coloque seu QR code em cartões, adesivos, placas e em oficinas parceiras, ou adicione seu link ao seu perfil no Google Maps. Assim que um vendedor deixa o contato, chega uma notificação no seu celular, e você liga enquanto ele ainda procura comprador.
   try_button: Experimente ↓
   card_front_alt: 'Um cartão de exemplo, frente: Compramos seu carro, com um QR code'
   card_back_alt: 'Um cartão de exemplo, verso: o que compramos, o QR code de novo e o telefone'
   card_caption: Um cartão de exemplo. O seu leva seu nome, seu telefone e sua cor.
   kicker_demo: Demo ao vivo
   h2_demo: Seja o vendedor. Depois, o comprador.
-  sub_demo: No primeiro celular, responda como alguém que achou seu cartão. Assim que o contato é preenchido, o pedido chega ao segundo celular com uma notificação. Toque nela, mude o status, adicione uma anotação.
+  sub_demo: No primeiro celular, responda como um vendedor que escaneou seu código. Assim que o contato é preenchido, o pedido chega ao segundo celular com uma notificação. Toque nela, mude o status, adicione uma anotação.
   seller_frame_title: O formulário do vendedor, uma demo que funciona
   seller_title: O vendedor
-  seller_caption: Achou seu cartão e escaneou. Sem app, sem cadastro.
+  seller_caption: Escaneou seu código. Sem app, sem cadastro.
   buyer_frame_title: Seu app, uma demo que funciona
   buyer_title: Você
   buyer_caption: Uma notificação em segundos e um toque para ligar.
   demo_note: Uma demo que funciona, com pedidos inventados e fotos de carros geradas por IA. Nada do que você digita sai desta página.
   start_over: Começar de novo
   kicker_get: O que você recebe
-  h2_get: Tudo entre o cartão e a ligação.
-  p1_title: Cartões com o seu QR code
-  p1_text: Um arquivo pronto para imprimir nas suas cores, para qualquer gráfica. Cada ponto pode ter o seu código, assim você vê quais lugares trazem carros.
+  h2_get: Tudo entre o QR code e a ligação.
+  p1_title: Seus QR codes e links
+  p1_text: Um cartão pronto para imprimir nas suas cores, e um código ou link próprio para cada outro lugar, assim você vê quais lugares trazem carros.
   p2_title: Um formulário que o vendedor termina
   p2_text: Uma pergunta por tela, sem app nem cadastro, fotos direto do celular. Um formulário parado no meio espera por ele uma semana.
   p3_title: Uma notificação em segundos
-  p3_text: O carro, o preço e as fotos no seu celular. O nome e o número do vendedor nunca aparecem na tela bloqueada.
+  p3_text: O carro, e também o preço e as fotos se o vendedor colocar. O nome e o número do vendedor nunca aparecem na tela bloqueada.
   p4_title: Todos os pedidos num app
   p4_text: Novos, em andamento, comprados, recusados. Anotações, um toque para ligar ou chamar no WhatsApp, e estatísticas do que traz carros.
   kicker_yours: Seu
