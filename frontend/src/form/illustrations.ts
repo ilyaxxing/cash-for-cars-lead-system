@@ -20,6 +20,7 @@ const heroes = [...byName.entries()]
   .filter((hero) => hero.width)
   .sort((a, b) => a.width - b.width)
 
+// The designs' car is a 3:2 photo (hero-car-1536.webp is 1536x1024).
 export const hero = heroes.length
-  ? { src: heroes.at(-1)!.url, srcset: heroes.map((h) => `${h.url} ${h.width}w`).join(', ') }
+  ? { src: heroes.at(-1)!.url, srcset: heroes.map((h) => `${h.url} ${h.width}w`).join(', '), ratio: 3 / 2 }
   : undefined

@@ -78,6 +78,8 @@ export interface Logo {
 export interface Photo {
   src: string
   srcset: string
+  width: number
+  height: number
 }
 
 export interface Brand {

@@ -81,9 +81,17 @@
   <div class="wide">
     <div data-st class="wide-hero">
       {#if form.config.brand.photo}
-        <img src={form.config.brand.photo.src} srcset={form.config.brand.photo.srcset} sizes="1180px" alt="" class="wide-img" />
+        {@const own = form.config.brand.photo}
+        <img src={own.src} srcset={own.srcset} sizes="1180px" alt="" class="wide-img" style:--ratio={own.width / own.height} />
       {:else if hero}
-        <img src={hero.src} srcset={hero.srcset} sizes="1180px" alt={t('form.welcome.hero_alt')} class="wide-img" />
+        <img
+          src={hero.src}
+          srcset={hero.srcset}
+          sizes="1180px"
+          alt={t('form.welcome.hero_alt')}
+          class="wide-img"
+          style:--ratio={hero.ratio}
+        />
       {/if}
       <div aria-hidden="true" class="wide-top"></div>
       <div aria-hidden="true" class="wide-bottom"></div>
@@ -263,15 +271,19 @@
     border-radius: 6px;
     overflow: hidden;
     background: var(--bg);
+    container-type: size;
   }
 
+  /* Covers the strip as object-fit: cover would, with object-position 50%
+     45%, but by the image's own box (see WelcomeBackdrop: Safari sometimes
+     stretches an image with a srcset instead). */
   .wide-img {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 45%;
+    left: 50%;
+    top: 45%;
+    width: max(100cqw, 100cqh * var(--ratio));
+    aspect-ratio: var(--ratio);
+    transform: translate(-50%, -45%);
   }
 
   .wide-top {

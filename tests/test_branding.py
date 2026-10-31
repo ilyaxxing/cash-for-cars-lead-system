@@ -153,6 +153,7 @@ def test_photo_comes_in_widths_for_phones_and_laptops(tmp_path):
     assert png_size(brand.files["photo-800.webp"].body) == (800, 500)
     public = brand.public()["photo"]
     assert public["src"].startswith("/brand/photo-1536.webp?v=")
+    assert (public["width"], public["height"]) == (1536, 960)
     small, large = public["srcset"].split(", ")
     assert re.fullmatch(r"/brand/photo-800\.webp\?v=\w+ 800w", small)
     assert re.fullmatch(r"/brand/photo-1536\.webp\?v=\w+ 1536w", large)
