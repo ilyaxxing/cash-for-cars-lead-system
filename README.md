@@ -42,7 +42,7 @@ and repair shops.
 
 | | Price | What's included |
 |---|---|---|
-| Setup | $300-600 once | Turnkey: installation, their name, color and logo, their domain, the card PDF and QR codes, the app on the owner's phone |
+| Setup | $300-600 once | Turnkey: installation, their name, color and logo, their domain, the app on the owner's phone, the card PDF, and QR codes and links for every place |
 | Support | $25-50 a month | Optional: changes, updates, someone to call |
 | Hosting | about $5 a month | On the client's own Railway account |
 | Domain | about $10-15 a year | In the business's name, if it has none |

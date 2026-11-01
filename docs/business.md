@@ -50,8 +50,8 @@ flyers on cars, so the client should check the local rules.
 - **An app on the owner's phone**: leads by status (New, In Progress,
   Purchased, Rejected), photos, notes, a one-tap call and a second button
   for the way the seller asked to be reached (a text, WhatsApp or email), and
-  statistics: how many sellers came, how many cars were bought, from cards,
-  signs or ads.
+  statistics: how many sellers came and how many cars were bought, from
+  each place.
 - **Their own brand and their own accounts**: their name, color, logo and
   domain, hosted on their own Railway account for about $5 a month, their
   data in their own database.
@@ -82,7 +82,7 @@ Suggested starting points, not market-tested yet.
 
 | | Price | What it covers |
 |---|---|---|
-| Setup | $300-600 once | Turnkey: installation, their name, color and logo, their domain, the card PDF and QR codes for signs and ads, the app on the owner's phone. |
+| Setup | $300-600 once | Turnkey: installation, their name, color and logo, their domain, the app on the owner's phone, the card PDF, and QR codes and links for every place. |
 | Support (optional) | $25-50 a month | Changes to the questions, new QR placements, updates, someone to call. |
 | Hosting | about $5 a month | On the client's own card. Where Railway doesn't fit (Russia), a small server in the client's country, at a similar price. |
 | Domain | about $10-15 a year | Required, in the business's name. Free if the business has a website: use a subdomain such as `buy.<their domain>`. |
