@@ -122,23 +122,41 @@ their own look, with no prices or setup details on it.
 ## Other niches
 
 At its core the system is a questionnaire with photos, an instant
-notification and an app to work the leads. It fits anything that is bought,
-or quoted, from a few phone photos:
+notification and an app to work the leads. How much of it changes for
+another niche depends on how close the thing is to a car.
+
+### Vehicles (form settings only)
+
+The questions are a preset file, the wording a texts file and the photo
+slots a list. A lead is titled by its make and model, with the year and
+mileage under it, so anything bought by make and model fits with no change
+to the app:
 
 | Niche | The form asks | Photos |
 |---|---|---|
 | Junk and scrap cars | Running or not, title, pickup address | The car, the damage |
-| Motorcycles, boats, RVs, trailers | Make, model, year, miles or hours, title | A walkaround |
-| Trucks and heavy equipment | Hours, maintenance, location | The machine, the hour meter |
+| Motorcycles, boats, RVs, trailers | Make, model, year, miles or engine hours, title | A walkaround |
+| Trucks and heavy equipment | Make, model, year, hours, maintenance, location | The machine, the hour meter |
+
+Engine hours or a boat's hull number are questions of their own: they show
+in the lead, not on its card in the list. The photo guides are sketches of a
+car; another photo slot shows none until a sketch of its own is added to the
+app. To adapt it, tell Claude Code what the business buys, for example:
+*"Adapt this system for a business that buys motorcycles. Ask for make,
+model, year, mileage, title status and photos of both sides and the
+dashboard."*
+
+### Other things (needs changes to the app)
+
+| Niche | The form asks | Photos |
+|---|---|---|
 | "We buy houses" investors | Address, condition, timeline, mortgage | Rooms, roof, problems |
 | Phones, electronics, appliances | Model, condition, accessories | Front, back, screen |
 | Repair and service quotes: auto body, roofing, junk removal | The problem, address, urgency | The damage, the job |
 
-To adapt it, tell Claude Code what the business buys or quotes, for example:
-*"Adapt this system for a business that buys motorcycles. Ask for make,
-model, year, mileage, title status and photos of both sides and the
-dashboard."* The questions are data (a preset file), the wording is a text
-file and the photo slots are a list, so a new niche needs no new code.
+The lead cards and the lead's fields are built around a car (make, model,
+year and mileage, also in the notification's title), so they have to change.
+
 The system can be adapted for other countries during setup: the sellers'
 language, the questions, the privacy policy (a draft for the client's
 lawyer), the card's size and, where needed, a server in the country
