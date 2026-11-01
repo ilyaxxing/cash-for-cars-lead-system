@@ -1,7 +1,7 @@
 # The business
 
 Who buys this system, what you sell, what to charge, where the clients are,
-and the other niches it fits. The short version is in the
+and the other niches and countries it fits. The short version is in the
 [README](../README.md).
 
 ![The seller's form and the buyer's app on six phone screens](media/screens.png)
@@ -23,17 +23,18 @@ reaches people who would not call.
 ## What you sell
 
 A done-for-you lead system under the buyer's own name. Many people who find a
-card under their wiper would rather not call a stranger, calls come at odd
-hours, and each one starts with the same questions. With a QR code the seller
-answers those questions and sends photos in a few minutes, and the owner sees
-the car before calling back.
+card under their wiper or see a sign would rather not call a stranger, calls
+come at odd hours, and each one starts with the same questions. With a QR code
+or a link the seller answers those questions in a few minutes and leaves their
+contacts, and the owner gets a push, usually within seconds, so they call
+first. The car (make, model, year and mileage) is always in the lead; photos
+and the asking price are there when the seller adds them.
 
 You build it with Claude Code on your Railway account and hand it over to the
 client's own: Railway and the domain are in the client's name and on the
 client's card, so it keeps working whatever happens between you. You charge
-for the setup and, if they want it, for support. Hosting, the domain and
-printing are paid by the client directly. Some cities and private lots restrict leaving
-flyers on cars, so the client should check the local rules.
+for the setup and, if they want it, for support. Some cities and private lots
+restrict leaving flyers on cars, so the client should check the local rules.
 
 ## What the business gets
 
@@ -45,13 +46,13 @@ flyers on cars, so the client should check the local rules.
   condition, accident and loan history, asking price, location, VIN, contact
   details and guided photos. A few minutes on a phone. A seller who stops
   halfway is not lost: the lead is saved as soon as the contact step is done.
-- **A push notification** to the owner's phone for every new lead, within
-  seconds. iPhone and Android.
+- **A push notification** to the owner's phone for every new lead, usually
+  within seconds. iPhone and Android.
 - **An app on the owner's phone**: leads by status (New, In Progress,
   Purchased, Rejected), photos, notes, a one-tap call and a second button
   for the way the seller asked to be reached (a text, WhatsApp or email), and
-  statistics: how many sellers came, how many cars were bought, from cards,
-  signs or ads.
+  statistics: how many sellers came and how many cars were bought, from
+  each place.
 - **Their own brand and their own accounts**: their name, color, logo and
   domain, hosted on their own Railway account for about $5 a month, their
   data in their own database.
@@ -70,7 +71,7 @@ cars each one brings:
 - **A poster at a partner repair shop or tow company**: one code per
   partner, so each one's sellers are counted.
 - **A sign or banner**: a large code for people who stop, and the address in
-  large letters (a typed address counts as Other).
+  large letters (someone who types the address by hand shows up as Other).
 - **A link in the Google Maps listing** (Yandex Maps in Russia): in the
   website field.
 - **A link in the social profiles and local groups**: in the bio, and in
@@ -82,11 +83,13 @@ Suggested starting points, not market-tested yet.
 
 | | Price | What it covers |
 |---|---|---|
-| Setup | $300-600 once | Turnkey: installation, their name, color and logo, their domain, the card PDF and QR codes for signs and ads, the app on the owner's phone. |
+| Setup | $300-600 once | Turnkey: installation, their name, color and logo, connecting their domain, the app on the owner's phone, the card PDF, and QR codes and links for every place. |
 | Support (optional) | $25-50 a month | Changes to the questions, new QR placements, updates, someone to call. |
 | Hosting | about $5 a month | On the client's own card. Where Railway doesn't fit (Russia), a small server in the client's country, at a similar price. |
 | Domain | about $10-15 a year | Required, in the business's name. Free if the business has a website: use a subdomain such as `buy.<their domain>`. |
 | Printing | usually under $150 per 1,000 cards | Any print shop; the PDF is print-ready. |
+
+Hosting, the domain and printing are paid by the client directly, on top of the setup price.
 
 Hosting is Railway's Hobby plan, $5 a month with $5 of usage included. In practice
 instances like this fit within Hobby's included usage; check the first client's bill.
@@ -96,8 +99,9 @@ with monthly support. Your own fixed costs are a paid Claude plan for Claude
 Code and your own Railway Hobby plan, $5 a month: each instance is built there
 before it is handed over.
 
-The argument for the owner: if a car earns them a few hundred dollars or
-more, one extra car a month pays for the whole thing.
+The argument for the owner is arithmetic, not a promise: if a car earns them
+a few hundred dollars, one extra car from the system pays for the setup.
+Whether it brings one, the first weeks will show.
 
 ## Finding clients
 
@@ -118,29 +122,45 @@ their own look, with no prices or setup details on it.
 ## Other niches
 
 At its core the system is a questionnaire with photos, an instant
-notification and an app to work the leads. It fits anything that is bought,
-or quoted, from a few phone photos:
+notification and an app to work the leads. How much of it changes for
+another niche depends on whether the thing has a make (or brand) and model.
+
+### Form settings only
+
+The questions are a preset file, the wording a texts file and the photo
+slots a list. A lead is titled by its make and model, with the year and
+mileage under it, so vehicles and electronics fit with no change to the app:
 
 | Niche | The form asks | Photos |
 |---|---|---|
 | Junk and scrap cars | Running or not, title, pickup address | The car, the damage |
-| Motorcycles, boats, RVs, trailers | Make, model, year, miles or hours, title | A walkaround |
-| Trucks and heavy equipment | Hours, maintenance, location | The machine, the hour meter |
-| "We buy houses" investors | Address, condition, timeline, mortgage | Rooms, roof, problems |
-| Phones, electronics, appliances | Model, condition, accessories | Front, back, screen |
-| Repair and service quotes: auto body, roofing, junk removal | The problem, address, urgency | The damage, the job |
+| Motorcycles, boats, RVs, trailers | Make, model, year, miles or engine hours, title | A walkaround |
+| Trucks and heavy equipment | Make, model, year, hours, maintenance, location | The machine, the hour meter |
+| Phones, electronics, appliances | Brand and model (in the make and model fields), condition, accessories | Front, back, screen |
 
-To adapt it, tell Claude Code what the business buys or quotes, for example:
+Photo guide sketches are drawn for cars; other items get plain photo tiles unless new sketches are added.
+
+Engine hours or a boat's hull number are questions of their own: they show
+in the lead, not on its card in the list. To adapt it, tell Claude Code what
+the business buys, for example:
 *"Adapt this system for a business that buys motorcycles. Ask for make,
 model, year, mileage, title status and photos of both sides and the
-dashboard."* The questions are data (a preset file), the wording is a text
-file and the photo slots are a list, so a new niche needs no new code.
-The system can be adapted for other countries during setup: the sellers'
-language, the questions, the privacy policy (a draft for the client's
-lawyer), the card's size and, where needed, a server in the country
-([SETUP.md](../SETUP.md#another-country)). The legal side needs a local
-check: where the data may be kept, whether it may leave the country and
-what the business must register are for its local lawyer to confirm. For the US in Spanish,
-Canada in English and French, Brazil, Russia, the UK, Germany, France, Spain
-and Poland it starts from files already made in `countries/`, and the page
-for car buyers comes in that language too.
+dashboard."*
+
+### Needs changes to the app
+
+| Niche | The form asks | Photos |
+|---|---|---|
+| "We buy houses" investors | Address, condition, timeline, mortgage | Rooms, roof, problems |
+| Repair and service quotes: auto body, roofing, junk removal | The problem, address, urgency | The damage, the job |
+
+These have no make and model: the lead cards and the lead's fields (make,
+model, year and mileage, also in the notification's title) have to change.
+
+## Other countries
+
+The system is adapted to another country during setup: the sellers'
+language, the questions, the privacy policy and the card's size. The legal
+side is for the business's local lawyer to check. Ready files for several
+countries are in [countries/](../countries/); see
+[SETUP.md](../SETUP.md#another-country).
