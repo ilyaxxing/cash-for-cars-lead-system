@@ -7,9 +7,9 @@ https://github.com/user-attachments/assets/1d80405d-8d4f-474a-80df-4143831ba948
 Business #1 of **100 Ready-to-Launch Businesses**: open source, free to copy,
 yours to sell. By [@ilyaxxing](https://instagram.com/ilyaxxing).
 
-Give a car buyer QR codes and links for their cards, signs and ads. Sellers
-send their car through a short form, and the buyer gets a push on their phone
-in seconds, with every lead in one app.
+Give a car buyer QR codes and links for their cards, signs and online
+listings. Sellers send their car through a short form, and the buyer gets a
+push on their phone in seconds, with every lead in one app.
 
 Suggested price: $300–600 per setup, plus optional monthly support (starting
 estimates, not yet tested with clients). The business pays its own hosting and
