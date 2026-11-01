@@ -2,32 +2,30 @@ https://github.com/user-attachments/assets/1d80405d-8d4f-474a-80df-4143831ba948
 
 # Cash for Cars Lead System
 
-**Turn QR codes into car-buying leads.**
+**Set up a branded lead system for local car buyers, and charge for the setup.**
 
 Business #1 of **100 Ready-to-Launch Businesses**: open source, free to copy,
 yours to sell. By [@ilyaxxing](https://instagram.com/ilyaxxing).
 
-[Live demo](https://ilyaxxing.github.io/cash-for-cars-lead-system/#how) ·
-[Business model](docs/business.md) · [Setup guide](SETUP.md) ·
-[Project page](https://ilyaxxing.github.io/cash-for-cars-lead-system/)
+Give a car buyer QR codes and links for their cards, signs and ads. Sellers
+send their car through a short form, and the buyer gets a push on their phone
+in seconds, with every lead in one app.
 
-A lead system for businesses that buy used cars for cash. A seller scans a
-QR code (on a card under the wiper, a sticker, a partner's poster) or taps a
-link, and fills in a short form on their phone; the buyer gets a push
-notification with the car, the price and how many photos came, and the whole
-lead in an app. Open source, for people who set it up for local car buyers:
-each business gets its own copy, under its name and on its own accounts, set
-up with Claude Code, and you charge for the setup.
+Suggested price: $300–600 per setup, plus optional monthly support (starting
+estimates, not yet tested with clients). The business pays its own hosting and
+domain.
+
+[See what the car buyer gets](https://car-buyer-demo.github.io/) ·
+[Set it up with Claude Code](#get-started) · [Business model](docs/business.md)
 
 ## How it works
 
 1. **QR codes and links.** A seller scans a code or opens a link wherever
    they see it: a card under a wiper (it comes as a print-ready file in the
    buyer's color, with their logo), a sticker on the buyer's own car, a
-   poster at a partner repair shop or tow company, a sign or banner, a link
-   in the Google Maps listing, and a link in the social profiles and local
-   groups. Each place gets its own code or link, so statistics tell them
-   apart.
+   poster at a partner repair shop, a sign or banner, a link in the Google
+   Maps listing, and more ([every place](docs/business.md#where-leads-come-from)).
+   Each place gets its own code or link, so statistics tell them apart.
 2. **The seller's form.** Car, condition, price, photos, contact. A few
    minutes, no app, no account.
 3. **A notification to the buyer** on their iPhone or Android, within seconds.
@@ -35,8 +33,6 @@ up with Claude Code, and you charge for the setup.
    which places bring cars.
 
 ## The business
-
-You install it for car buyers under their own name and charge for the setup.
 
 **Who buys it:** cash-for-cars buyers, junk and salvage car buyers, small used
 car lots and independent dealers. The best client already hands out cards or
@@ -58,9 +54,9 @@ You pick the price, and whether to sell the setup alone or with monthly
 support. Suggested starting points, not market-tested yet. More in
 [docs/business.md](docs/business.md).
 
-**Show it to a client.** Send the buyer [the page made for them](https://car-buyer-demo.github.io/):
-the same live demo and what it does for their business, without prices,
-setup details or GitHub. Add their name and color to the link
+**Show it to a client.** The page for car buyers (linked at the top) has the
+same live demo and what it does for their business, without prices, setup
+details or GitHub. Send it in their name and color: add them to the link
 (`https://car-buyer-demo.github.io/?name=Rapid+Cash+Cars&color=ff8a00`), or make it with the link
 maker on the [project page](https://ilyaxxing.github.io/cash-for-cars-lead-system/#show), which
 also picks the buyer's country and language: eleven of them, as in [countries/](countries/).
@@ -89,6 +85,9 @@ and the domain's DNS can take up to a day.
   about $5 a month; the finished project is handed over to it.
   Also its domain, its name and email, and the owner's phone for ten minutes.
 
+<details>
+<summary><b>Other countries</b></summary>
+
 The system can be adapted for other countries: Claude changes the sellers'
 language, the questions, the privacy policy, the card's size and, where
 needed, where it runs. The legal side needs a local check: where sellers'
@@ -100,9 +99,14 @@ are drafts for the business's lawyer. It is tested end to end for the US;
 [SETUP.md](SETUP.md#another-country) lists what to check for another country
 and what does not work yet, such as languages written right to left.
 
+</details>
+
 > **AI assistants:** follow [SETUP.md](SETUP.md).
 
 ## Limitations
+
+<details>
+<summary>Known limits of this version</summary>
 
 - Notifications are Web Push only, with no email or SMS fallback. Battery
   savers on some Android phones can delay them, and an Android phone needs
@@ -123,6 +127,8 @@ and what does not work yet, such as languages written right to left.
   server of the client's own has been tested on a local virtual machine, not
   yet with a public domain and a real certificate.
 - Prices are suggestions, not tested on real clients yet.
+
+</details>
 
 ## More
 
