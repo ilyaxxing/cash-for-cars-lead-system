@@ -4,8 +4,8 @@
     python -m app.cli qr --env-file clients/acme.env --source sticker  <PUBLIC_URL>/?src=sticker
 
 The first is the business card's; any other place gets its own label, named
-in SOURCE_LABELS. An online place (a map listing, a social profile, an
-auto-reply) takes the link itself: --link-only prints it and writes nothing.
+in SOURCE_LABELS. An online place (a map listing, a social profile, a post
+in a local group) takes the link itself: --link-only prints it and writes nothing.
 
 Writes an SVG for the print shop (vector, sharp at any size) and a PNG
 preview for messengers into qr/, which is git-ignored: the files carry the

@@ -218,26 +218,23 @@ Tell them the privacy policy is a template, not legal advice: the business
 should have its lawyer read it at `/privacy` before launch.
 
 **Where sellers will find the form**
-- The windshield card is built in and stays the main channel. Then go through
-  these places with the person, one at a time, and note the ones the business
-  will use:
+- A card under a wiper is built in (`card`) and comes first. Then go through
+  the other places with the person, one at a time, and note the ones the
+  business will use:
   - a sticker on the buyer's own car (`sticker`);
-  - posters or cards at partners: repair shops, tow companies, car washes,
-    tire shops, one label per partner (`shop_<name>`, `tow_<name>`), so each
-    one's sellers are counted;
-  - road signs and banners (`sign`, or one per spot);
-  - the Google Maps or Yandex Maps listing (`maps`);
-  - social profiles (`instagram`, `facebook`, `vk`);
-  - a messenger auto-reply (`autoreply`) and a text after a missed call
-    (`missed_call`): the business sets these up in its messenger or phone
-    service, and the system gives the link;
-  - ads, one label per campaign (`ads_<campaign>`).
+  - a poster at a partner repair shop or tow company, one label per partner
+    (`shop_<name>`, `tow_<name>`), so each one's sellers are counted;
+  - a sign or banner (`sign`, or one per spot);
+  - a link in the Google Maps listing, or the Yandex Maps one in Russia
+    (`maps`);
+  - a link in the social profiles and local groups (`social`, or one per
+    profile or group: `instagram`, `group_<name>`).
 - Write each into `SOURCE_LABELS` now, label and the name the owner will read
   in statistics: `sticker:Car sticker,shop_lone_star:Lone Star Auto Repair,maps:Google Maps`.
   Labels are lowercase letters, digits, `-` and `_`; names have no commas or
   quotes. A place added later is one more entry and a deploy.
-- Printed places get a QR code in step 9. Online places (maps, social
-  profiles, auto-replies, online ads) get a link, `https://<domain>/?src=<label>`,
+- Printed places get a QR code in step 9. Online places (the maps listing,
+  social profiles and local groups) get a link, `https://<domain>/?src=<label>`,
   not a QR code: also in step 9, once the domain is connected.
 
 **Address**
@@ -473,16 +470,16 @@ command refuses (the code would print too small), it says why: print it larger
 or use a shorter address. A warning that a label would show as Other means it
 is missing from `SOURCE_LABELS`: add it and deploy again.
 
-**Links** for the online places from step 3 (maps, social profiles,
-auto-replies, online ads), one per label:
+**Links** for the online places from step 3 (the maps listing, social
+profiles and local groups), one per label:
 
 ```bash
 .venv/bin/python -m app.cli qr --env-file clients/<id>.env --source maps --link-only
 ```
 
-Give the person each link with where it goes: the Google Maps or Yandex Maps
-listing's website field, the bio link of each social profile, the text of the
-messenger away message or the missed-call text, the ad's destination address.
+Give the person each link with where it goes: the website field of the
+Google Maps or Yandex Maps listing, the bio link of each social profile, a
+post in each local group.
 
 ## Step 10. Hand over
 

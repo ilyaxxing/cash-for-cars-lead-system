@@ -210,7 +210,7 @@ def qr(
     if checked.problems:
         raise SystemExit("Not written: " + "; ".join(checked.problems))
     print(f"link:    {checked.url}")
-    # Maps, social profiles and auto-replies take the link itself: nothing to print.
+    # Maps, social profiles and groups take the link itself: nothing to print.
     if link_only:
         return
     svg, png = qr_codes.write(checked, out)

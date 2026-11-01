@@ -61,22 +61,20 @@ flyers on cars, so the client should check the local rules.
 
 ## Where leads come from
 
-The windshield card is the main channel. Every other place gets its own QR
-code (printed) or link (online), and statistics show how many sellers and
-bought cars each one brings:
+A card under a wiper comes first. Every other place gets its own QR code
+(printed) or link (online), and statistics show how many sellers and bought
+cars each one brings:
 
-- **Cards under windshield wipers**: the card's own code.
+- **A card under a wiper**: the card's own code.
 - **A sticker on the buyer's own car**: seen in traffic and parking lots.
-- **Partners**: a poster or a stack of cards at repair shops, tow companies,
-  car washes and tire shops, one code per partner, so each one's sellers are
-  counted.
-- **Road signs and banners**: a large code for people who stop, and the
-  address in large letters (a typed address counts as Other).
-- **Google Maps or Yandex Maps listing**: the link in the website field.
-- **Social profiles**: the link in the bio.
-- **Messenger auto-reply and a text after a missed call**: the link in the
-  away message, so a seller who couldn't get through still sends the car.
-- **Ads**: a link per online campaign, a code on printed ones.
+- **A poster at a partner repair shop or tow company**: one code per
+  partner, so each one's sellers are counted.
+- **A sign or banner**: a large code for people who stop, and the address in
+  large letters (a typed address counts as Other).
+- **A link in the Google Maps listing** (Yandex Maps in Russia): in the
+  website field.
+- **A link in the social profiles and local groups**: in the bio, and in
+  posts in neighborhood and car groups.
 
 ## Pricing
 

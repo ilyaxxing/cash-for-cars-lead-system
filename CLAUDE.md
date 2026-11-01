@@ -207,6 +207,7 @@ Invalid preset → the app refuses to start.
   X-Real-IP with the real address (checked live on 2026-10-20).
 - QR codes: `python -m app.cli qr --env-file clients/<id>.env --source <label>`,
   error correction H, a 4-module quiet zone, at least 0.4 mm per module at
-  20 mm; `--link-only` gives the link alone for an online place (maps,
-  social profiles, auto-replies). The card is the main channel; every other
-  place has its own label in SOURCE_LABELS, so statistics tell them apart.
+  20 mm; `--link-only` gives the link alone for an online place (the maps
+  listing, social profiles and local groups). The card comes first; every
+  other place (the same six as on the page for car buyers) has its own label
+  in SOURCE_LABELS, so statistics tell them apart.
