@@ -357,9 +357,12 @@ of step 9, which need the domain anyway.
 
 ## Step 7. Test it together
 
-1. Ask the person to open the seller form on their own phone, at the
-   business's address (or the Railway one while the domain is on its way),
-   and send a test car (any car; a 555 number like 512-555-0100 is fine).
+1. Ask the person to open the seller form on their own phone through the
+   test link, `https://<address>/?src=test` (the business's address, or the
+   Railway one while the domain is on its way), and send a test car (any
+   car; a 555 number like 512-555-0100 is fine). The `test` label marks the
+   lead **Test** in the dashboard and keeps it out of every number in the
+   owner's statistics.
 2. Don't sign in to the dashboard yourself. The first sign-in sets the
    owner's own password, and that belongs to the owner, on their phone
    (step 8). The test lead waits for them there.
@@ -384,14 +387,16 @@ the business owner, filled in with that address, in the owner's language
 >    one above stops working.
 > 5. Tap **Turn on notifications** and allow them, then **Send test
 >    notification**.
-> 6. The car in **New** is our test: open it and mark it **Rejected**.
+> 6. Test leads are marked **Test** and don't count in your statistics; you
+>    can mark them **Rejected**.
 >
 > iPhone shows notifications only for the home-screen app, and needs iOS 16.4
 > or newer. Make sure Focus or Do Not Disturb isn't hiding them.
 
 Send it to the owner privately, and ask them to do it soon: until they set
 their own password, anyone with this message could. Then ask the person to
-send another test lead and confirm the owner got the notification. If it
+send another test lead through the same test link and confirm the owner got
+the notification. If it
 didn't arrive, see [Troubleshooting](#troubleshooting). From now on nobody
 but the owner knows the password, and updates don't need it.
 

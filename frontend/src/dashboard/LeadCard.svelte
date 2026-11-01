@@ -2,6 +2,7 @@
   // A lead in the list: the first photo, status, time, car, price and two
   // facts. The other photos are in the opened lead.
   import { getContext } from 'svelte'
+  import { TEST_SOURCE } from '../form/engine'
   import type { Card } from './api'
   import { summarize } from './car'
   import type { DashboardState } from './state.svelte'
@@ -34,6 +35,7 @@
   <span class="body">
     <span class="meta">
       <span class="status"><span class="status-dot"></span>{dash.statusLabel(lead.status)}</span>
+      {#if lead.source === TEST_SOURCE}<span class="test">{lead.sourceLabel}</span>{/if}
       <span class="when">{dash.fmt.when(lead.createdAt)}</span>
     </span>
     <span class="heading">
@@ -137,6 +139,16 @@
     justify-content: space-between;
     gap: 10px;
     margin-bottom: 14px;
+  }
+
+  /* A lead sent while setting up, which the statistics leave out. */
+  .test {
+    margin-right: auto;
+    padding: 4px 7px;
+    border-radius: 6px;
+    border: 1px dashed var(--line-hover);
+    font: 500 11px/1 var(--font-mono);
+    color: var(--text-muted);
   }
 
   .status {

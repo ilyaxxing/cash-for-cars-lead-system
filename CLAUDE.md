@@ -168,6 +168,9 @@ Labels from the design: New, In Progress, Purchased, Rejected.
   default `direct`. Frozen on the lead at creation. Format `[A-Za-z0-9_-]{1,64}`,
   lowercased. `/v` → `card` ("Business Card"), `?src=` for others, labels via
   `SOURCE_LABELS`; unknown labels show as "Other" and log a warning.
+  `?src=test` is built in, for the leads sent while setting up: it always
+  wins over a stored label, shows a Test badge in the dashboard and counts
+  nowhere in the statistics.
 - Retention: 90 days after closing (not creation), name, phone, every preset
   field marked `personal: true` and the photos (objects, then rows) are wiped;
   rows stay for statistics. Photos are wiped as well: plates, faces and

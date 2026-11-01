@@ -198,6 +198,39 @@ async def test_stats_use_frozen_sources_and_custom_labels(owner):
     ]
 
 
+async def test_test_leads_are_badged_and_count_nowhere(owner):
+    """Leads sent through ?src=test while setting up never reach the statistics."""
+    await new_lead(owner, source="card")
+    test, _ = await new_lead(owner, source="test")
+    await owner.post(f"/api/owner/leads/{test}/status", json={"status": "bought"})
+    lead = (await owner.get(f"/api/owner/leads/{test}")).json()
+    assert (lead["source"], lead["sourceLabel"]) == ("test", "Test")
+    for period in ("7", "30", "all"):
+        stats = (await owner.get(f"/api/owner/stats?period={period}")).json()
+        assert (stats["total"], stats["week"], stats["purchased"]) == (1, 1, 0)
+        assert [s["source"] for s in stats["sources"]] == ["card"]
+        assert sum(b["leads"] for b in stats["buckets"]) == 1
+
+
+def test_test_leads_are_left_out_of_every_number():
+    from zoneinfo import ZoneInfo
+
+    from app.services.stats import Row, compute
+
+    tz = ZoneInfo("America/New_York")
+    now = datetime(2026, 10, 21, 15, 0, tzinfo=tz)
+    rows = [
+        Row(now - timedelta(days=50), "bought", "test"),
+        Row(now - timedelta(days=1), "bought", "card"),
+        Row(now - timedelta(hours=1), "new", "test"),
+    ]
+    stats = compute(rows, "all", now, tz)
+    assert (stats["total"], stats["week"], stats["purchased"]) == (1, 1, 1)
+    assert stats["firstLeadAt"] == rows[1].created_at.isoformat()
+    assert [s["source"] for s in stats["sources"]] == ["card"]
+    assert sum(b["leads"] for b in stats["buckets"]) == 1
+
+
 def test_stats_periods_and_buckets():
     from zoneinfo import ZoneInfo
 

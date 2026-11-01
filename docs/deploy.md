@@ -91,8 +91,9 @@ until then), turn on notifications, and send the test notification. On
 Android, Chrome offers to install the app; then do the same. Leave the first
 sign-in to the owner: whoever does it chooses the password.
 
-Then submit a test lead through the form from another phone and check that the
-notification arrives and opens the lead.
+Then submit a test lead from another phone through `https://<address>/?src=test`
+and check that the notification arrives and opens the lead. The `test` label
+marks it **Test** in the dashboard and keeps it out of the statistics.
 
 ## Updating
 

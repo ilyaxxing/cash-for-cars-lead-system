@@ -443,6 +443,7 @@
   },
   "sources": {
     "card": "Wizytówka",
+    "test": "Test",
     "direct": "Inne",
     "other": "Inne"
   },

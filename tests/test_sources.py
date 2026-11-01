@@ -35,6 +35,7 @@ def test_parse_source(raw, expected):
         ("direct", "card", "card"),  # a label replaces the default
         ("card", "flyer", "card"),  # but never another label: first one wins
         ("card", None, "card"),
+        ("card", "test", "test"),  # a test link always wins
     ],
 )
 def test_first_meaningful_source_wins(stored, incoming, expected):

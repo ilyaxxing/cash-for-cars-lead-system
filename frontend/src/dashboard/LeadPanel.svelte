@@ -2,6 +2,7 @@
   // The open lead: status, photos, the car's answers, seller contact,
   // notes and activity. A side panel on wide screens, full screen on phones.
   import { getContext } from 'svelte'
+  import { TEST_SOURCE } from '../form/engine'
   import type { FieldSpec } from '../shared/config'
   import { formatPhone } from '../shared/region'
   import type { Status } from './api'
@@ -117,7 +118,7 @@
           <div class="top">
             <div class="chips">
               <span class="chip status-{lead.status}"><span class="status-dot"></span>{dash.statusLabel(lead.status)}</span>
-              <span class="source">{lead.sourceLabel}</span>
+              <span class="source" class:test={lead.source === TEST_SOURCE}>{lead.sourceLabel}</span>
               <span class="received">{t('dashboard.lead.received', { when: dash.fmt.when(lead.createdAt) })}</span>
             </div>
             <div class="title-row">
@@ -449,6 +450,12 @@
     border: 1px solid #2e3030;
     font: 500 12px/24px var(--font-mono);
     color: var(--text-muted);
+  }
+
+  /* A lead sent while setting up, which the statistics leave out. */
+  .source.test {
+    border-style: dashed;
+    border-color: var(--line-hover);
   }
 
   .received {

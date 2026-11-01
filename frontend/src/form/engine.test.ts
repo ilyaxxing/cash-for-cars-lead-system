@@ -168,6 +168,7 @@ describe('source and saved progress', () => {
     expect(rememberSource(null, 'card')).toBe('card')
     expect(rememberSource('direct', 'card')).toBe('card')
     expect(rememberSource('card', 'flyer')).toBe('card')
+    expect(rememberSource('card', 'test')).toBe('test')
     expect(rememberSource('card', null)).toBe('card')
   })
 
