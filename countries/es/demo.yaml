@@ -35,7 +35,7 @@ cars: [[Seat, León], [Seat, Arona], [Volkswagen, Golf], [Renault, Clio], [Peuge
 names: [Lucía García, Antonio Martín, Paula Sánchez, Manuel López, Sara Fernández, David González, Elena Pérez, Sergio Gómez, Alba Díaz, Raúl Hernández, Nuria Muñoz, Álvaro Álvarez]
 cities: [[Madrid, '28001'], [Alcalá de Henares, '28803'], [Fuenlabrada, '28941'], [Alcorcón, '28921']]
 
-sources: {sticker: Pegatina en el coche, shop: Taller colaborador, sign: Cartel en la calle, maps: Google Maps, missed_call: SMS tras llamada perdida}
+sources: {sticker: Pegatina en el coche, shop: Taller colaborador, sign: Cartel en la calle, maps: Google Maps, social: Redes sociales y grupos}
 
 page:
   title: Coches al Contado · Llama el primero
@@ -55,7 +55,7 @@ page:
   place_partner: Un póster en un taller o una grúa colaboradores
   place_sign: Un cartel o una lona
   place_maps: Un enlace en tu ficha de Google Maps
-  place_sms: Un SMS tras una llamada perdida
+  place_social: Un enlace en tus redes sociales y grupos locales
   places_note: Cada sitio tiene su propio código o enlace, y la app muestra cuál te trae coches.
   kicker_demo: Demo en directo
   h2_demo: Sé el vendedor. Luego sé el comprador.

@@ -118,11 +118,11 @@ const FEATURED: Featured[] = [
 
 const CONDITIONS = ['excellent', 'good', 'good', 'needs_repairs', 'accident_damaged', 'not_running']
 // The places the older leads came from, taken in turn: the card most, then a
-// sticker, a partner repair shop, a sign, the maps listing and a text after a
-// missed call (the ids an instance names in SOURCE_LABELS; the country's
+// sticker, a partner repair shop, a sign, the maps listing and social media
+// with local groups (the ids an instance names in SOURCE_LABELS; the country's
 // names are in its demo.yaml). Every third closed lead was bought, which
 // gives each place purchases within the last 30 days of the statistics.
-const SOURCES = ['card', 'maps', 'card', 'sticker', 'shop', 'sign', 'card', 'missed_call']
+const SOURCES = ['card', 'maps', 'card', 'sticker', 'shop', 'sign', 'card', 'social']
 const OLDER = 54
 
 // A small fixed sequence: the same demo on every visit.

@@ -35,7 +35,7 @@ cars: [[Fiat, Strada], [Fiat, Argo], [Fiat, Mobi], [Volkswagen, Gol], [Volkswage
 names: [Ana Souza, Lucas Silva, Mariana Rodrigues, Pedro Ferreira, Camila Gomes, Gabriel Martins, Beatriz Ribeiro, Rodrigo Carvalho, Larissa Almeida, Thiago Araújo, Aline Barbosa, Diego Rocha]
 cities: [[São Paulo, 01310-100], [Barueri, 06401-000], [Diadema, 09910-000], [Mauá, 09310-000]]
 
-sources: {sticker: Adesivo no carro, shop: Oficina parceira, sign: Placa na rua, maps: Google Maps, missed_call: SMS após ligação perdida}
+sources: {sticker: Adesivo no carro, shop: Oficina parceira, sign: Placa na rua, maps: Google Maps, social: Redes sociais e grupos}
 
 page:
   title: Venda Já · Ligue primeiro
@@ -55,7 +55,7 @@ page:
   place_partner: Um cartaz numa oficina ou guincho parceiro
   place_sign: Uma placa ou faixa
   place_maps: Um link no seu perfil do Google Maps
-  place_sms: Um SMS depois de uma ligação perdida
+  place_social: Um link nas suas redes sociais e grupos locais
   places_note: Cada lugar tem seu próprio código ou link, e o app mostra qual traz carros.
   kicker_demo: Demo ao vivo
   h2_demo: Seja o vendedor. Depois, o comprador.

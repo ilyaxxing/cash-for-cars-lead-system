@@ -34,7 +34,7 @@ cars: [[Toyota, Camry], [Toyota, Tacoma], [Ford, Escape], [Chevrolet, Silverado]
 names: [María López, Juan Martínez, Lucía Gómez, Carlos Rodríguez, Sofía Hernández, Miguel Sánchez, Elena Díaz, Pedro Morales, Daniela Ruiz, Andrés Vargas, Patricia Reyes, Fernando Cruz]
 cities: [[Houston, '77002'], [Pasadena, '77502'], [Baytown, '77520'], [Pearland, '77581']]
 
-sources: {sticker: Calcomanía en el auto, shop: Taller aliado, sign: Letrero en la calle, maps: Google Maps, missed_call: Texto tras llamada perdida}
+sources: {sticker: Calcomanía en el auto, shop: Taller aliado, sign: Letrero en la calle, maps: Google Maps, social: Redes sociales y grupos}
 
 page:
   title: Autos al Contado · Llame primero
@@ -54,7 +54,7 @@ page:
   place_partner: Un póster en un taller o una grúa aliados
   place_sign: Un letrero o una lona
   place_maps: Un enlace en su perfil de Google Maps
-  place_sms: Un mensaje de texto tras una llamada perdida
+  place_social: Un enlace en sus redes sociales y grupos locales
   places_note: Cada lugar tiene su propio código o enlace, y la app muestra cuál le trae autos.
   kicker_demo: Demo en vivo
   h2_demo: Sea el vendedor. Luego sea el comprador.
