@@ -42,10 +42,12 @@ and repair shops.
 
 | | Price | What's included |
 |---|---|---|
-| Setup | $300-600 once | Turnkey: installation, their name, color and logo, their domain, the app on the owner's phone, the card PDF, and QR codes and links for every place |
+| Setup | $300-600 once | Turnkey: installation, their name, color and logo, connecting their domain, the app on the owner's phone, the card PDF, and QR codes and links for every place |
 | Support | $25-50 a month | Optional: changes, updates, someone to call |
 | Hosting | about $5 a month | On the client's own Railway account |
 | Domain | about $10-15 a year | In the business's name, if it has none |
+
+Hosting, the domain and printing are paid by the client directly, on top of the setup price.
 
 Hosting is Railway's Hobby plan, $5 a month with $5 of usage included. In practice
 instances like this fit within Hobby's included usage; check the first client's bill.

@@ -31,9 +31,8 @@ the car before calling back.
 You build it with Claude Code on your Railway account and hand it over to the
 client's own: Railway and the domain are in the client's name and on the
 client's card, so it keeps working whatever happens between you. You charge
-for the setup and, if they want it, for support. Hosting, the domain and
-printing are paid by the client directly. Some cities and private lots restrict leaving
-flyers on cars, so the client should check the local rules.
+for the setup and, if they want it, for support. Some cities and private lots
+restrict leaving flyers on cars, so the client should check the local rules.
 
 ## What the business gets
 
@@ -82,11 +81,13 @@ Suggested starting points, not market-tested yet.
 
 | | Price | What it covers |
 |---|---|---|
-| Setup | $300-600 once | Turnkey: installation, their name, color and logo, their domain, the app on the owner's phone, the card PDF, and QR codes and links for every place. |
+| Setup | $300-600 once | Turnkey: installation, their name, color and logo, connecting their domain, the app on the owner's phone, the card PDF, and QR codes and links for every place. |
 | Support (optional) | $25-50 a month | Changes to the questions, new QR placements, updates, someone to call. |
 | Hosting | about $5 a month | On the client's own card. Where Railway doesn't fit (Russia), a small server in the client's country, at a similar price. |
 | Domain | about $10-15 a year | Required, in the business's name. Free if the business has a website: use a subdomain such as `buy.<their domain>`. |
 | Printing | usually under $150 per 1,000 cards | Any print shop; the PDF is print-ready. |
+
+Hosting, the domain and printing are paid by the client directly, on top of the setup price.
 
 Hosting is Railway's Hobby plan, $5 a month with $5 of usage included. In practice
 instances like this fit within Hobby's included usage; check the first client's bill.
