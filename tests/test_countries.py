@@ -1,11 +1,13 @@
 """Every country in countries/: starting files that work, and a demo that holds together."""
 
+import io
 import re
 from typing import Any
 
 import pytest
 import yaml
 from dotenv import dotenv_values
+from PIL import Image
 
 from app.config import BASE_DIR
 from app.i18n import load_messages, translation_problems
@@ -130,6 +132,13 @@ def test_a_country_page_for_buyers_fills_the_template(code):
     page = make_buyer_site.page(code)
     assert "{{" not in page
     assert f'<html lang="{demo_of(code)["lang"]}">' in page
+    # A link preview: a full address for the picture, small enough for WhatsApp.
+    assert (
+        f'property="og:image" content="{make_buyer_site.SITE}assets/preview/{code}.jpg?v=' in page
+    )
+    picture = Image.open(io.BytesIO(make_buyer_site.preview(code)))
+    assert (picture.format, picture.size) == ("JPEG", make_buyer_site.PREVIEW_SIZE)
+    assert len(make_buyer_site.preview(code)) < 300_000
 
 
 @pytest.mark.parametrize("code", CODES)

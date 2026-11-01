@@ -63,9 +63,13 @@ name and color from the link (`?name=...&color=...`), with no prices, setup
 details or links back here, in the buyer's language: the US page at the
 root, every other country at `/<code>/` (`/de/?name=...`), as the link maker
 on this page picks it. Its source is the template `buyer-site/index.html`,
-filled in from each country's `demo.yaml`; to publish a change (or a rebuilt
-demo), build it into a clone of the site's repository and push, with a
-neutral commit message:
+filled in from each country's `demo.yaml`. A link to it in a messenger
+shows a preview: the country's headline and description, and a picture of
+the headline and the sample card drawn at build time. Messengers read the
+page as it is served, so the preview never carries the name from a named
+link; robots.txt keeps search engines out and lets the preview fetchers in.
+To publish a change (or a rebuilt demo), build it into a clone of the site's
+repository and push, with a neutral commit message:
 
 ```bash
 git clone https://github.com/car-buyer-demo/car-buyer-demo.github.io.git /tmp/buyer-site

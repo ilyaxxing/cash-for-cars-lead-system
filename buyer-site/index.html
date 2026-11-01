@@ -8,6 +8,15 @@
   <meta name="robots" content="noindex">
   <title>{{title}}</title>
   <meta name="description" content="{{description}}">
+  <!-- The preview a messenger shows under a link. It reads the page as it is
+       served, so a named link shows the headline, not the business's name. -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{preview_title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:image" content="{{preview_image}}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#0b0c0c">
   <script>
     // A named link (?name=...&color=...) shows the page in that business's
