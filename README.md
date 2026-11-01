@@ -28,7 +28,8 @@ domain.
    Each place gets its own code or link, so statistics tell them apart.
 2. **The seller's form.** Car, condition, price, photos, contact. A few
    minutes, no app, no account.
-3. **A notification to the buyer** on their iPhone or Android, within seconds.
+3. **A notification to the buyer** on their iPhone or Android, usually within
+   seconds.
 4. **The app.** Leads by status, photos, one tap to call, and statistics on
    which places bring cars.
 

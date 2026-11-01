@@ -23,10 +23,12 @@ reaches people who would not call.
 ## What you sell
 
 A done-for-you lead system under the buyer's own name. Many people who find a
-card under their wiper would rather not call a stranger, calls come at odd
-hours, and each one starts with the same questions. With a QR code the seller
-answers those questions and sends photos in a few minutes, and the owner sees
-the car before calling back.
+card under their wiper or see a sign would rather not call a stranger, calls
+come at odd hours, and each one starts with the same questions. With a QR code
+or a link the seller answers those questions in a few minutes and leaves their
+contacts, and the owner gets a push, usually within seconds, so they call
+first. The car (make, model, year and mileage) is always in the lead; photos
+and the asking price are there when the seller adds them.
 
 You build it with Claude Code on your Railway account and hand it over to the
 client's own: Railway and the domain are in the client's name and on the
@@ -44,8 +46,8 @@ restrict leaving flyers on cars, so the client should check the local rules.
   condition, accident and loan history, asking price, location, VIN, contact
   details and guided photos. A few minutes on a phone. A seller who stops
   halfway is not lost: the lead is saved as soon as the contact step is done.
-- **A push notification** to the owner's phone for every new lead, within
-  seconds. iPhone and Android.
+- **A push notification** to the owner's phone for every new lead, usually
+  within seconds. iPhone and Android.
 - **An app on the owner's phone**: leads by status (New, In Progress,
   Purchased, Rejected), photos, notes, a one-tap call and a second button
   for the way the seller asked to be reached (a text, WhatsApp or email), and
