@@ -123,39 +123,39 @@ their own look, with no prices or setup details on it.
 
 At its core the system is a questionnaire with photos, an instant
 notification and an app to work the leads. How much of it changes for
-another niche depends on how close the thing is to a car.
+another niche depends on whether the thing has a make (or brand) and model.
 
-### Vehicles (form settings only)
+### Form settings only
 
 The questions are a preset file, the wording a texts file and the photo
 slots a list. A lead is titled by its make and model, with the year and
-mileage under it, so anything bought by make and model fits with no change
-to the app:
+mileage under it, so vehicles and electronics fit with no change to the app:
 
 | Niche | The form asks | Photos |
 |---|---|---|
 | Junk and scrap cars | Running or not, title, pickup address | The car, the damage |
 | Motorcycles, boats, RVs, trailers | Make, model, year, miles or engine hours, title | A walkaround |
 | Trucks and heavy equipment | Make, model, year, hours, maintenance, location | The machine, the hour meter |
+| Phones, electronics, appliances | Brand and model (in the make and model fields), condition, accessories | Front, back, screen |
+
+Photo guide sketches are drawn for cars; other items get plain photo tiles unless new sketches are added.
 
 Engine hours or a boat's hull number are questions of their own: they show
-in the lead, not on its card in the list. The photo guides are sketches of a
-car; another photo slot shows none until a sketch of its own is added to the
-app. To adapt it, tell Claude Code what the business buys, for example:
+in the lead, not on its card in the list. To adapt it, tell Claude Code what
+the business buys, for example:
 *"Adapt this system for a business that buys motorcycles. Ask for make,
 model, year, mileage, title status and photos of both sides and the
 dashboard."*
 
-### Other things (needs changes to the app)
+### Needs changes to the app
 
 | Niche | The form asks | Photos |
 |---|---|---|
 | "We buy houses" investors | Address, condition, timeline, mortgage | Rooms, roof, problems |
-| Phones, electronics, appliances | Model, condition, accessories | Front, back, screen |
 | Repair and service quotes: auto body, roofing, junk removal | The problem, address, urgency | The damage, the job |
 
-The lead cards and the lead's fields are built around a car (make, model,
-year and mileage, also in the notification's title), so they have to change.
+These have no make and model: the lead cards and the lead's fields (make,
+model, year and mileage, also in the notification's title) have to change.
 
 ## Other countries
 
