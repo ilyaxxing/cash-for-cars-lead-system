@@ -1,7 +1,7 @@
 # The business
 
 Who buys this system, what you sell, what to charge, where the clients are,
-and the other niches it fits. The short version is in the
+and the other niches and countries it fits. The short version is in the
 [README](../README.md).
 
 ![The seller's form and the buyer's app on six phone screens](media/screens.png)
@@ -157,12 +157,10 @@ dashboard."*
 The lead cards and the lead's fields are built around a car (make, model,
 year and mileage, also in the notification's title), so they have to change.
 
-The system can be adapted for other countries during setup: the sellers'
-language, the questions, the privacy policy (a draft for the client's
-lawyer), the card's size and, where needed, a server in the country
-([SETUP.md](../SETUP.md#another-country)). The legal side needs a local
-check: where the data may be kept, whether it may leave the country and
-what the business must register are for its local lawyer to confirm. For the US in Spanish,
-Canada in English and French, Brazil, Russia, the UK, Germany, France, Spain
-and Poland it starts from files already made in `countries/`, and the page
-for car buyers comes in that language too.
+## Other countries
+
+The system is adapted to another country during setup: the sellers'
+language, the questions, the privacy policy and the card's size. The legal
+side is for the business's local lawyer to check. Ready files for several
+countries are in [countries/](../countries/); see
+[SETUP.md](../SETUP.md#another-country).
