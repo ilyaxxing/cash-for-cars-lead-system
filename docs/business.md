@@ -71,7 +71,7 @@ cars each one brings:
 - **A poster at a partner repair shop or tow company**: one code per
   partner, so each one's sellers are counted.
 - **A sign or banner**: a large code for people who stop, and the address in
-  large letters (a typed address counts as Other).
+  large letters (someone who types the address by hand shows up as Other).
 - **A link in the Google Maps listing** (Yandex Maps in Russia): in the
   website field.
 - **A link in the social profiles and local groups**: in the bio, and in
