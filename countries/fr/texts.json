@@ -449,6 +449,7 @@
   },
   "sources": {
     "card": "Carte de visite",
+    "test": "Test",
     "direct": "Autre",
     "other": "Autre"
   },

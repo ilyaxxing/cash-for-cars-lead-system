@@ -6,7 +6,8 @@ Definitions follow the design:
 - "this week" always starts on Monday, whatever the period;
 - conversion = leads purchased / leads received, both counted over leads
   received in the period;
-- sources group leads by the source frozen on each lead.
+- sources group leads by the source frozen on each lead;
+- test leads (sent through ?src=test while setting up) count nowhere.
 
 Kept as plain functions over (created_at, status, source) rows so they can
 be tested without a database.
@@ -21,6 +22,7 @@ from typing import Any
 from zoneinfo import ZoneInfo
 
 from app.db.models import STATUS_BOUGHT
+from app.services.sources import TEST_SOURCE
 
 PERIODS = {"7": 7, "30": 30, "all": None}
 
@@ -83,6 +85,7 @@ def _buckets(
 def compute(rows: list[Row], period: str, now: datetime, tz: ZoneInfo) -> dict[str, Any]:
     if period not in PERIODS:
         raise ValueError(f"unknown period {period!r}")
+    rows = [r for r in rows if r.source != TEST_SOURCE]
     start = period_start(period, now, tz)
     in_period = [r for r in rows if start is None or r.created_at >= start]
     bought = sum(r.status == STATUS_BOUGHT for r in in_period)

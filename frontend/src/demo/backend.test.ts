@@ -204,6 +204,21 @@ describe('statistics, as the server computes them', () => {
   })
 })
 
+describe('test leads', () => {
+  it('count nowhere in the statistics, as the server leaves them out', () => {
+    const rows = [
+      { createdAt: '2026-09-01T15:00:00Z', status: 'bought' as const, source: 'test' },
+      { createdAt: '2026-10-20T15:00:00Z', status: 'bought' as const, source: 'card' },
+      { createdAt: '2026-10-21T16:00:00Z', status: 'new' as const, source: 'test' },
+    ]
+    const stats = computeStats(rows, 'all', NOW, 'America/Chicago')
+    expect([stats.total, stats.week, stats.purchased]).toEqual([1, 1, 1])
+    expect(stats.firstLeadAt).toBe('2026-10-20T15:00:00.000Z')
+    expect(stats.sources.map((s) => s.source)).toEqual(['card'])
+    expect(stats.buckets.reduce((sum, b) => sum + b.leads, 0)).toBe(1)
+  })
+})
+
 // The form a country's clients start from: its own, or the shipped US one.
 function presetOf(code: string): string {
   const settings = read(`../../../countries/${code}/settings.env`)

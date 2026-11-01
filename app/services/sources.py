@@ -1,13 +1,17 @@
 """Lead source labels: where the seller found the form.
 
 The business card QR code points at /v, which tags the visit as "card". Any
-other placement uses its own ?src= label (a parking lot sticker, a flyer)
-and gets a readable name through SOURCE_LABELS.
+other placement uses its own ?src= label (a sticker, a partner's poster)
+and gets a readable name through SOURCE_LABELS. One more label is built in:
+"test" (?src=test), for the leads sent while setting the system up. They show
+a Test badge in the dashboard and are left out of the statistics.
 
-Two rules:
+Three rules:
 - The first meaningful source wins. A later visit with a label only replaces
   the default "direct", never another label: someone who scanned the business
   card and later came back by a typed address still counts as "card".
+- A test link always wins: the phone that tests may have scanned a card
+  before, and its test lead must not count as one.
 - The lead keeps the source it had when it was created. Statistics group by
   it, so past months never shift.
 """
@@ -24,6 +28,7 @@ from app.i18n import Messages
 logger = logging.getLogger(__name__)
 
 CARD_SOURCE = "card"
+TEST_SOURCE = "test"
 SOURCE_RE = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
 
 _warned: set[str] = set()
@@ -41,7 +46,7 @@ def parse_source(raw: str | None) -> str | None:
 
 def choose_source(stored: str | None, incoming: str | None) -> str:
     """Which source to remember after a visit: the first meaningful one wins."""
-    if incoming and (not stored or stored == DEFAULT_SOURCE):
+    if incoming == TEST_SOURCE or (incoming and (not stored or stored == DEFAULT_SOURCE)):
         return incoming
     return stored or DEFAULT_SOURCE
 

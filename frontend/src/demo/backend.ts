@@ -6,7 +6,7 @@
 // visitor would notice: tabs, search, statuses with undo, notes, statistics.
 
 import type { Card, Detail, LeadEvent, LeadList, Note, Photo, PushStatus, Stats, Status, Tab } from '../dashboard/api'
-import type { Value } from '../form/engine'
+import { TEST_SOURCE, type Value } from '../form/engine'
 import type { StoredLead } from '../form/api'
 import type { AppConfig, FieldSpec } from '../shared/config'
 import { createTranslator } from '../shared/i18n'
@@ -501,6 +501,7 @@ export function computeStats(rows: StatsRow[], period: Stats['period'], now: Dat
   const weekStartDay = addDays(today, -weekday(today))
   const weekStart = midnight(weekStartDay, timeZone)
   const at = (row: StatsRow) => new Date(row.createdAt).getTime()
+  rows = rows.filter((row) => row.source !== TEST_SOURCE)
   const inPeriod = rows.filter((row) => !start || at(row) >= start.getTime())
   const received = new Map<string, number>()
   const purchased = new Map<string, number>()

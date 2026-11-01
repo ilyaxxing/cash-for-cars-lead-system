@@ -443,6 +443,7 @@
   },
   "sources": {
     "card": "Tarjeta de presentación",
+    "test": "Prueba",
     "direct": "Otro",
     "other": "Otro"
   },

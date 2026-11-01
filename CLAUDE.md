@@ -168,6 +168,9 @@ Labels from the design: New, In Progress, Purchased, Rejected.
   default `direct`. Frozen on the lead at creation. Format `[A-Za-z0-9_-]{1,64}`,
   lowercased. `/v` → `card` ("Business Card"), `?src=` for others, labels via
   `SOURCE_LABELS`; unknown labels show as "Other" and log a warning.
+  `?src=test` is built in, for the leads sent while setting up: it always
+  wins over a stored label, shows a Test badge in the dashboard and counts
+  nowhere in the statistics.
 - Retention: 90 days after closing (not creation), name, phone, every preset
   field marked `personal: true` and the photos (objects, then rows) are wiped;
   rows stay for statistics. Photos are wiped as well: plates, faces and
@@ -204,6 +207,7 @@ Invalid preset → the app refuses to start.
   X-Real-IP with the real address (checked live on 2026-10-20).
 - QR codes: `python -m app.cli qr --env-file clients/<id>.env --source <label>`,
   error correction H, a 4-module quiet zone, at least 0.4 mm per module at
-  20 mm; `--link-only` gives the link alone for an online place (maps,
-  social profiles, auto-replies). The card is the main channel; every other
-  place has its own label in SOURCE_LABELS, so statistics tell them apart.
+  20 mm; `--link-only` gives the link alone for an online place (the maps
+  listing, social profiles and local groups). The card comes first; every
+  other place (the same six as on the page for car buyers) has its own label
+  in SOURCE_LABELS, so statistics tell them apart.

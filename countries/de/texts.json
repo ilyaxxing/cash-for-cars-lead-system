@@ -443,6 +443,7 @@
   },
   "sources": {
     "card": "Visitenkarte",
+    "test": "Test",
     "direct": "Sonstige",
     "other": "Sonstige"
   },

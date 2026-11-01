@@ -91,8 +91,9 @@ until then), turn on notifications, and send the test notification. On
 Android, Chrome offers to install the app; then do the same. Leave the first
 sign-in to the owner: whoever does it chooses the password.
 
-Then submit a test lead through the form from another phone and check that the
-notification arrives and opens the lead.
+Then submit a test lead from another phone through `https://<address>/?src=test`
+and check that the notification arrives and opens the lead. The `test` label
+marks it **Test** in the dashboard and keeps it out of the statistics.
 
 ## Updating
 
@@ -154,7 +155,7 @@ good and it must be the business's own. Use a subdomain of the client's site
 
 This writes `qr/<domain>-<source>.svg` for the print shop and a `.png`
 preview; `--link-only` prints the link and writes nothing, for a map listing,
-a social profile or an auto-reply. The address comes from the file's
+a social profile or a post in a local group. The address comes from the file's
 `PUBLIC_URL` (`--url` overrides it) and the place names from its
 `SOURCE_LABELS`: a label the file does not name is flagged, since the
 dashboard would show it as Other. Business card codes point at `/v`, which

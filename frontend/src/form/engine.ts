@@ -235,9 +235,15 @@ export function parseSource(raw: string | null): string | null {
   return candidate && SOURCE_RE.test(candidate) ? candidate.toLowerCase() : null
 }
 
+// The label of the leads sent while setting up (?src=test): a Test badge in
+// the dashboard, and left out of the statistics (app/services/sources.py).
+export const TEST_SOURCE = 'test'
+
 // First meaningful source wins: a label only replaces nothing or "direct".
+// A test link always wins, so a phone that scanned a card before still
+// sends its test lead as a test.
 export function rememberSource(stored: string | null, incoming: string | null): string | null {
-  if (incoming && (!stored || stored === 'direct')) return incoming
+  if (incoming === TEST_SOURCE || (incoming && (!stored || stored === 'direct'))) return incoming
   return stored
 }
 
