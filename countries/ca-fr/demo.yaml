@@ -34,7 +34,7 @@ cars: [[Toyota, Corolla], [Toyota, RAV4], [Honda, Civic], [Honda, CR-V], [Hyunda
 names: [Catherine Pelletier, Gabriel Bélanger, Léa Lavoie, Félix Fortin, Maude Ouellet, William Morin, Sarah Lévesque, Samuel Bergeron, Jade Leblanc, Louis Girard, Audrey Caron, Vincent Paquette]
 cities: [[Montréal, 'H2X 1Y4'], [Laval, 'H7T 2Z3'], [Longueuil, 'J4H 3M6'], [Repentigny, 'J6A 2T2']]
 
-sources: {sticker: Autocollant sur votre auto, shop: Garage partenaire, sign: Panneau routier, maps: Google Maps, missed_call: Texto après appel manqué}
+sources: {sticker: Autocollant sur votre auto, shop: Garage partenaire, sign: Panneau routier, maps: Google Maps, social: Réseaux sociaux et groupes}
 
 page:
   title: Achat Auto Comptant · Appelez le premier
@@ -54,7 +54,7 @@ page:
   place_partner: Une affiche chez un garage ou un remorqueur partenaire
   place_sign: Un panneau ou une bannière
   place_maps: Un lien dans votre fiche Google Maps
-  place_sms: Un texto après un appel manqué
+  place_social: Un lien dans vos réseaux sociaux et groupes locaux
   places_note: Chaque endroit a son propre code ou lien, et l'app montre lequel vous amène des autos.
   kicker_demo: Démo en direct
   h2_demo: Soyez le vendeur. Puis l'acheteur.

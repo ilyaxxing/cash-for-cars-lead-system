@@ -38,7 +38,7 @@ DEMO_KEYS = {
     "page",
 }
 # The places frontend/src/demo/seed.ts gives the demo's leads, besides the card.
-PLACES = {"sticker", "shop", "sign", "maps", "missed_call"}
+PLACES = {"sticker", "shop", "sign", "maps", "social"}
 
 
 def settings_of(code: str) -> dict[str, Any]:
