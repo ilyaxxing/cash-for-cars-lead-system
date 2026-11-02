@@ -244,6 +244,15 @@ should have its lawyer read it at `/privacy` before launch.
   can change its DNS today, its address goes into the settings now (step 4)
   and is connected right after the first deploy (step 6), before the owner's
   phone and before anything is printed.
+- The form needs a subdomain of its own: it cannot live at a page of the
+  existing site, such as `example.com/sell`. The website itself stays as it
+  is. Ask who manages its DNS, the business or a web designer, and whether
+  the site was made with a site builder (Wix, Squarespace, GoDaddy, Shopify):
+  that person, or that builder's DNS settings, adds the records in step 6.
+- If the business has a website, the site is one more place for the form:
+  a "Sell your car" button or link on it, label `website`. Add it to
+  `SOURCE_LABELS` with the places above, e.g. `website:Our website`; its link
+  comes in step 9.
 
 **Owner's password**
 - Generate a strong, typeable one (three random words and a number) unless the
@@ -343,7 +352,8 @@ address the cards will carry.
    prints the DNS records to add at the registrar (the first one already did,
    if the address was set in step 4).
 3. Walk the person, or the business's web person, through adding them at the
-   registrar. Check `railway domain list --service app` until the domain is
+   registrar, or in the site builder's domain settings when the site was made
+   with one (step 3). Check `railway domain list --service app` until the domain is
    active, then open the address and confirm the padlock (certificate) shows.
 
 A DNS change usually shows within an hour, and can take up to a day. While it
@@ -479,7 +489,8 @@ profiles and local groups), one per label:
 
 Give the person each link with where it goes: the website field of the
 Google Maps or Yandex Maps listing, the bio link of each social profile, a
-post in each local group.
+post in each local group, and, if the business has a website, the address of
+its "Sell your car" button (`--source website`), for whoever edits the site.
 
 ## Step 10. Hand over
 
