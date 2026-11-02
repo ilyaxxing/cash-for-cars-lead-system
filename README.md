@@ -15,7 +15,7 @@ Suggested price: $300–600 per setup, plus optional monthly support (starting
 estimates, not yet tested with clients). The business pays its own hosting and
 domain.
 
-[See what the car buyer gets](https://car-buyer-demo.github.io/) ·
+[Try the live demo](https://ilyaxxing.github.io/cash-for-cars-lead-system/) ·
 [Set it up with Claude Code](#get-started) · [Business model](docs/business.md)
 
 ## How it works
@@ -57,9 +57,9 @@ You pick the price, and whether to sell the setup alone or with monthly
 support. Suggested starting points, not market-tested yet. More in
 [docs/business.md](docs/business.md).
 
-**Show it to a client.** The page for car buyers (linked at the top) has the
-same live demo and what it does for their business, without prices, setup
-details or GitHub. Send it in their name and color: add them to the link
+**Show it to a client.** [The page for car buyers](https://car-buyer-demo.github.io/)
+has the same live demo and what it does for their business, without prices,
+setup details or GitHub. Send it in their name and color: add them to the link
 (`https://car-buyer-demo.github.io/?name=Rapid+Cash+Cars&color=ff8a00`), or make it with the link
 maker on the [project page](https://ilyaxxing.github.io/cash-for-cars-lead-system/#show), which
 also picks the buyer's country and language: eleven of them, as in [countries/](countries/).
