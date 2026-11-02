@@ -13,7 +13,7 @@ service, set by the deploy script from the client's file.
 | `SECRET_KEY` | | 32+ characters. Signs owner sessions and sellers' upload tokens. |
 | `CLIENT_IP_HEADER` | | Header the hosting proxy fills with the visitor's address, for rate limits. `X-Real-IP` on Railway (set by the deploy script; Railway replaces any value a client sends). Never `X-Forwarded-For`: many proxies pass a client's own value through. |
 | `PRESET`, `LOCALE` | `us-car-buyout`, `en` | Files in `presets/` and `locales/`. |
-| `PRESET_FILE`, `LOCALE_FILE`, `PRIVACY_POLICY_FILE` | | A client's own form, texts and privacy policy, for a market the shipped files don't cover; see [Customize the form](customize-the-form.md#another-country). |
+| `PRESET_FILE`, `LOCALE_FILE`, `PRIVACY_POLICY_FILE` | | A client's own form, texts and privacy policy, for a market the shipped files don't cover; see [Customize the form](customize-the-form.md#another-country). `PRIVACY_POLICY_FILE` also takes a business's own policy wording ([SETUP.md](../SETUP.md), step 3). |
 | `CURRENCY`, `TIMEZONE` | `USD`, `America/New_York` | |
 | `BRAND_NAME`, `BRAND_PHONE` | `Car Buyout` | The phone may be written any way; the privacy policy and the business card show it as people in the form's country write it, e.g. (512) 555-0100. |
 | `BRAND_COLOR` | `#C7F747` | Accent color. Refused if too dark for the dark screens; the error suggests a lighter shade. |

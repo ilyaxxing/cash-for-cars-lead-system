@@ -217,6 +217,26 @@ The business card is asked about later, in step 9.
 Tell them the privacy policy is a template, not legal advice: the business
 should have its lawyer read it at `/privacy` before launch.
 
+Ask whether the business already has a privacy policy, for example on its
+website. If it does:
+- Keep the form's own policy at `/privacy`, next to theirs. A general policy
+  rarely says what this form collects and how long it keeps it, and the form
+  links only to its own page: it cannot point to a policy elsewhere.
+- The business's lawyer reads both and checks that they agree. Their main
+  policy can add one line linking to `https://<form address>/privacy`.
+- If the lawyer wants the business's own wording on the form's page too, save
+  it as Markdown in `clients/<id>/policy.md` (the first line is its title,
+  `# ...`) and set `PRIVACY_POLICY_FILE` to it in step 4. It may use the same
+  `{operator_name}`, `{operator_email}`, `{brand_phone}`, `{site_url}` and
+  `{retention_days}` as the template. Before deploying, compare it with
+  `locales/privacy-policy.en.md` section by section and tell the person
+  what it leaves out: what the form collects (the car, the photos, the name,
+  phone and email), that the IP address is used briefly and never stored,
+  the push notifications (car and price, no contacts), the hosting provider,
+  the erasure 90 days after a lead is closed and what it cannot reach
+  (backups, notifications already shown), and how to ask for erasure. The
+  gaps are for the lawyer to fill; never fill them in yourself.
+
 **Where sellers will find the form**
 - A card under a wiper is built in (`card`) and comes first. Then go through
   the other places with the person, one at a time, and note the ones the
