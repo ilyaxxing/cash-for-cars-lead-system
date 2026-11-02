@@ -5,7 +5,10 @@ What the system stores, for how long, and what it never does.
 The privacy policy at `/privacy` is generated from
 [locales/privacy-policy.en.md](../locales/privacy-policy.en.md) and the operator
 settings. It is a starting point, not legal advice: have the client's lawyer
-review it before launch.
+review it before launch. A business that already has a policy keeps this one
+for the form, next to its own; if its lawyer wants the business's wording
+here too, `PRIVACY_POLICY_FILE` points to it, checked against this template
+for what it leaves out (SETUP.md, step 3).
 
 Retention runs once at startup and then daily, and logs one line per pass.
 It erases the seller's name, phone, email (every `personal: true` field) and

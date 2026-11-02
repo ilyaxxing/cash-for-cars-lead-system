@@ -217,6 +217,26 @@ The business card is asked about later, in step 9.
 Tell them the privacy policy is a template, not legal advice: the business
 should have its lawyer read it at `/privacy` before launch.
 
+Ask whether the business already has a privacy policy, for example on its
+website. If it does:
+- Keep the form's own policy at `/privacy`, next to theirs. A general policy
+  rarely says what this form collects and how long it keeps it, and the form
+  links only to its own page: it cannot point to a policy elsewhere.
+- The business's lawyer reads both and checks that they agree. Their main
+  policy can add one line linking to `https://<form address>/privacy`.
+- If the lawyer wants the business's own wording on the form's page too, save
+  it as Markdown in `clients/<id>/policy.md` (the first line is its title,
+  `# ...`) and set `PRIVACY_POLICY_FILE` to it in step 4. It may use the same
+  `{operator_name}`, `{operator_email}`, `{brand_phone}`, `{site_url}` and
+  `{retention_days}` as the template. Before deploying, compare it with
+  `locales/privacy-policy.en.md` section by section and tell the person
+  what it leaves out: what the form collects (the car, the photos, the name,
+  phone and email), that the IP address is used briefly and never stored,
+  the push notifications (car and price, no contacts), the hosting provider,
+  the erasure 90 days after a lead is closed and what it cannot reach
+  (backups, notifications already shown), and how to ask for erasure. The
+  gaps are for the lawyer to fill; never fill them in yourself.
+
 **Where sellers will find the form**
 - A card under a wiper is built in (`card`) and comes first. Then go through
   the other places with the person, one at a time, and note the ones the
@@ -244,6 +264,15 @@ should have its lawyer read it at `/privacy` before launch.
   can change its DNS today, its address goes into the settings now (step 4)
   and is connected right after the first deploy (step 6), before the owner's
   phone and before anything is printed.
+- The form needs a subdomain of its own: it cannot live at a page of the
+  existing site, such as `example.com/sell`. The website itself stays as it
+  is. Ask who manages its DNS, the business or a web designer, and whether
+  the site was made with a site builder (Wix, Squarespace, GoDaddy, Shopify):
+  that person, or that builder's DNS settings, adds the records in step 6.
+- If the business has a website, the site is one more place for the form:
+  a "Sell your car" button or link on it, label `website`. Add it to
+  `SOURCE_LABELS` with the places above, e.g. `website:Our website`; its link
+  comes in step 9.
 
 **Owner's password**
 - Generate a strong, typeable one (three random words and a number) unless the
@@ -343,7 +372,8 @@ address the cards will carry.
    prints the DNS records to add at the registrar (the first one already did,
    if the address was set in step 4).
 3. Walk the person, or the business's web person, through adding them at the
-   registrar. Check `railway domain list --service app` until the domain is
+   registrar, or in the site builder's domain settings when the site was made
+   with one (step 3). Check `railway domain list --service app` until the domain is
    active, then open the address and confirm the padlock (certificate) shows.
 
 A DNS change usually shows within an hour, and can take up to a day. While it
@@ -479,7 +509,8 @@ profiles and local groups), one per label:
 
 Give the person each link with where it goes: the website field of the
 Google Maps or Yandex Maps listing, the bio link of each social profile, a
-post in each local group.
+post in each local group, and, if the business has a website, the address of
+its "Sell your car" button (`--source website`), for whoever edits the site.
 
 ## Step 10. Hand over
 
