@@ -297,7 +297,7 @@
     </div>
 
     {#if !dash.desk && phone}
-      <div class="mobile-actions">
+      <div class="mobile-actions" class:three={answer.key !== 'email' && email}>
         <a class="call mobile" href="tel:{phone}">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.2 2.5H3.4a1 1 0 00-1 1.1c.5 5.3 4.7 9.5 10 10a1 1 0 001.1-1v-1.8a1 1 0 00-.8-1l-2-.5a1 1 0 00-1 .3l-.8.8a8 8 0 01-3.5-3.5l.8-.8a1 1 0 00.3-1l-.5-2a1 1 0 00-1-.8z" style="stroke: var(--on-accent)" stroke-width="1.4" stroke-linejoin="round" /></svg>
           {t('dashboard.lead.call')}
@@ -1031,13 +1031,31 @@
     padding: 12px 16px max(10px, env(safe-area-inset-bottom));
     border-top: 1px solid #222424;
     background: var(--bg);
+    container-type: inline-size;
   }
 
   .mobile {
     flex: 1;
+    min-width: 0;
     height: 52px;
+    padding: 0 10px;
     border-radius: 14px;
     font: 600 16px/1 var(--font-sans);
+    white-space: nowrap;
+  }
+
+  /* Call, the seller's way and email: equal thirds, but Call never narrower
+     than its label. On a narrow phone its icon makes room for the labels
+     (Позвонить, WhatsApp, Courriel). */
+  .mobile-actions.three {
+    display: grid;
+    grid-template-columns: minmax(max-content, 1fr) 1fr 1fr;
+  }
+
+  @container (max-width: 349px) {
+    .three .call svg {
+      display: none;
+    }
   }
 
   .secondary.mobile {
