@@ -17,7 +17,7 @@ Suggested price: $300–600 per setup, plus optional monthly support (starting
 estimates, not yet tested with clients). The business pays its own hosting and
 domain.
 
-[Try the live demo](https://ilyaxxing.github.io/cash-for-cars-lead-system/) ·
+[Live demo](https://ilyaxxing.github.io/cash-for-cars-lead-system/) ·
 [Set it up with Claude Code](#get-started) · [Business model](docs/business.md)
 
 ## How it works
