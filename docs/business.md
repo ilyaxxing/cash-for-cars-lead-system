@@ -54,7 +54,7 @@ restrict leaving flyers on cars, so the client should check the local rules.
   statistics: how many sellers came and how many cars were bought, from
   each place.
 - **Their own brand and their own accounts**: their name, color, logo and
-  domain, hosted on their own Railway account for about $5 a month, their
+  domain, hosted on their own Railway account from $5 a month, their
   data in their own database.
 - **Privacy built in**: a privacy policy template, a consent checkbox, and
   sellers' names, phones and photos erased automatically 90 days after a lead
@@ -85,14 +85,14 @@ Suggested starting points, not market-tested yet.
 |---|---|---|
 | Setup | $300-600 once | Turnkey: installation, their name, color and logo, connecting their domain, the app on the owner's phone, the card PDF, and QR codes and links for every place. |
 | Support (optional) | $25-50 a month | Changes to the questions, new QR placements, updates, someone to call. |
-| Hosting | about $5 a month | On the client's own card. Where Railway doesn't fit (Russia), a small server in the client's country, at a similar price. |
+| Hosting | from $5 a month | On the client's own card. Where Railway doesn't fit (Russia), a small server in the client's country, at a similar price. |
 | Domain | about $10-15 a year | Required, in the business's name. Free if the business has a website: use a subdomain such as `buy.<their domain>`. |
 | Printing | usually under $150 per 1,000 cards | Any print shop; the PDF is print-ready. |
 
 Hosting, the domain and printing are paid by the client directly, on top of the setup price.
 
-Hosting is Railway's Hobby plan, $5 a month with $5 of usage included. In practice
-instances like this fit within Hobby's included usage; check the first client's bill.
+Hosting is from $5 a month (Railway Hobby includes $5 of usage; anything above is billed, taxes may apply).
+Check the bill after the first week.
 
 You pick the price within the range, and whether to sell the setup alone or
 with monthly support. Your own fixed costs are a paid Claude plan for Claude
