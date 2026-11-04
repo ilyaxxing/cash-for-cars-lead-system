@@ -95,9 +95,9 @@ Hosting is from $5 a month (Railway Hobby includes $5 of usage; anything above i
 Check the bill after the first week.
 
 You pick the price within the range, and whether to sell the setup alone or
-with monthly support. Your own fixed costs are a paid Claude plan for Claude
-Code and your own Railway Hobby plan, $5 a month: each instance is built there
-before it is handed over.
+with monthly support. Your own costs are a paid Claude plan for Claude Code
+and your own Railway Hobby plan, from $5 a month (usage above the included
+$5 is billed): each instance is built there before it is handed over.
 
 The argument for the owner is arithmetic, not a promise: if a car earns them
 a few hundred dollars, one extra car from the system pays for the setup.

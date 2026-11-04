@@ -85,8 +85,9 @@ and the domain's DNS can take up to a day.
 
 - **You bring** Claude Code, which needs a paid Claude plan (Pro or higher)
   or an Anthropic API account, and your own [Railway](https://railway.com)
-  account on the Hobby plan, $5 a month: each project is built there before
-  it is handed over. These two are your own running costs.
+  account on the Hobby plan, from $5 a month (usage above the included $5 is
+  billed): each project is built there before it is handed over. These two
+  are your own running costs.
 - **The business brings** its own Railway account with its card, hosting
   from $5 a month; the finished project is handed over to it.
   Also its domain, its name and email, and the owner's phone for ten minutes.
