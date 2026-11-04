@@ -5,7 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="robots" content="noindex">
   <title>Cash for Cars Lead System</title>
-  <meta name="description" content="A QR code or a link wherever sellers look, a mobile form for car sellers, instant push to the buyer's phone and an app to work every lead. Open source, installed with Claude Code.">
+  <meta name="description" content="Brand and deploy a seller form, a lead dashboard and phone notifications for a local car buyer. Claude Code does most of the technical work. Open source.">
+  <!-- The preview a messenger shows under a link (tools/make_page_preview.py draws the picture). -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ilyaxxing.github.io/cash-for-cars-lead-system/">
+  <meta property="og:title" content="Set up a lead system for a local car buyer. Charge for the setup.">
+  <meta property="og:description" content="Brand and deploy a seller form, a lead dashboard and phone notifications for a local car buyer. Claude Code does most of the technical work. Open source.">
+  <meta property="og:image" content="https://ilyaxxing.github.io/cash-for-cars-lead-system/assets/preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#0b0c0c">
   <style>
     @font-face { font-family: Geist; font-weight: 400; font-display: swap; src: url(assets/fonts/geist-400.woff2) format("woff2"); }
@@ -27,7 +36,7 @@
     }
 
     * { box-sizing: border-box; }
-    html { -webkit-text-size-adjust: 100%; }
+    html { -webkit-text-size-adjust: 100%; scroll-padding-top: 16px; }
     body {
       margin: 0;
       background: var(--bg);
@@ -48,7 +57,7 @@
     .hero { display: grid; grid-template-columns: 1fr; gap: 28px; padding: 28px 0 8px; }
     .kicker { font: 500 12px/1 "Geist Mono", ui-monospace, monospace; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
     .kicker::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--accent); transition: background-color .4s; }
-    h1 { margin: 14px 0 0; font: 800 clamp(40px, 7.4vw, 76px)/.98 Geist, sans-serif; letter-spacing: -.035em; }
+    h1 { margin: 14px 0 0; font: 800 clamp(36px, 5.4vw, 60px)/1 Geist, sans-serif; letter-spacing: -.035em; }
     h1 em { font-style: normal; color: var(--accent); transition: color .4s; }
     .lead { margin: 20px 0 0; max-width: 34em; color: var(--muted); font-size: clamp(17px, 2vw, 19px); }
     .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
@@ -56,6 +65,7 @@
     .button.primary { background: var(--accent); color: var(--on-accent); transition: background-color .4s; }
     .button.ghost { border: 1px solid var(--line); color: var(--text); }
     .button.ghost:hover { border-color: var(--faint); }
+    .price { margin: 18px 0 0; color: var(--muted); font: 500 13px/1.6 "Geist Mono", ui-monospace, monospace; }
 
     /* The card, in 3D. 3.5 x 2 in. */
     .stage { position: relative; display: grid; place-items: center; padding: 34px 0 10px; perspective: 1600px; touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
@@ -79,7 +89,7 @@
     .hint { text-align: center; color: var(--faint); font: 500 12px/1.5 "Geist Mono", ui-monospace, monospace; margin: 4px 0 0; }
 
     section { padding: 72px 0 0; }
-    h2 { margin: 0; font: 800 clamp(30px, 4.4vw, 44px)/1.04 Geist, sans-serif; letter-spacing: -.03em; }
+    h2 { margin: 14px 0 0; font: 800 clamp(30px, 4.4vw, 44px)/1.04 Geist, sans-serif; letter-spacing: -.03em; }
     .sub { color: var(--muted); max-width: 40em; margin: 14px 0 0; }
 
     .flow { display: grid; grid-template-columns: 1fr; gap: 28px; margin-top: 36px; }
@@ -102,24 +112,32 @@
     .maker .actions .button { min-height: 46px; padding: 0 18px; font-size: 15px; border: 0; cursor: pointer; }
     .maker .warn { margin: 10px 0 0; color: #ffb4a6; font-size: 14px; }
     .maker .hint { text-align: left; margin: 14px 0 0; color: var(--muted); font: 400 14px/1.5 Geist, sans-serif; }
-    .needs { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
-    .needs .point ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: 15.5px; }
-    .needs .point li + li { margin-top: 4px; }
+    .needs, .econ { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 32px; }
+    .point ul { margin: 10px 0 0; padding-left: 18px; color: var(--muted); font-size: 15.5px; }
+    .point li + li { margin-top: 4px; }
     .phone figcaption { text-align: center; margin-top: 16px; color: var(--muted); font-size: 15px; }
     .phone figcaption b { display: block; color: var(--text); font-weight: 600; font-size: 17px; }
 
-    .points { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 32px; }
     .point { border: 1px solid var(--line); border-radius: 16px; padding: 20px; background: var(--surface); }
     .point h3 { margin: 0; font: 600 18px/1.3 Geist, sans-serif; }
     .point p { margin: 8px 0 0; color: var(--muted); font-size: 15.5px; }
-    .num { font: 500 12px/1 "Geist Mono", ui-monospace, monospace; color: var(--accent); transition: color .4s; }
+    .point.alert { border-color: var(--accent); margin-top: 14px; transition: border-color .4s; }
+    .point p.tag { margin: 6px 0 0; color: var(--accent); font: 500 12px/1.5 "Geist Mono", ui-monospace, monospace; transition: color .4s; }
+    .rows { margin: 14px 0 0; }
+    .rows div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; border-top: 1px solid var(--line); }
+    .rows dt { color: var(--muted); font-size: 15.5px; white-space: nowrap; }
+    .rows dd { margin: 0; font-weight: 600; text-align: right; }
+    .path { list-style: none; margin: 24px 0 0; padding: 0; counter-reset: step; border-top: 1px solid var(--line); }
+    .path li { display: grid; grid-template-columns: 34px 1fr; padding: 12px 0; border-bottom: 1px solid var(--line); counter-increment: step; color: var(--muted); }
+    .path li::before { content: counter(step, decimal-leading-zero); padding-top: 5px; color: var(--accent); font: 500 12px/1.5 "Geist Mono", ui-monospace, monospace; transition: color .4s; }
+    .path b { color: var(--text); font-weight: 600; }
 
     .prompt { margin-top: 28px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); padding: 18px 20px; font: 500 15px/1.6 "Geist Mono", ui-monospace, monospace; overflow-wrap: anywhere; }
     footer { padding: 72px 0 48px; color: var(--faint); font-size: 14px; display: flex; flex-wrap: wrap; gap: 8px 24px; }
 
     @media (min-width: 760px) {
       .flow { grid-template-columns: 1fr 1fr; }
-      .points, .needs { grid-template-columns: repeat(3, 1fr); }
+      .needs, .econ { grid-template-columns: repeat(2, 1fr); }
     }
     @media (min-width: 980px) {
       .hero { grid-template-columns: 1fr 1.05fr; align-items: center; padding-top: 48px; }
@@ -129,11 +147,15 @@
     @media (max-width: 520px) {
       .long { display: none; }
       .short { display: inline; }
+      .cta .button { flex: 1 1 0; justify-content: center; padding: 0 12px; white-space: nowrap; font-size: 15px; }
     }
     /* ?spin: the card alone, turning, for recording the README animation. */
     body.spin header.top, body.spin .hero > div:first-child, body.spin .controls, body.spin .hint, body.spin section, body.spin footer { display: none; }
     body.spin .hero { min-height: 100vh; display: grid; place-items: center; padding: 0; }
     body.spin .stage { padding: 0; }
+    @media (prefers-reduced-motion: no-preference) {
+      html { scroll-behavior: smooth; }
+    }
     @media (prefers-reduced-motion: reduce) {
       .card.eased, .mark, h1 em, .button.primary { transition: none; }
     }
@@ -153,13 +175,14 @@
 
     <div class="hero">
       <div>
-        <div class="kicker">Open source · For people who set it up for car buyers</div>
-        <h1>Every lead <em>lands on the buyer's phone.</em></h1>
-        <p class="lead">A lead system for local businesses that buy used cars for cash. A seller scans a QR code (on a card under the wiper, a sticker, a partner's poster) or taps a link and fills in a short mobile form; the buyer gets a phone notification within seconds and an app to work every lead. You set it up for a buyer under their name with Claude Code and charge for the setup.</p>
+        <div class="kicker">Open source · Set up with Claude Code</div>
+        <h1>Set up a lead system for a local car buyer. <em>Charge for the setup.</em></h1>
+        <p class="lead">Brand and deploy the seller form, the lead dashboard and phone notifications for a local business. Claude Code does most of the technical work; you guide the setup and handle the client.</p>
         <div class="cta">
-          <a class="button primary" data-repo href="https://github.com/ilyaxxing/cash-for-cars-lead-system">Get it on GitHub →</a>
-          <a class="button ghost" href="#how">Try the live demo</a>
+          <a class="button primary" href="#demo">Try the live demo</a>
+          <a class="button ghost" data-repo href="https://github.com/ilyaxxing/cash-for-cars-lead-system">Get it on GitHub</a>
         </div>
+        <p class="price">Suggested US starting price: $300–600 per setup · optional support $25–50/month.</p>
       </div>
 
       <div>
@@ -175,14 +198,14 @@
           <div class="swatches" id="swatches" role="group" aria-label="Accent color"></div>
           <button class="flip" id="flip" type="button">Flip card</button>
         </div>
-        <p class="hint">Drag to turn · every client gets their own color, logo and QR code</p>
+        <p class="hint">What the client gets: a print-ready card in their color, with their logo and QR code. Drag to turn.</p>
       </div>
     </div>
 
-    <section id="how">
-      <div class="kicker">Live demo</div>
+    <section id="demo">
+      <div class="kicker">Live demo · What the client gets</div>
       <h2>Fill in the form. Watch the lead arrive.</h2>
-      <p class="sub">These are the real seller's form and the buyer's app. Answer as a seller would: the moment the contact details are in, the lead lands in the app with a notification, the way it reaches the buyer's phone. Tap the notification, change the status, add a note.</p>
+      <p class="sub">This is what the client gets: the real seller's form and the buyer's app. Answer as a seller would: the moment the contact details are in, the lead lands in the app with a notification, the way it reaches the buyer's phone. Tap the notification, change the status, add a note.</p>
       <div class="flow">
         <figure class="phone">
           <div class="screen"><iframe data-src="demo/index.html?src=card" src="demo/index.html?src=card" title="The seller's form, a working demo" loading="lazy"></iframe></div>
@@ -194,6 +217,83 @@
         </figure>
       </div>
       <p class="demo-note">A working demo with fictional leads and AI-generated car photos. It runs in your browser: nothing you type leaves this page.<br><button class="flip" id="restart" type="button">Start over</button></p>
+    </section>
+
+    <section id="economics">
+      <div class="kicker">The economics</div>
+      <h2>What you charge, and who pays for what.</h2>
+      <p class="sub">Every "We buy cars" card under a wiper is a possible client. So are the numbers on road signs and the "we buy cars" listings on maps. They already spend money on finding sellers. You set the system up under their name, on their own accounts, and pick the price.</p>
+      <div class="econ">
+        <div class="point">
+          <h3>What you charge</h3>
+          <p class="tag">Suggested, not tested with clients yet</p>
+          <dl class="rows">
+            <div><dt>Setup</dt><dd>$300–600 once</dd></div>
+            <div><dt>Support (optional)</dt><dd>$25–50 a month</dd></div>
+          </dl>
+          <p>Support: up to two small changes a month (form questions, texts, new QR codes and labels), updates to new releases, a reply within a working day. New features and rework are extra.</p>
+        </div>
+        <div class="point">
+          <h3>What the client pays directly</h3>
+          <p class="tag">On top of the setup price</p>
+          <dl class="rows">
+            <div><dt>Hosting</dt><dd>from $5 a month</dd></div>
+            <div><dt>Domain</dt><dd>about $10–15 a year</dd></div>
+            <div><dt>Printing</dt><dd>usually under $150 per 1,000 cards</dd></div>
+          </dl>
+          <p>Railway Hobby includes $5 of usage; anything above is billed, taxes may apply. Check the bill after the first week.</p>
+        </div>
+        <div class="point">
+          <h3>Your costs</h3>
+          <dl class="rows">
+            <div><dt>Claude Code</dt><dd>Claude Pro or higher, or an Anthropic API account</dd></div>
+            <div><dt>Your Railway</dt><dd>Hobby plan, $5 a month</dd></div>
+          </dl>
+          <p>Each project is built on your Railway account before it is handed over.</p>
+        </div>
+        <div class="point">
+          <h3>What stays with the client</h3>
+          <ul>
+            <li>Their own Railway account, on their card</li>
+            <li>Their domain, in the business's name</li>
+            <li>Their leads, in their own database</li>
+            <li>The print-ready card and every QR code</li>
+          </ul>
+          <p>So it keeps working whatever happens between you.</p>
+        </div>
+      </div>
+      <p class="sub">Prices, who buys it and the other niches it fits are in the <a href="https://github.com/ilyaxxing/cash-for-cars-lead-system/blob/main/docs/business.md">business doc</a>.</p>
+    </section>
+
+    <section id="setup">
+      <div class="kicker">The setup</div>
+      <h2>Paste one line. Claude asks, you answer.</h2>
+      <p class="sub">Open Claude Code (for example the Code tab in the Claude desktop app) in an empty folder and send:</p>
+      <div class="prompt" id="prompt">Set up https://github.com/ilyaxxing/cash-for-cars-lead-system for my client.</div>
+      <ol class="path">
+        <li><span><b>One line in Claude Code.</b> It starts everything below.</span></li>
+        <li><span><b>Questions about the business.</b> Its name, phone, look and what it buys.</span></li>
+        <li><span><b>Deploy.</b> Claude builds it on Railway and connects the business's domain.</span></li>
+        <li><span><b>A test lead.</b> You send a car through the form; it never counts in the statistics.</span></li>
+        <li><span><b>The owner's phone.</b> The app on the home screen, notifications on, a test push.</span></li>
+        <li><span><b>Card and QR codes.</b> The print-ready card, and a QR code or link for every other place.</span></li>
+        <li><span><b>Hand-over.</b> The project moves to the business's own Railway account.</span></li>
+      </ol>
+      <p class="sub">About an hour for the setup itself once the accounts are ready; the hand-over and the domain's DNS can take up to a day. Claude tells you when a step needs a person: signing in, payment, the domain's DNS settings.</p>
+    </section>
+
+    <section id="requirements">
+      <div class="kicker">Requirements and limits</div>
+      <h2>What it takes, and what isn't proven yet.</h2>
+      <div class="needs">
+        <div class="point"><h3>You</h3><ul><li>Claude Code, which needs a paid Claude plan (Pro or higher) or an Anthropic API account</li><li>A Mac or a Linux computer; on Windows, WSL</li><li>Your own Railway account on the Hobby plan, $5 a month: each project is built there before it is handed over</li></ul></div>
+        <div class="point"><h3>The business</h3><ul><li>Its own Railway account with its card, hosting from $5 a month; the finished project is handed over to it</li><li>Its domain, or a new one in its name (about $10–15 a year)</li><li>Its name, email, and the owner's phone for ten minutes</li></ul></div>
+      </div>
+      <div class="point alert">
+        <h3>In Russia</h3>
+        <p>The business needs its own server in the country, its own domain and a lawyer's check of the privacy policy. Installing on such a server has so far been tested only on a local virtual machine, not with a public domain. See <a href="https://github.com/ilyaxxing/cash-for-cars-lead-system/blob/main/SETUP.md#another-country">Another country</a>.</p>
+      </div>
+      <p class="sub">The system is tested end to end for the US. The prices and the hand-over to a client's own Railway account have not been tried with a real client yet. All known limits are under <a href="https://github.com/ilyaxxing/cash-for-cars-lead-system#limitations">Limitations</a> in the README.</p>
     </section>
 
     <section id="show">
@@ -229,32 +329,17 @@
       </div>
     </section>
 
-    <section>
-      <div class="kicker">The business</div>
-      <h2>Sell the setup, install it in about an hour.</h2>
-      <p class="sub">Cash-for-cars buyers leave cards under windshield wipers, put up signs and list themselves on maps. With this system each of those places carries a QR code or a link, so a seller who would rather not call a stranger scans it instead. You install it for the buyer, under their name, on their own account.</p>
-      <div class="points">
-        <div class="point"><span class="num">01</span><h3>Find the buyers</h3><p>Every "We buy cars" card under your wiper is one. So are the numbers on road signs and the "we buy cars" listings on maps. They already spend money on finding sellers.</p></div>
-        <div class="point"><span class="num">02</span><h3>Charge for the setup</h3><p>$300–600 for a turnkey setup, plus an optional support plan at $25–50 a month. Hosting (from $5 a month) and the domain (about $10–15 a year) are on the client's own accounts.</p></div>
-        <div class="point"><span class="num">03</span><h3>Install with Claude</h3><p>Claude Code asks the questions, deploys, connects the owner's phone and makes the print-ready card, plus a QR code or link for stickers, partners' posters, signs and map listings. About an hour for the setup itself once the accounts are ready; the hand-over and the domain's DNS can take up to a day.</p></div>
-      </div>
-      <p class="sub">Prices, who buys it and the other niches it fits are in the <a href="https://github.com/ilyaxxing/cash-for-cars-lead-system/blob/main/docs/business.md">business doc</a>. Suggested starting points, not market-tested yet.</p>
-    </section>
-
-    <section>
-      <div class="kicker">Start</div>
-      <h2>Paste one line into Claude Code.</h2>
-      <p class="sub">Open the Code tab in the Claude desktop app, start a session in an empty folder and send:</p>
-      <div class="prompt" id="prompt">Set up https://github.com/ilyaxxing/cash-for-cars-lead-system for my client.</div>
-      <div class="needs">
-        <div class="point"><h3>You</h3><ul><li>Claude Code (the Code tab in the Claude desktop app), on a paid Claude plan</li><li>A Mac or a Linux computer; on Windows, WSL</li><li>Your own Railway account on the Hobby plan, $5 a month: each project is built there before it is handed over</li><li>About an hour for the setup itself, once the accounts are ready; the hand-over and the domain's DNS can take up to a day</li></ul></div>
-        <div class="point"><h3>The business</h3><ul><li>Its own Railway account with its card, hosting from $5 a month; the finished project is handed over to it</li><li>Its domain, or a new one in its name (about $10–15 a year)</li><li>Its name, email, and the owner's phone for ten minutes</li></ul></div>
-        <div class="point"><h3>Claude</h3><ul><li>Asks about the business and deploys it</li><li>Connects the owner's phone and sends a test notification</li><li>Makes the print-ready card, and a QR code or link for every other place sellers see</li><li>Tells you when a step needs a person: signing in, payment, DNS</li></ul></div>
+    <section id="series">
+      <div class="kicker">The series</div>
+      <h2>Business #1 of 100 Ready-to-Launch Businesses.</h2>
+      <p class="sub">Open source, free to copy, yours to sell.</p>
+      <div class="cta">
+        <a class="button primary" data-repo href="https://github.com/ilyaxxing/cash-for-cars-lead-system">Star on GitHub</a>
+        <a class="button ghost" href="https://instagram.com/ilyaxxing">Instagram @ilyaxxing</a>
       </div>
     </section>
 
     <footer>
-      <span>Business #1 of 100 Ready-to-Launch Businesses, by <a href="https://instagram.com/ilyaxxing">@ilyaxxing</a></span>
       <span>MIT license</span>
       <a data-repo href="https://github.com/ilyaxxing/cash-for-cars-lead-system">Source on GitHub</a>
       <span>Car photos in the demo are AI-generated. No real customer data.</span>

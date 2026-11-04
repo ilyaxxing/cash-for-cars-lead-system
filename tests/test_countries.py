@@ -14,7 +14,7 @@ from app.i18n import load_messages, translation_problems
 from app.preset.loader import check_texts, load_preset
 from app.web.privacy import check_policy
 from tests.conftest import make_settings
-from tools import make_buyer_site
+from tools import make_buyer_site, make_page_preview
 from tools.make_demo import DEFAULT, SETTINGS
 from tools.pii_scan import scan_line
 
@@ -157,6 +157,15 @@ def test_the_link_maker_offers_every_country():
     assert options[0][0] == DEFAULT
     for code, label in options:
         assert label == demo_of(code)["label"]
+
+
+def test_the_project_page_preview_follows_its_first_screen():
+    page = (BASE_DIR / "docs" / "index.html").read_text(encoding="utf-8")
+    _, headline = make_page_preview.first_screen()
+    assert f'property="og:title" content="{re.sub(r"</?em>", "", headline)}"' in page
+    assert 'property="og:image" content="https://' in page and "assets/preview.jpg" in page
+    picture = Image.open(make_page_preview.PICTURE)
+    assert (picture.format, picture.size) == ("JPEG", make_buyer_site.PREVIEW_SIZE)
 
 
 def test_the_demo_builder_finds_every_country():
