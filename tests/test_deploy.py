@@ -21,7 +21,6 @@ def env_file(tmp_path):
     """A client file made from .env.example, the way docs/deploy.md says."""
     path = tmp_path / "acme.env"
     text = (BASE_DIR / ".env.example").read_text()
-    text = text.replace("PUBLIC_URL=http://localhost:8000", "PUBLIC_URL=")
     text = text.replace("BRAND_NAME=Car Buyout", "BRAND_NAME='Acme Auto Buyers'")
     text = text.replace("OPERATOR_NAME=\n", "OPERATOR_NAME=Acme Auto LLC\n")
     text = text.replace("OPERATOR_EMAIL=\n", "OPERATOR_EMAIL=privacy@example.com\n")

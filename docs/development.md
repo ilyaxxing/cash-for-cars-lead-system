@@ -41,7 +41,7 @@ git config core.hooksPath .githooks
 # Backend
 uv venv --python 3.12 --seed .venv   # or: python3.12 -m venv .venv
 .venv/bin/pip install -r requirements-dev.txt
-cp .env.example .env
+cp .env.example .env   # then set PUBLIC_URL=http://localhost:8000 in .env
 
 # Database
 docker compose -f docker-compose.dev.yml up -d
