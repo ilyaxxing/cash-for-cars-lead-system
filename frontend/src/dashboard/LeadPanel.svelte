@@ -39,6 +39,11 @@
   const methodField = contactFields.find((field) => field.type === 'select')
   const photoSlots = dash.config.preset.steps.flatMap((step) => step.fields).find((f) => f.type === 'photos')?.slots ?? []
 
+  // The form says "your price" to the seller; for the buyer it is the seller's.
+  function rowLabel(field: FieldSpec): string {
+    return field.id === 'asking_price' ? t('dashboard.lead.asking_price') : present.fieldLabel(field)
+  }
+
   function rowValue(field: FieldSpec): { text: string; flag: boolean; missing: boolean } {
     const value = lead?.answers[field.id]
     let text = present.display(field, value)
@@ -187,7 +192,7 @@
               {#each carFields as field (field.id)}
                 {@const row = rowValue(field)}
                 <div class="row">
-                  <span class="key">{present.fieldLabel(field)}</span>
+                  <span class="key">{rowLabel(field)}</span>
                   <span class="value" class:flag={row.flag} class:missing={row.missing} class:mono={!row.missing && (field.format === 'vin' || field.widget === 'year_grid' || field.unit === 'distance')}>
                     {#if row.flag}<span aria-hidden="true" class="flag-dot"></span>{/if}{row.text}
                   </span>
