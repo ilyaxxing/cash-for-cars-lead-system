@@ -53,8 +53,8 @@ Tell the person briefly what they will need:
    the project over to the business and the domain's DNS can take up to a
    day.
 2. Facts about the business (asked in step 3); they can ask the client as you go.
-3. Two Railway accounts, each on the Hobby plan ($5 a month, with a payment
-   card): their own, where the instance is built and tested, and the
+3. Two Railway accounts, each on the Hobby plan (from $5 a month, with a
+   payment card): their own, where the instance is built and tested, and the
    business's own, on the business's card, which the finished project is
    handed over to (step 10). Hosting is from $5 a month (Railway Hobby includes $5 of usage; anything above is billed, taxes may apply).
    Railway moves a project between accounts only when both have a paid plan.
