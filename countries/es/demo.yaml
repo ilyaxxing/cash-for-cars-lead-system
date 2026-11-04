@@ -38,11 +38,11 @@ cities: [[Madrid, '28001'], [Alcalá de Henares, '28803'], [Fuenlabrada, '28941'
 sources: {sticker: Pegatina en el coche, shop: Taller colaborador, sign: Cartel en la calle, maps: Google Maps, social: Redes sociales y grupos}
 
 page:
-  title: Coches al Contado · Llama el primero
+  title: Coches al Contado · Llama antes
   description: 'Una demo que funciona: el formulario que rellena un vendedor al escanear tu código o tocar tu enlace, y la app donde llega la solicitud con una notificación.'
   badge: Demo
   kicker_hero: Para compradores de coches usados
-  h1: Llama el primero. <em>Compra más coches.</em>
+  h1: Llama antes. <em>Compra más coches.</em>
   lead: Pon tu código QR en tarjetas, pegatinas, carteles y en talleres colaboradores, o añade tu enlace a tu ficha de Google Maps. En cuanto un vendedor deja sus datos, te llega una notificación al móvil y llamas mientras aún busca comprador.
   try_button: Pruébalo tú mismo ↓
   card_front_alt: 'Una tarjeta de ejemplo, anverso: Compramos tu coche, con un código QR'

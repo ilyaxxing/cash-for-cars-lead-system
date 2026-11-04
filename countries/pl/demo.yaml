@@ -38,11 +38,11 @@ cities: [[Warszawa, 00-950], [Marki, 05-270], [Ząbki, 05-091], [Józefów, 05-4
 sources: {sticker: Naklejka na aucie, shop: Warsztat partnerski, sign: Tablica przy drodze, maps: Mapy Google, social: Media społecznościowe i grupy}
 
 page:
-  title: Skup Aut Ekspres · Dzwoń pierwszy
+  title: Skup Aut Ekspres · Dzwoń szybciej
   description: 'Działające demo: formularz, który sprzedający wypełnia po zeskanowaniu Twojego kodu lub kliknięciu Twojego linku, i aplikacja, w której zgłoszenie przychodzi jako powiadomienie.'
   badge: Demo
   kicker_hero: Dla skupów samochodów
-  h1: Dzwoń pierwszy. <em>Skupuj więcej aut.</em>
+  h1: Dzwoń szybciej. <em>Skupuj więcej aut.</em>
   lead: Umieść swój kod QR na wizytówkach, naklejkach, tablicach i u warsztatów partnerskich albo dodaj link do profilu firmy w Mapach Google. Gdy tylko sprzedający zostawi kontakt, dostajesz powiadomienie na telefon i dzwonisz, póki on wciąż szuka kupca.
   try_button: Wypróbuj sam ↓
   card_front_alt: 'Przykładowa wizytówka, przód: Kupimy Twoje auto, z kodem QR'
