@@ -24,9 +24,10 @@ domain.
 
 1. **QR codes and links.** A seller scans a code or opens a link wherever
    they see it: a card under a wiper (it comes as a print-ready file in the
-   buyer's color, with their logo), a sticker on the buyer's own car, a
-   poster at a partner repair shop, a sign or banner, a link in the Google
-   Maps listing, and more ([every place](docs/business.md#where-leads-come-from)).
+   buyer's color, with their logo; some cities and private parking lots ban
+   this, so the client checks the local rules), a sticker on the buyer's own
+   car, a poster at a partner repair shop, a sign or banner, a link in the
+   Google Maps listing, and more ([every place](docs/business.md#where-leads-come-from)).
    Each place gets its own code or link, so statistics tell them apart.
 2. **The seller's form.** Car, condition, price, photos, contact. A few
    minutes, no app, no account.
@@ -46,14 +47,14 @@ and repair shops.
 | | Price | What's included |
 |---|---|---|
 | Setup | $300-600 once | Turnkey: installation, their name, color and logo, connecting their domain, the app on the owner's phone, the card PDF, and QR codes and links for every place |
-| Support | $25-50 a month | Optional: changes, updates, someone to call |
-| Hosting | about $5 a month | On the client's own Railway account |
+| Support | $25-50 a month | Optional: up to two small changes a month (form questions, texts, new QR codes and labels), updates to new releases, a reply within a working day. New features and rework are extra. |
+| Hosting | from $5 a month | On the client's own Railway account |
 | Domain | about $10-15 a year | In the business's name, if it has none |
 
 Hosting, the domain and printing are paid by the client directly, on top of the setup price.
 
-Hosting is Railway's Hobby plan, $5 a month with $5 of usage included. In practice
-instances like this fit within Hobby's included usage; check the first client's bill.
+Hosting is from $5 a month (Railway Hobby includes $5 of usage; anything above is billed, taxes may apply).
+Check the bill after the first week.
 
 You pick the price, and whether to sell the setup alone or with monthly
 support. Suggested starting points, not market-tested yet. More in
@@ -87,8 +88,13 @@ and the domain's DNS can take up to a day.
   account on the Hobby plan, $5 a month: each project is built there before
   it is handed over. These two are your own running costs.
 - **The business brings** its own Railway account with its card, hosting
-  about $5 a month; the finished project is handed over to it.
+  from $5 a month; the finished project is handed over to it.
   Also its domain, its name and email, and the owner's phone for ten minutes.
+
+**In Russia** the business needs its own server in the country, its own domain
+and a lawyer's check of the privacy policy. Installing on such a server has so
+far been tested only on a local virtual machine, not with a public domain.
+See [Another country](SETUP.md#another-country).
 
 <details>
 <summary><b>Other countries</b></summary>
