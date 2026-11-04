@@ -433,9 +433,10 @@ Do this after step 6: the commands make codes only for the business's own
 domain.
 
 **Business card.** These cards are mostly left under the windshield wipers
-of parked cars, so they are printed by the thousand. Ask whether they want
-the ready card: on the front the brand, a headline, what they buy and the QR
-code; on the back a promise, three lines about what they buy, the same QR
+of parked cars, so they are printed by the thousand. Some cities and private
+parking lots ban this, so tell the client to check the local rules. Ask
+whether they want the ready card: on the front the brand, a headline, what
+they buy and the QR code; on the back a promise, three lines about what they buy, the same QR
 code, and the contact person and phone; all in their color, in the size
 print shops in their country use (`CARD_SIZE`). If they have their own
 designer, skip to the QR codes below and give the designer the SVG.

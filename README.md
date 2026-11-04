@@ -24,9 +24,10 @@ domain.
 
 1. **QR codes and links.** A seller scans a code or opens a link wherever
    they see it: a card under a wiper (it comes as a print-ready file in the
-   buyer's color, with their logo), a sticker on the buyer's own car, a
-   poster at a partner repair shop, a sign or banner, a link in the Google
-   Maps listing, and more ([every place](docs/business.md#where-leads-come-from)).
+   buyer's color, with their logo; some cities and private parking lots ban
+   this, so the client checks the local rules), a sticker on the buyer's own
+   car, a poster at a partner repair shop, a sign or banner, a link in the
+   Google Maps listing, and more ([every place](docs/business.md#where-leads-come-from)).
    Each place gets its own code or link, so statistics tell them apart.
 2. **The seller's form.** Car, condition, price, photos, contact. A few
    minutes, no app, no account.
