@@ -56,11 +56,11 @@ sources: {sticker: Car sticker, shop: Partner garage, sign: Roadside sign, maps:
 
 # The page for car buyers (buyer-site/index.html). h1 may hold an <em>.
 page:
-  title: Car Buyout · Be first to call
+  title: Car Buyout · Call sooner
   description: 'A working demo: the form a seller fills in after scanning your code or tapping your link, and the app where the lead arrives with a push.'
   badge: Demo
   kicker_hero: For car buyers and traders
-  h1: Be first to call. <em>Buy more cars.</em>
+  h1: Call sooner. <em>Buy more cars.</em>
   lead: Put your QR code on cards, stickers, signs and at partner garages, or add your link to your Google Maps listing. The moment a seller leaves their contacts, a push hits your phone, so you call while they're still looking for a buyer.
   try_button: Try it yourself ↓
   card_front_alt: 'A sample card, front: We buy your car, with a QR code'

@@ -37,11 +37,11 @@ cities: [[Montréal, 'H2X 1Y4'], [Laval, 'H7T 2Z3'], [Longueuil, 'J4H 3M6'], [Re
 sources: {sticker: Autocollant sur votre auto, shop: Garage partenaire, sign: Panneau routier, maps: Google Maps, social: Réseaux sociaux et groupes}
 
 page:
-  title: Achat Auto Comptant · Appelez le premier
+  title: Achat Auto Comptant · Appelez plus vite
   description: 'Une démo qui fonctionne : le formulaire que remplit un vendeur après avoir scanné votre code ou touché votre lien, et l''app où la demande arrive par notification.'
   badge: Démo
   kicker_hero: Pour les acheteurs de véhicules d'occasion
-  h1: Appelez le premier. <em>Achetez plus d'autos.</em>
+  h1: Appelez plus vite. <em>Achetez plus d'autos.</em>
   lead: Mettez votre QR code sur des cartes, des autocollants, des affiches et chez des garages partenaires, ou ajoutez votre lien à votre fiche Google Maps. Dès qu'un vendeur laisse ses coordonnées, une notification arrive sur votre téléphone, et vous l'appelez pendant qu'il cherche encore un acheteur.
   try_button: Essayez vous-même ↓
   card_front_alt: 'Une carte d''exemple, recto : On rachète votre auto, avec un QR code'

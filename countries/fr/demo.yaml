@@ -38,11 +38,11 @@ cities: [[Lyon, '69003'], [Vaulx-en-Velin, '69120'], [Décines-Charpieu, '69150'
 sources: {sticker: Autocollant sur la voiture, shop: Garage partenaire, sign: Panneau routier, maps: Google Maps, social: Réseaux sociaux et groupes}
 
 page:
-  title: Cash Auto · Appelez le premier
+  title: Cash Auto · Appelez plus vite
   description: 'Une démo qui fonctionne : le formulaire que remplit un vendeur après avoir scanné votre code ou touché votre lien, et l''app où la demande arrive par notification.'
   badge: Démo
   kicker_hero: Pour les acheteurs de voitures d'occasion
-  h1: Appelez le premier. <em>Achetez plus de voitures.</em>
+  h1: Appelez plus vite. <em>Achetez plus de voitures.</em>
   lead: Mettez votre QR code sur des cartes, des autocollants, des panneaux et chez des garages partenaires, ou ajoutez votre lien à votre fiche Google Maps. Dès qu'un vendeur laisse ses coordonnées, une notification arrive sur votre téléphone, et vous l'appelez pendant qu'il cherche encore un acheteur.
   try_button: Essayez vous-même ↓
   card_front_alt: 'Une carte d''exemple, recto : On rachète votre auto, avec un QR code'

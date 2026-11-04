@@ -38,11 +38,11 @@ cities: [[Köln, '50667'], [Pulheim, '50259'], [Frechen, '50226'], [Brühl, '503
 sources: {sticker: Autoaufkleber, shop: Partnerwerkstatt, sign: Schild an der Straße, maps: Google Maps, social: Soziale Netzwerke und Gruppen}
 
 page:
-  title: Autoankauf Sofort · Zuerst anrufen
+  title: Autoankauf Sofort · Schneller anrufen
   description: 'Eine funktionierende Demo: das Formular, das ein Verkäufer nach dem Scannen Ihres Codes oder einem Tipp auf Ihren Link ausfüllt, und die App, in der die Anfrage per Push ankommt.'
   badge: Demo
   kicker_hero: Für Autoankäufer
-  h1: Rufen Sie zuerst an. <em>Kaufen Sie mehr Autos.</em>
+  h1: Rufen Sie schneller an. <em>Kaufen Sie mehr Autos.</em>
   lead: Bringen Sie Ihren QR-Code auf Karten, Aufkleber, Schilder und zu Partnerwerkstätten, oder setzen Sie Ihren Link in Ihren Google-Maps-Eintrag. Sobald ein Verkäufer seine Kontaktdaten hinterlässt, kommt eine Push-Meldung auf Ihr Handy, und Sie rufen an, während er noch einen Käufer sucht.
   try_button: Selbst ausprobieren ↓
   card_front_alt: 'Eine Beispielkarte, Vorderseite: Wir kaufen Ihr Auto, mit QR-Code'

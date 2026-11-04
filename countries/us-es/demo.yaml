@@ -37,11 +37,11 @@ cities: [[Houston, '77002'], [Pasadena, '77502'], [Baytown, '77520'], [Pearland,
 sources: {sticker: Calcomanía en el auto, shop: Taller aliado, sign: Letrero en la calle, maps: Google Maps, social: Redes sociales y grupos}
 
 page:
-  title: Autos al Contado · Llame primero
+  title: Autos al Contado · Llame antes
   description: 'Una demo que funciona: el formulario que llena un vendedor al escanear su código o tocar su enlace, y la app donde llega el prospecto con una notificación.'
   badge: Demo
   kicker_hero: Para compradores de autos usados
-  h1: Llame primero. <em>Compre más autos.</em>
+  h1: Llame antes. <em>Compre más autos.</em>
   lead: Ponga su código QR en tarjetas, calcomanías, letreros y en talleres aliados, o agregue su enlace a su perfil de Google Maps. En cuanto un vendedor deja sus datos, le llega una notificación al teléfono y usted llama mientras él todavía busca comprador.
   try_button: Pruébelo usted mismo ↓
   card_front_alt: 'Una tarjeta de ejemplo, frente: Compramos su auto, con un código QR'
