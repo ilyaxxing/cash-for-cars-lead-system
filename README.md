@@ -1,4 +1,4 @@
-https://github.com/user-attachments/assets/1d80405d-8d4f-474a-80df-4143831ba948
+https://github.com/user-attachments/assets/9c580f35-8f06-4318-b243-26126172c50f
 
 **[Try the live demo](https://ilyaxxing.github.io/cash-for-cars-lead-system/) · [Start with SETUP.md](SETUP.md)**
 
