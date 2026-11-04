@@ -125,11 +125,16 @@ def lay(canvas: Image.Image, card: Image.Image, center: tuple[float, float]) -> 
 def preview(code: str) -> bytes:
     """The link preview picture for one country: its headline and its sample card."""
     texts = load_demo(code)["page"]
+    cards = CARDS / code if code != DEFAULT else CARDS
+    return poster(cards, texts["kicker_hero"], texts["h1"])
+
+
+def poster(cards: Path, kicker: str, h1: str) -> bytes:
+    """A link preview picture: a kicker and a headline beside a sample card."""
     canvas = Image.new("RGBA", PREVIEW_SIZE, (*BACKGROUND, 255))
     width, height = PREVIEW_SIZE
 
     # The front and back of the card on the right, laid out as on the page.
-    cards = CARDS / code if code != DEFAULT else CARDS
     left, room = 612, width - 612 - 40
     tall = room * 3.1 / 3.5
     top = (height - tall) / 2
@@ -147,12 +152,12 @@ def preview(code: str) -> bytes:
     bold = FONTS / "Geist-ExtraBold.ttf"
     for size in range(68, 40, -2):
         font = ImageFont.truetype(str(bold), size)
-        lines = headline_lines(texts["h1"], font, text_width)
+        lines = headline_lines(h1, font, text_width)
         if len(lines) * size * 0.98 <= text_height and all(
             font.getlength(" ".join(word for word, _ in line)) <= text_width for line in lines
         ):
             break
-    kicker = texts["kicker_hero"].upper()
+    kicker = kicker.upper()
     for small in range(20, 12, -1):
         mono = ImageFont.truetype(str(FONTS / "GeistMono-Medium.ttf"), small)
         if 21 + sum(mono.getlength(letter) + small * 0.12 for letter in kicker) <= text_width:
