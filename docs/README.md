@@ -24,14 +24,15 @@ it, and the page's repository links are set in one place at the top of
 `index.html` (`data-repo`).
 
 The README opens with the launch video (`media/cash-for-cars-lead-system.mp4`,
-silent, 18 s): the question, one line in Claude Code, then what the client
-gets. GitHub plays a video inside a README only when it is uploaded through
-the website, and an upload made in a private repository is visible only to
-people with access to it. So a new public copy, or a new video, needs its own
-upload: open a new issue in the repository, drag the file into the comment
-box, copy the `https://github.com/user-attachments/assets/...` link GitHub
-inserts, and close the issue without submitting it. That link goes on the
-first line of README.md in an ordinary commit. Editing README.md on the
+41 s, with music): what you set up, the places sellers come from, the setup in
+Claude Code, a test lead, and what you can charge for. Its music is made from
+GarageBand's Apple Loops. GitHub plays a video inside a README only when it is
+uploaded through the website, and an upload made in a private repository is
+visible only to people with access to it. So a new public copy, or a new video,
+needs its own upload: open a new issue in the repository, drag the file into
+the comment box, copy the `https://github.com/user-attachments/assets/...` link
+GitHub inserts, and close the issue without submitting it. That link goes on
+the first line of README.md in an ordinary commit. Editing README.md on the
 website instead commits under the account's own email address unless "Keep
 my email addresses private" is on in GitHub's email settings.
 

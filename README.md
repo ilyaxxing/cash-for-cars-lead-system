@@ -152,4 +152,5 @@ Instagram for the next businesses.
 ## License
 
 [MIT](LICENSE). The demo data is fictional and the car photos are
-AI-generated.
+AI-generated. The launch video's music is made from GarageBand's Apple Loops
+and is not under the MIT license.
