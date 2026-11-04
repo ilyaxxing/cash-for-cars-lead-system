@@ -90,6 +90,11 @@ and the domain's DNS can take up to a day.
   from $5 a month; the finished project is handed over to it.
   Also its domain, its name and email, and the owner's phone for ten minutes.
 
+**In Russia** the business needs its own server in the country, its own domain
+and a lawyer's check of the privacy policy. Installing on such a server has so
+far been tested only on a local virtual machine, not with a public domain.
+See [Another country](SETUP.md#another-country).
+
 <details>
 <summary><b>Other countries</b></summary>
 
