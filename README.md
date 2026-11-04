@@ -46,7 +46,7 @@ and repair shops.
 | | Price | What's included |
 |---|---|---|
 | Setup | $300-600 once | Turnkey: installation, their name, color and logo, connecting their domain, the app on the owner's phone, the card PDF, and QR codes and links for every place |
-| Support | $25-50 a month | Optional: changes, updates, someone to call |
+| Support | $25-50 a month | Optional: up to two small changes a month (form questions, texts, new QR codes and labels), updates to new releases, a reply within a working day. New features and rework are extra. |
 | Hosting | from $5 a month | On the client's own Railway account |
 | Domain | about $10-15 a year | In the business's name, if it has none |
 
