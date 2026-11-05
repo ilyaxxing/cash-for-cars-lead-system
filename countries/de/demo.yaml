@@ -8,7 +8,7 @@ label: Germany · Deutsch
 lang: de
 
 business:
-  brand_name: Autoankauf Sofort
+  brand_name: Muster Autoankauf
   brand_phone: 0151 23456789
   operator_name: Beispiel Auto GmbH
   operator_email: datenschutz@example.com
@@ -38,14 +38,14 @@ cities: [[Köln, '50667'], [Pulheim, '50259'], [Frechen, '50226'], [Brühl, '503
 sources: {sticker: Autoaufkleber, shop: Partnerwerkstatt, sign: Schild an der Straße, maps: Google Maps, social: Soziale Netzwerke und Gruppen}
 
 page:
-  title: Autoankauf Sofort · Schneller anrufen
+  title: Muster Autoankauf · Schneller anrufen
   description: 'Eine funktionierende Demo: das Formular, das ein Verkäufer nach dem Scannen Ihres Codes oder einem Tipp auf Ihren Link ausfüllt, und die App, in der die Anfrage per Push ankommt.'
   badge: Demo
   kicker_hero: Für Autoankäufer
   h1: Rufen Sie schneller an. <em>Kaufen Sie mehr Autos.</em>
   lead: Bringen Sie Ihren QR-Code auf Karten, Aufkleber, Schilder und zu Partnerwerkstätten, oder setzen Sie Ihren Link in Ihren Google-Maps-Eintrag. Sobald ein Verkäufer seine Kontaktdaten hinterlässt, kommt eine Push-Meldung auf Ihr Handy, und Sie rufen an, während er noch einen Käufer sucht.
   try_button: Selbst ausprobieren ↓
-  card_front_alt: 'Eine Beispielkarte, Vorderseite: Wir kaufen Ihr Auto, mit QR-Code'
+  card_front_alt: 'Eine Beispielkarte, Vorderseite: Wir kaufen alle Autos, mit QR-Code'
   card_back_alt: 'Eine Beispielkarte, Rückseite: was wir kaufen, noch einmal der QR-Code und die Telefonnummer'
   card_caption: Eine Beispielkarte. Ihre trägt Ihren Namen, Ihre Nummer und Ihre Farbe.
   kicker_places: Ein Code, jeder Ort

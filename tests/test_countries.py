@@ -1,6 +1,7 @@
 """Every country in countries/: starting files that work, and a demo that holds together."""
 
 import io
+import json
 import re
 from typing import Any
 
@@ -157,6 +158,16 @@ def test_the_link_maker_offers_every_country():
     assert options[0][0] == DEFAULT
     for code, label in options:
         assert label == demo_of(code)["label"]
+
+
+RIVALS = ("we buy any car", "compramos tu coche", "wir kaufen dein auto", "wir kaufen ihr auto")
+
+
+def test_no_card_spells_a_rivals_name():
+    english = json.loads((BASE_DIR / "locales" / "en.json").read_text(encoding="utf-8"))["card"]
+    for path in (BASE_DIR / "countries").glob("*/texts.json"):
+        card = {**english, **json.loads(path.read_text(encoding="utf-8")).get("card", {})}
+        assert f"{card['front_hot']} {card['front_rest']}".lower() not in RIVALS, path
 
 
 def test_the_project_page_preview_follows_its_first_screen():

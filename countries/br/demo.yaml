@@ -45,7 +45,7 @@ page:
   h1: Ligue antes. <em>Compre mais carros.</em>
   lead: Coloque seu QR code em cartões, adesivos, placas e em oficinas parceiras, ou adicione seu link ao seu perfil no Google Maps. Assim que um vendedor deixa o contato, chega uma notificação no seu celular, e você liga enquanto ele ainda procura comprador.
   try_button: Experimente ↓
-  card_front_alt: 'Um cartão de exemplo, frente: Compramos seu carro, com um QR code'
+  card_front_alt: 'Um cartão de exemplo, frente: Compramos carros, com um QR code'
   card_back_alt: 'Um cartão de exemplo, verso: o que compramos, o QR code de novo e o telefone'
   card_caption: Um cartão de exemplo. O seu leva seu nome, seu telefone e sua cor.
   kicker_places: Um código, qualquer lugar

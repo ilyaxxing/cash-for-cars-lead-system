@@ -45,7 +45,7 @@ page:
   h1: Llama antes. <em>Compra más coches.</em>
   lead: Pon tu código QR en tarjetas, pegatinas, carteles y en talleres colaboradores, o añade tu enlace a tu ficha de Google Maps. En cuanto un vendedor deja sus datos, te llega una notificación al móvil y llamas mientras aún busca comprador.
   try_button: Pruébalo tú mismo ↓
-  card_front_alt: 'Una tarjeta de ejemplo, anverso: Compramos tu coche, con un código QR'
+  card_front_alt: 'Una tarjeta de ejemplo, anverso: Compramos coches, con un código QR'
   card_back_alt: 'Una tarjeta de ejemplo, reverso: qué compramos, el código QR otra vez y el teléfono'
   card_caption: Una tarjeta de ejemplo. La tuya lleva tu nombre, tu teléfono y tu color.
   kicker_places: Un código, cualquier sitio

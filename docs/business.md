@@ -10,7 +10,7 @@ and the other niches and countries it fits. The short version is in the
 
 Businesses that buy used cars straight from private sellers:
 
-- cash-for-cars and "we buy any car" buyers;
+- cash-for-cars and "we buy cars" buyers;
 - junk and salvage car buyers;
 - small used car lots and independent dealers;
 - wholesalers and people who flip cars.
