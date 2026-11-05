@@ -452,7 +452,8 @@ Linux: `xdg-open`, WSL: `explorer.exe`). Then go through the design with them,
 one item at a time: say what is there now and ask whether to change it.
 
 1. The headline, two lines, the first in the accent color (`card.front_hot`,
-   `card.front_rest`), e.g. "We buy / any car".
+   `card.front_rest`), e.g. "We buy / all cars". Not "We buy any car": that
+   is a registered brand.
 2. The three short tags under it (`card.front_tag_1` to `card.front_tag_3`).
 3. The call to action under the code and the hint below it (`card.cta`,
    `card.scan`).
