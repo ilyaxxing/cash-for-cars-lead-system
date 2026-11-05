@@ -129,10 +129,10 @@ def preview(code: str) -> bytes:
     return poster(cards, texts["kicker_hero"], texts["h1"])
 
 
-def poster(cards: Path, kicker: str, h1: str) -> bytes:
+def poster(cards: Path, kicker: str, h1: str, size: tuple[int, int] = PREVIEW_SIZE) -> bytes:
     """A link preview picture: a kicker and a headline beside a sample card."""
-    canvas = Image.new("RGBA", PREVIEW_SIZE, (*BACKGROUND, 255))
-    width, height = PREVIEW_SIZE
+    canvas = Image.new("RGBA", size, (*BACKGROUND, 255))
+    width, height = size
 
     # The front and back of the card on the right, laid out as on the page.
     left, room = 612, width - 612 - 40
