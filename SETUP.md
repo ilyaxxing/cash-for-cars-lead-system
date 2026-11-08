@@ -16,7 +16,17 @@ app, and a push notification on that phone for every new lead.
   language follows the business's country: English for the US, the sellers'
   language elsewhere ([Another country](#another-country)).
 - One step at a time. Say in a sentence what you are about to do and why, then
-  do it. Ask a few questions at once at most, never a long questionnaire.
+  do it.
+- One question per message, in the order this guide asks them. Wait for the
+  answer before the next question; never send a list of questions, even short
+  ones. A sentence of context before the question is fine.
+- Give every choice as buttons. When the answer is one of a few options (yes
+  or no, keep or change, a country, a time zone), ask with the tool for a
+  question with options (in Claude Code, AskUserQuestion): your
+  recommendation first, the options short, one question per call. The person
+  can always type another answer instead. A free answer, such as a name or a
+  phone number, is asked in plain text. If no such tool is available, number
+  the options so the answer can be a single digit.
 - Run every command yourself. Ask the person only for what only they can do:
   facts about the business, signing in to Railway in the browser, payment,
   testing on a phone, DNS settings at a domain registrar, handing the project
@@ -38,8 +48,9 @@ app, and a push notification on that phone for every new lead.
 
 ## Before you start
 
-First ask where the business is: its country, and the language its sellers
-speak. The steps below are written for the US. For any other country, read
+First ask where the business is, with buttons: "United States, English"
+first, then the countries in [countries/](countries/) that fit, and the
+person can type another. The steps below are written for the US. For any other country, read
 [Another country](#another-country) now, go through its first part before
 step 1 (it can change where the system runs, and it says what the system
 cannot do there yet), and follow its notes as you go: the system adapts to
@@ -133,10 +144,12 @@ access, as in [Another country](#another-country), replace this step.
   in Claude Code (the `!` runs it in their own terminal) and finish in the
   browser.
 - Check with `railway whoami`. If it lists more than one workspace, ask which
-  one to build in; it goes into `RAILWAY_WORKSPACE`.
+  one to build in, one button per workspace; it goes into
+  `RAILWAY_WORKSPACE`.
 
 **The business's own account**, which the project is handed over to in step
-10: ask the person to have the business sign up at https://railway.com with
+10: ask whether the business has one yet (buttons: "Yes", "Not yet"). If
+not, ask the person to have the business sign up at https://railway.com with
 the business's email and add the business's payment card (Hobby plan), and to
 tell you the email it signed up with. It can wait until step 10, but asking
 now saves time: the business has to accept the hand-over, which can take a
@@ -144,8 +157,11 @@ day.
 
 ## Step 3. Questions about the business
 
-Ask in small groups, offer sensible defaults, and note the answers. The names in
-brackets are the settings they fill in step 4.
+Ask one question per message, in the order below, with buttons for every
+choice (see [How to work with the person](#how-to-work-with-the-person)).
+Offer sensible defaults and note the answers. The names in brackets are the
+settings they fill in step 4. For example, the time zone: "The business is in
+Texas, so Central time?" with the buttons "Yes, Central" and "Another zone".
 
 **What sellers see**
 - The business name as sellers should see it, e.g. "Lone Star Car Buyers"
