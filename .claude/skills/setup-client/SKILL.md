@@ -6,5 +6,6 @@ description: Set up this lead system for a car-buying business, start to finish.
 Follow [SETUP.md](../../../SETUP.md) in the repository root, step by step, in
 the language the person writes in. It assumes a non-technical person: you run
 the commands, they answer questions and do what only they can (signing in to
-Railway, payment, the phone, DNS). Ask one question per message, in the
-guide's order, and give every choice as buttons.
+Railway, payment, the phone, DNS). Ask through the question tool in short
+forms, one topic at a time, in the guide's order, with buttons for every
+question.

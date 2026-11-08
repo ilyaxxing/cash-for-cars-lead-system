@@ -17,16 +17,18 @@ app, and a push notification on that phone for every new lead.
   language elsewhere ([Another country](#another-country)).
 - One step at a time. Say in a sentence what you are about to do and why, then
   do it.
-- One question per message, in the order this guide asks them. Wait for the
-  answer before the next question; never send a list of questions, even short
-  ones. A sentence of context before the question is fine.
-- Give every choice as buttons. When the answer is one of a few options (yes
-  or no, keep or change, a country, a time zone), ask with the tool for a
-  question with options (in Claude Code, AskUserQuestion): your
-  recommendation first, the options short, one question per call. The person
-  can always type another answer instead. A free answer, such as a name or a
-  phone number, is asked in plain text. If no such tool is available, number
-  the options so the answer can be a single digit.
+- Ask in short forms, one topic at a time, in the order this guide asks: use
+  the tool for questions with options (in Claude Code, AskUserQuestion), up
+  to four questions of one topic in one call, which the person answers one
+  after another. Never write a list of questions in a message. A sentence of
+  context before the form is fine.
+- Every question gets buttons. For a choice (yes or no, keep or change, a
+  country, a time zone) the options are the answers, your recommendation
+  first. For a typed answer (a name, a phone number, an email) the person
+  types it into the tool's own answer field; next to it offer only real
+  shortcuts, such as "Ask the client first" or "Same as the owner's phone",
+  never a made-up value. If no such tool is available, ask one question per
+  message and number the options so the answer can be a single digit.
 - Run every command yourself. Ask the person only for what only they can do:
   facts about the business, signing in to Railway in the browser, payment,
   testing on a phone, DNS settings at a domain registrar, handing the project
@@ -157,9 +159,13 @@ day.
 
 ## Step 3. Questions about the business
 
-Ask one question per message, in the order below, with buttons for every
-choice (see [How to work with the person](#how-to-work-with-the-person)).
-Offer sensible defaults and note the answers. The names in brackets are the
+Ask in forms, one topic per form, in the order below (see
+[How to work with the person](#how-to-work-with-the-person)): what sellers
+see; the look, a keep-or-change question per item; the privacy policy; where
+sellers will find the form, as two multiple-choice questions, printed places
+and online places; the address; the owner's password and the photo storage.
+Files, such as a logo, are asked for after the form that needs them. Offer
+sensible defaults and note the answers. The names in brackets are the
 settings they fill in step 4. For example, the time zone: "The business is in
 Texas, so Central time?" with the buttons "Yes, Central" and "Another zone".
 
