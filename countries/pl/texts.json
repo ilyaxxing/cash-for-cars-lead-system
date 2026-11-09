@@ -61,7 +61,7 @@
       "popular_models": "Popularne modele"
     },
     "contact": {
-      "consent": "Zgadzam się, aby {operator} przetwarzał moje dane osobowe w celu obsługi tego zgłoszenia i kontaktował się ze mną w tej sprawie telefonicznie, SMS-em, przez WhatsApp lub e-mailem, zgodnie z opisem w",
+      "consent": "Zgadzam się na przetwarzanie moich danych osobowych (administrator: {operator}) w celu obsługi tego zgłoszenia i na kontakt ze mną w tej sprawie telefonicznie, SMS-em, przez WhatsApp lub e-mailem, zgodnie z opisem w",
       "consent_link": "Polityce prywatności",
       "consent_error": "Zaznacz pole, abyśmy mogli przetwarzać Twoje dane.",
       "save_failed_title": "Nie udało się zapisać danych",
