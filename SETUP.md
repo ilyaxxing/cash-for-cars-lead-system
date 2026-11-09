@@ -230,8 +230,23 @@ or say where it is (Downloads, Desktop); copy it into the folder yourself.
 The business card is asked about later, in step 9.
 
 **Privacy policy** (the business is responsible for sellers' data)
-- The company's legal name, e.g. "Lone Star Car Buyers LLC" (`OPERATOR_NAME`).
-- An email for privacy requests (`OPERATOR_EMAIL`).
+- Who runs the business: the policy and the consent name them as the
+  operator of sellers' data (`OPERATOR_NAME`). Ask it first, with buttons:
+  - A company: its legal name, e.g. "Lone Star Car Buyers LLC".
+  - A sole proprietor: their full legal name, with the business name if they
+    trade under one, e.g. "Jane Doe, doing business as Lone Star Car Buyers"
+    (in Russia "ИП Иванов Иван Иванович").
+  - A private person, with no business registered: their full legal name as
+    on their ID, e.g. "Jane Doe".
+
+  The brand alone names nobody, unless it is the company's registered name.
+  Tell a person that their name will be public, on `/privacy` and in the
+  consent text: sellers must know who gets their data. Whether they may buy
+  cars for resale without registering a business is a question for their
+  accountant or lawyer: never answer it either way, and never hold the setup
+  up over it.
+- An email for privacy requests (`OPERATOR_EMAIL`): any mailbox they read,
+  a separate one for the business if they have it.
 - A mailing address, optional (`OPERATOR_ADDRESS`).
 - The date the policy takes effect: today unless they say otherwise
   (`POLICY_EFFECTIVE_DATE`, `YYYY-MM-DD`).
