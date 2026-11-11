@@ -36,6 +36,11 @@
       "minutes_left": "Encore {minutes} min environ",
       "answers_so_far": "Vos réponses jusqu'ici"
     },
+    "saved": {
+      "title": "Vos coordonnées sont bien reçues.",
+      "text": "La suite est facultative.",
+      "finish": "Terminer"
+    },
     "buttons": {
       "continue": "Continuer",
       "skip": "Passer pour l'instant",
@@ -183,7 +188,7 @@
       "contact": {
         "tag": "Coordonnées",
         "title": "Comment l'acheteur peut-il vous joindre ?",
-        "hint": "Vos coordonnées sont enregistrées dès que vous continuez : rien n'est perdu si vous vous arrêtez à l'étape des photos."
+        "hint": "Votre demande est enregistrée dès que vous continuez. Tout ce qui suit est facultatif."
       },
       "photos": {
         "tag": "Photos",

@@ -18,18 +18,29 @@ def test_shipped_preset_loads_and_has_texts():
 
 
 def test_flow_follows_the_agreed_order(preset):
+    # The car, then the contacts: the lead is saved there, the rest adds to it.
     assert [step.id for step in preset.steps] == [
         "vehicle",
         "year_mileage",
         "condition",
+        "contact",
         "accident",
         "finance",
         "price",
         "location",
         "vin",
-        "contact",
         "photos",
     ]
+
+
+def test_questions_after_the_contact_step_are_optional(preset):
+    by_id = {step.id: step for step in preset.steps}
+    before = ("vehicle", "year_mileage", "condition", "contact")
+    assert not any(by_id[step_id].skippable for step_id in before)
+    later = ("accident", "finance", "price", "location", "vin")
+    assert all(by_id[step_id].skippable for step_id in later)
+    # The photos step keeps its own way of being left for later.
+    assert not by_id["photos"].skippable
 
 
 def test_accident_and_lien_offer_dont_know(preset):
@@ -107,6 +118,7 @@ BROKEN_PRESETS = {
     "two submit steps": lambda d: step_of(d, "vin").update(submit=True, consent=True),
     "submit step without consent": lambda d: step_of(d, "contact").update(consent=False),
     "photos before the lead exists": lambda d: d["steps"].insert(0, d["steps"].pop()),
+    "the car asked after the lead is saved": lambda d: d["steps"].append(d["steps"].pop(0)),
     "unknown attribute": lambda d: _field(d, "vin", "vin").update(color="red"),
     "postal code without format": lambda d: d.pop("postal_code_format"),
     "postal code with two rules": lambda d: d.update(postal_code_pattern=r"\d{5}"),

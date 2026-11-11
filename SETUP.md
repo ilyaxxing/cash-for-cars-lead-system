@@ -798,7 +798,11 @@ client.
   ones in `locales/en.json`.
 - Questions: copy `presets/us-car-buyout.yaml` to `clients/<id>/form.yaml`,
   change it, set `PRESET_FILE=clients/<id>/form.yaml`, and add the texts for
-  any new question to the texts file.
+  any new question to the texts file. Keep the contact step where it is,
+  right after the questions about the car: the lead is saved and the owner
+  notified there, and whatever comes after it is optional for the seller.
+  A question the business must have before the call goes before that step;
+  every question added there costs some sellers.
 
 [docs/customize-the-form.md](docs/customize-the-form.md) explains both
 formats; a new question needs no database change. The deploy script checks

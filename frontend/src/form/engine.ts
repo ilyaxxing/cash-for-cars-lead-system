@@ -1,6 +1,8 @@
 // The seller form's logic, kept free of the DOM so it can be unit-tested.
 //
 // Screens come from the preset: welcome, every enabled step, review, success.
+// The lead is saved at the submit step (the contacts); the questions after it
+// are extras the seller may skip, and their answers are added to that lead.
 // Validation mirrors app/services/answers.py and returns the same error codes;
 // the server checks everything again, this only spares the seller a round trip.
 
@@ -36,6 +38,19 @@ export function stepById(preset: Preset, id: string): Step | undefined {
 
 export function submitStep(preset: Preset): Step {
   return activeSteps(preset).find((step) => step.submit)!
+}
+
+const hasPhotos = (step: Step) => step.fields.some((field) => field.type === 'photos')
+
+// Every step that asks questions, in order (the photos step is not one).
+export function questionSteps(preset: Preset): Step[] {
+  return activeSteps(preset).filter((step) => !hasPhotos(step))
+}
+
+// The questions asked once the lead is saved. The server marks them skippable.
+export function laterSteps(preset: Preset): Step[] {
+  const steps = activeSteps(preset)
+  return steps.slice(steps.indexOf(submitStep(preset)) + 1).filter((step) => !hasPhotos(step))
 }
 
 export interface Progress {
@@ -206,12 +221,13 @@ export function validateStep(step: Step, answers: Answers, today = new Date()): 
   return errors
 }
 
-// Answers as the API expects them: every answered field up to the submit
-// step, follow-ups only when unlocked, numbers as numbers, defaults filled.
+// Answers as the API expects them: every answered field, follow-ups only
+// when unlocked, numbers as numbers, defaults filled. A skipped step sends
+// nothing, not even a default, so the server sees it as skipped too.
 export function payload(preset: Preset, answers: Answers): Record<string, Value> {
   const result: Record<string, Value> = {}
-  const steps = activeSteps(preset)
-  for (const step of steps.slice(0, steps.indexOf(submitStep(preset)) + 1)) {
+  for (const step of questionSteps(preset)) {
+    if (step.skippable && isStepBlank(step, answers)) continue
     for (const field of visibleFields(step, answers)) {
       let value = answers[field.id]
       if (isEmpty(value)) {

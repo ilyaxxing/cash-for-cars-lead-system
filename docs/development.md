@@ -5,8 +5,10 @@ Running the app locally, the checks that must pass, and how it is built.
 ## What it does
 
 - **Seller form.** Mobile-first, one question per screen, built from a preset
-  file. The lead is saved and the buyer is notified as soon as the contact step
-  is done, so a seller who stops at the photo step is not lost.
+  file. The car comes first, then the contact step: there the lead is saved
+  and the buyer notified. The questions after it are optional and are added
+  to the same lead as the seller answers them, so one who stops early is not
+  lost.
 - **Owner dashboard.** Installable web app (PWA) with leads by status, full
   lead details and photos, notes, one-tap call and WhatsApp, and statistics by
   source and conversion.

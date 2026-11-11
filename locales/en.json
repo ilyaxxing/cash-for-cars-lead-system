@@ -36,6 +36,11 @@
       "minutes_left": "About {minutes} min left",
       "answers_so_far": "Your answers so far"
     },
+    "saved": {
+      "title": "The buyer has your details.",
+      "text": "The rest is optional.",
+      "finish": "Finish now"
+    },
     "buttons": {
       "continue": "Continue",
       "skip": "Skip for now",
@@ -183,7 +188,7 @@
       "contact": {
         "tag": "Contact",
         "title": "How can the buyer reach you?",
-        "hint": "Your details are saved when you continue, so nothing is lost if you stop at the photo step."
+        "hint": "Your inquiry is saved when you continue. Everything after this step is optional."
       },
       "photos": {
         "tag": "Photos",

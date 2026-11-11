@@ -42,10 +42,11 @@ restrict leaving flyers on cars, so the client should check the local rules.
   to be left under wipers, generated in their color with their logo and
   phone. A print-ready PDF (bleed, CMYK) for any print shop. A QR code or a
   link for every other place sellers see, each counted separately (below).
-- **A form for sellers** that collects the year, make, model, mileage,
-  condition, accident and loan history, asking price, location, VIN, contact
-  details and guided photos. A few minutes on a phone. A seller who stops
-  halfway is not lost: the lead is saved as soon as the contact step is done.
+- **A form for sellers** that asks for the car first (make, model, year,
+  mileage, condition), then the contact details: at that point the lead is
+  saved and the owner notified. Accident and loan history, asking price,
+  location, VIN and guided photos follow as optional extras, added to the
+  same lead, so a seller who stops early is not lost.
 - **A push notification** to the owner's phone for every new lead, usually
   within seconds. iPhone and Android.
 - **An app on the owner's phone**: leads by status (New, In Progress,

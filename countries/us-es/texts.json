@@ -36,6 +36,11 @@
       "minutes_left": "Faltan unos {minutes} min",
       "answers_so_far": "Sus respuestas hasta ahora"
     },
+    "saved": {
+      "title": "Ya tenemos sus datos.",
+      "text": "El resto es opcional.",
+      "finish": "Terminar ahora"
+    },
     "buttons": {
       "continue": "Continuar",
       "skip": "Omitir por ahora",
@@ -183,7 +188,7 @@
       "contact": {
         "tag": "Contacto",
         "title": "¿Cómo puede contactarlo el comprador?",
-        "hint": "Sus datos se guardan al continuar, así que no se pierde nada si se detiene en el paso de las fotos."
+        "hint": "Su solicitud se guarda al continuar. Todo lo que sigue es opcional."
       },
       "photos": {
         "tag": "Fotos",

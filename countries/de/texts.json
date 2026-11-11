@@ -36,6 +36,11 @@
       "minutes_left": "Noch etwa {minutes} Min.",
       "answers_so_far": "Ihre bisherigen Antworten"
     },
+    "saved": {
+      "title": "Ihre Angaben sind angekommen.",
+      "text": "Der Rest ist freiwillig.",
+      "finish": "Jetzt abschließen"
+    },
     "buttons": {
       "continue": "Weiter",
       "skip": "Erst mal überspringen",
@@ -183,7 +188,7 @@
       "contact": {
         "tag": "Kontakt",
         "title": "Wie erreicht Sie der Käufer?",
-        "hint": "Ihre Angaben werden beim Weitergehen gespeichert. Es geht also nichts verloren, wenn Sie bei den Fotos aufhören."
+        "hint": "Ihre Anfrage wird beim Weitergehen gespeichert. Alles danach ist freiwillig."
       },
       "photos": {
         "tag": "Fotos",

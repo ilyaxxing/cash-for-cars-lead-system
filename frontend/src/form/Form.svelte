@@ -143,6 +143,26 @@
 
   <div class="scroll" bind:this={scrollEl}>
     <div class="content" style:max-width={layout.contentMax} style:padding={layout.bodyPad}>
+      {#if form.extra && !form.fromReview}
+        <!-- Not in the design: after the contact step the lead is saved, and
+             the seller should know the rest is extra and how to stop. -->
+        <div class="saved">
+          <svg class="saved-tick" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
+            <circle cx="9" cy="9" r="9" style="fill: var(--accent)" />
+            <path
+              d="M5.2 9.3l2.5 2.5 5.1-5.3"
+              style="stroke: var(--on-accent)"
+              stroke-width="1.8"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span class="saved-text"><b>{t('form.saved.title')}</b> {t('form.saved.text')}</span>
+          <button class="saved-finish" onclick={form.finish} disabled={form.busy}>{t('form.saved.finish')}</button>
+        </div>
+      {/if}
+
       {#if chips.length}
         <div class="chips" aria-label={t('form.header.answers_so_far')}>
           {#each chips as chip (chip.value)}
@@ -256,6 +276,54 @@
   .content {
     margin: 0 auto;
     box-sizing: border-box;
+  }
+
+  .saved {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 8px 9px 12px;
+    margin-bottom: 16px;
+    border-radius: 12px;
+    background: rgb(var(--accent-rgb) / 0.06);
+    border: 1px solid rgb(var(--accent-rgb) / 0.26);
+  }
+
+  .saved-tick {
+    flex: none;
+  }
+
+  .saved-text {
+    flex: 1;
+    min-width: 0;
+    font: 400 13px/1.4 var(--font-sans);
+    color: var(--text-muted);
+  }
+
+  .saved-text b {
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .saved-finish {
+    flex: none;
+    min-height: 36px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 9px;
+    background: none;
+    font: 600 13px/1 var(--font-sans);
+    color: var(--accent);
+    cursor: pointer;
+  }
+
+  .saved-finish:hover {
+    background: rgb(var(--accent-rgb) / 0.1);
+  }
+
+  .saved-finish:disabled {
+    opacity: 0.5;
+    cursor: default;
   }
 
   .chips {

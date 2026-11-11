@@ -35,10 +35,11 @@ async def create_lead(
     *,
     source: str | None,
 ) -> Lead:
-    """Validate the answers up to the submit step and save a new lead.
+    """Validate the answers and save a new lead.
 
     Called only when the contact step is submitted, so an abandoned form
-    leaves nothing behind in the database.
+    leaves nothing behind in the database. Questions after that step are
+    optional and arrive later, through update_answers.
     """
     values = validate_answers(preset, raw_answers)
     columns, answers = split_answers(preset, values)
@@ -92,7 +93,8 @@ async def set_status(
 async def update_answers(
     session: AsyncSession, preset: Preset, lead: Lead, raw_answers: Mapping[str, Any]
 ) -> Lead:
-    """Replace the answers after an edit on the review step.
+    """Replace the answers: details added after the contact step, or an edit
+    on the review step.
 
     The full set is validated again, exactly as on creation: an edit can
     remove an answer (a skipped price) as well as change one.

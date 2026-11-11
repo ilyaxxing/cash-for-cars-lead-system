@@ -38,10 +38,14 @@ class AnswersInvalid(Exception):
         self.errors = errors
 
 
-def steps_until_submit(preset: Preset) -> list[Step]:
-    """Steps answered before the lead is saved (the photos come afterwards)."""
-    steps = preset.active_steps
-    return steps[: steps.index(preset.submit_step) + 1]
+def question_steps(preset: Preset) -> list[Step]:
+    """Every step with questions, in order. The ones after the submit step are
+    skippable (the preset marks them so): blank, they are simply left out."""
+    return [
+        step
+        for step in preset.active_steps
+        if not any(spec.type == "photos" for spec in step.fields)
+    ]
 
 
 def validate_answers(
@@ -51,7 +55,7 @@ def validate_answers(
     steps: Iterable[Step] | None = None,
     today: datetime | None = None,
 ) -> dict[str, Any]:
-    """Clean answers for the given steps (by default everything up to submit).
+    """Clean answers for the given steps (by default every question step).
 
     Raises AnswersInvalid listing every problem at once, so the form can show
     them all instead of one per round trip.
@@ -60,7 +64,7 @@ def validate_answers(
     values: dict[str, Any] = {}
     errors: list[AnswerError] = []
 
-    for step in steps if steps is not None else steps_until_submit(preset):
+    for step in steps if steps is not None else question_steps(preset):
         if not step.enabled:
             continue
         given = {spec.id for spec in step.fields if not _is_empty(raw.get(spec.id))}

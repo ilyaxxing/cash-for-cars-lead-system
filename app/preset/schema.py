@@ -12,7 +12,7 @@ startup, not surface as a broken step in front of a seller.
 from __future__ import annotations
 
 import re
-from typing import Literal, Self
+from typing import Any, Literal, Self
 
 import phonenumbers
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -151,9 +151,12 @@ class Step(StrictModel):
     fields: list[FieldSpec]
     # Off switch for a whole step, e.g. location for a client who does not need it.
     enabled: bool = True
-    # The seller may move on without answering.
+    # The seller may move on without answering. Always true for the questions
+    # after the submit step: the lead is saved by then, the rest is extra.
     skippable: bool = False
     # The lead is saved and the owner notified when this step is submitted.
+    # Put it early: every question before it stands between a seller and the
+    # owner's phone, and every question after it can still be answered.
     submit: bool = False
     # Show the privacy consent checkbox on this step.
     consent: bool = False
@@ -180,6 +183,34 @@ class Preset(StrictModel):
     postal_code_format: Literal["us_zip"] | None = None
     postal_code_pattern: str | None = None
     steps: list[Step]
+
+    @model_validator(mode="before")
+    @classmethod
+    def _questions_after_submit_are_optional(cls, data: Any) -> Any:
+        """Mark every question step after the submit step as skippable.
+
+        The lead exists once the submit step is done, so what follows only adds
+        to it: the seller may skip any of it or stop. A malformed preset is
+        left as it is for the checks below to explain.
+        """
+        steps = data.get("steps") if isinstance(data, dict) else None
+        if not isinstance(steps, list) or not all(isinstance(step, dict) for step in steps):
+            return data
+        submit_at = next((i for i, step in enumerate(steps) if step.get("submit") is True), None)
+        if submit_at is None:
+            return data
+
+        def has_photos(step: dict[str, Any]) -> bool:
+            fields = step.get("fields")
+            return isinstance(fields, list) and any(
+                isinstance(spec, dict) and spec.get("type") == "photos" for spec in fields
+            )
+
+        later = [
+            step if has_photos(step) else {**step, "skippable": True}
+            for step in steps[submit_at + 1 :]
+        ]
+        return {**data, "steps": [*steps[: submit_at + 1], *later]}
 
     @field_validator("phone_region")
     @classmethod
@@ -253,13 +284,15 @@ class Preset(StrictModel):
         }
         if "phone" not in before_submit:
             raise ValueError("a phone field is required at or before the submit step")
+        # A lead is titled by its make and model, in the notification too.
+        asked = {spec.id for spec in fields}
+        for title_field in ("make", "model"):
+            if title_field in asked and title_field not in before_submit:
+                raise ValueError(f"field {title_field!r} must come at or before the submit step")
         # Photos are uploaded to an existing lead, so they come after it is saved.
         for step in self.steps[: submit_index + 1]:
             if any(spec.type == "photos" for spec in step.fields):
                 raise ValueError("photos must come after the submit step")
-        for step in self.steps[submit_index + 1 :]:
-            if any(spec.type != "photos" for spec in _with_follow_ups(step.fields)):
-                raise ValueError("only photos can come after the submit step")
         if sum(spec.type == "photos" for spec in fields) > 1:
             raise ValueError("a preset can have at most one photos field")
 

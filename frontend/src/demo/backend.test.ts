@@ -12,8 +12,11 @@ const read = (path: string) => readFileSync(new URL(path, import.meta.url), 'utf
 // The shipped preset, with the defaults the server adds when it serializes it.
 function loadPreset(): Preset {
   const raw = parse(read('../../../presets/us-car-buyout.yaml'))
-  for (const step of raw.steps) {
+  const submitAt = raw.steps.findIndex((s: any) => s.submit)
+  for (const [index, step] of raw.steps.entries()) {
     Object.assign(step, { enabled: true, skippable: false, submit: false, consent: false, show_chips: false, ...step })
+    // As the server does: questions after the contact step are optional.
+    if (index > submitAt && !step.fields.some((f: any) => f.type === 'photos')) step.skippable = true
     for (const field of step.fields.flatMap((f: any) => [f, ...(f.follow_up?.fields ?? [])])) {
       Object.assign(field, {
         required: false, personal: false, options: [], unknown: false, multiline: false,

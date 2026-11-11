@@ -81,6 +81,27 @@ steps:
           - { id: accident_damaged, level: 1 }
           - { id: not_running, level: 0 }
 
+  - id: contact
+    submit: true
+    consent: true
+    fields:
+      - { id: name, type: text, required: true, personal: true, max_length: 128 }
+      - { id: phone, type: phone, required: true, personal: true }
+      - id: email
+        type: text
+        format: email
+        personal: true
+        max_length: 254
+        required_when: { contact_method: email }
+      - id: contact_method
+        type: select
+        default: call
+        options:
+          - { id: call }
+          - { id: whatsapp }
+          - { id: sms }
+          - { id: email }
+
   - id: accident
     group: history
     show_chips: true
@@ -132,27 +153,6 @@ steps:
     note: text
     fields:
       - { id: registration, type: text, personal: true, max_length: 10 }
-
-  - id: contact
-    submit: true
-    consent: true
-    fields:
-      - { id: name, type: text, required: true, personal: true, max_length: 128 }
-      - { id: phone, type: phone, required: true, personal: true }
-      - id: email
-        type: text
-        format: email
-        personal: true
-        max_length: 254
-        required_when: { contact_method: email }
-      - id: contact_method
-        type: select
-        default: call
-        options:
-          - { id: call }
-          - { id: whatsapp }
-          - { id: sms }
-          - { id: email }
 
   - id: photos
     fields:

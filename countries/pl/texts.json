@@ -36,6 +36,11 @@
       "minutes_left": "Zostało ok. {minutes} min",
       "answers_so_far": "Twoje dotychczasowe odpowiedzi"
     },
+    "saved": {
+      "title": "Mamy już Twoje dane.",
+      "text": "Reszta jest opcjonalna.",
+      "finish": "Zakończ teraz"
+    },
     "buttons": {
       "continue": "Dalej",
       "skip": "Pomiń na razie",
@@ -183,7 +188,7 @@
       "contact": {
         "tag": "Kontakt",
         "title": "Jak kupujący może się z Tobą skontaktować?",
-        "hint": "Dane zapisują się, gdy przechodzisz dalej, więc nic nie przepadnie, jeśli zatrzymasz się na zdjęciach."
+        "hint": "Zgłoszenie zapisuje się, gdy przechodzisz dalej. Wszystko po tym kroku jest opcjonalne."
       },
       "photos": {
         "tag": "Zdjęcia",
