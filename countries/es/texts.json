@@ -673,7 +673,7 @@
       "help": {
         "arrive": {
           "title": "Cómo llegan las solicitudes",
-          "text": "Un vendedor escanea tu tarjeta de visita o abre tu enlace, responde unas preguntas sobre el coche y deja un teléfono. La solicitud aparece en Nuevas justo después del paso de contacto, aunque el vendedor se salte las fotos."
+          "text": "Un vendedor escanea tu tarjeta de visita o abre tu enlace, responde unas preguntas sobre el coche y deja un teléfono. La solicitud aparece en Nuevas justo después del paso de contacto. El resto del formulario es opcional: lo que el vendedor añada después, fotos incluidas, aparece en la misma solicitud."
         },
         "statuses": {
           "title": "Qué significa cada estado",

@@ -667,7 +667,7 @@
       "help": {
         "arrive": {
           "title": "Jak przychodzą zgłoszenia",
-          "text": "Sprzedający skanuje Twoją wizytówkę albo otwiera Twój link, odpowiada na kilka pytań o auto i zostawia numer telefonu. Zgłoszenie pojawia się w Nowe zaraz po kroku z kontaktem, nawet jeśli sprzedający pominie zdjęcia."
+          "text": "Sprzedający skanuje Twoją wizytówkę albo otwiera Twój link, odpowiada na kilka pytań o auto i zostawia numer telefonu. Zgłoszenie pojawia się w Nowe zaraz po kroku z kontaktem. Reszta formularza jest nieobowiązkowa: wszystko, co sprzedający doda później, także zdjęcia, pojawi się w tym samym zgłoszeniu."
         },
         "statuses": {
           "title": "Co oznaczają statusy",

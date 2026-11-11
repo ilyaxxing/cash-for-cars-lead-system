@@ -667,7 +667,7 @@
       "help": {
         "arrive": {
           "title": "How leads arrive",
-          "text": "A seller scans your business card or opens your link, answers a few questions about the car and leaves a phone number. The lead shows up in New right after the contact step, even if the seller skips the photos."
+          "text": "A seller scans your business card or opens your link, answers a few questions about the car and leaves a phone number. The lead shows up in New right after the contact step. The rest of the form is optional: whatever the seller adds after that, photos included, appears in the same lead."
         },
         "statuses": {
           "title": "What the statuses mean",

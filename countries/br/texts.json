@@ -673,7 +673,7 @@
       "help": {
         "arrive": {
           "title": "Como os pedidos chegam",
-          "text": "Um vendedor escaneia seu cartão de visita ou abre seu link, responde algumas perguntas sobre o carro e deixa um telefone. O pedido aparece em Novos logo depois da etapa de contato, mesmo que o vendedor pule as fotos."
+          "text": "Um vendedor escaneia seu cartão de visita ou abre seu link, responde algumas perguntas sobre o carro e deixa um telefone. O pedido aparece em Novos logo depois da etapa de contato. O resto do formulário é opcional: o que o vendedor adicionar depois, inclusive fotos, aparece no mesmo pedido."
         },
         "statuses": {
           "title": "O que cada status significa",

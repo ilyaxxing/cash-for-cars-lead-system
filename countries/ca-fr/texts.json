@@ -667,7 +667,7 @@
       "help": {
         "arrive": {
           "title": "Comment arrivent les demandes",
-          "text": "Un vendeur scanne votre carte professionnelle ou ouvre votre lien, répond à quelques questions sur la voiture et laisse un numéro de téléphone. La demande apparaît dans Nouvelles juste après l'étape des coordonnées, même si le vendeur passe les photos."
+          "text": "Un vendeur scanne votre carte professionnelle ou ouvre votre lien, répond à quelques questions sur la voiture et laisse un numéro de téléphone. La demande apparaît dans Nouvelles juste après l'étape des coordonnées. Le reste du formulaire est facultatif : ce que le vendeur ajoute ensuite, photos comprises, apparaît dans la même demande."
         },
         "statuses": {
           "title": "Ce que veulent dire les statuts",

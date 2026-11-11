@@ -667,7 +667,7 @@
       "help": {
         "arrive": {
           "title": "Cómo llegan los prospectos",
-          "text": "Un vendedor escanea su tarjeta de presentación o abre su enlace, contesta unas preguntas sobre el auto y deja un teléfono. El prospecto aparece en Nuevos justo después del paso de contacto, aunque el vendedor omita las fotos."
+          "text": "Un vendedor escanea su tarjeta de presentación o abre su enlace, contesta unas preguntas sobre el auto y deja un teléfono. El prospecto aparece en Nuevos justo después del paso de contacto. El resto del formulario es opcional: lo que el vendedor agregue después, fotos incluidas, aparece en el mismo prospecto."
         },
         "statuses": {
           "title": "Qué significa cada estado",

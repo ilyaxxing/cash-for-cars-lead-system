@@ -667,7 +667,7 @@
       "help": {
         "arrive": {
           "title": "Wie Anfragen eingehen",
-          "text": "Ein Verkäufer scannt Ihre Visitenkarte oder öffnet Ihren Link, beantwortet ein paar Fragen zum Auto und hinterlässt eine Telefonnummer. Die Anfrage erscheint direkt nach dem Kontaktschritt unter Neu, auch wenn der Verkäufer die Fotos überspringt."
+          "text": "Ein Verkäufer scannt Ihre Visitenkarte oder öffnet Ihren Link, beantwortet ein paar Fragen zum Auto und hinterlässt eine Telefonnummer. Die Anfrage erscheint direkt nach dem Kontaktschritt unter Neu. Der Rest des Formulars ist freiwillig: Was der Verkäufer danach ergänzt, auch Fotos, erscheint in derselben Anfrage."
         },
         "statuses": {
           "title": "Was die Status bedeuten",
