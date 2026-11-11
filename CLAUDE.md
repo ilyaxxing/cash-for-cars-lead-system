@@ -76,7 +76,9 @@ The repository is public. Write everything as if strangers read it.
 - Deploy scripts: the client's env file in, a working URL out. Both wait for
   `/healthz` to report the uploaded git sha and the Alembic head: never
   assume a deploy came up, since the container can be running while the app
-  in it failed at startup and answers nobody. Both end with a `backups:`
+  in it failed at startup and answers nobody. Both stop before uploading
+  when the client's own texts lack a text the app shows (a release can add
+  texts; a missing one shows as its key). Both end with a `backups:`
   line, and a "Backups are OFF" banner when they are off.
   `docker-compose.dev.yml` is for local development only. `tools/deploy.py` drives the Railway CLI step
   by step, not `.railway/railway.ts` IaC: IaC deletes every variable it does

@@ -596,6 +596,8 @@ And remind the person:
 - Updates: move to the newest release (`git fetch --tags`, then
   `git checkout` the newest `v*` tag), then the same deploy command, while
   they are an Editor on the business's project (docs/deploy.md, Updating).
+  With texts of its own in another language, the deploy names any text the
+  new release added: add it to the business's file and run it again.
 - Forgotten owner password: change `OWNER_PASSWORD` in the settings file and
   deploy again. That signs every device out; give the owner the new password
   privately, like the first one: it works for one sign-in, then they set
@@ -812,6 +814,11 @@ the files before it uploads anything and says which text or field is wrong.
 
 - **"The settings would not start in production"**: the message lists what is
   missing or malformed. Fix the settings file and run the deploy again.
+- **"...lacks N texts this version shows"**: the release added texts that
+  the business's own texts file (`LOCALE_FILE`) does not have yet. Add each
+  listed key to that file in its language: `countries/<code>/texts.json` has
+  them for the countries that ship, `locales/en.json` in English. Read the
+  new texts back with the person, then run the deploy again.
 - **"The git tree has uncommitted or untracked files"**: undo stray edits: a
   client's changes belong in `clients/<id>/`, never in tracked files. Files in
   `clients/` and `qr/` are ignored and never cause this.

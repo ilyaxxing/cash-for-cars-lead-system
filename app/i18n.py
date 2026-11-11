@@ -88,6 +88,15 @@ def text_keys(data: Mapping[str, Any], prefix: str = "") -> dict[str, str]:
     return found
 
 
+def missing_texts(reference: Messages, messages: Messages) -> list[str]:
+    """The reference's texts that messages lack: each would show as its key on screen.
+
+    A release can add texts, and a client's own translation does not get
+    them by itself.
+    """
+    return [key for key in text_keys(reference.data) if messages.get(key) is None]
+
+
 def translation_problems(reference: Messages, messages: Messages) -> list[str]:
     """What a translation lacks against the reference locale, one line each.
 

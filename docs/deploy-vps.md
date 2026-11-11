@@ -99,6 +99,14 @@ tools/check.sh
 .venv/bin/python tools/deploy_vps.py clients/acme.env
 ```
 
+A business with texts of its own in another language (`LOCALE_FILE`): a
+release can add texts, and a translation made before it does not have them.
+The deploy stops before it uploads anything and lists the ones the file
+lacks. Add them in that language (`countries/<code>/texts.json` has them for
+the countries that ship, `locales/en.json` in English) and run it again. A
+form of its own (`PRESET_FILE`) keeps its questions and their order; what a
+release changed in the shipped forms is in its notes.
+
 Migrations run before the new version starts serving.
 
 ## Logs, backups, restore

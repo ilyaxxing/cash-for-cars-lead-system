@@ -137,6 +137,31 @@ def test_a_broken_client_form_stops_the_deploy_before_anything_is_created(env_fi
         deploy.validate(env)
 
 
+def test_a_translation_without_a_new_text_stops_the_deploy(env_file, tmp_path):  # noqa: F811
+    """A release adds a text; a client's own translation, made before it, lacks it."""
+    files = client_files(tmp_path)
+    texts = english()
+    env = {**deploy.read_env(env_file), **files, "LOCALE": "ru"}
+    deploy.fill_secrets(env_file, env)
+    write_json(Path(files["LOCALE_FILE"]), texts)
+    deploy.validate(env)
+    del texts["form"]["saved"]
+    write_json(Path(files["LOCALE_FILE"]), texts)
+    with pytest.raises(deploy.DeployError) as caught:
+        deploy.validate(env)
+    message = str(caught.value)
+    assert f"{files['LOCALE_FILE']} lacks 3 texts this version shows" in message
+    for key in ("form.saved.title", "form.saved.text", "form.saved.finish"):
+        assert f"  - {key}\n" in message
+
+
+def test_a_few_changed_texts_of_a_shipped_language_lack_nothing(env_file, tmp_path):  # noqa: F811
+    env = {**deploy.read_env(env_file), **client_files(tmp_path)}
+    deploy.fill_secrets(env_file, env)
+    # English ships, so the client's file only lays its own texts over it.
+    deploy.validate(env)
+
+
 def test_a_translation_is_checked_against_english(tmp_path, capsys):
     from app.cli import check_texts_command
     from app.i18n import Messages, translation_problems
