@@ -105,6 +105,9 @@ Whether it brings one, the first weeks will show.
 
 ## Finding clients
 
+The short list. What to say first, what buyers ask and how to offer the
+setup are in [Getting your first client](first-client.md).
+
 - "We buy cars" cards under windshield wipers, and road signs with a phone
   number.
 - Google Maps: "we buy cars", "cash for cars", "junk car buyer" with a city

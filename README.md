@@ -60,6 +60,10 @@ You pick the price, and whether to sell the setup alone or with monthly
 support. Suggested starting points, not market-tested yet. More in
 [docs/business.md](docs/business.md).
 
+**Find the first client.** [Getting your first client](docs/first-client.md):
+where to look, the first message, answers to the questions car buyers ask,
+and two ways to offer the setup.
+
 **Show it to a client.** [The page for car buyers](https://car-buyer-demo.github.io/)
 has the same live demo and what it does for their business, without prices,
 setup details or GitHub. Send it in their name and color: add them to the link
