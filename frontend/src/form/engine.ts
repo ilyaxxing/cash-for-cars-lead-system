@@ -292,3 +292,14 @@ export function loadSaved(raw: string | null, now: number): Saved | null {
     return null
   }
 }
+
+// The screen an unfinished form opens at. Everything past the contact step
+// adds to a saved lead. Without one (the form was left when the contacts
+// came last, or the server no longer opens the lead) nothing there could be
+// saved or sent, so the form opens at the contact step instead.
+export function resumeScreen(preset: Preset, step: string, hasLead: boolean): string {
+  const ids = screenIds(preset)
+  if (!ids.includes(step)) return ids[1]
+  const contact = submitStep(preset).id
+  return !hasLead && ids.indexOf(step) > ids.indexOf(contact) ? contact : step
+}

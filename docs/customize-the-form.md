@@ -128,9 +128,10 @@ checks that it is complete.
 
 The app checks them at startup, and the deploy script checks them before it
 uploads anything: a missing text or an invalid form stops it with the key or
-the line to fix. For a full translation, `python -m app.cli check-texts
---env-file clients/<id>.env` also compares it with `locales/en.json`, key by
-key, placeholders included. Dates, numbers and prices follow the language and the
+the line to fix. That includes a text a new release added, which a
+translation made before it lacks. For a full translation, `python -m app.cli
+check-texts --env-file clients/<id>.env` also compares it with
+`locales/en.json`, key by key, placeholders included. Dates, numbers and prices follow the language and the
 country. Geist covers Latin, Latin Extended, Vietnamese and Cyrillic; in the
 app, phones show other scripts in their own fonts, and on the business card
 `CARD_FONT` sets them. Not supported yet: languages written right to left,

@@ -76,7 +76,9 @@ The repository is public. Write everything as if strangers read it.
 - Deploy scripts: the client's env file in, a working URL out. Both wait for
   `/healthz` to report the uploaded git sha and the Alembic head: never
   assume a deploy came up, since the container can be running while the app
-  in it failed at startup and answers nobody. Both end with a `backups:`
+  in it failed at startup and answers nobody. Both stop before uploading
+  when the client's own texts lack a text the app shows (a release can add
+  texts; a missing one shows as its key). Both end with a `backups:`
   line, and a "Backups are OFF" banner when they are off.
   `docker-compose.dev.yml` is for local development only. `tools/deploy.py` drives the Railway CLI step
   by step, not `.railway/railway.ts` IaC: IaC deletes every variable it does
@@ -104,7 +106,8 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   Photos upload right after picking; skip label "I'll send later". Final
   submit on Review marks the lead submitted (one more push if it has photos).
   Review lists the car's sections first and the contacts last.
-  Unfinished form resumes on the same device (localStorage, max 7 days);
+  Unfinished form resumes on the same device (localStorage, max 7 days),
+  no further than the Contact step while it has no saved lead;
   the consent step's policy link opens in the same tab, and back from it
   the form goes straight to that step (sessionStorage flag).
 - Accident and lien: Yes / No / Don't know (third tile added in design style).

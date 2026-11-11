@@ -5,6 +5,7 @@ import type { Preset } from '../shared/config'
 import { isPostalCode, normalizePhone, normalizeUsPhone, prepareRegion } from '../shared/region'
 import {
   EARLIER,
+  REVIEW,
   clearStep,
   laterSteps,
   loadSaved,
@@ -12,6 +13,7 @@ import {
   payload,
   progress,
   rememberSource,
+  resumeScreen,
   screenIds,
   stepById,
   suggestionsFor,
@@ -206,6 +208,24 @@ describe('source and saved progress', () => {
     expect(loadSaved(saved, now + 8 * 24 * 3600 * 1000)).toBeNull()
     expect(loadSaved('{broken', now)).toBeNull()
     expect(loadSaved(JSON.stringify({ step: 'success', answers: {}, savedAt: now }), now)).toBeNull()
+  })
+
+  it('opens an unfinished form where it was left', () => {
+    expect(resumeScreen(preset, 'condition', false)).toBe('condition')
+    expect(resumeScreen(preset, 'contact', false)).toBe('contact')
+    expect(resumeScreen(preset, 'price', true)).toBe('price')
+    expect(resumeScreen(preset, 'photos', true)).toBe('photos')
+    expect(resumeScreen(preset, REVIEW, true)).toBe(REVIEW)
+    // A step the form no longer has: from the first question.
+    expect(resumeScreen(preset, 'gone', true)).toBe('vehicle')
+  })
+
+  it('opens it at the contact step when nothing past it has a lead to add to', () => {
+    // Left at the price when the contacts came last, before any lead was saved.
+    expect(resumeScreen(preset, 'accident', false)).toBe('contact')
+    expect(resumeScreen(preset, 'price', false)).toBe('contact')
+    expect(resumeScreen(preset, 'photos', false)).toBe('contact')
+    expect(resumeScreen(preset, REVIEW, false)).toBe('contact')
   })
 })
 

@@ -269,7 +269,7 @@ def validate(env: Mapping[str, str]) -> None:
     from pydantic import ValidationError
 
     from app.config import Settings
-    from app.i18n import load_messages
+    from app.i18n import load_messages, missing_texts
     from app.preset.loader import check_texts, load_preset
     from app.web.privacy import check_policy
 
@@ -305,6 +305,18 @@ def validate(env: Mapping[str, str]) -> None:
         check_policy(settings)
     except Exception as exc:
         raise DeployError(f"The form would not load: {exc}") from None
+    # A release can add texts. A client's own translation does not have them
+    # until someone adds them, and each would show as its key on screen.
+    missing = missing_texts(load_messages(settings.locales_dir, "en"), messages)
+    if missing:
+        keys = "\n".join(f"  - {key}" for key in missing)
+        raise DeployError(
+            f"{settings.locale_file} lacks {len(missing)} texts this version shows:\n"
+            f"{keys}\n"
+            "Each would show as its key on screen. Add them to that file, in its language: "
+            "the English texts are in locales/en.json, and countries/<code>/texts.json has "
+            "them for the countries that ship. Then run the deploy again."
+        )
     # The same checks the app runs at startup, on the files on this machine.
     from app.branding import Brand, BrandError
 
