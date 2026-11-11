@@ -50,6 +50,7 @@ async def process_due(
     settings: Settings,
     now: datetime,
     region: str = "US",
+    distance_unit: str = "mi",
 ) -> int:
     """Send every due event once. Returns how many were handled."""
     async with sessions() as session:
@@ -63,7 +64,7 @@ async def process_due(
             )
         )
         for event in events:
-            await _deliver(session, event, channels, messages, settings, now, region)
+            await _deliver(session, event, channels, messages, settings, now, region, distance_unit)
         await session.commit()
         return len(events)
 
@@ -76,13 +77,14 @@ async def _deliver(
     settings: Settings,
     now: datetime,
     region: str,
+    distance_unit: str,
 ) -> None:
     lead = await session.get(Lead, event.lead_id)
     if lead is None:
         event.status = "skipped"
         return
     photos = await session.scalar(select(func.count()).where(Photo.lead_id == lead.id)) or 0
-    notification = build(event.kind, lead, photos, messages, settings, region)
+    notification = build(event.kind, lead, photos, messages, settings, region, distance_unit)
 
     event.attempts += 1
     delivered = retry = 0
@@ -119,6 +121,7 @@ async def run(
     messages: Messages,
     settings: Settings,
     region: str,
+    distance_unit: str,
     wakeup: asyncio.Event,
 ) -> None:
     """The background loop. Stops when its task is cancelled."""
@@ -129,7 +132,9 @@ async def run(
     )
     while True:
         try:
-            while await process_due(sessions, channels, messages, settings, utcnow(), region):
+            while await process_due(
+                sessions, channels, messages, settings, utcnow(), region, distance_unit
+            ):
                 pass
         except Exception:
             # A database hiccup must not kill the loop; try again on the next tick.

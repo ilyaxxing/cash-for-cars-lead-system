@@ -813,8 +813,7 @@
     "photos_one": "1 foto",
     "photos_other": "{count} fotos",
     "new_lead": {
-      "title": "Novo pedido: {car}",
-      "body": "{price} · {photos}"
+      "title": "Novo pedido: {car}"
     },
     "photos_added": {
       "title": "Fotos adicionadas: {car}",

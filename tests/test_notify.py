@@ -8,7 +8,7 @@ from sqlalchemy import select
 
 from app.config import BASE_DIR
 from app.db.models import Lead, OutboxEvent, PushSubscription
-from app.i18n import format_money, load_messages
+from app.i18n import format_money, format_number, load_messages
 from app.notify import Delivery, build, outbox
 from app.notify import push as push_module
 from app.notify.push import PushChannel, allowed_endpoint
@@ -27,36 +27,61 @@ KEYS = vapid_keys()
 
 
 def lead(**overrides) -> Lead:
-    values = dict(id=7, make="Toyota", model="Camry", year=2019, asking_price=21500)
-    values.update(overrides)
-    return Lead(
-        **values, name="Jordan Lee", phone="+14155550142", answers={"email": "j@example.com"}
+    """A lead as the contact step saves it: the car and the seller, no price yet."""
+    values = dict(
+        id=7,
+        make="Toyota",
+        model="Camry",
+        year=2019,
+        mileage=78400,
+        name="Jordan Lee",
+        phone="+14155550142",
+        answers={"email": "j@example.com", "condition": "good"},
     )
+    values.update(overrides)
+    return Lead(**values)
 
 
 # --- what a notification says ------------------------------------------------
 
 
-def test_new_lead_notification_has_car_and_price_only():
+def test_new_lead_notification_says_what_the_seller_has_told_by_then():
     note = build("new_lead", lead(), 0, MESSAGES, make_settings())
     assert note.title == "New lead: 2019 Toyota Camry"
-    assert note.body == "$21,500 · No photos yet"
+    assert note.body == "78,400 mi · Good"
     assert note.url == "/app/leads/7"
     text = json.dumps(note.__dict__)
     for personal in ("Jordan", "Lee", "4155550142", "example.com"):
         assert personal not in text
 
 
+def test_new_lead_notification_names_the_price_and_photos_once_they_are_there():
+    note = build("new_lead", lead(asking_price=21500), 2, MESSAGES, make_settings())
+    assert note.body == "78,400 mi · Good · $21,500 · 2 photos"
+
+
+def test_new_lead_notification_leaves_out_what_the_form_did_not_ask():
+    note = build("new_lead", lead(mileage=None, answers={}), 0, MESSAGES, make_settings())
+    assert note.title == "New lead: 2019 Toyota Camry"
+    assert note.body == ""
+
+
 def test_photos_added_and_missing_price():
-    note = build("photos_added", lead(asking_price=None), 6, MESSAGES, make_settings())
+    note = build("photos_added", lead(), 6, MESSAGES, make_settings())
     assert note.title == "Photos added: 2019 Toyota Camry"
     assert note.body == "6 photos · No price given"
 
 
-def test_price_is_written_the_way_the_country_writes_it():
+def test_photos_added_with_the_price():
+    note = build("photos_added", lead(asking_price=21500), 1, MESSAGES, make_settings())
+    assert note.body == "1 photo · $21,500"
+
+
+def test_numbers_are_written_the_way_the_country_writes_them():
     settings = make_settings(currency="RUB", locale="ru")
-    note = build("new_lead", lead(asking_price=850000), 0, MESSAGES, settings, "RU")
-    assert note.body.startswith("850\N{NO-BREAK SPACE}000\N{NO-BREAK SPACE}₽ ·")
+    note = build("new_lead", lead(asking_price=850000), 0, MESSAGES, settings, "RU", "km")
+    nbsp = "\N{NO-BREAK SPACE}"
+    assert note.body == f"78{nbsp}400 km · Good · 850{nbsp}000{nbsp}₽"
 
 
 @pytest.mark.parametrize(
@@ -73,6 +98,21 @@ def test_price_is_written_the_way_the_country_writes_it():
 )
 def test_money_matches_the_browser(locale, region, currency, written):
     assert format_money(21500, currency, locale, region) == written
+
+
+@pytest.mark.parametrize(
+    ("locale", "region", "written"),
+    [
+        ("en", "US", "78,400"),
+        ("de", "DE", "78.400"),
+        ("ru", "RU", "78\N{NO-BREAK SPACE}400"),
+        ("fr", "FR", "78\N{NARROW NO-BREAK SPACE}400"),
+        # No such pair in the locale data: the language's own way.
+        ("en", "RU", "78,400"),
+    ],
+)
+def test_numbers_match_the_browser(locale, region, written):
+    assert format_number(78400, locale, region) == written
 
 
 # --- the outbox ----------------------------------------------------------------
@@ -195,7 +235,7 @@ async def test_push_sends_car_only_payload(session, preset, clean_db, pushed):
     payload = calls[0][1]
     assert payload == {
         "title": "New lead: 2019 Toyota Camry",
-        "body": "$21,500 · No photos yet",
+        "body": "78,400 mi · Good · $21,500",
         "url": f"/app/leads/{created.id}",
         "tag": f"lead-{created.id}",
     }

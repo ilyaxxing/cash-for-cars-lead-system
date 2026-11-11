@@ -807,8 +807,7 @@
     "photos_one": "1 zdjęcie",
     "photos_other": "Zdjęcia: {count}",
     "new_lead": {
-      "title": "Nowe zgłoszenie: {car}",
-      "body": "{price} · {photos}"
+      "title": "Nowe zgłoszenie: {car}"
     },
     "photos_added": {
       "title": "Dodano zdjęcia: {car}",

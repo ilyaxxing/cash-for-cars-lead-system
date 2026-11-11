@@ -67,6 +67,7 @@ type Handler = (match: RegExpMatchArray, query: URLSearchParams, body: Record<st
 export class Backend {
   private readonly t
   private readonly money: Intl.NumberFormat
+  private readonly number: Intl.NumberFormat
   private readonly personal: Set<string>
   private readonly slotOrder: string[]
   private readonly routes: [string, RegExp, Handler][]
@@ -87,6 +88,7 @@ export class Backend {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     })
+    this.number = new Intl.NumberFormat(`${config.locale}-${config.preset.phone_region}`)
     const fields = config.preset.steps.flatMap((step) =>
       step.fields.flatMap((field): FieldSpec[] => [field, ...(field.follow_up?.fields ?? [])]),
     )
@@ -424,28 +426,41 @@ export class Backend {
     return label === `sources.${source}` ? this.t('sources.other') : label
   }
 
-  // The notification the server builds: the car and the price, never the seller.
+  // The notification the server builds: the car, never the seller. A new lead
+  // says what the form has asked by then (the mileage and the condition), and
+  // names the price and the photos only once they are there.
   private announce(kind: 'new_lead' | 'photos_added', lead: DemoLead) {
-    const { year, make, model, asking_price: price } = lead.answers
+    const { year, make, model, mileage, condition, asking_price: price } = lead.answers
     const car =
       typeof year === 'number'
         ? this.t('notifications.car', { year, make: String(make ?? ''), model: String(model ?? '') })
         : this.t('notifications.car_no_year', { make: String(make ?? ''), model: String(model ?? '') }).trim()
+    const money = typeof price === 'number' ? this.money.format(price) : null
     const count = lead.photos.length
     const photos =
       count === 0
-        ? this.t('notifications.no_photos')
+        ? null
         : count === 1
           ? this.t('notifications.photos_one')
           : this.t('notifications.photos_other', { count })
-    this.notify({
-      title: this.t(`notifications.${kind}.title`, { car }),
-      body: this.t(`notifications.${kind}.body`, {
-        price: typeof price === 'number' ? this.money.format(price) : this.t('notifications.no_price'),
+    let body: string
+    if (kind === 'new_lead') {
+      const unit = this.t(`units.${this.config.preset.distance_unit}.short`)
+      const conditionKey = `preset.options.condition.${condition}.label`
+      const known = [
+        typeof mileage === 'number' ? `${this.number.format(mileage)} ${unit}` : null,
+        typeof condition === 'string' && this.t(conditionKey) !== conditionKey ? this.t(conditionKey) : null,
+        money,
         photos,
-      }),
-      path: `/app/leads/${lead.id}`,
-    })
+      ]
+      body = known.filter((part) => part !== null).join(' · ')
+    } else {
+      body = this.t('notifications.photos_added.body', {
+        photos: photos ?? this.t('notifications.no_photos'),
+        price: money ?? this.t('notifications.no_price'),
+      })
+    }
+    this.notify({ title: this.t(`notifications.${kind}.title`, { car }), body, path: `/app/leads/${lead.id}` })
   }
 }
 

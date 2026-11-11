@@ -78,14 +78,18 @@ describe('the demo answers every request the apps make', () => {
 describe('a seller sends an inquiry', () => {
   it('lands in the dashboard with the notifications the server would send', () => {
     const { backend, call, notices } = setup()
-    const created = call('POST', '/api/leads', { answers: ANSWERS, source: 'card', honeypot: '' })
+    // The contact step saves the lead: the price and the rest are not asked yet.
+    const { accident, finance, asking_price, location, postal_code, ...upToContact } = ANSWERS
+    const created = call('POST', '/api/leads', { answers: upToContact, source: 'card', honeypot: '' })
     expect(created.status).toBe(201)
     const { id } = created.body as { id: number }
     expect(notices[0]).toEqual({
       title: 'New lead: 2019 Toyota Camry',
-      body: '$12,500 · No photos yet',
+      body: '64,000 mi · Good',
       path: `/app/leads/${id}`,
     })
+    expect(call('PATCH', `/api/leads/${id}`, { answers: ANSWERS }).status).toBe(200)
+    expect(notices).toHaveLength(1)
 
     const list = call('GET', '/api/owner/leads?tab=new').body as LeadList
     expect(list.counts).toEqual({ new: 1, in_work: 0, all: 1 })

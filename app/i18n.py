@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 
 from babel import Locale, UnknownLocaleError
-from babel.numbers import format_currency
+from babel.numbers import format_currency, format_decimal
 
 PLACEHOLDER = re.compile(r"\{(\w+)\}")
 
@@ -58,13 +58,22 @@ def format_money(amount: int, currency: str, locale: str, region: str) -> str:
     The same as the browser's Intl formatting in the form and the dashboard,
     so a price reads alike in a notification and on screen.
     """
-    language = locale.replace("-", "_")  # zh-Hant: Babel's zh_Hant
-    try:
-        place = Locale.parse(f"{language}_{region}")
-    except (UnknownLocaleError, ValueError):
-        place = Locale.parse(language)
+    place = _place(locale, region)
     whole = re.sub(r"\.0+", "", place.currency_formats["standard"].pattern)
     return format_currency(amount, currency, format=whole, locale=place, currency_digits=False)
+
+
+def format_number(value: int, locale: str, region: str) -> str:
+    """A whole number with the country's digit grouping: "64,000", "64 000"."""
+    return format_decimal(value, locale=_place(locale, region))
+
+
+def _place(locale: str, region: str) -> Locale:
+    language = locale.replace("-", "_")  # zh-Hant: Babel's zh_Hant
+    try:
+        return Locale.parse(f"{language}_{region}")
+    except (UnknownLocaleError, ValueError):
+        return Locale.parse(language)
 
 
 def text_keys(data: Mapping[str, Any], prefix: str = "") -> dict[str, str]:

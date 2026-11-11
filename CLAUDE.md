@@ -95,7 +95,8 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   city+ZIP → VIN (separate step) → Photos → Review → Success. The contacts
   come early on purpose (the design had them last): every step before them
   stands between a seller and the owner's phone.
-- After Contact the lead is saved and the owner is notified ("no photos").
+- After Contact the lead is saved and the owner is notified (the push names
+  the car, its mileage and condition: the price is not asked yet).
   Every question after it is optional (Skip for now) and is added to the lead
   as the seller moves on; a bar says so ("The buyer has your details. The
   rest is optional.") with Finish now, which goes to Review. Not in the

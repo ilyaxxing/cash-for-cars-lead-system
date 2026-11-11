@@ -13,8 +13,9 @@ Running the app locally, the checks that must pass, and how it is built.
   lead details and photos, notes, one-tap call and WhatsApp, and statistics by
   source and conversion.
 - **Push notifications.** Web Push, including iPhone (iOS 16.4+ home screen
-  apps). Notifications carry the car and the price, never the seller's name or
-  phone number.
+  apps). A notification carries the car, its mileage and condition, and the
+  price and photos once the seller has added them, never the seller's name
+  or phone number.
 - **Data retention.** The seller's name, phone, email and the photos are
   erased 90 days after a lead is closed. The car and the outcome are kept for
   statistics.
