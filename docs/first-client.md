@@ -1,7 +1,7 @@
 # Getting your first client
 
 Where to look, what to say first, what car buyers ask and how to answer, and
-two ways to offer the setup. The product and the prices are in
+how to offer the setup. The product and the prices are in
 [business.md](business.md).
 
 The messages and answers below are starting points. They have not been tested
@@ -167,26 +167,19 @@ local rules. The code works the same on a sticker on your own car, a sign, a
 poster at a partner shop and the link in your Maps listing.
 
 **"What if it brings nothing?"** I cannot promise sellers: that depends on
-how many cards, signs and links are out there. Which is what the second
-offer below is for.
+how many cards, signs and links are out there. What I can show is that it
+works: the second half is due only after a test lead from your own card
+reaches your phone.
 
-## Two ways to offer it
+## How to offer it
 
 **Half now, half when it works.** Half of the setup price before you start,
 the rest when a test lead from their own card arrives on their phone. They
 see it working before the second payment.
 
-**Pay when the first seller comes.** You set it up, and they pay the setup
-price when the first real seller's lead arrives, within a period you agree
-on: say, 30 days from the day the cards or links go out. If none comes, they
-owe you nothing. Their own costs (the domain, hosting, printing) are theirs
-either way. It suits a first client: you risk your time, they have little
-reason to say no, and their numbers help you with the next one. Offer it
-only to someone who will really put the cards out.
-
-Either way, put it in writing, one message is enough: what is included, the
-price, when it is due, and what monthly support covers if they take it (the
-table in [business.md](business.md#pricing)).
+Put it in writing, one message is enough: what is included, the price, when
+it is due, and what monthly support covers if they take it (the table in
+[business.md](business.md#pricing)).
 
 ## When they say yes
 
