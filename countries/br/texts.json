@@ -17,7 +17,7 @@
         },
         "2": {
           "title": "Receba sua oferta",
-          "text": "Nós analisamos as informações."
+          "text": "Analisamos seus dados e entramos em contato com uma oferta."
         },
         "3": {
           "title": "Você decide",
@@ -35,6 +35,11 @@
       "under_a_minute": "Falta menos de um minuto",
       "minutes_left": "Faltam cerca de {minutes} min",
       "answers_so_far": "Suas respostas até agora"
+    },
+    "saved": {
+      "title": "Já recebemos seus dados.",
+      "text": "O resto é opcional.",
+      "finish": "Finalizar agora"
     },
     "buttons": {
       "continue": "Continuar",
@@ -183,7 +188,7 @@
       "contact": {
         "tag": "Contato",
         "title": "Como o comprador fala com você?",
-        "hint": "Seus dados são salvos ao continuar, então nada se perde se você parar nas fotos."
+        "hint": "Seu pedido é salvo ao continuar. Tudo depois desta etapa é opcional."
       },
       "photos": {
         "tag": "Fotos",
@@ -668,7 +673,7 @@
       "help": {
         "arrive": {
           "title": "Como os pedidos chegam",
-          "text": "Um vendedor escaneia seu cartão de visita ou abre seu link, responde algumas perguntas sobre o carro e deixa um telefone. O pedido aparece em Novos logo depois da etapa de contato, mesmo que o vendedor pule as fotos."
+          "text": "Um vendedor escaneia seu cartão de visita ou abre seu link, responde algumas perguntas sobre o carro e deixa um telefone. O pedido aparece em Novos logo depois da etapa de contato. O resto do formulário é opcional: o que o vendedor adicionar depois, inclusive fotos, aparece no mesmo pedido."
         },
         "statuses": {
           "title": "O que cada status significa",
@@ -808,8 +813,7 @@
     "photos_one": "1 foto",
     "photos_other": "{count} fotos",
     "new_lead": {
-      "title": "Novo pedido: {car}",
-      "body": "{price} · {photos}"
+      "title": "Novo pedido: {car}"
     },
     "photos_added": {
       "title": "Fotos adicionadas: {car}",

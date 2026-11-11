@@ -17,7 +17,7 @@
         },
         "2": {
           "title": "Angebot erhalten",
-          "text": "Wir prüfen Ihre Angaben."
+          "text": "Wir prüfen Ihre Angaben und melden uns mit einem Angebot."
         },
         "3": {
           "title": "Sie entscheiden",
@@ -35,6 +35,11 @@
       "under_a_minute": "Noch unter einer Minute",
       "minutes_left": "Noch etwa {minutes} Min.",
       "answers_so_far": "Ihre bisherigen Antworten"
+    },
+    "saved": {
+      "title": "Ihre Angaben sind angekommen.",
+      "text": "Der Rest ist freiwillig.",
+      "finish": "Jetzt abschließen"
     },
     "buttons": {
       "continue": "Weiter",
@@ -183,7 +188,7 @@
       "contact": {
         "tag": "Kontakt",
         "title": "Wie erreicht Sie der Käufer?",
-        "hint": "Ihre Angaben werden beim Weitergehen gespeichert. Es geht also nichts verloren, wenn Sie bei den Fotos aufhören."
+        "hint": "Ihre Anfrage wird beim Weitergehen gespeichert. Alles danach ist freiwillig."
       },
       "photos": {
         "tag": "Fotos",
@@ -662,7 +667,7 @@
       "help": {
         "arrive": {
           "title": "Wie Anfragen eingehen",
-          "text": "Ein Verkäufer scannt Ihre Visitenkarte oder öffnet Ihren Link, beantwortet ein paar Fragen zum Auto und hinterlässt eine Telefonnummer. Die Anfrage erscheint direkt nach dem Kontaktschritt unter Neu, auch wenn der Verkäufer die Fotos überspringt."
+          "text": "Ein Verkäufer scannt Ihre Visitenkarte oder öffnet Ihren Link, beantwortet ein paar Fragen zum Auto und hinterlässt eine Telefonnummer. Die Anfrage erscheint direkt nach dem Kontaktschritt unter Neu. Der Rest des Formulars ist freiwillig: Was der Verkäufer danach ergänzt, auch Fotos, erscheint in derselben Anfrage."
         },
         "statuses": {
           "title": "Was die Status bedeuten",
@@ -802,8 +807,7 @@
     "photos_one": "1 Foto",
     "photos_other": "{count} Fotos",
     "new_lead": {
-      "title": "Neue Anfrage: {car}",
-      "body": "{price} · {photos}"
+      "title": "Neue Anfrage: {car}"
     },
     "photos_added": {
       "title": "Fotos hinzugefügt: {car}",

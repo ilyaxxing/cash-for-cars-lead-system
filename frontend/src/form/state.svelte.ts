@@ -21,6 +21,7 @@ import {
   clearStep,
   isEmpty,
   isStepBlank,
+  laterSteps,
   loadSaved,
   parseSource,
   payload,
@@ -97,6 +98,11 @@ export class FormState {
 
   get step(): Step | undefined {
     return stepById(this.preset, this.screen)
+  }
+
+  /** A question after the contact step: the lead is saved, this only adds to it. */
+  get extra(): boolean {
+    return Boolean(this.leadId) && laterSteps(this.preset).some((step) => step.id === this.screen)
   }
 
   /** An optional step with nothing answered: Continue waits for an answer, Skip moves on. */
@@ -247,7 +253,25 @@ export class FormState {
       return
     }
     if (step.submit) return this.saveLead()
+    if (this.extra) this.saveProgress()
     this.go(this.fromReview ? this.leave() : this.following(screen), 1)
+  }
+
+  // From a question after the contact step straight to the review: the lead
+  // is saved already, and the seller has said all they want to.
+  finish = () => {
+    clearTimeout(this.advanceTimer)
+    const step = this.step
+    if (!step || this.busy) return
+    const errors = validateStep(step, this.answers)
+    if (Object.keys(errors).length) {
+      this.errors = errors
+      this.nudges++
+      return
+    }
+    if (this.extra) this.saveProgress()
+    this.fromReview = false
+    this.go(REVIEW, 1)
   }
 
   private leave(): string {
@@ -268,6 +292,7 @@ export class FormState {
     if (!step) return
     if (step.fields.some((field) => field.type === 'photos')) return this.go(REVIEW, 1)
     this.answers = clearStep(step, this.answers)
+    if (this.extra) this.saveProgress()
     this.go(this.fromReview ? this.leave() : this.following(this.screen), 1)
   }
 
@@ -277,6 +302,25 @@ export class FormState {
   }
 
   // --- saving ----------------------------------------------------------------
+
+  // Details given after the contact step go to the saved lead as the seller
+  // moves on, so they are not lost with a closed tab. Quietly, one request
+  // after another: whatever fails here is sent again by the final submit,
+  // which reports it.
+  private progressSaved: Promise<void> = Promise.resolve()
+
+  private saveProgress() {
+    const id = this.leadId
+    const token = this.token
+    if (!id || !token) return
+    const answers = payload(this.preset, this.answers)
+    this.progressSaved = this.progressSaved
+      .then(() => api.updateLead(id, token, answers))
+      .then(
+        () => undefined,
+        () => undefined,
+      )
+  }
 
   private async saveLead() {
     this.busy = true
@@ -320,6 +364,7 @@ export class FormState {
     this.busy = true
     this.submitFailed = false
     try {
+      await this.progressSaved
       // Sections edited from the review step are saved together with the submit.
       await api.updateLead(this.leadId, this.token, payload(this.preset, this.answers))
       await api.submitLead(this.leadId, this.token)

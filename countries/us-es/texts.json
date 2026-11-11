@@ -17,7 +17,7 @@
         },
         "2": {
           "title": "Reciba su oferta",
-          "text": "Revisaremos su información."
+          "text": "Revisamos sus datos y nos comunicamos con usted con una oferta."
         },
         "3": {
           "title": "Usted decide",
@@ -35,6 +35,11 @@
       "under_a_minute": "Falta menos de un minuto",
       "minutes_left": "Faltan unos {minutes} min",
       "answers_so_far": "Sus respuestas hasta ahora"
+    },
+    "saved": {
+      "title": "Ya tenemos sus datos.",
+      "text": "El resto es opcional.",
+      "finish": "Terminar ahora"
     },
     "buttons": {
       "continue": "Continuar",
@@ -183,7 +188,7 @@
       "contact": {
         "tag": "Contacto",
         "title": "¿Cómo puede contactarlo el comprador?",
-        "hint": "Sus datos se guardan al continuar, así que no se pierde nada si se detiene en el paso de las fotos."
+        "hint": "Su solicitud se guarda al continuar. Todo lo que sigue es opcional."
       },
       "photos": {
         "tag": "Fotos",
@@ -662,7 +667,7 @@
       "help": {
         "arrive": {
           "title": "Cómo llegan los prospectos",
-          "text": "Un vendedor escanea su tarjeta de presentación o abre su enlace, contesta unas preguntas sobre el auto y deja un teléfono. El prospecto aparece en Nuevos justo después del paso de contacto, aunque el vendedor omita las fotos."
+          "text": "Un vendedor escanea su tarjeta de presentación o abre su enlace, contesta unas preguntas sobre el auto y deja un teléfono. El prospecto aparece en Nuevos justo después del paso de contacto. El resto del formulario es opcional: lo que el vendedor agregue después, fotos incluidas, aparece en el mismo prospecto."
         },
         "statuses": {
           "title": "Qué significa cada estado",
@@ -802,8 +807,7 @@
     "photos_one": "1 foto",
     "photos_other": "{count} fotos",
     "new_lead": {
-      "title": "Nuevo prospecto: {car}",
-      "body": "{price} · {photos}"
+      "title": "Nuevo prospecto: {car}"
     },
     "photos_added": {
       "title": "Fotos agregadas: {car}",

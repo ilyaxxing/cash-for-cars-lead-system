@@ -129,11 +129,10 @@ Promise nothing. Say what it costs and let them do the arithmetic.
 is for people who will not call a stranger: at work, late at night, or not
 ready to talk yet. You lose no callers and gain the others.
 
-**"Nobody will fill in a form."** Try the demo: a few minutes on a phone, one
-question per screen. The lead is saved as soon as the seller leaves their
-contacts, even if they stop there, and the questions can be cut down to the
-ones you care about. How many sellers finish, the first weeks will show: the
-statistics count the sellers from every place.
+**"Nobody will fill in a form."** Try the demo: three short steps about the
+car, then the phone number, and the lead is already on your phone. Everything
+after that is optional: history, price, photos. How many sellers go on, the
+first weeks will show: the statistics count the sellers from every place.
 
 **"I already have a website."** Or a Facebook page. Then you already have
 places for the link. The site keeps doing its job; the link goes into the

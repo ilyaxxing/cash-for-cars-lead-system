@@ -17,7 +17,7 @@
         },
         "2": {
           "title": "Get your offer",
-          "text": "We'll review your information."
+          "text": "We review your details and contact you with an offer."
         },
         "3": {
           "title": "Make your decision",
@@ -35,6 +35,11 @@
       "under_a_minute": "Under a minute left",
       "minutes_left": "About {minutes} min left",
       "answers_so_far": "Your answers so far"
+    },
+    "saved": {
+      "title": "The buyer has your details.",
+      "text": "The rest is optional.",
+      "finish": "Finish now"
     },
     "buttons": {
       "continue": "Continue",
@@ -183,7 +188,7 @@
       "contact": {
         "tag": "Contact",
         "title": "How can the buyer reach you?",
-        "hint": "Your details are saved when you continue, so nothing is lost if you stop at the photo step."
+        "hint": "Your inquiry is saved when you continue. Everything after this step is optional."
       },
       "photos": {
         "tag": "Photos",
@@ -662,7 +667,7 @@
       "help": {
         "arrive": {
           "title": "How leads arrive",
-          "text": "A seller scans your business card or opens your link, answers a few questions about the car and leaves a phone number. The lead shows up in New right after the contact step, even if the seller skips the photos."
+          "text": "A seller scans your business card or opens your link, answers a few questions about the car and leaves a phone number. The lead shows up in New right after the contact step. The rest of the form is optional: whatever the seller adds after that, photos included, appears in the same lead."
         },
         "statuses": {
           "title": "What the statuses mean",
@@ -802,8 +807,7 @@
     "photos_one": "1 photo",
     "photos_other": "{count} photos",
     "new_lead": {
-      "title": "New lead: {car}",
-      "body": "{price} · {photos}"
+      "title": "New lead: {car}"
     },
     "photos_added": {
       "title": "Photos added: {car}",

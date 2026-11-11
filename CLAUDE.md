@@ -90,12 +90,20 @@ The repository is public. Write everything as if strangers read it.
 ## Designs (source of truth for UI, repeat exactly)
 Claude Design projects "Seller Flow" and "Buyer Dashboard" (US market variant:
 miles, USD, ZIP, US phone format). Agreed deviations:
-- Seller steps: Welcome → Vehicle → Year & mileage → Condition → Accident (+details)
-  → Finance/lien (+details) → Price (skippable) → Location city+ZIP (skippable)
-  → VIN (separate step, skippable) → Contact & consent → Photos → Review → Success.
-- After Contact the lead is saved and the owner is notified ("no photos").
+- Seller steps: Welcome → Vehicle → Year & mileage → Condition → Contact &
+  consent → Accident (+details) → Finance/lien (+details) → Price → Location
+  city+ZIP → VIN (separate step) → Photos → Review → Success. The contacts
+  come early on purpose (the design had them last): every step before them
+  stands between a seller and the owner's phone.
+- After Contact the lead is saved and the owner is notified (the push names
+  the car, its mileage and condition: the price is not asked yet).
+  Every question after it is optional (Skip for now) and is added to the lead
+  as the seller moves on; a bar says so ("The buyer has your details. The
+  rest is optional.") with Finish now, which goes to Review. Not in the
+  design, built in its visual system.
   Photos upload right after picking; skip label "I'll send later". Final
   submit on Review marks the lead submitted (one more push if it has photos).
+  Review lists the car's sections first and the contacts last.
   Unfinished form resumes on the same device (localStorage, max 7 days);
   the consent step's policy link opens in the same tab, and back from it
   the form goes straight to that step (sessionStorage flag).
@@ -182,6 +190,8 @@ Labels from the design: New, In Progress, Purchased, Rejected.
   first pass at startup, one log line per pass even when nothing was purged,
   errors never crash the app. The period lives in one place.
 - Nothing is stored before the Contact step: abandoned forms leave no rows.
+  After it, each later step's answers replace the lead's answers (PATCH);
+  the owner is not notified again until the final submit.
 - Never log personal data; logs carry ids only.
 - Privacy policy must be honest about what retention cannot reach (backups until
   their rotation, notifications already shown). Not legal advice: the client's
@@ -192,6 +202,9 @@ Labels from the design: New, In Progress, Purchased, Rejected.
 select, yes_no, photos, phone), required, options, unit, follow_up, plus UI hints
 (widget, levels, photo slots). No UI text in the preset; keys are derived from ids.
 Field id equal to a fixed column → stored in the column, otherwise in `answers`.
+One step has `submit: true` (the contacts): it needs the phone, and make and
+model come at or before it. Question steps after it are made skippable when
+the preset loads; photos always come after it.
 Invalid preset → the app refuses to start.
 
 ## Abuse, addresses and QR codes

@@ -27,9 +27,10 @@
 
   const steps = dash.config.preset.steps.filter((step) => step.enabled)
   const submitIndex = steps.findIndex((step) => step.submit)
-  // Answers about the car: everything asked before the contact step.
+  // Answers about the car: every question but the contact step's, whether the
+  // form asks it before the contacts or after.
   const carFields = steps
-    .slice(0, submitIndex)
+    .filter((step, index) => index !== submitIndex)
     .flatMap((step) => step.fields)
     .filter((field) => field.type !== 'photos')
   const contactFields = steps[submitIndex]?.fields ?? []

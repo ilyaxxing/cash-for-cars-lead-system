@@ -8,7 +8,7 @@ from sqlalchemy import func, select
 from app.db.models import Lead, OutboxEvent
 from app.services import tokens
 from app.web import seller_api
-from tests.test_answers import COMPLETE
+from tests.test_answers import COMPLETE, UP_TO_CONTACT
 
 pytestmark = pytest.mark.usefixtures("clean_db")
 
@@ -57,6 +57,24 @@ async def test_contact_step_creates_the_lead(client):
     assert body["answers"]["phone"] == "+14155550142"
     assert body["answers"]["make"] == "Toyota"
     assert body["photos"] == [] and body["submitted"] is False
+
+
+async def test_details_after_the_contact_step_are_added_to_the_lead(client):
+    first = dict(UP_TO_CONTACT)
+    response = await client.post("/api/leads", json={"answers": first, "source": "card"})
+    assert response.status_code == 201, response.text
+    lead_id = response.json()["id"]
+    auth = {"Authorization": f"Bearer {response.json()['token']}"}
+    saved = (await client.get(f"/api/leads/{lead_id}", headers=auth)).json()["answers"]
+    assert "accident" not in saved and "vin" not in saved
+
+    # The seller goes on: each later step sends everything answered so far.
+    more = {**first, "accident": "no", "finance": "yes", "finance_details": "Two payments left"}
+    response = await client.patch(f"/api/leads/{lead_id}", headers=auth, json={"answers": more})
+    assert response.status_code == 200, response.text
+    saved = (await client.get(f"/api/leads/{lead_id}", headers=auth)).json()["answers"]
+    assert saved["finance"] == "yes" and saved["finance_details"] == "Two payments left"
+    assert saved["phone"] == "+14155550142"
 
 
 async def test_invalid_answers_come_back_as_codes(client):

@@ -12,8 +12,11 @@ const read = (path: string) => readFileSync(new URL(path, import.meta.url), 'utf
 // The shipped preset, with the defaults the server adds when it serializes it.
 function loadPreset(): Preset {
   const raw = parse(read('../../../presets/us-car-buyout.yaml'))
-  for (const step of raw.steps) {
+  const submitAt = raw.steps.findIndex((s: any) => s.submit)
+  for (const [index, step] of raw.steps.entries()) {
     Object.assign(step, { enabled: true, skippable: false, submit: false, consent: false, show_chips: false, ...step })
+    // As the server does: questions after the contact step are optional.
+    if (index > submitAt && !step.fields.some((f: any) => f.type === 'photos')) step.skippable = true
     for (const field of step.fields.flatMap((f: any) => [f, ...(f.follow_up?.fields ?? [])])) {
       Object.assign(field, {
         required: false, personal: false, options: [], unknown: false, multiline: false,
@@ -75,14 +78,18 @@ describe('the demo answers every request the apps make', () => {
 describe('a seller sends an inquiry', () => {
   it('lands in the dashboard with the notifications the server would send', () => {
     const { backend, call, notices } = setup()
-    const created = call('POST', '/api/leads', { answers: ANSWERS, source: 'card', honeypot: '' })
+    // The contact step saves the lead: the price and the rest are not asked yet.
+    const { accident, finance, asking_price, location, postal_code, ...upToContact } = ANSWERS
+    const created = call('POST', '/api/leads', { answers: upToContact, source: 'card', honeypot: '' })
     expect(created.status).toBe(201)
     const { id } = created.body as { id: number }
     expect(notices[0]).toEqual({
       title: 'New lead: 2019 Toyota Camry',
-      body: '$12,500 · No photos yet',
+      body: '64,000 mi · Good',
       path: `/app/leads/${id}`,
     })
+    expect(call('PATCH', `/api/leads/${id}`, { answers: ANSWERS }).status).toBe(200)
+    expect(notices).toHaveLength(1)
 
     const list = call('GET', '/api/owner/leads?tab=new').body as LeadList
     expect(list.counts).toEqual({ new: 1, in_work: 0, all: 1 })

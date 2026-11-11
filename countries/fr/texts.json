@@ -17,7 +17,7 @@
         },
         "2": {
           "title": "Recevez une offre",
-          "text": "Nous étudions vos informations."
+          "text": "Nous étudions vos informations et vous contactons avec une offre."
         },
         "3": {
           "title": "Vous décidez",
@@ -35,6 +35,11 @@
       "under_a_minute": "Moins d'une minute",
       "minutes_left": "Encore {minutes} min environ",
       "answers_so_far": "Vos réponses jusqu'ici"
+    },
+    "saved": {
+      "title": "Vos coordonnées sont bien reçues.",
+      "text": "La suite est facultative.",
+      "finish": "Terminer"
     },
     "buttons": {
       "continue": "Continuer",
@@ -183,7 +188,7 @@
       "contact": {
         "tag": "Coordonnées",
         "title": "Comment l'acheteur peut-il vous joindre ?",
-        "hint": "Vos coordonnées sont enregistrées dès que vous continuez : rien n'est perdu si vous vous arrêtez à l'étape des photos."
+        "hint": "Votre demande est enregistrée dès que vous continuez. Tout ce qui suit est facultatif."
       },
       "photos": {
         "tag": "Photos",
@@ -668,7 +673,7 @@
       "help": {
         "arrive": {
           "title": "Comment arrivent les demandes",
-          "text": "Un vendeur scanne votre carte de visite ou ouvre votre lien, répond à quelques questions sur la voiture et laisse un numéro de téléphone. La demande apparaît dans Nouvelles juste après l'étape des coordonnées, même si le vendeur passe les photos."
+          "text": "Un vendeur scanne votre carte de visite ou ouvre votre lien, répond à quelques questions sur la voiture et laisse un numéro de téléphone. La demande apparaît dans Nouvelles juste après l'étape des coordonnées. Le reste du formulaire est facultatif : ce que le vendeur ajoute ensuite, photos comprises, apparaît dans la même demande."
         },
         "statuses": {
           "title": "Ce que veulent dire les statuts",
@@ -808,8 +813,7 @@
     "photos_one": "1 photo",
     "photos_other": "{count} photos",
     "new_lead": {
-      "title": "Nouvelle demande : {car}",
-      "body": "{price} · {photos}"
+      "title": "Nouvelle demande : {car}"
     },
     "photos_added": {
       "title": "Photos ajoutées : {car}",

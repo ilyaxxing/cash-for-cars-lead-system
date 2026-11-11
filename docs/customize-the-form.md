@@ -47,6 +47,16 @@ Texts are looked up by ids:
 }
 ```
 
+**Where the contacts go.** One step has `submit: true` and `consent: true`:
+the contact step. When the seller completes it, the lead is saved and the
+owner notified, so keep it early: the shipped forms ask three steps about the
+car, then the contacts. A phone field has to come at or before it, and so do
+`make` and `model`, which title the lead and its notification. Every question
+step after it is optional, whatever its fields say: the app marks it
+skippable, the seller sees "The buyer has your details. The rest is
+optional." with a way to finish, and each answer is added to the saved lead
+as they go. The photos step always comes after the contact step.
+
 A skippable step shows Continue and Skip for now. When all its fields are
 optional, Continue stays unavailable until something is answered, so Skip
 for now is the one way on from an empty step; with a required field,

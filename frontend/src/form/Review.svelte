@@ -3,7 +3,7 @@
   // Sections follow the preset's step groups.
   import { getContext } from 'svelte'
   import type { FieldSpec, Step } from '../shared/config'
-  import { activeSteps, isEmpty, isStepBlank, visibleFields } from './engine'
+  import { activeSteps, isEmpty, isStepBlank, questionSteps, visibleFields } from './engine'
   import type { FormState } from './state.svelte'
   import StepTitle from './StepTitle.svelte'
 
@@ -35,8 +35,9 @@
 
   const groups = $derived.by(() => {
     const result: { id: string; title: string; editTo: string; rows: Row[] }[] = []
-    const steps = activeSteps(form.preset)
-    for (const step of steps.slice(0, steps.indexOf(steps.find((s) => s.submit)!) + 1)) {
+    // The car and what was added about it first, the contacts last.
+    const steps = questionSteps(form.preset)
+    for (const step of [...steps.filter((s) => !s.submit), ...steps.filter((s) => s.submit)]) {
       const id = step.group ?? step.id
       let group = result.find((g) => g.id === id)
       if (!group) {

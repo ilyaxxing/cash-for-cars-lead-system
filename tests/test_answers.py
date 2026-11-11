@@ -31,6 +31,13 @@ COMPLETE = {
 }
 
 
+# What the form has when the contact step saves the lead.
+UP_TO_CONTACT = {
+    key: COMPLETE[key]
+    for key in ("make", "model", "year", "mileage", "condition", "name", "phone", "contact_method")
+}
+
+
 def errors_of(preset, raw):
     with pytest.raises(AnswersInvalid) as caught:
         validate_answers(preset, raw, today=TODAY)
@@ -45,6 +52,22 @@ def test_complete_answers_are_cleaned(preset):
     assert values["vin"] == "1HGCM82633A004352"
     assert values["name"] == "Jordan Lee"
     assert values["phone"] == "+14155550142"
+
+
+def test_a_lead_needs_only_the_answers_up_to_the_contact_step(preset):
+    values = validate_answers(preset, UP_TO_CONTACT, today=TODAY)
+    assert values["phone"] == "+14155550142"
+    assert "accident" not in values and "finance" not in values
+
+
+def test_a_question_after_the_contact_step_is_checked_once_answered(preset):
+    # The city and the ZIP code are one step: started, it is checked in full.
+    assert errors_of(preset, {**UP_TO_CONTACT, "location": "Austin"}) == {
+        ("postal_code", "required")
+    }
+    assert errors_of(preset, {**UP_TO_CONTACT, "accident": "maybe"}) == {("accident", "option")}
+    values = validate_answers(preset, {**UP_TO_CONTACT, "accident": "yes"}, today=TODAY)
+    assert values["accident"] == "yes"
 
 
 def test_answers_split_between_columns_and_jsonb(preset):

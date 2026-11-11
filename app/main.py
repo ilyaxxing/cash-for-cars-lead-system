@@ -72,6 +72,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     messages,
                     settings,
                     preset.phone_region,
+                    preset.distance_unit,
                     outbox_wakeup,
                 )
             ),

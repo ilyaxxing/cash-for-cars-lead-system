@@ -6,6 +6,7 @@ import { isPostalCode, normalizePhone, normalizeUsPhone, prepareRegion } from '.
 import {
   EARLIER,
   clearStep,
+  laterSteps,
   loadSaved,
   maxDigits,
   payload,
@@ -23,8 +24,11 @@ import {
 // The shipped preset, with the defaults the server adds when it serializes it.
 function loadPreset(): Preset {
   const raw = parse(readFileSync(new URL('../../../presets/us-car-buyout.yaml', import.meta.url), 'utf8'))
-  for (const step of raw.steps) {
+  const submitAt = raw.steps.findIndex((s: any) => s.submit)
+  for (const [index, step] of raw.steps.entries()) {
     Object.assign(step, { enabled: true, skippable: false, submit: false, consent: false, show_chips: false, ...step })
+    // As the server does: questions after the contact step are optional.
+    if (index > submitAt && !step.fields.some((f: any) => f.type === 'photos')) step.skippable = true
     for (const field of step.fields.flatMap((f: any) => [f, ...(f.follow_up?.fields ?? [])])) {
       Object.assign(field, {
         required: false, personal: false, options: [], unknown: false, multiline: false,
@@ -47,11 +51,13 @@ const COMPLETE: Answers = {
 }
 
 describe('screens and progress', () => {
-  it('follows the agreed flow', () => {
+  it('follows the agreed flow: the car, the contacts, then the extras', () => {
     expect(screenIds(preset)).toEqual([
-      'welcome', 'vehicle', 'year_mileage', 'condition', 'accident', 'finance',
-      'price', 'location', 'vin', 'contact', 'photos', 'review', 'success',
+      'welcome', 'vehicle', 'year_mileage', 'condition', 'contact', 'accident', 'finance',
+      'price', 'location', 'vin', 'photos', 'review', 'success',
     ])
+    expect(laterSteps(preset).map((s) => s.id)).toEqual(['accident', 'finance', 'price', 'location', 'vin'])
+    expect(laterSteps(preset).every((s) => s.skippable)).toBe(true)
   })
 
   it('counts like the design: welcome is 1, review is 12 of 12', () => {
@@ -95,7 +101,15 @@ describe('validation', () => {
   it('checks the follow-up only when it is unlocked', () => {
     const accident = step('accident')
     expect(validateStep(accident, { accident: 'unknown' }, TODAY)).toEqual({})
-    expect(validateStep(accident, {}, TODAY)).toEqual({ accident: { code: 'required' } })
+    expect(validateStep(accident, { accident: 'yes', accident_details: 'x'.repeat(401) }, TODAY)).toEqual({
+      accident_details: { code: 'too_long', params: { max: 400 } },
+    })
+    expect(validateStep(accident, { accident: 'no', accident_details: 'x'.repeat(401) }, TODAY)).toEqual({})
+  })
+
+  it('asks nothing of a question after the contact step that was left blank', () => {
+    expect(validateStep(step('accident'), {}, TODAY)).toEqual({})
+    expect(validateStep(step('condition'), {}, TODAY)).toEqual({ condition: { code: 'required' } })
   })
 
   it('applies the year and mileage limits the server applies', () => {
@@ -143,6 +157,19 @@ describe('answers', () => {
     expect(body.mileage).toBe(78400)
     expect(body.contact_method).toBe('call')
     expect(body).not.toHaveProperty('accident_details')
+  })
+
+  it('sends what is known at the contact step, then the extras as they come', () => {
+    const atContact: Answers = {
+      make: 'Toyota', model: 'Camry', year: 2019, mileage: 78400, condition: 'good',
+      name: 'Jordan Lee', phone: '(415) 555-0142',
+    }
+    expect(Object.keys(payload(preset, atContact)).sort()).toEqual(
+      ['condition', 'contact_method', 'make', 'mileage', 'model', 'name', 'phone', 'year'],
+    )
+    const later = payload(preset, { ...atContact, accident: 'yes', accident_details: ' Rear bumper ', asking_price: '4,500' })
+    expect(later).toMatchObject({ accident: 'yes', accident_details: 'Rear bumper', asking_price: 4500 })
+    expect(later).not.toHaveProperty('finance')
   })
 
   it('forgets a skipped step', () => {

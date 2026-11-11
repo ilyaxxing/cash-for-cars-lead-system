@@ -29,8 +29,9 @@ domain.
    car, a poster at a partner repair shop, a sign or banner, a link in the
    Google Maps listing, and more ([every place](docs/business.md#where-leads-come-from)).
    Each place gets its own code or link, so statistics tell them apart.
-2. **The seller's form.** Car, condition, price, photos, contact. A few
-   minutes, no app, no account.
+2. **The seller's form.** Three short steps about the car, then the
+   seller's contacts: that is already a lead. History, price and photos
+   follow, all optional. No app, no account.
 3. **A notification to the buyer** on their iPhone or Android, usually within
    seconds.
 4. **The app.** Leads by status, photos, one tap to call, and statistics on
