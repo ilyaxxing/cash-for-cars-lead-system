@@ -27,6 +27,7 @@ import {
   payload,
   progress,
   rememberSource,
+  resumeScreen,
   screenIds,
   stepById,
   validateStep,
@@ -410,8 +411,13 @@ export class FormState {
     this.token = saved.token ?? null
     this.consent = Boolean(saved.leadId)
     this.saved = null
-    this.go(this.ids.includes(saved.step) ? saved.step : this.ids[1], 1)
-    if (this.leadId && this.token) await this.restorePhotos()
+    this.go(resumeScreen(this.preset, saved.step, Boolean(this.leadId)), 1)
+    if (!this.leadId || !this.token) return
+    await this.restorePhotos()
+    if (this.leadId) return
+    // The lead is gone: the seller leaves their contacts, and consents, again.
+    this.consent = false
+    this.go(resumeScreen(this.preset, this.screen, false), -1)
   }
 
   private async restorePhotos() {
@@ -429,10 +435,14 @@ export class FormState {
         }
       }
       this.photos = photos
-    } catch {
-      // The lead is gone or the token expired: start the photos afresh.
-      this.leadId = null
-      this.token = null
+    } catch (error) {
+      // The lead is gone or the token expired (the server answers 404 to
+      // both): forget it. Anything else, such as no connection, leaves the
+      // lead as it is, with only its thumbnails missing here.
+      if (error instanceof api.ApiError && error.status === 404) {
+        this.leadId = null
+        this.token = null
+      }
     }
   }
 

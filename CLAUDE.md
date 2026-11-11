@@ -104,7 +104,8 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   Photos upload right after picking; skip label "I'll send later". Final
   submit on Review marks the lead submitted (one more push if it has photos).
   Review lists the car's sections first and the contacts last.
-  Unfinished form resumes on the same device (localStorage, max 7 days);
+  Unfinished form resumes on the same device (localStorage, max 7 days),
+  no further than the Contact step while it has no saved lead;
   the consent step's policy link opens in the same tab, and back from it
   the form goes straight to that step (sessionStorage flag).
 - Accident and lien: Yes / No / Don't know (third tile added in design style).

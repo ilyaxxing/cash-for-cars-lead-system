@@ -2,6 +2,7 @@
   // First screen: hero photo, headline, three claims, how it works, and a
   // link back into an unfinished inquiry saved on this device.
   import { getContext } from 'svelte'
+  import { resumeScreen } from './engine'
   import { hero } from './illustrations'
   import type { FormState } from './state.svelte'
 
@@ -22,7 +23,8 @@
     const saved = form.saved
     if (!saved) return ''
     const car = typeof saved.answers.make === 'string' && saved.answers.make ? saved.answers.make : t('form.welcome.saved_car')
-    const n = form.ids.indexOf(saved.step) + 1
+    // The step the form will open at, which is not always the one it was left at.
+    const n = form.ids.indexOf(resumeScreen(form.preset, saved.step, Boolean(saved.leadId))) + 1
     const label = t('form.welcome.saved_label', { car, n, total: form.ids.length - 1 })
     return t('form.welcome.resume', { label })
   })
