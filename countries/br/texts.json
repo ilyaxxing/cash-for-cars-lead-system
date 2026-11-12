@@ -741,7 +741,7 @@
       "continue": "Continuar",
       "skip": "Agora não",
       "push_title": "Um aviso para cada carro novo.",
-      "push_text": "Ative as notificações neste aparelho. Cada uma mostra o carro e o preço, nunca os dados do vendedor.",
+      "push_text": "Ative as notificações neste aparelho. Cada uma mostra o carro, nunca os dados do vendedor.",
       "push_button": "Ativar notificações",
       "push_working": "Ativando…",
       "push_done": "As notificações estão ativas. Uma notificação de teste está a caminho.",

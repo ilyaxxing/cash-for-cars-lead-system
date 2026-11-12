@@ -735,7 +735,7 @@
       "continue": "Weiter",
       "skip": "Jetzt nicht",
       "push_title": "Eine Meldung für jedes neue Auto.",
-      "push_text": "Schalten Sie Benachrichtigungen für dieses Gerät ein. Jede zeigt das Auto und den Preis, nie die Daten des Verkäufers.",
+      "push_text": "Schalten Sie Benachrichtigungen für dieses Gerät ein. Jede zeigt das Auto, nie die Daten des Verkäufers.",
       "push_button": "Benachrichtigungen einschalten",
       "push_working": "Wird eingeschaltet…",
       "push_done": "Benachrichtigungen sind an. Eine Testmeldung ist unterwegs.",

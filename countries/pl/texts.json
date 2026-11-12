@@ -735,7 +735,7 @@
       "continue": "Dalej",
       "skip": "Nie teraz",
       "push_title": "Powiadomienie o każdym nowym aucie.",
-      "push_text": "Włącz powiadomienia na tym urządzeniu. Każde pokazuje auto i cenę, nigdy danych sprzedającego.",
+      "push_text": "Włącz powiadomienia na tym urządzeniu. Każde pokazuje auto, nigdy danych sprzedającego.",
       "push_button": "Włącz powiadomienia",
       "push_working": "Włączanie…",
       "push_done": "Powiadomienia są włączone. Testowe powiadomienie jest w drodze.",

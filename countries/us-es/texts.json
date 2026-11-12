@@ -735,7 +735,7 @@
       "continue": "Continuar",
       "skip": "Ahora no",
       "push_title": "Reciba un aviso por cada auto nuevo.",
-      "push_text": "Active las notificaciones en este dispositivo. Cada una muestra el auto y el precio, nunca los datos del vendedor.",
+      "push_text": "Active las notificaciones en este dispositivo. Cada una muestra el auto, nunca los datos del vendedor.",
       "push_button": "Activar notificaciones",
       "push_working": "Activando…",
       "push_done": "Las notificaciones están activadas. Va en camino una notificación de prueba.",
