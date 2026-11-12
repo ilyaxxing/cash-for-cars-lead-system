@@ -4,14 +4,14 @@ Running the app locally, the checks that must pass, and how it is built.
 
 ## What it does
 
-- **Seller form.** Mobile-first, one question per screen, built from a preset
+- **Seller form.** Mobile-first, one topic per screen, built from a preset
   file. The car comes first, then the contact step: there the lead is saved
   and the buyer notified. The questions after it are optional and are added
   to the same lead as the seller answers them, so one who stops early is not
   lost.
 - **Owner dashboard.** Installable web app (PWA) with leads by status, full
-  lead details and photos, notes, one-tap call and WhatsApp, and statistics by
-  source and conversion.
+  lead details and photos, notes, a one-tap call and a second button for the
+  way the seller chose, and statistics by source and conversion.
 - **Push notifications.** Web Push, including iPhone (iOS 16.4+ home screen
   apps). A notification carries the car, its mileage and condition, and the
   price and photos once the seller has added them, never the seller's name

@@ -735,7 +735,7 @@
       "continue": "Continue",
       "skip": "Not now",
       "push_title": "Get a ping for every new car.",
-      "push_text": "Turn on notifications for this device. Each one shows the car and the price, never the seller’s details.",
+      "push_text": "Turn on notifications for this device. Each one shows the car, never the seller’s details.",
       "push_button": "Turn on notifications",
       "push_working": "Turning on…",
       "push_done": "Notifications are on. A test notification is on its way.",

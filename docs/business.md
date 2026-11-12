@@ -25,10 +25,11 @@ reaches people who would not call.
 A done-for-you lead system under the buyer's own name. Many people who find a
 card under their wiper or see a sign would rather not call a stranger, calls
 come at odd hours, and each one starts with the same questions. With a QR code
-or a link the seller answers those questions in a few minutes and leaves their
+or a link the seller answers three short steps about the car and leaves their
 contacts, and the owner gets a push, usually within seconds, so they call
-first. The car (make, model, year and mileage) is always in the lead; photos
-and the asking price are there when the seller adds them.
+while the seller is still looking for a buyer. The car (make, model, year,
+mileage and condition) is always in the lead; the asking price and photos are
+there when the seller adds them.
 
 You build it with Claude Code on your Railway account and hand it over to the
 client's own: Railway and the domain are in the client's name and on the
@@ -80,7 +81,7 @@ cars each one brings:
 
 ## Pricing
 
-Suggested starting points, not market-tested yet.
+Suggested starting points.
 
 | | Price | What it covers |
 |---|---|---|

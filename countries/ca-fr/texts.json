@@ -735,7 +735,7 @@
       "continue": "Continuer",
       "skip": "Plus tard",
       "push_title": "Une alerte pour chaque nouvelle voiture.",
-      "push_text": "Activez les notifications sur cet appareil. Chacune montre la voiture et le prix, jamais les coordonnées du vendeur.",
+      "push_text": "Activez les notifications sur cet appareil. Chacune montre la voiture, jamais les coordonnées du vendeur.",
       "push_button": "Activer les notifications",
       "push_working": "Activation…",
       "push_done": "Les notifications sont activées. Une notification de test arrive.",

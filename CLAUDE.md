@@ -16,8 +16,8 @@ The repository is public. Write everything as if strangers read it.
   `countries/<code>/` (its texts, and the demo's in `demo.yaml`); code uses
   keys. Target market and reader: US; other countries through client files
   started from `countries/` (docs/customize-the-form.md, Another country),
-  never by forking the code. Their translations had no native speaker's
-  review yet; say so wherever they are offered.
+  never by forking the code. Their translations are AI-made; say so
+  wherever they are offered, so a native speaker reads them before launch.
 - Never commit `.env`, secrets (tokens, passwords, VAPID keys, bucket keys),
   DB dumps/backups, uploaded photos, real client data (names, phones,
   domains, tax IDs). Client-specific values come only from env and the preset.

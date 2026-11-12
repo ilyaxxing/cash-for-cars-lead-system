@@ -229,9 +229,9 @@ railway postgres pitr restore --service Postgres --at 2026-10-05T14:55:00Z --new
 
 Check the restored data first. The deploy script always points the app at
 the service named `Postgres`, so to switch, rename the old database service in
-Railway, give the restored one the name `Postgres`, and deploy again (this
-switch has not been rehearsed yet: do it calmly, not for the first time in an
-emergency). Delete the old database only after living on the new one for a
+Railway, give the restored one the name `Postgres`, and deploy again (do it
+calmly: better once on a quiet day than for the first time in an emergency).
+Delete the old database only after living on the new one for a
 few days, and delete any restored copy you do not use: retention does not
 reach it, so a forgotten copy keeps personal data past the 90 days. Deleting a
 service does not delete its volume; check `railway volume list`.
