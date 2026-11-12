@@ -13,9 +13,8 @@ Give a car buyer QR codes and links for their cards, signs and online
 listings. Sellers send their car through a short form, and the buyer gets a
 push on their phone in seconds, with every lead in one app.
 
-Suggested price: $300–600 per setup, plus optional monthly support (starting
-estimates, not yet tested with clients). The business pays its own hosting and
-domain.
+Suggested price: $300–600 per setup, plus optional monthly support. The
+business pays its own hosting and domain.
 
 [Live demo](https://ilyaxxing.github.io/cash-for-cars-lead-system/) ·
 [Set it up with Claude Code](#get-started) · [Business model](docs/business.md)
@@ -58,8 +57,7 @@ Hosting is from $5 a month (Railway Hobby includes $5 of usage; anything above i
 Check the bill after the first week.
 
 You pick the price, and whether to sell the setup alone or with monthly
-support. Suggested starting points, not market-tested yet. More in
-[docs/business.md](docs/business.md).
+support. More in [docs/business.md](docs/business.md).
 
 **Find the first client.** [Getting your first client](docs/first-client.md):
 where to look, the first message, answers to the questions car buyers ask,
@@ -98,9 +96,8 @@ and the domain's DNS can take up to a day.
   Also its domain, its name and email, and the owner's phone for ten minutes.
 
 **In Russia** the business needs its own server in the country, its own domain
-and a lawyer's check of the privacy policy. Installing on such a server has so
-far been tested only on a local virtual machine, not with a public domain.
-See [Another country](SETUP.md#another-country).
+and a lawyer's check of the privacy policy. See
+[Another country](SETUP.md#another-country).
 
 <details>
 <summary><b>Other countries</b></summary>
@@ -111,10 +108,10 @@ needed, where it runs. The legal side needs a local check: where sellers'
 data may be kept, whether it may leave the country and what the business
 must register are for its local lawyer to confirm. For the countries in
 [countries/](countries/) it starts from ready files; their translations
-have not been reviewed by native speakers yet, and their privacy policies
-are drafts for the business's lawyer. It is tested end to end for the US;
+are AI-made, for a native speaker to read before launch, and their privacy
+policies are drafts for the business's lawyer. It is made for the US first;
 [SETUP.md](SETUP.md#another-country) lists what to check for another country
-and what does not work yet, such as languages written right to left.
+and what it does not support, such as languages written right to left.
 
 </details>
 
@@ -132,18 +129,15 @@ and what does not work yet, such as languages written right to left.
   screen.
 - One owner login per business: no separate accounts for a team.
 - One language per instance. Languages written right to left (Arabic, Hebrew,
-  Persian, Urdu) are not supported yet, and on the business card, scripts
-  whose letters join (Arabic, Hindi, Thai) are refused.
+  Persian, Urdu) are not supported, and on the business card, scripts whose
+  letters join (Arabic, Hindi, Thai) are refused.
 - Next to Call, a lead's second button opens a text, an email, WhatsApp or
   Telegram, whichever the seller chose; another messenger can only be the
   seller's stated preference.
-- Restoring the database from a backup has not been rehearsed yet. On Railway,
+- On Railway the database is backed up continuously for about 4 weeks;
   photos are not backed up.
-- Handing a Railway project over to the client's own account follows
-  Railway's documentation and has not been done with a real client yet. A
-  server of the client's own has been tested on a local virtual machine, not
-  yet with a public domain and a real certificate.
-- Prices are suggestions, not tested on real clients yet.
+- Handing a project over to the client's Railway account needs a paid plan
+  on both accounts, and the client confirms it by email within 24 hours.
 
 </details>
 

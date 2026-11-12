@@ -55,7 +55,7 @@ first, then the countries in [countries/](countries/) that fit, and the
 person can type another. The steps below are written for the US. For any other country, read
 [Another country](#another-country) now, go through its first part before
 step 1 (it can change where the system runs, and it says what the system
-cannot do there yet), and follow its notes as you go: the system adapts to
+cannot do there), and follow its notes as you go: the system adapts to
 the language, the form, the privacy law, the card and, where needed, the
 server, without changing its code.
 
@@ -652,7 +652,7 @@ throughout.
 
 **First, what decides the plan** (before step 1):
 
-1. **What the system cannot do there yet.** Say it at once, before anyone
+1. **What the system cannot do there.** Say it at once, before anyone
    pays for anything:
    - Languages written right to left (Arabic, Hebrew, Persian, Urdu): the
      form and the dashboard are laid out left to right only. Offer English,

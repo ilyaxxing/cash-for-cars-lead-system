@@ -4,9 +4,8 @@ Where to look, what to say first, what car buyers ask and how to answer, and
 how to offer the setup. The product and the prices are in
 [business.md](business.md).
 
-The messages and answers below are starting points. They have not been tested
-with clients yet: change the words until they sound like you, and keep what
-works.
+The messages and answers below are starting points: change the words until
+they sound like you, and keep what works.
 
 ## Before you write to anyone
 
