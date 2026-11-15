@@ -111,7 +111,7 @@
       "not_provided": "Not provided",
       "photos_head": "Photos · {count}",
       "edit_photos_aria": "Edit photos",
-      "no_photos": "No photos added. You can still submit.",
+      "no_photos": "No photos added. You can still submit, and send photos when the buyer contacts you.",
       "failed_title": "Your inquiry wasn't submitted",
       "failed_text": "The connection dropped. Your details and photos are still saved. Try again when you're ready.",
       "limited_text": "Too many requests from this network. Your details and photos are saved. Wait a few minutes and try again."
@@ -128,6 +128,7 @@
       "next_title": "What happens next",
       "next1_title": "A buyer reviews your inquiry",
       "next1_text": "They look at the details and photos you sent.",
+      "next1_text_no_photos": "They look at the details you sent. You can send photos when they contact you.",
       "next2_title": "You're contacted by {method}",
       "next2_text": "Using {contact}.",
       "next2_fallback": "the number you gave",
