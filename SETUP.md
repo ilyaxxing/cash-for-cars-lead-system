@@ -472,11 +472,13 @@ domain.
 **Business card.** These cards are mostly left under the windshield wipers
 of parked cars, so they are printed by the thousand. Some cities and private
 parking lots ban this, so tell the client to check the local rules. Ask
-whether they want the ready card: on the front the brand, a headline, what
-they buy and the QR code; on the back a promise, three lines about what they buy, the same QR
-code, and the contact person and phone; all in their color, in the size
-print shops in their country use (`CARD_SIZE`). If they have their own
-designer, skip to the QR codes below and give the designer the SVG.
+whether they want the ready card. Its front is their color from edge to
+edge, so it shows on a windshield: the brand, a headline in large capitals,
+what they buy and the QR code. Its back is dark: a promise, three lines about
+what they buy, the same QR code, and the contact person with the phone in
+large figures. It comes in the size print shops in their country use
+(`CARD_SIZE`). If they have their own designer, skip to the QR codes below
+and give the designer the SVG.
 
 Make it once as it is:
 
@@ -488,21 +490,23 @@ Open `cards/<brand>-preview.png` for the person to look at (macOS: `open`,
 Linux: `xdg-open`, WSL: `explorer.exe`). Then go through the design with them,
 one item at a time: say what is there now and ask whether to change it.
 
-1. The headline, two lines, the first in the accent color (`card.front_hot`,
-   `card.front_rest`), e.g. "We buy / all cars". Never a rival's name: not "We
+1. The headline, two lines in large capitals (`card.front_hot`,
+   `card.front_rest`), e.g. "We buy / all cars": the shorter the lines, the
+   larger they print. Never a rival's name: not "We
    buy any car", a registered brand, and not "Compramos tu coche" in Spain or
    anything close to "Wir kaufen dein Auto" in Germany.
 2. The three short tags under it (`card.front_tag_1` to `card.front_tag_3`).
 3. The call to action under the code and the hint below it (`card.cta`,
    `card.scan`).
 4. The promise on the back, two lines (`card.back_title_1`,
-   `card.back_title_2`), and its three lines with check marks
+   `card.back_title_2`), and the three lines under it
    (`card.back_list_1` to `card.back_list_3`).
 5. The contact: whose name goes on it, if anyone's (`--name "<name>"`), and
    the phone (`BRAND_PHONE`, or `--phone`).
-6. The color. If the business has official print values for it (CMYK, from a
-   brand guide or an earlier print job), pass them as `--cmyk C,M,Y,K`;
-   otherwise the screen color is converted.
+6. The color. It covers the whole front, and the type on it turns black or
+   white by itself, whichever reads better. If the business has official
+   print values for it (CMYK, from a brand guide or an earlier print job),
+   pass them as `--cmyk C,M,Y,K`; otherwise the screen color is converted.
 7. The logo (`BRAND_LOGO`) and the card size (`CARD_SIZE`).
 
 Wording goes into the client's own texts file, `clients/<id>/texts.json`
@@ -521,8 +525,9 @@ For printing, tell the person:
   embedded. If the shop asks for crop marks, send
   `cards/<brand>-crop-marks.pdf` instead.
 - Choose a matte or uncoated stock if the owner will write on the cards.
-- Screen colors print a little duller. Order a proof first and scan its
-  QR code with a phone before the full run.
+- Screen colors print a little duller, and the front is one color from
+  edge to edge. Order a proof first, look at that color and scan the QR
+  code with a phone before the full run.
 
 **QR codes** for every printed place from step 3 (a sticker, a partner's
 poster, a sign), one per label:

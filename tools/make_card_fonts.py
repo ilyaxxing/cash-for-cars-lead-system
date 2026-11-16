@@ -1,4 +1,4 @@
-"""Build the business card's fonts from the frontend's Geist packages.
+"""Build the business card's fonts from the frontend's font packages.
 
     .venv/bin/python tools/make_card_fonts.py
 
@@ -28,6 +28,8 @@ FONTS = {
     "Geist-Bold": ("geist", 700),
     "Geist-ExtraBold": ("geist", 800),
     "GeistMono-Medium": ("geist-mono", 500),
+    "SofiaSansExtraCondensed-Bold": ("sofia-sans-extra-condensed", 700),
+    "SofiaSansExtraCondensed-ExtraBold": ("sofia-sans-extra-condensed", 800),
 }
 SUBSETS = ("latin", "latin-ext", "cyrillic")
 

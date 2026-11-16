@@ -124,7 +124,7 @@ checks that it is complete.
 | `LOCALE`, `LOCALE_FILE` | The language code (`ru`, `de`, `zh-Hant` with its script where it has several, never the country) and the texts. For a language that ships (`en`), the file only needs the texts that change; otherwise it is a full translation of `locales/en.json`. |
 | `PRIVACY_POLICY_FILE` | The privacy policy in that language and under that country's law, a template like `locales/privacy-policy.en.md`. A lawyer of the client's checks it. |
 | `CURRENCY`, `TIMEZONE` | e.g. `RUB`, `Europe/Moscow`. Where a car costs millions in the currency, the price question's `max` goes up with it. |
-| `CARD_SIZE`, `CARD_FONT` | The card's size there, and a font for card text in a script Geist lacks ([Configuration](configuration.md)). |
+| `CARD_SIZE`, `CARD_FONT` | The card's size there, and a font for card text in a script the card's own fonts lack ([Configuration](configuration.md)). |
 
 The app checks them at startup, and the deploy script checks them before it
 uploads anything: a missing text or an invalid form stops it with the key or

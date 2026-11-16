@@ -40,8 +40,8 @@ restrict leaving flyers on cars, so the client should check the local rules.
 ## What the business gets
 
 - **Windshield cards with a QR code** on both sides: business-card size (3.5 x 2 in in the US), made
-  to be left under wipers, generated in their color with their logo and
-  phone. A print-ready PDF (bleed, CMYK) for any print shop. A QR code or a
+  to be left under wipers, in their color from edge to edge on the front,
+  with their logo and phone. A print-ready PDF (bleed, CMYK) for any print shop. A QR code or a
   link for every other place sellers see, each counted separately (below).
 - **A form for sellers** that asks for the car first (make, model, year,
   mileage, condition), then the contact details: at that point the lead is

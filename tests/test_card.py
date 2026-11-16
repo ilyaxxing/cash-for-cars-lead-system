@@ -138,16 +138,71 @@ def test_the_code_is_black_on_white_with_its_quiet_zone(made):
     assert made.plan.module_mm >= qr_codes.MIN_MODULE_MM
 
 
+def test_the_front_is_the_accent_and_the_back_dark(made):
+    assert made.front[0].ink is made.accent
+    assert made.back[0].ink is cards.BACKGROUND
+
+
+def on_the_front(card: cards.Card, ink: cards.Ink) -> list[cards.Op]:
+    """Everything drawn in this ink on the accent side, the code aside."""
+    return [
+        op
+        for op in card.front[1:]
+        if getattr(op, "ink", None) is ink and not isinstance(op, cards.Modules)
+    ]
+
+
 def test_black_on_the_accent_overprints():
     lime = cards.make(card_text(accent=cards.accent_ink(parse("#C7F747"))))
-    on_band = [run for run in lime.back if isinstance(run, cards.Run) and run.ink is cards.BLACK]
-    assert on_band and all(run.overprint for run in on_band)
+    black = on_the_front(lime, cards.BLACK)
+    assert {type(op) for op in black} == {cards.Run, cards.Box, cards.Shape}
+    assert all(op.overprint for op in black)
+    # The code is the exception: its black stands on the white plate.
+    code = next(op for op in lime.front if isinstance(op, cards.Modules))
+    assert code.ink is cards.BLACK
+
+
+def test_black_cuts_into_an_accent_too_heavy_to_print_over():
+    heavy = cards.accent_ink(parse("#C7F747"), "80,60,70,0")
+    assert heavy.coverage + cards.BLACK.coverage > cards.TOTAL_INK_LIMIT
+    card = cards.make(card_text(accent=heavy))
+    black = on_the_front(card, cards.BLACK)
+    assert black and not any(op.overprint for op in black)
 
 
 def test_white_on_a_darker_accent_knocks_out():
     purple = cards.make(card_text(accent=cards.accent_ink(parse("#8E5CF6"))))
-    band = [run for run in purple.back if isinstance(run, cards.Run) and run.ink is cards.PAPER]
-    assert band and not any(run.overprint for run in band)
+    white = [op for op in on_the_front(purple, cards.PAPER) if isinstance(op, cards.Run)]
+    assert white and not any(run.overprint for run in white)
+    assert not on_the_front(purple, cards.BLACK)
+
+
+def test_the_phone_is_the_largest_thing_on_the_back(made):
+    back = [op for op in made.back if isinstance(op, cards.Run)]
+    phone = next(run for run in back if run.text == "(512) 555-0142")
+    assert phone.ink is made.accent
+    assert phone.size == max(run.size for run in back) >= 24
+
+
+def test_the_headline_is_read_from_a_distance(made):
+    headline = [run for run in made.front if run_text(run) in ("WE BUY", "ALL CARS")]
+    assert len(headline) == 2
+    assert all(run.face == "display" and run.size >= 40 for run in headline)
+
+
+def run_text(op: cards.Op) -> str:
+    return op.text if isinstance(op, cards.Run) else ""
+
+
+def test_a_logo_keeps_a_dark_plate_on_the_accent():
+    for image in (logo(), logo((1400, 300))):
+        card = cards.make(card_text(logo=image))
+        picture = next(op for op in card.front if isinstance(op, cards.Picture))
+        plate = card.front[card.front.index(picture) - 1]
+        assert isinstance(plate, cards.Box) and plate.ink is cards.BACKGROUND
+        assert plate.x <= picture.x and picture.x + picture.w <= plate.x + plate.w
+        assert plate.y <= picture.y and picture.y + picture.h <= plate.y + plate.h
+        assert picture.under is cards.BACKGROUND
 
 
 def test_a_brands_own_cmyk_is_used_as_given():
@@ -236,6 +291,8 @@ def test_the_command_writes_print_ready_pdfs_and_a_preview(tmp_path, capsys):
     assert b"/DeviceRGB" not in data
     assert not re.search(rb"(?<![A-Za-z])(rg|RG)(?![A-Za-z])", content)
     assert re.search(rb"(?<![A-Za-z])k(?![A-Za-z])", content)
+    # Black on the yellow overprints, in the mode that keeps the yellow under it.
+    assert b"/OPM 1" in data and b"/op true" in data
 
     marks, _ = pdf_content(folder / "acme-auto-buyers-crop-marks.pdf")
     assert b"/TrimBox [ 33 33 285 177 ]" in marks
@@ -319,9 +376,20 @@ def test_text_in_other_scripts_is_set_in_the_clients_font(tmp_path):
     card = cards.make(card_text(texts=CHINESE, name="王先生", font=font, locale="zh"))
     faces = {run.text: run.face for run in runs(card)}
     assert faces["高价收购"] == faces["王先生"] == str(font)
-    # Geist still sets what it can: the brand and the phone.
+    # The card's own fonts still set what they can: the brand and the phone.
     assert faces["LONE STAR CARS"] == "bold"
-    assert faces["(512) 555-0142"] == "bold"
+    assert faces["(512) 555-0142"] == "display"
+    assert_inside(card)
+
+
+def test_a_letter_the_display_face_lacks_is_set_in_geist():
+    # Azerbaijani: the display face has no Ə, Geist has.
+    words = {**texts(), "front_hot": "Avtomobil", "front_rest": "əla qiymətə"}
+    card = cards.make(card_text(texts=words, locale="az"))
+    faces = {run.text: run.face for run in runs(card)}
+    # Both lines of the headline, so it stays one piece.
+    assert faces["AVTOMOBİL"] == faces["ƏLA QİYMƏTƏ"] == "bold"
+    assert faces["(512) 555-0142"] == "display"
     assert_inside(card)
 
 
