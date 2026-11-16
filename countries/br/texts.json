@@ -111,7 +111,7 @@
       "not_provided": "Não informado",
       "photos_head": "Fotos · {count}",
       "edit_photos_aria": "Editar fotos",
-      "no_photos": "Nenhuma foto adicionada. Você ainda pode enviar.",
+      "no_photos": "Nenhuma foto adicionada. Você ainda pode enviar, e mandar as fotos quando o comprador entrar em contato.",
       "failed_title": "Seu pedido não foi enviado",
       "failed_text": "A conexão caiu. Seus dados e fotos continuam salvos. Tente de novo quando quiser.",
       "limited_text": "Pedidos demais vindos desta rede. Seus dados e fotos estão salvos. Espere alguns minutos e tente de novo."
@@ -128,6 +128,7 @@
       "next_title": "O que acontece agora",
       "next1_title": "Um comprador analisa seu pedido",
       "next1_text": "Ele vê os dados e as fotos que você enviou.",
+      "next1_text_no_photos": "Ele vê os dados que você enviou. Você pode mandar as fotos quando ele entrar em contato.",
       "next2_title": "Você recebe contato por {method}",
       "next2_text": "No {contact}.",
       "next2_fallback": "número informado",

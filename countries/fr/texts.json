@@ -111,7 +111,7 @@
       "not_provided": "Non renseigné",
       "photos_head": "Photos · {count}",
       "edit_photos_aria": "Modifier les photos",
-      "no_photos": "Aucune photo ajoutée. Vous pouvez quand même envoyer la demande.",
+      "no_photos": "Aucune photo ajoutée. Vous pouvez quand même envoyer la demande, et envoyer les photos quand l'acheteur vous contactera.",
       "failed_title": "Votre demande n'a pas été envoyée",
       "failed_text": "La connexion a été coupée. Vos informations et vos photos restent enregistrées. Réessayez quand vous voulez.",
       "limited_text": "Trop de demandes depuis ce réseau. Vos informations et vos photos sont enregistrées. Patientez quelques minutes et réessayez."
@@ -128,6 +128,7 @@
       "next_title": "Et ensuite",
       "next1_title": "Un acheteur étudie votre demande",
       "next1_text": "Il regarde les informations et les photos envoyées.",
+      "next1_text_no_photos": "Il regarde les informations envoyées. Vous pourrez lui envoyer les photos quand il vous contactera.",
       "next2_title": "Vous êtes contacté par {method}",
       "next2_text": "Au {contact}.",
       "next2_fallback": "numéro indiqué",
