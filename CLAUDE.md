@@ -41,7 +41,8 @@ The repository is public. Write everything as if strangers read it.
 - Frontend: Svelte 5 + Vite + TypeScript, two separate bundles (seller form at `/`,
   dashboard PWA at `/app/`), served by FastAPI. Node only at image build time.
   Chosen because the designs are HTML templates with if/for and inline styles,
-  which map onto Svelte almost 1:1. Fonts (Geist, Geist Mono) self-hosted.
+  which map onto Svelte almost 1:1. Fonts self-hosted: Geist, Geist Mono,
+  and Sofia Sans Extra Condensed for headlines.
 - Project page (`docs/index.html`, GitHub Pages) with a live demo (`docs/demo`):
   the real bundles plus a stand-in server that runs in the browser
   (`frontend/src/demo`, typed against the API modules, never part of an
@@ -112,6 +113,15 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   no further than the Contact step while it has no saved lead;
   the consent step's policy link opens in the same tab, and back from it
   the form goes straight to that step (sessionStorage flag).
+- Display type: headlines and key numbers (a price, a count) are set in
+  Sofia Sans Extra Condensed 800, in capitals (`--font-display`), where the
+  design had Geist 700 and 800; text and controls stay in Geist. Sizes keep
+  the design's footprint: a step's title takes the lines it took. A step's
+  label is its name in the display face, without the design's number and
+  accent dot: the accent is for actions and states (the main button,
+  progress, a chosen option, New), not for labels. Chosen by the owner from a
+  side-by-side mockup. The link preview pictures, the home-screen icons and
+  the business card are still drawn in Geist.
 - Accident and lien: Yes / No / Don't know (third tile added in design style).
 - Photo tiles open the system picker directly (iOS offers camera or library
   there); the design's action sheet is unused in the prototype, so it is not built.

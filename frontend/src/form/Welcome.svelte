@@ -184,10 +184,8 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 6px 10px;
-    font: 500 11px/1.5 var(--font-mono);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #8e908b;
+    font: 500 13px/1.5 var(--font-sans);
+    color: #9c9e99;
   }
 
   .claim {
@@ -200,7 +198,7 @@
     width: 3px;
     height: 3px;
     border-radius: 2px;
-    background: var(--accent);
+    background: #5a5c5b;
   }
 
   .how {
@@ -220,9 +218,8 @@
   }
 
   .how-n {
-    font: 600 22px/1 var(--font-sans);
-    letter-spacing: -0.04em;
-    color: #3e403f;
+    font: 800 28px/1 var(--font-display);
+    color: #4a4c4b;
   }
 
   .how-body {
@@ -325,11 +322,12 @@
 
   .wide-headline {
     margin: 0;
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-weight: 800;
-    font-size: clamp(64px, min(8vw, 12.5vh), 112px);
-    line-height: 0.88;
-    letter-spacing: -0.055em;
+    font-size: clamp(90px, min(11.2vw, 17.5vh), 156px);
+    line-height: 0.86;
+    letter-spacing: 0.004em;
+    text-transform: uppercase;
     color: var(--text);
   }
 

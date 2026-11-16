@@ -5,6 +5,10 @@
 // downloaded by the browser only when such a character is on screen, so they
 // cost an English page nothing. Scripts Geist does not draw (Chinese, Greek,
 // Thai...) come from the phone's own fonts (system-ui in base.css).
+// The display face (headlines and key numbers): two weights, each split by
+// script with its unicode-range, so a page fetches only the scripts it shows.
+import '@fontsource/sofia-sans-extra-condensed/700.css'
+import '@fontsource/sofia-sans-extra-condensed/800.css'
 import '@fontsource/geist/latin-400.css'
 import '@fontsource/geist/latin-500.css'
 import '@fontsource/geist/latin-600.css'

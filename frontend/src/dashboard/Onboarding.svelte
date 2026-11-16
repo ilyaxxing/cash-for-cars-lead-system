@@ -173,8 +173,9 @@
 
   h1 {
     margin: 0;
-    font: 700 31px/1.06 var(--font-sans);
-    letter-spacing: -0.035em;
+    font: 800 46px/0.94 var(--font-display);
+    letter-spacing: 0.004em;
+    text-transform: uppercase;
     text-wrap: balance;
   }
 

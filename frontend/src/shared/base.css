@@ -29,6 +29,9 @@
   --error-soft: #ffb4a6;
 
   --font-sans: Geist, system-ui, sans-serif;
+  /* Headlines and key numbers: a narrow poster face, set in capitals. Scripts
+     it does not draw fall back to the text face. */
+  --font-display: 'Sofia Sans Extra Condensed', 'Arial Narrow', Geist, system-ui, sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, monospace;
   --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
 }

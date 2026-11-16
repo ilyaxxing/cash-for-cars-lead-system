@@ -145,11 +145,12 @@
     right: 12px;
     top: 82px;
     margin: 0;
-    font-family: var(--font-sans);
+    font-family: var(--font-display);
     font-weight: 800;
-    font-size: 50px;
-    line-height: 0.9;
-    letter-spacing: -0.05em;
+    font-size: 72px;
+    line-height: 0.88;
+    letter-spacing: 0.004em;
+    text-transform: uppercase;
     color: var(--text);
     white-space: nowrap;
   }

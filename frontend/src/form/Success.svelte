@@ -71,8 +71,8 @@
       </svg>
     </span>
   </div>
-  <div role="status" class="status"><span class="dot"></span>{t('form.success.status')}</div>
-  <h1 style:font-size={form.wide ? '72px' : '48px'}>{t('form.success.title')}</h1>
+  <div role="status" class="status">{t('form.success.status')}</div>
+  <h1 style:font-size={form.wide ? '100px' : '68px'}>{t('form.success.title')}</h1>
   <p class="lead">{t('form.success.text')}</p>
 
   <div class="car">
@@ -163,27 +163,21 @@
   }
 
   .status {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font: 500 12px/1 var(--font-mono);
+    font: 700 15px/1 var(--font-display);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--text-muted);
     margin-bottom: 14px;
     animation: ui-in 0.3s 0.25s both;
   }
 
-  .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 2px;
-    background: var(--accent);
-  }
-
   h1 {
     margin: 0 0 12px;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.04em;
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: 0.004em;
+    text-transform: uppercase;
     animation: ui-in 0.3s 0.3s both;
   }
 
