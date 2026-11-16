@@ -129,13 +129,13 @@
             </div>
             <div class="title-row">
               <div class="title-block">
-                <h2 style:font-size={dash.desk ? '38px' : '30px'}>{car.title}</h2>
+                <h2 style:font-size={dash.desk ? '50px' : '40px'}>{car.title}</h2>
                 <span class="sub">{car.sub}</span>
               </div>
               <div class="price-block" style:align-items={panelWidth >= 560 ? 'flex-end' : 'flex-start'}>
                 <span class="mono-label small">{t('dashboard.lead.asking_price')}</span>
                 {#if car.price}
-                  <span class="price" style:font-size={dash.desk ? '34px' : '28px'}>{car.price}</span>
+                  <span class="price" style:font-size={dash.desk ? '50px' : '42px'}>{car.price}</span>
                 {:else}
                   <span class="no-price">{t('dashboard.lead.not_provided')}</span>
                 {/if}
@@ -486,9 +486,11 @@
 
   h2 {
     margin: 0;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.045em;
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: 0.004em;
+    text-transform: uppercase;
     text-wrap: balance;
   }
 
@@ -509,9 +511,10 @@
   }
 
   .price {
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.04em;
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: 0.004em;
     font-variant-numeric: tabular-nums;
   }
 

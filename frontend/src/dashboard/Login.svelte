@@ -244,8 +244,9 @@
 
   .title {
     margin: 0;
-    font: 700 26px/1.1 var(--font-sans);
-    letter-spacing: -0.03em;
+    font: 800 38px/0.94 var(--font-display);
+    letter-spacing: 0.004em;
+    text-transform: uppercase;
   }
 
   .text {

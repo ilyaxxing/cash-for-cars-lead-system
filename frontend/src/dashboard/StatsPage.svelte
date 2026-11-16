@@ -79,7 +79,7 @@
 <div class="page" style:padding={desk ? '36px 40px 64px' : '20px 16px 32px'}>
   <div class="head">
     <div class="titles">
-      <h1 style:font-size={desk ? '40px' : '32px'}>{t('dashboard.stats.title')}</h1>
+      <h1 style:font-size={desk ? '58px' : '46px'}>{t('dashboard.stats.title')}</h1>
       <p>{t('dashboard.stats.subtitle')}</p>
     </div>
     <div role="radiogroup" aria-label={t('dashboard.stats.periods_aria')} class="periods" class:full={!desk}>
@@ -96,7 +96,7 @@
       <div class="metric">
         <span class="metric-label"><span class="dot"></span>{t('dashboard.stats.total')}</span>
         <span class="metric-body">
-          <span class="value" style:font-size={desk ? '44px' : '34px'}>{stats.total}</span>
+          <span class="value" style:font-size={desk ? '62px' : '48px'}>{stats.total}</span>
           <span class="caption">
             {period === 'all'
               ? stats.firstLeadAt
@@ -109,7 +109,7 @@
       <div class="metric">
         <span class="metric-label"><span class="dot"></span>{t('dashboard.stats.week')}</span>
         <span class="metric-body">
-          <span class="value" style:font-size={desk ? '44px' : '34px'}>{stats.week}</span>
+          <span class="value" style:font-size={desk ? '62px' : '48px'}>{stats.week}</span>
           <span class="caption">{t('dashboard.stats.week_since', { date: dash.fmt.date(stats.weekStart) })}</span>
         </span>
       </div>
@@ -118,7 +118,7 @@
         <!-- Number and caption side by side on a desk; stacked like the
              other cards on a phone, where the side caption got squeezed. -->
         <span class={desk ? 'metric-row' : 'metric-body'}>
-          <span class="value big" style:font-size={desk ? '68px' : '46px'}>{stats.purchased}</span>
+          <span class="value big" style:font-size={desk ? '96px' : '64px'}>{stats.purchased}</span>
           <span class="caption" class:right={desk}>
             {stats.total
               ? stats.total === 1
@@ -131,7 +131,7 @@
       <div class="metric">
         <span class="metric-label"><span class="dot"></span>{t('dashboard.stats.conversion')}</span>
         <span class="metric-body">
-          <span class="value" style:font-size={desk ? '44px' : '34px'}>{stats.total ? `${pct(stats.purchased, stats.total).toFixed(1)}%` : '—'}</span>
+          <span class="value" style:font-size={desk ? '62px' : '48px'}>{stats.total ? `${pct(stats.purchased, stats.total).toFixed(1)}%` : '—'}</span>
           <span class="caption">
             {stats.total ? t('dashboard.stats.conversion_from', { bought: stats.purchased, total: stats.total }) : t('dashboard.stats.conversion_none')}
           </span>
@@ -238,9 +238,11 @@
 
   h1 {
     margin: 0;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.04em;
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: 0.004em;
+    text-transform: uppercase;
   }
 
   p {
@@ -358,9 +360,10 @@
   }
 
   .value {
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.04em;
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: 0.004em;
     font-variant-numeric: tabular-nums;
   }
 
@@ -515,8 +518,8 @@
   }
 
   .source-n {
-    font: 700 20px/1 var(--font-sans);
-    letter-spacing: -0.03em;
+    font: 800 28px/1 var(--font-display);
+    letter-spacing: 0.004em;
     font-variant-numeric: tabular-nums;
   }
 

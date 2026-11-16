@@ -173,16 +173,17 @@
   }
 
   .title {
-    font: 700 26px/1.1 var(--font-sans);
-    letter-spacing: -0.03em;
+    font: 800 34px/0.94 var(--font-display);
+    letter-spacing: 0.004em;
+    text-transform: uppercase;
     text-wrap: balance;
     min-width: 0;
   }
 
   .price {
     flex: none;
-    font: 700 22px/1.25 var(--font-sans);
-    letter-spacing: -0.025em;
+    font: 800 34px/0.98 var(--font-display);
+    letter-spacing: 0.004em;
     font-variant-numeric: tabular-nums;
   }
 

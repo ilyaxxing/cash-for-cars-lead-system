@@ -63,7 +63,7 @@
 
 <div class="page" style:padding={dash.desk ? '36px 40px 64px' : '20px 16px 32px'}>
   <div class="head">
-    <h1 style:font-size={dash.desk ? '40px' : '32px'}>{t('dashboard.settings.title')}</h1>
+    <h1 style:font-size={dash.desk ? '58px' : '46px'}>{t('dashboard.settings.title')}</h1>
     <p>{t('dashboard.settings.subtitle')}</p>
   </div>
 
@@ -184,9 +184,11 @@
 
   h1 {
     margin: 0;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.04em;
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: 0.004em;
+    text-transform: uppercase;
   }
 
   p {
