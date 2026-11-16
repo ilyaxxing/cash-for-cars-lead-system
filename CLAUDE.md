@@ -126,9 +126,14 @@ miles, USD, ZIP, US phone format). Agreed deviations:
 - Illustrations: sources go to `design-reference/` (git-ignored), the app ships
   WebP versions in `frontend/src/assets/illustrations/` (hero in several widths
   for srcset, guides named as in the preset). Guide sources are pencil sketches
-  on light paper (`design-reference/guide-<slot>.jpg`); `tools/make_guides.py`
-  redraws them in two colors, paper = the empty tile's `--surface-sunken`,
-  pencil = a soft light line, dense interior sketches dimmed to match.
+  on white paper (`design-reference/guide-<slot>.png`), with no shadow on the
+  ground (turned light, it glows under the car); the car takes nine tenths of
+  the tile's width and sits a little high, so the tile's plus in the lower
+  right corner stays clear of it, and the left and right views are mirrors of
+  one sketch. `tools/make_guides.py` redraws them in two colors, paper = the
+  empty tile's `--surface-sunken`, pencil = a soft light line, dense interior
+  sketches dimmed to match. Simple outline drawings were tried and dropped:
+  the owner found them childish next to the sketches.
 - Brand mark: the design's lime rounded square, with a dark price tag instead
   of the design's dot (chosen by the owner; `shared/TagGlyph.svelte`, and
   `app/branding/mark.py` for the home-screen icons). The $ shows only where
@@ -148,10 +153,10 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   missing letter, no joining scripts yet), text >= 7 pt and
   >= 0.2 in inside the trim, flat rich-black background under 300% ink, QR and
   small gray text in black ink only, black overprints on the accent.
-- No manufacturer badges or emblems in shipped images (trademarks). They are
-  retouched out of the sources: `design-reference/hero-car-clean.png` and the
-  `guide-<slot>.jpg` sketches. A new illustration gets the same treatment
-  before it is converted.
+- No manufacturer badges or emblems in shipped images, and no grille that
+  belongs to one make (trademarks). They are retouched out of the sources:
+  `design-reference/hero-car-clean.png` and the `guide-<slot>.png` sketches.
+  A new illustration gets the same treatment before it is converted.
 - Contact: name, phone (required), email (optional, personal data), preferred
   contact method (call, SMS, WhatsApp, email). Telegram is opt-in per client
   (one line in the preset; texts ship). The lead's second button, next to
