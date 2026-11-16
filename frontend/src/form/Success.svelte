@@ -41,7 +41,13 @@
   // The number as the review showed it, not as it was typed.
   const contact = method === 'email' ? String(answer('email') ?? '') : formatPhone(String(answer('phone') ?? ''))
   const next = [
-    { n: '1', title: t('form.success.next1_title'), text: t('form.success.next1_text'), lit: true },
+    {
+      n: '1',
+      title: t('form.success.next1_title'),
+      // Sent without photos: a submitted inquiry takes none, so say how they can still reach the buyer.
+      text: t(photos.length ? 'form.success.next1_text' : 'form.success.next1_text_no_photos'),
+      lit: true,
+    },
     {
       n: '2',
       title: t('form.success.next2_title', { method: methodBy.startsWith('preset.') ? method : methodBy }),

@@ -111,7 +111,7 @@
       "not_provided": "Nie podano",
       "photos_head": "Zdjęcia · {count}",
       "edit_photos_aria": "Zmień zdjęcia",
-      "no_photos": "Nie dodano zdjęć. Możesz mimo to wysłać zgłoszenie.",
+      "no_photos": "Nie dodano zdjęć. Możesz mimo to wysłać zgłoszenie, a zdjęcia przesłać, gdy kupujący się odezwie.",
       "failed_title": "Zgłoszenie nie zostało wysłane",
       "failed_text": "Połączenie zostało przerwane. Twoje dane i zdjęcia są nadal zapisane. Spróbuj ponownie, kiedy chcesz.",
       "limited_text": "Zbyt wiele zgłoszeń z tej sieci. Twoje dane i zdjęcia są zapisane. Poczekaj kilka minut i spróbuj ponownie."
@@ -128,6 +128,7 @@
       "next_title": "Co dalej",
       "next1_title": "Kupujący przegląda zgłoszenie",
       "next1_text": "Ogląda wysłane dane i zdjęcia.",
+      "next1_text_no_photos": "Ogląda wysłane dane. Zdjęcia możesz przesłać, gdy się odezwie.",
       "next2_title": "Kontakt: {method}",
       "next2_text": "Na {contact}.",
       "next2_fallback": "podany numer",

@@ -111,7 +111,7 @@
       "not_provided": "No indicado",
       "photos_head": "Fotos · {count}",
       "edit_photos_aria": "Editar fotos",
-      "no_photos": "No agregó fotos. Aun así puede enviar.",
+      "no_photos": "No agregó fotos. Aun así puede enviar, y mandar las fotos cuando el comprador lo contacte.",
       "failed_title": "Su solicitud no se envió",
       "failed_text": "Se perdió la conexión. Sus datos y fotos siguen guardados. Inténtelo de nuevo cuando quiera.",
       "limited_text": "Demasiadas solicitudes desde esta red. Sus datos y fotos están guardados. Espere unos minutos e inténtelo de nuevo."
@@ -128,6 +128,7 @@
       "next_title": "Qué sigue",
       "next1_title": "Un comprador revisa su solicitud",
       "next1_text": "Mira los datos y las fotos que envió.",
+      "next1_text_no_photos": "Mira los datos que envió. Puede mandarle las fotos cuando lo contacte.",
       "next2_title": "Lo contactan por {method}",
       "next2_text": "Al {contact}.",
       "next2_fallback": "número que indicó",

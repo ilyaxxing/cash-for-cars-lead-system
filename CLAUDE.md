@@ -106,6 +106,8 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   design, built in its visual system.
   Photos upload right after picking; skip label "I'll send later". Final
   submit on Review marks the lead submitted (one more push if it has photos).
+  A submitted lead takes no more photos, so with none added Review and
+  Success say they can be sent when the buyer makes contact.
   Review lists the car's sections first and the contacts last.
   Unfinished form resumes on the same device (localStorage, max 7 days),
   no further than the Contact step while it has no saved lead;

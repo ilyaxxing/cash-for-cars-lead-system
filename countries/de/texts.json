@@ -111,7 +111,7 @@
       "not_provided": "Keine Angabe",
       "photos_head": "Fotos · {count}",
       "edit_photos_aria": "Fotos ändern",
-      "no_photos": "Keine Fotos hinzugefügt. Sie können trotzdem senden.",
+      "no_photos": "Keine Fotos hinzugefügt. Sie können trotzdem senden und die Fotos schicken, wenn sich der Käufer meldet.",
       "failed_title": "Ihre Anfrage wurde nicht gesendet",
       "failed_text": "Die Verbindung ist abgebrochen. Ihre Angaben und Fotos sind weiter gespeichert. Versuchen Sie es erneut, wann Sie möchten.",
       "limited_text": "Zu viele Anfragen aus diesem Netz. Ihre Angaben und Fotos sind gespeichert. Warten Sie ein paar Minuten und versuchen Sie es erneut."
@@ -128,6 +128,7 @@
       "next_title": "So geht es weiter",
       "next1_title": "Ein Käufer prüft Ihre Anfrage",
       "next1_text": "Er sieht sich Ihre Angaben und Fotos an.",
+      "next1_text_no_photos": "Er sieht sich Ihre Angaben an. Fotos können Sie schicken, wenn er sich meldet.",
       "next2_title": "Sie werden per {method} kontaktiert",
       "next2_text": "Über {contact}.",
       "next2_fallback": "die angegebene Nummer",
