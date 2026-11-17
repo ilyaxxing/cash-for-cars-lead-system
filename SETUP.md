@@ -662,7 +662,7 @@ throughout.
    - Languages written right to left (Arabic, Hebrew, Persian, Urdu): the
      form and the dashboard are laid out left to right only. Offer English,
      or a language the sellers also read, if that works for the business.
-   - On the card, scripts whose letters join or change order (Arabic,
+   - On the card, scripts whose letters join or change shape (Arabic,
      Hebrew, Hindi and the other Indian scripts, Thai): the card command
      refuses them. The form and the dashboard show them, but the card's
      texts must be in another script, or the print shop sets the card from

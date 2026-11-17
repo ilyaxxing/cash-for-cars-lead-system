@@ -130,7 +130,7 @@ and what it does not support, such as languages written right to left.
 - One owner login per business: no separate accounts for a team.
 - One language per instance. Languages written right to left (Arabic, Hebrew,
   Persian, Urdu) are not supported, and on the business card, scripts whose
-  letters join (Arabic, Hindi, Thai) are refused.
+  letters join or change shape (Arabic, Hebrew, Hindi, Thai) are refused.
 - Next to Call, a lead's second button opens a text, an email, WhatsApp or
   Telegram, whichever the seller chose; another messenger can only be the
   seller's stated preference.
