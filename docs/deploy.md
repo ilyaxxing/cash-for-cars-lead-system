@@ -175,7 +175,10 @@ the designer not to crop the white margin around the code.
 
 ## Business card
 
-A ready card in the client's color and logo, with the card QR code:
+A ready card with the card QR code: the front in the client's color from
+edge to edge, with the brand, a headline in large capitals and what the
+business buys; the back dark, with a promise, the contact person and the
+phone in large figures:
 
 ```bash
 .venv/bin/python -m app.cli card --env-file clients/acme.env --name "Mike"
@@ -188,11 +191,11 @@ It writes, into `cards/`:
   0.125 in bleed (3.75 x 2.25 in pages), Russia 90 x 50 mm with 2 mm (94 x 54
   mm), Europe 85 x 55 mm with 3 mm (91 x 61 mm), or any card from 85 x 50 to
   92 x 56 mm with 3 mm, such as Japan's 91 x 55 mm; TrimBox and BleedBox set.
-  Text in a script the card's font lacks (Chinese, Korean, Greek...) is set in
+  Text in a script the card's fonts lack (Chinese, Korean, Greek...) is set in
   `CARD_FONT`; a card with a letter no font has, or in a script whose letters
   join (Arabic, Hebrew, Hindi, Thai), is refused with a message saying so. Vector, CMYK only, fonts embedded. The QR code is in black ink only
-  on unprinted white; small gray text is black ink only; the rich black
-  background stays well under 300% total ink; black on the accent overprints.
+  on unprinted white; small gray text is black ink only; the back's rich
+  black stays well under 300% total ink; black on the accent overprints.
   No text is under 7 pt or closer than 0.2 in to the trim line.
 - `<brand>-crop-marks.pdf`: the same with crop marks, for shops that ask.
 - `<brand>-preview.png`: both sides as they look after trimming.
@@ -203,8 +206,9 @@ is converted from `BRAND_COLOR`; if the business has official CMYK values
 for its color (brand guide, earlier print jobs), pass them, e.g.
 `--cmyk 0,45,100,0`. The wording is in `locales/en.json` under `card`; text
 that would have to print under 7 pt is refused with the key to shorten.
-Bright screen colors print a little duller: order a proof and scan its code
-before a full run.
+Bright screen colors print a little duller, and the front is that color
+from edge to edge: order a proof, look at the color and scan its code before
+a full run.
 
 ## Backups and restore
 

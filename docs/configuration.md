@@ -19,7 +19,7 @@ service, set by the deploy script from the client's file.
 | `BRAND_COLOR` | `#C7F747` | Accent color. Refused if too dark for the dark screens; the error suggests a lighter shade. |
 | `BRAND_LOGO`, `BRAND_ICON`, `BRAND_PHOTO` | | Image files (PNG, JPEG, WebP), relative to the repository. Checked at startup; see [Client branding](#client-branding). |
 | `CARD_SIZE` | `3.5x2in` | The business card's size: `3.5x2in` (US), `90x50mm` (Russia), `85x55mm` (Europe), each with the bleed shops there ask for, or any card from `85x50mm` to `92x56mm` (3 mm bleed), e.g. `91x55mm` in Japan. |
-| `CARD_FONT` | | A font for card text in scripts the card's own font (Geist: Latin, Cyrillic) lacks, such as Chinese, Korean, Japanese or Greek: a static TrueType `.ttf` file, e.g. Noto Sans SC Bold from Google Fonts. Used by the card command only; never sent to the server. |
+| `CARD_FONT` | | A font for card text in scripts the card's own fonts (Geist and Sofia Sans Extra Condensed: Latin, Cyrillic) lack, such as Chinese, Korean, Japanese or Greek: a static TrueType `.ttf` file, e.g. Noto Sans SC Bold from Google Fonts. Used by the card command only; never sent to the server. |
 | `OPERATOR_NAME`, `OPERATOR_EMAIL`, `OPERATOR_ADDRESS`, `POLICY_EFFECTIVE_DATE` | | Privacy policy and consent. Name and email are required in production. |
 | `OWNER_PASSWORD` | | The owner's first dashboard password: it opens the dashboard until the owner sets a password of their own, which the first sign-in asks for before anything else. Changing it here and restarting resets the owner's password to it, signs every device out and asks again: the way back in when it is forgotten. |
 | `DATABASE_URL` | local | Any PostgreSQL URL; converted to the async driver. |

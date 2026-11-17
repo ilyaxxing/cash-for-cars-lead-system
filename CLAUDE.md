@@ -120,17 +120,22 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   label is its name in the display face, without the design's number and
   accent dot: the accent is for actions and states (the main button,
   progress, a chosen option, New), not for labels. Chosen by the owner from a
-  side-by-side mockup. The link preview pictures, the home-screen icons and
-  the business card are still drawn in Geist.
+  side-by-side mockup. The business card uses the same display face; the
+  link preview pictures and the home-screen icons are still drawn in Geist.
 - Accident and lien: Yes / No / Don't know (third tile added in design style).
 - Photo tiles open the system picker directly (iOS offers camera or library
   there); the design's action sheet is unused in the prototype, so it is not built.
 - Illustrations: sources go to `design-reference/` (git-ignored), the app ships
   WebP versions in `frontend/src/assets/illustrations/` (hero in several widths
   for srcset, guides named as in the preset). Guide sources are pencil sketches
-  on light paper (`design-reference/guide-<slot>.jpg`); `tools/make_guides.py`
-  redraws them in two colors, paper = the empty tile's `--surface-sunken`,
-  pencil = a soft light line, dense interior sketches dimmed to match.
+  on white paper (`design-reference/guide-<slot>.png`), with no shadow on the
+  ground (turned light, it glows under the car); the car takes nine tenths of
+  the tile's width and sits a little high, so the tile's plus in the lower
+  right corner stays clear of it, and the left and right views are mirrors of
+  one sketch. `tools/make_guides.py` redraws them in two colors, paper = the
+  empty tile's `--surface-sunken`, pencil = a soft light line, dense interior
+  sketches dimmed to match. Simple outline drawings were tried and dropped:
+  the owner found them childish next to the sketches.
 - Brand mark: the design's lime rounded square, with a dark price tag instead
   of the design's dot (chosen by the owner; `shared/TagGlyph.svelte`, and
   `app/branding/mark.py` for the home-screen icons). The $ shows only where
@@ -143,17 +148,27 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   shipped as files. The installer is asked item by item what to change;
   anything not changed stays default.
 - Business card (`python -m app.cli card`): our own design, deliberately not
-  a copy of the card the owner made for a client. Print-ready by rule: vector
+  a copy of the card the owner made for a client. The front is the accent
+  from edge to edge (seen on a dark windshield), with black or white on it,
+  whichever reads better: the brand, the headline as large as the room lets
+  it be, the tags in one line and the QR code on its white plate. The back is
+  dark: the promise, three lines, the code again, the contact name and the
+  phone, the largest thing there, in the accent. Headline, tags, call to
+  action and phone are in the display face, the rest in Geist. A logo is
+  made for the dark interface, so on the accent it keeps a dark plate.
+  Chosen by the owner from a mockup. Print-ready by rule: vector
   CMYK PDF in the client's country size (`CARD_SIZE`: 3.5x2in, 90x50mm,
   85x55mm, any metric card from 85x50 to 92x56mm) with that country's bleed
   and page boxes, fonts embedded (`CARD_FONT` for scripts Geist lacks; never a
   missing letter, no joining scripts yet), text >= 7 pt and
-  >= 0.2 in inside the trim, flat rich-black background under 300% ink, QR and
-  small gray text in black ink only, black overprints on the accent.
-- No manufacturer badges or emblems in shipped images (trademarks). They are
-  retouched out of the sources: `design-reference/hero-car-clean.png` and the
-  `guide-<slot>.jpg` sketches. A new illustration gets the same treatment
-  before it is converted.
+  >= 0.2 in inside the trim, flat backgrounds (the accent, and a rich black
+  under 300% ink), QR and small gray text in black ink only, black
+  overprints on the accent (overprint mode 1, and only while both inks stay
+  under the limit).
+- No manufacturer badges or emblems in shipped images, and no grille that
+  belongs to one make (trademarks). They are retouched out of the sources:
+  `design-reference/hero-car-clean.png` and the `guide-<slot>.png` sketches.
+  A new illustration gets the same treatment before it is converted.
 - Contact: name, phone (required), email (optional, personal data), preferred
   contact method (call, SMS, WhatsApp, email). Telegram is opt-in per client
   (one line in the preset; texts ship). The lead's second button, next to

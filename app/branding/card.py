@@ -4,13 +4,16 @@
 
 In the size print shops in the client's country know (card_format): US 3.5 x
 2 in, Russia 90 x 50 mm, Europe 85 x 55 mm, or any card from 85 x 50 to
-92 x 56 mm, such as Japan's 91 x 55 mm. Front: the brand, a large headline with its first line
-in the accent color, what the business takes, and the QR code on a white
-plate. Back: a promise and three lines with check marks next to the same
-code, then an accent band with the contact person and the phone. The
-wording is in the locale (card.*); the color, logo, name and phone come from
-the client's settings. Geist draws Latin and Cyrillic letters; text in other
-scripts (Chinese, Korean, Greek...) is set in the client's own font
+92 x 56 mm, such as Japan's 91 x 55 mm. The front is the accent color from edge
+to edge, with black or white on it, whichever reads better: the brand, a
+headline as large as the card lets it be, what the business takes, and the QR
+code on a white plate. The back is dark: a promise and three lines next to
+the same code, then the contact person and, largest of all and in the accent,
+the phone. The wording is in the locale (card.*); the color, logo, name and
+phone come from the client's settings. The headline, the tags, the call to
+action and the phone are set in Sofia Sans Extra Condensed, the interface's
+display face, the rest in Geist; both draw Latin and Cyrillic letters. Text
+in other scripts (Chinese, Korean, Greek...) is set in the client's own font
 (CARD_FONT), and a card with a letter neither font has is not made.
 
 The files are made the way print shops ask for them:
@@ -19,13 +22,16 @@ The files are made the way print shops ask for them:
   and TrimBox/BleedBox set, plus a copy with crop marks for shops that want
   them;
 - no text under 7 pt, and all of it at least 0.2 in inside the trim line;
-- a flat background, because gradients band in print, in a rich black that
-  stays well under a 300% total ink limit;
+- flat backgrounds, because gradients band in print: the accent on the
+  front, and on the back a rich black that stays well under a 300% total ink
+  limit;
 - small gray text in black ink only, so a slightly misaligned press cannot
   blur it;
 - the QR code in black ink only, on unprinted paper, with the quiet zone and
   the module size rules of app/qr.py;
-- black text on the accent overprints, as prepress does it.
+- black on the accent overprints, as prepress does it, so a press slightly
+  out of register leaves no white edge around the letters; a logo, made for
+  the dark interface, keeps a dark plate under it there.
 A PNG preview shows both sides as they look after trimming.
 """
 
@@ -89,8 +95,17 @@ WIDTHS, HEIGHTS = (85.0, 92.0), (50.0, 56.0)
 MARGIN = 15.0
 MIN_TEXT = 7.0
 TOTAL_INK_LIMIT = 3.0
-# The QR code's white plate, quiet zone included.
+# The QR code's white plate, quiet zone included, and the black rim around it
+# on a light accent.
 PLATE = 72.0
+PLATE_RADIUS = 7.0
+RIM = 1.6
+# The largest the front's headline and the back's phone are set.
+HEADLINE = 50.0
+PHONE = 30.0
+# Between the letters of the front's tags, and between the tags, in font sizes.
+TAG_TRACKING = 0.09
+TAG_GAP = 1.5
 # Crop marks: outside the bleed, in the extra room around the marked copy.
 MARK_ROOM = 24.0
 MARK_GAP = 3.0
@@ -114,10 +129,13 @@ FACES = {
     "medium": "Geist-Medium.ttf",
     "semibold": "Geist-SemiBold.ttf",
     "bold": "Geist-Bold.ttf",
-    "extrabold": "Geist-ExtraBold.ttf",
-    "mono": "GeistMono-Medium.ttf",
+    "display": "SofiaSansExtraCondensed-ExtraBold.ttf",
+    "display-bold": "SofiaSansExtraCondensed-Bold.ttf",
 }
-CAP_HEIGHT = 0.71  # of the font size, for Geist
+# The height of the capitals, of the font size: Geist, and the display face
+# (Sofia Sans Extra Condensed), which sets what is read from a distance.
+CAP_HEIGHT = 0.71
+DISPLAY_CAP_HEIGHT = 0.655
 
 # The locale's card.* keys.
 TEXT_KEYS = (
@@ -208,6 +226,7 @@ class Box:
     h: float
     ink: Ink
     radius: float = 0.0
+    overprint: bool = False
 
 
 @dataclass
@@ -229,6 +248,7 @@ class Shape:
     points: list[tuple[float, float]]
     ink: Ink
     stroke: float = 0.0  # 0: filled
+    overprint: bool = False
 
 
 @dataclass
@@ -303,7 +323,7 @@ def card_format(value: str) -> Format:
 
 
 def face_file(face: str) -> Path:
-    """One of Geist's FACES, or the client's own font, named by its path."""
+    """One of the card's FACES, or the client's own font, named by its path."""
     return FONTS / FACES[face] if face in FACES else Path(face)
 
 
@@ -343,14 +363,26 @@ def own_font(path: Path) -> str:
     return str(path)
 
 
+# Geist has a few letters the display face lacks (Azerbaijani Ə, Vietnamese Ơ
+# and Ư, Kazakh Ұ): a line with one of them is set in Geist, not refused.
+PLAIN = {"display": "bold", "display-bold": "bold"}
+
+
+def needs(line: str) -> set[int]:
+    return {ord(char) for char in line if not char.isspace()}
+
+
 def face_for(text: CardText, line: str, face: str) -> str:
-    """Geist's face when it has every letter of the line, else the client's font."""
-    needed = {ord(char) for char in line if not char.isspace()}
-    if needed <= letters(face):
-        return face
+    """The card's face when it has every letter of the line (Geist where the
+    display face lacks one), else the client's font."""
+    needed = needs(line)
+    own = [face, PLAIN[face]] if face in PLAIN else [face]
+    for candidate in own:
+        if needed <= letters(candidate):
+            return candidate
     if text.font is not None and needed <= letters(str(text.font)):
         return str(text.font)
-    lacking = needed - letters(face)
+    lacking = needed.difference(*(letters(candidate) for candidate in own))
     if text.font is not None:
         lacking -= letters(str(text.font))
     shown = "".join(chr(code) for code in sorted(lacking)[:12])
@@ -365,11 +397,24 @@ def face_for(text: CardText, line: str, face: str) -> str:
     )
 
 
+def faces_for(text: CardText, lines: Sequence[str], face: str) -> list[str]:
+    """The same for lines read as one: where one of them takes Geist, the
+    others the display face would set follow it, so they stay one piece."""
+    faces = [face_for(text, line, face) for line in lines]
+    plain = PLAIN.get(face)
+    if plain not in faces:
+        return faces
+    return [
+        plain if chosen == face and needs(line) <= letters(plain) else chosen
+        for line, chosen in zip(lines, faces, strict=True)
+    ]
+
+
 def rise(line: str, face: str, size: float) -> float:
-    """How far the line reaches above its baseline: Geist's capitals, or the
-    client's font measured, where ideographs stand taller than capitals."""
+    """How far the line reaches above its baseline: the capitals of the card's
+    fonts, or the client's font measured, where ideographs stand taller."""
     if face in FACES:
-        return CAP_HEIGHT * size
+        return (DISPLAY_CAP_HEIGHT if face.startswith("display") else CAP_HEIGHT) * size
     top = raster_font(face, 1000).getbbox(line, anchor="ls")[1]
     return max(CAP_HEIGHT, -top / 1000) * size
 
@@ -417,25 +462,53 @@ def background(fmt: Format) -> Box:
 
 
 def on_accent_ink(accent: Ink) -> Ink:
-    """Black or paper white on the accent band, whichever reads better."""
+    """Black or paper white on the accent, whichever reads better."""
     dark = contrast(accent.rgb, BLACK.rgb)
     light = contrast(accent.rgb, PAPER.rgb)
     return BLACK if dark >= light else PAPER
 
 
-def mark(x: float, y: float, size: float, accent: Ink) -> list[Op]:
-    """The default mark: the price tag on an accent square (page coordinates)."""
+@dataclass(frozen=True)
+class Side:
+    """What a side is printed on, and the inks of what stands on it."""
+
+    under: Ink
+    ink: Ink  # the brand, headlines, the call to action
+    quiet: Ink  # the hint under the code
+    overprint: bool  # black prints over the ink under it
+
+    @property
+    def dark(self) -> bool:
+        return self.under is BACKGROUND
+
+
+DARK = Side(BACKGROUND, CREAM, MUTED, False)
+
+
+def accent_side(accent: Ink) -> Side:
+    """The front: the accent itself, with black or white on it."""
+    ink = on_accent_ink(accent)
+    # Black over the accent needs no trapping, while both stay under the limit.
+    over = ink is BLACK and accent.coverage + BLACK.coverage <= TOTAL_INK_LIMIT
+    return Side(accent, ink, ink, over)
+
+
+def mark(x: float, y: float, size: float, accent: Ink, side: Side) -> list[Op]:
+    """The default mark, the price tag on a rounded square (page coordinates):
+    an accent square on the dark side, the other way round on the accent."""
+    square, tag = (accent, on_accent_ink(accent)) if side.dark else (side.ink, accent)
     unit = size / 24
-    tag = [(x + px * unit, y + py * unit) for px, py in outline(TAG_PATH, steps=6)]
+    shape = [(x + px * unit, y + py * unit) for px, py in outline(TAG_PATH, steps=6)]
     cx, cy, r = HOLE
     corners = [(1, 0), (0.71, 0.71), (0, 1), (-0.71, 0.71), (-1, 0), (-0.71, -0.71), (0, -1)]
     hole = [
         (x + (cx + r * c) * unit, y + (cy + r * s) * unit) for c, s in [*corners, (0.71, -0.71)]
     ]
+    over = side.overprint
     return [
-        Box(x, y, size, size, accent, radius=size * 7 / 24),
-        Shape(tag, on_accent_ink(accent)),
-        Shape(hole, accent),
+        Box(x, y, size, size, square, radius=size * 7 / 24, overprint=over),
+        Shape(shape, tag),
+        Shape(hole, square, overprint=over),
     ]
 
 
@@ -443,52 +516,74 @@ def is_wordmark(logo: Image.Image) -> bool:
     return logo.width >= WORDMARK_RATIO * logo.height
 
 
-def brand_line(text: CardText, x: float, y: float, height: float, width: float) -> list[Op]:
-    """Logo, or the mark and the name, `height` high from the top left (trim)."""
+BRAND_HEIGHT = 11.0
+# A logo is made for the dark interface: on the accent it keeps a dark plate.
+CHIP_PAD = 2.5
+
+
+def brand_line(
+    text: CardText, x: float, y: float, width: float, side: Side
+) -> tuple[list[Op], float]:
+    """Logo, or the mark and the name, from the top left (trim); and its height."""
     fmt = text.format
     logo = text.logo
+    pad = 0.0 if side.dark else CHIP_PAD
+    height = BRAND_HEIGHT + 2 * pad
     if logo is not None and is_wordmark(logo):
-        scale = min(height / logo.height, width / logo.width)
-        return [Picture(*fmt.at(x, y), logo.width * scale, logo.height * scale, logo, BACKGROUND)]
-    ops: list[Op] = []
+        scale = min(BRAND_HEIGHT / logo.height, (width - 2 * pad) / logo.width)
+        size = (logo.width * scale, logo.height * scale)
+        ops: list[Op] = []
+        if pad:
+            ops.append(Box(*fmt.at(x, y), size[0] + 4 * pad, height, BACKGROUND, radius=3.5))
+        left = x + 2 * pad
+        ops.append(Picture(*fmt.at(left, y + (height - size[1]) / 2), *size, logo, BACKGROUND))
+        return ops, height
+    ops = []
     if logo is not None:
-        scale = height / max(logo.width, logo.height)
+        scale = BRAND_HEIGHT / max(logo.width, logo.height)
+        if pad:
+            ops.append(Box(*fmt.at(x, y), height, height, BACKGROUND, radius=height * 7 / 24))
         ops.append(
-            Picture(*fmt.at(x, y), logo.width * scale, logo.height * scale, logo, BACKGROUND)
+            Picture(
+                *fmt.at(x + pad, y + pad), logo.width * scale, logo.height * scale, logo, BACKGROUND
+            )
         )
     else:
-        ops += mark(*fmt.at(x, y), height, text.accent)
+        height = BRAND_HEIGHT
+        ops += mark(*fmt.at(x, y), height, text.accent, side)
     name = capitals(text.brand_name, text.locale)
     face = face_for(text, name, "bold")
     size = fit(name, face, 7.5, width - height - 5, "BRAND_NAME", tracking=0.14)
     baseline = y + height / 2 + CAP_HEIGHT * size / 2
-    ops.append(Run(*fmt.at(x + height + 5, baseline), name, face, size, CREAM, tracking=0.14))
-    return ops
+    ops.append(
+        Run(
+            *fmt.at(x + height + 5, baseline),
+            name,
+            face,
+            size,
+            side.ink,
+            tracking=0.14,
+            overprint=side.overprint,
+        )
+    )
+    return ops, height
 
 
-def arrow(x: float, baseline: float, size: float, ink: Ink) -> list[Op]:
-    """The arrow the font lacks: a shaft and a head at mid cap height (page)."""
-    middle = baseline - CAP_HEIGHT * size / 2
-    length, head, stroke = 0.62 * size, 0.24 * size, 0.09 * size
+def arrow(x: float, baseline: float, size: float, height: float, side: Side) -> list[Op]:
+    """The arrow the fonts lack: a shaft and a head at mid cap height (page)."""
+    middle = baseline - height / 2
+    length, head, stroke = 0.6 * size, 0.23 * size, 0.11 * size
     tip = x + length
+    over = side.overprint
     return [
-        Shape([(x, middle), (tip, middle)], ink, stroke=stroke),
+        Shape([(x, middle), (tip, middle)], side.ink, stroke=stroke, overprint=over),
         Shape(
-            [(tip - head, middle - head), (tip, middle), (tip - head, middle + head)], ink, stroke
+            [(tip - head, middle - head), (tip, middle), (tip - head, middle + head)],
+            side.ink,
+            stroke,
+            over,
         ),
     ]
-
-
-def check(x: float, baseline: float, size: float, ink: Ink) -> Shape:
-    """A check mark as tall as the capitals (page coordinates)."""
-    cap = CAP_HEIGHT * size
-    top = baseline - cap
-    points = [
-        (x, top + 0.55 * cap),
-        (x + 0.35 * cap, top + 0.92 * cap),
-        (x + cap, top + 0.08 * cap),
-    ]
-    return Shape(points, ink, stroke=0.13 * size)
 
 
 def plate(fmt: Format, left: float, top: float, matrix: list[list[bool]]) -> list[Op]:
@@ -498,116 +593,200 @@ def plate(fmt: Format, left: float, top: float, matrix: list[list[bool]]) -> lis
     module = PLATE / (modules + 2 * qr_codes.BORDER)
     side = module * modules
     return [
-        Box(*fmt.at(left, top), PLATE, PLATE, PAPER, radius=7),
+        Box(*fmt.at(left, top), PLATE, PLATE, PAPER, radius=PLATE_RADIUS),
         Modules(
             *fmt.at(left + (PLATE - side) / 2, top + (PLATE - side) / 2), module, matrix, BLACK
         ),
     ]
 
 
-def qr_column(text: CardText, matrix: list[list[bool]]) -> tuple[list[Op], float]:
-    """The plate with the code, the call to action and the hint; returns its left."""
+def qr_column(
+    text: CardText, matrix: list[list[bool]], side: Side, top: float | None = None
+) -> tuple[list[Op], float, float]:
+    """The plate with the code, the call to action and the hint, down the right
+    edge: centered, or from `top`. Returns its left edge and its bottom."""
     texts = text.texts
     fmt = text.format
     width, height = fmt.trim
-    left = width - MARGIN - PLATE
-    cta_gap, hint_gap = 12.0, 9.5
-    top = (height - (PLATE + cta_gap + hint_gap)) / 2 - 2
-    ops = plate(fmt, left, top, matrix)
+    # On a light accent the white plate gets a black rim, or it would melt
+    # into the color; the rim stays inside the margin like everything else.
+    rim = RIM if side.ink is BLACK and not side.dark else 0.0
+    left = width - MARGIN - PLATE - rim
+    cta_gap, hint_gap = 13.5, 9.5
+    if top is None:
+        top = (height - (PLATE + cta_gap + hint_gap)) / 2 - 2
+    top += rim
+    ops: list[Op] = []
+    if rim:
+        ops.append(
+            Box(
+                *fmt.at(left - rim, top - rim),
+                PLATE + 2 * rim,
+                PLATE + 2 * rim,
+                BLACK,
+                radius=PLATE_RADIUS + rim,
+                overprint=side.overprint,
+            )
+        )
+    ops += plate(fmt, left, top, matrix)
 
-    cta = texts["cta"]
-    face = face_for(text, cta, "semibold")
-    size = fit(cta, face, 8.0, PLATE - 8, "card.cta")
-    arrow_room = 0.94 * size
-    cta_width = text_width(cta, face, size) + arrow_room
+    cta = capitals(texts["cta"], text.locale)
+    face = face_for(text, cta, "display")
+    tracking = 0.03
+    # Room for the arrow: its length and the gap before it, in font sizes.
+    tail = 0.9
+    size = 11.5
+    needed = text_width(cta, face, size, tracking) + tail * size
+    if needed > PLATE:
+        size = fit(cta, face, size * PLATE / needed, PLATE, "card.cta", tracking)
+    cta_width = text_width(cta, face, size, tracking) + tail * size
     cta_x = left + (PLATE - cta_width) / 2
-    baseline = top + PLATE + cta_gap
-    ops.append(Run(*fmt.at(cta_x, baseline), cta, face, size, CREAM))
-    ops += arrow(*fmt.at(cta_x + cta_width - 0.62 * size, baseline), size, CREAM)
+    baseline = top + PLATE + rim + cta_gap
+    ops.append(Run(*fmt.at(cta_x, baseline), cta, face, size, side.ink, tracking, side.overprint))
+    ops += arrow(
+        *fmt.at(cta_x + cta_width - 0.6 * size, baseline), size, rise(cta, face, size), side
+    )
 
     hint = texts["scan"]
-    face = face_for(text, hint, "mono")
-    hint_size = fit(hint, face, 7.0, PLATE + 6, "card.scan")
+    face = face_for(text, hint, "semibold")
+    hint_size = fit(hint, face, MIN_TEXT, PLATE + 6, "card.scan")
     hint_x = left + (PLATE - text_width(hint, face, hint_size)) / 2
-    ops.append(Run(*fmt.at(hint_x, baseline + hint_gap), hint, face, hint_size, MUTED))
-    return ops, left
+    ops.append(
+        Run(
+            *fmt.at(hint_x, baseline + hint_gap),
+            hint,
+            face,
+            hint_size,
+            side.quiet,
+            overprint=side.overprint,
+        )
+    )
+    return ops, left - rim, baseline + hint_gap + 0.25 * hint_size
+
+
+def tag_rows(
+    text: CardText, tags: list[str], faces: list[str], width: float
+) -> tuple[float, list[float], list[list[int]]]:
+    """What the business takes, on one line if it fits at a size worth
+    printing, else on several at the smallest: the size, each tag's width and
+    which tags stand on which line."""
+    sizes = (8.5, 7.75, MIN_TEXT)
+    for size in sizes:
+        pieces = [
+            text_width(tag, face, size, TAG_TRACKING) for tag, face in zip(tags, faces, strict=True)
+        ]
+        rows: list[list[int]] = [[]]
+        used = 0.0
+        for index, piece in enumerate(pieces):
+            if piece > width:
+                break
+            if rows[-1] and used + TAG_GAP * size + piece > width:
+                rows.append([])
+                used = 0.0
+            used += (TAG_GAP * size if rows[-1] else 0) + piece
+            rows[-1].append(index)
+        else:
+            if len(rows) == 1 or size == sizes[-1]:
+                return size, pieces, rows
+            continue
+        if size == sizes[-1]:
+            raise CardError(
+                f"card.front_tag_{index + 1} is too long for the card. Make it shorter."
+            )
+    raise AssertionError("unreachable")
 
 
 def front(text: CardText, matrix: list[list[bool]]) -> list[Op]:
     texts = text.texts
     fmt = text.format
     height = fmt.trim[1]
-    ops: list[Op] = [background(fmt)]
-    column, plate_left = qr_column(text, matrix)
+    side = accent_side(text.accent)
+    # The accent itself, into the bleed on every side: under a wiper, on a
+    # dark windshield, a bright card is the one that gets seen.
+    ops: list[Op] = [Box(0, 0, *fmt.page, text.accent)]
+    column, column_left, _ = qr_column(text, matrix, side)
     ops += column
-    width = plate_left - 14 - MARGIN
+    width = column_left - 12 - MARGIN
 
     # The brand on top, what the business takes at the bottom, and the
-    # headline centered between them.
-    brand_height = 11.0
-    ops += brand_line(text, MARGIN, MARGIN, brand_height, width)
+    # headline as large as the room between them lets it be.
+    brand, brand_height = brand_line(text, MARGIN, MARGIN, width, side)
+    ops += brand
 
     tags = [capitals(texts[f"front_tag_{n}"], text.locale) for n in (1, 2, 3)]
-    faces = [face_for(text, tag, "mono") for tag in tags]
-    size, tracking, dot, gap, line = 7.0, 0.05, 2.6, 8.0, 10.0
-    pieces = [
-        dot + 3.5 + text_width(tag, face, size, tracking)
-        for tag, face in zip(tags, faces, strict=True)
-    ]
-    rows: list[list[int]] = [[]]
-    used = 0.0
-    for index, piece in enumerate(pieces):
-        if piece > width:
-            raise CardError(
-                f"card.front_tag_{index + 1} is too long for the card. Make it shorter."
-            )
-        if rows[-1] and used + gap + piece > width:
-            rows.append([])
-            used = 0.0
-        used += (gap if rows[-1] else 0) + piece
-        rows[-1].append(index)
-    first_tags = height - MARGIN - 1.5 - line * (len(rows) - 1)
+    faces = faces_for(text, tags, "display-bold")
+    size, pieces, rows = tag_rows(text, tags, faces, width)
+    line = 1.3 * size
+    first_tags = height - MARGIN - 1.0 - line * (len(rows) - 1)
+    dot = 0.22 * size
     for number, row in enumerate(rows):
         baseline = first_tags + number * line
         x = MARGIN
-        for index in row:
-            ops.append(
-                Box(*fmt.at(x, baseline - CAP_HEIGHT * size / 2 - dot / 2), dot, dot, text.accent)
-            )
+        for place, index in enumerate(row):
+            if place:
+                middle = baseline - rise(tags[index], faces[index], size) / 2
+                ops.append(
+                    Box(
+                        *fmt.at(x - (TAG_GAP * size + dot) / 2, middle - dot / 2),
+                        dot,
+                        dot,
+                        side.ink,
+                        radius=dot / 2,
+                        overprint=side.overprint,
+                    )
+                )
             ops.append(
                 Run(
-                    *fmt.at(x + dot + 3.5, baseline),
+                    *fmt.at(x, baseline),
                     tags[index],
                     faces[index],
                     size,
-                    SOFT,
-                    tracking=tracking,
+                    side.ink,
+                    TAG_TRACKING,
+                    side.overprint,
                 )
             )
-            x += pieces[index] + gap
+            x += pieces[index] + TAG_GAP * size
 
     hot, rest = (capitals(texts[key], text.locale) for key in ("front_hot", "front_rest"))
-    hot_face, rest_face = face_for(text, hot, "extrabold"), face_for(text, rest, "extrabold")
+    hot_face, rest_face = faces_for(text, (hot, rest), "display")
     headline = min(
-        fit(hot, hot_face, 28.0, width, "card.front_hot", tracking=-0.01),
-        fit(rest, rest_face, 28.0, width, "card.front_rest", tracking=-0.01),
+        fit(hot, hot_face, HEADLINE, width, "card.front_hot"),
+        fit(rest, rest_face, HEADLINE, width, "card.front_rest"),
     )
-    if headline < 16:
+    above = MARGIN + brand_height + 5
+    below = first_tags - max(rise(tag, face, size) for tag, face in zip(tags, faces, strict=True))
+    below -= 5
+
+    def block(at: float) -> tuple[float, float]:
+        # The display face's capitals sit 0.835 apart; taller letters get the same gap.
+        top = rise(hot, hot_face, at)
+        return top, max(0.835 * at, rise(rest, rest_face, at) + 0.18 * at)
+
+    top, leading = block(headline)
+    if top + leading > below - above:
+        headline *= (below - above) / (top + leading)
+        top, leading = block(headline)
+    # The narrow display face needs more height to stand out than a face of
+    # ordinary width (Geist, or the client's own font).
+    least = 24.0 if {hot_face, rest_face} <= PLAIN.keys() else 16.0
+    if headline < least:
         raise CardError(
             "The headline is too long to stand out on the card. "
             "Make card.front_hot and card.front_rest shorter."
         )
-    # Geist's capitals sit 0.98 apart; taller letters get the same gap.
-    top = rise(hot, hot_face, headline)
-    leading = max(0.98 * headline, rise(rest, rest_face, headline) + 0.27 * headline)
-    block = leading + top
-    above = MARGIN + brand_height
-    below = first_tags - max(rise(tag, face, size) for tag, face in zip(tags, faces, strict=True))
-    first = above + (below - above - block) / 2 + top
-    ops.append(Run(*fmt.at(MARGIN, first), hot, hot_face, headline, text.accent, tracking=-0.01))
-    ops.append(
-        Run(*fmt.at(MARGIN, first + leading), rest, rest_face, headline, CREAM, tracking=-0.01)
-    )
+    first = above + (below - above - top - leading) / 2 + top
+    for line_text, face, baseline in ((hot, hot_face, first), (rest, rest_face, first + leading)):
+        ops.append(
+            Run(
+                *fmt.at(MARGIN, baseline),
+                line_text,
+                face,
+                headline,
+                side.ink,
+                overprint=side.overprint,
+            )
+        )
     return ops
 
 
@@ -616,57 +795,60 @@ def back(text: CardText, matrix: list[list[bool]]) -> list[Op]:
     fmt = text.format
     width, height = fmt.trim
     ops: list[Op] = [background(fmt)]
-    on_accent = on_accent_ink(text.accent)
-    band = height - 42
 
     # The code again, as large as on the front: a card is often picked up
-    # back side first. Centered in the dark part, on the right.
-    left = width - MARGIN - PLATE
-    top = (band - PLATE) / 2
-    ops += plate(fmt, left, top, matrix)
+    # back side first. In the top right corner, so the phone has the bottom.
+    column, column_left, column_bottom = qr_column(text, matrix, DARK, top=MARGIN)
+    ops += column
+    room = column_left - 12 - MARGIN
 
     # The promise and what the business takes, left of the code.
-    column = left - 12 - MARGIN
-    titles = [texts["back_title_1"], texts["back_title_2"]]
-    title_faces = [face_for(text, title, "bold") for title in titles]
+    titles = [capitals(texts[f"back_title_{n}"], text.locale) for n in (1, 2)]
+    title_faces = faces_for(text, titles, "display")
     size = min(
-        fit(title, face, 13.0, column, f"card.back_title_{n}", tracking=-0.01)
+        fit(title, face, 19.5, room, f"card.back_title_{n}")
         for n, (title, face) in enumerate(zip(titles, title_faces, strict=True), 1)
     )
-    # A taller card (85 x 55 mm) keeps the band's height: the promise and the
-    # list move down by half the extra room, so it doesn't gather under them.
-    slack = max(0.0, height - US.trim[1])
-    baseline = MARGIN + slack / 2 + rise(titles[0], title_faces[0], size)
-    for title, face in zip(titles, title_faces, strict=True):
-        ops.append(Run(*fmt.at(MARGIN, baseline), title, face, size, CREAM, tracking=-0.01))
-        baseline += 1.18 * size
-    baseline += 5
+    baseline = MARGIN + rise(titles[0], title_faces[0], size)
+    ops.append(Run(*fmt.at(MARGIN, baseline), titles[0], title_faces[0], size, CREAM))
+    baseline += max(0.9 * size, rise(titles[1], title_faces[1], size) + 0.24 * size)
+    ops.append(Run(*fmt.at(MARGIN, baseline), titles[1], title_faces[1], size, CREAM))
+    baseline += 14
+    square = 3.2
     for n in (1, 2, 3):
         item = texts[f"back_list_{n}"]
         face = face_for(text, item, "medium")
-        item_size = fit(item, face, 8.0, column - 11, f"card.back_list_{n}")
-        ops.append(check(*fmt.at(MARGIN, baseline), item_size, text.accent))
-        ops.append(Run(*fmt.at(MARGIN + 11, baseline), item, face, item_size, SOFT))
+        item_size = fit(item, face, 8.0, room - 9, f"card.back_list_{n}")
+        middle = baseline - CAP_HEIGHT * item_size / 2
+        ops.append(
+            Box(*fmt.at(MARGIN, middle - square / 2), square, square, text.accent, radius=0.9)
+        )
+        ops.append(Run(*fmt.at(MARGIN + 9, baseline), item, face, item_size, SOFT))
         baseline += 11.5
+    list_bottom = baseline - 11.5 + 0.25 * 8.0
 
-    # The contact on an accent band that runs off the bottom and both sides:
-    # the person's name if given, and the phone. The address is in the code.
-    ops.append(Box(0, fmt.bleed + band, fmt.page[0], fmt.page[1] - fmt.bleed - band, text.accent))
-    overprint = on_accent is BLACK
+    # The contact along the bottom: the person's name if given, and the phone
+    # as the largest thing on this side, in the accent. The address is in the
+    # code.
+    name_size, name_gap = 8.0, 6.0
+    # Room under the baseline for what hangs below it at the phone's size.
+    bottom = height - max(MARGIN, 9 + 0.25 * PHONE if text.phone else 0)
+    if text.phone:
+        face = face_for(text, text.phone, "display")
+        # No taller than the room under the list (and the name) allows.
+        taken = name_gap + CAP_HEIGHT * name_size if text.name else 0.0
+        tallest = (bottom - list_bottom - 4 - taken) / (rise(text.phone, face, 1000) / 1000)
+        phone_size = min(PHONE, tallest)
+        # Beside the code's column, unless it stands clear below it.
+        clear = bottom - rise(text.phone, face, phone_size) >= column_bottom + 3
+        limit = width - 2 * MARGIN if clear else room
+        phone_size = fit(text.phone, face, phone_size, limit, "The phone")
+        ops.append(Run(*fmt.at(MARGIN, bottom), text.phone, face, phone_size, text.accent))
+        bottom -= rise(text.phone, face, phone_size) + name_gap
     if text.name:
         face = face_for(text, text.name, "semibold")
-        name_size = fit(text.name, face, 8.0, width - 2 * MARGIN, "The name (--name)")
-        ops.append(
-            Run(*fmt.at(MARGIN, band + 13), text.name, face, name_size, on_accent,
-                overprint=overprint)
-        )  # fmt: skip
-    if text.phone:
-        face = face_for(text, text.phone, "bold")
-        phone_size = fit(text.phone, face, 15.0, width - 2 * MARGIN, "The phone")
-        ops.append(
-            Run(*fmt.at(MARGIN, height - MARGIN), text.phone, face, phone_size, on_accent,
-                overprint=overprint)
-        )  # fmt: skip
+        name_size = fit(text.name, face, name_size, room, "The name (--name)")
+        ops.append(Run(*fmt.at(MARGIN, bottom), text.name, face, name_size, SOFT))
     return ops
 
 
@@ -695,7 +877,10 @@ def make(text: CardText) -> Card:
         raise CardError("; ".join(checked.problems))
     warnings = list(checked.warnings)
     if contrast(text.accent.rgb, BACKGROUND.rgb) < 4.5:
-        warnings.append("The accent reads weakly on the dark card; a lighter shade prints better.")
+        warnings.append(
+            "The accent reads weakly on the card's dark side, where it sets the phone; "
+            "a lighter shade prints better."
+        )
     return Card(
         front(text, matrix), back(text, matrix), checked, text.accent, warnings, text.format
     )
@@ -736,7 +921,15 @@ def draw_pdf(canvas: Any, ops: Sequence[Op], offset: float, fmt: Format) -> None
         # PDF counts from the bottom.
         return page_height - offset - value
 
+    def overprint(on: bool) -> None:
+        # With the mode that leaves alone the inks a color has none of: black
+        # then prints over the accent instead of cutting a hole in it.
+        canvas.setFillOverprint(on)
+        canvas.setStrokeOverprint(on)
+        canvas.setOverprintMask(on)
+
     for op in ops:
+        overprint(getattr(op, "overprint", False))
         if isinstance(op, Box):
             canvas.setFillColor(color(op.ink))
             if op.radius:
@@ -745,13 +938,11 @@ def draw_pdf(canvas: Any, ops: Sequence[Op], offset: float, fmt: Format) -> None
                 canvas.rect(x(op.x), y(op.y + op.h), op.w, op.h, stroke=0, fill=1)
         elif isinstance(op, Run):
             canvas.setFillColor(color(op.ink))
-            canvas.setFillOverprint(op.overprint)
             line = canvas.beginText(x(op.x), y(op.baseline))
             line.setFont(pdf_font(op.face), op.size)
             line.setCharSpace(op.tracking * op.size)
             line.textOut(op.text)
             canvas.drawText(line)
-            canvas.setFillOverprint(False)
         elif isinstance(op, Shape):
             path = canvas.beginPath()
             (first_x, first_y), *rest = op.points
@@ -791,6 +982,7 @@ def draw_pdf(canvas: Any, ops: Sequence[Op], offset: float, fmt: Format) -> None
         elif isinstance(op, Picture):
             image = ImageReader(logo_in_cmyk(op.image, op.under))
             canvas.drawImage(image, x(op.x), y(op.y + op.h), op.w, op.h)
+    overprint(False)
 
 
 def crop_marks(canvas: Any, offset: float, fmt: Format) -> None:
