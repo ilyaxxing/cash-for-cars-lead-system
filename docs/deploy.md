@@ -193,7 +193,9 @@ It writes, into `cards/`:
   92 x 56 mm with 3 mm, such as Japan's 91 x 55 mm; TrimBox and BleedBox set.
   Text in a script the card's fonts lack (Chinese, Korean, Greek...) is set in
   `CARD_FONT`; a card with a letter no font has, or in a script whose letters
-  join (Arabic, Hebrew, Hindi, Thai), is refused with a message saying so. Vector, CMYK only, fonts embedded. The QR code is in black ink only
+  join or change shape (Arabic, Hebrew, Hindi, Thai), is refused with a
+  message saying so. Vector, CMYK only, fonts embedded. The QR code is in
+  black ink only
   on unprinted white; small gray text is black ink only; the back's rich
   black stays well under 300% total ink; black on the accent overprints.
   No text is under 7 pt or closer than 0.2 in to the trim line.

@@ -134,7 +134,8 @@ check-texts --env-file clients/<id>.env` also compares it with
 `locales/en.json`, key by key, placeholders included. Dates, numbers and prices follow the language and the
 country. Geist covers Latin, Latin Extended, Vietnamese and Cyrillic; in the
 app, phones show other scripts in their own fonts, and on the business card
-`CARD_FONT` sets them. Not supported yet: languages written right to left,
-and on the card, scripts whose letters join (Arabic, Hindi, Thai).
+`CARD_FONT` sets them. Not supported: languages written right to left, and
+on the card, scripts whose letters join or change shape (Arabic, Hebrew,
+Hindi, Thai).
 [SETUP.md](../SETUP.md#another-country) has the full list of what to check
 for a country.

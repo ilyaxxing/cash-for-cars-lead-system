@@ -52,7 +52,8 @@ restrict leaving flyers on cars, so the client should check the local rules.
   within seconds. iPhone and Android.
 - **An app on the owner's phone**: leads by status (New, In Progress,
   Purchased, Rejected), photos, notes, a one-tap call and a second button
-  for the way the seller asked to be reached (a text, WhatsApp or email), and
+  for the way the seller asked to be reached (a text, an email, WhatsApp, or
+  Telegram where the business offers it), and
   statistics: how many sellers came and how many cars were bought, from
   each place.
 - **Their own brand and their own accounts**: their name, color, logo and
