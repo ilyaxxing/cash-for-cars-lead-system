@@ -15,7 +15,8 @@ for working on the code are in [CLAUDE.md](../CLAUDE.md).
 
 This folder also holds the project page for GitHub Pages
 ([index.html](index.html), with `.nojekyll` so it is served as it is), the
-media the README shows (`media/`) and the page's live demo (`demo/`).
+media (`media/`: the source of the README's film, and the six screens in
+[business.md](business.md)) and the page's live demo (`demo/`).
 `for-buyers/` only forwards old links to the buyer site below. The page speaks
 to the person who sets the system up; its link preview (`assets/preview.jpg`)
 is drawn from its kicker and headline by `tools/make_page_preview.py`, so run
