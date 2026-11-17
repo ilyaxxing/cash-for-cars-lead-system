@@ -165,10 +165,11 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   under 300% ink), QR and small gray text in black ink only, black
   overprints on the accent (overprint mode 1, and only while both inks stay
   under the limit).
-- No manufacturer badges or emblems in shipped images, and no grille that
-  belongs to one make (trademarks). They are retouched out of the sources:
-  `design-reference/hero-car-clean.png` and the `guide-<slot>.png` sketches.
-  A new illustration gets the same treatment before it is converted.
+- No manufacturer badges or emblems in shipped images (trademarks). They are
+  retouched out of the sources: `design-reference/hero-car-clean.png` and the
+  `guide-<slot>.png` sketches. The sketches also have no grille that belongs
+  to one make; the welcome photo still has its car's own grille, badge
+  removed. A new illustration gets the same treatment before it is converted.
 - Contact: name, phone (required), email (optional, personal data), preferred
   contact method (call, SMS, WhatsApp, email). Telegram is opt-in per client
   (one line in the preset; texts ship). The lead's second button, next to
