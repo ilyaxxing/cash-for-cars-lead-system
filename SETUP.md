@@ -1,4 +1,4 @@
-# Setting up the system for a business: a guide for Claude Code
+# Setting up the system for a business
 
 This file is written for the AI assistant. A person gave you this repository
 because they want the lead system running for a business that buys used cars:
@@ -9,6 +9,9 @@ business owner's phone, and do the technical work yourself.
 What they get at the end: a web form for car sellers (opened from a QR code on
 a business card), a dashboard for the owner that installs on the phone like an
 app, and a push notification on that phone for every new lead.
+
+If you are using Codex, read [the setup-client skill](.agents/skills/setup-client/SKILL.md)
+for its question and sign-in options.
 
 ## How to work with the person
 
@@ -36,8 +39,9 @@ app, and a push notification on that phone for every new lead.
 - Use plain words: "server", "address", "password", "settings file". Avoid
   "env vars", "VAPID", "PITR" and the like; if a term can't be avoided, explain
   it the first time.
-- Before anything that costs money (creating the Railway project, buying a
-  domain), say what it costs and wait for a clear yes.
+- Before creating infrastructure or taking a paid step (a Railway project, a
+  server, a domain), explain what will be created, who pays and the expected
+  cost. Wait for a clear yes.
 - The client's settings file holds passwords and keys. Never paste its contents
   into the chat, never commit it, never send it anywhere: only the deploy
   script reads it. The one exception is the owner's first password, which
@@ -87,8 +91,8 @@ happens between the person and the business later, everything keeps working.
 
 The commands in this guide are for a bash shell on macOS or Linux. On Windows,
 everything runs inside WSL, the Linux that Windows can install (Ubuntu, from
-Microsoft's guide: https://learn.microsoft.com/windows/wsl/install): start
-Claude Code inside it and follow the Linux notes. Windows itself, outside WSL,
+Microsoft's guide: https://learn.microsoft.com/windows/wsl/install): run
+the setup commands inside it and follow the Linux notes. Windows itself, outside WSL,
 is not supported.
 
 Check what is installed and install what is missing (ask first):
@@ -108,15 +112,21 @@ Check what is installed and install what is missing (ask first):
   Railway's own installer, `bash <(curl -fsSL cli.new)`: tell the person it is
   Railway's script, which downloads the CLI and puts it on the path.
 
-If you are not inside this repository yet, clone it into a folder of its own,
-for example `~/car-buyout`, and work from there. Deploy the newest release
-(a `v*` tag), not `main`: `main` is where development happens.
+Clone the repository once if needed, then work inside that folder. For a
+new installation, fetch the release tags and select the latest stable one:
 
 ```bash
-git clone https://github.com/ilyaxxing/cash-for-cars-lead-system.git ~/car-buyout
-cd ~/car-buyout
-git checkout "$(git tag --list 'v*' --sort=-v:refname | head -n 1)"
+git fetch origin --tags
+git tag --list 'v*' --sort=-v:refname | grep -Ex 'v[0-9]+\.[0-9]+\.[0-9]+' | head -n 1
 ```
+
+If the fetch fails or there is no release, stop. For Codex, check that the
+selected tag includes [the setup-client skill](.agents/skills/setup-client/SKILL.md)
+and `AGENTS.md` before continuing (v1.0.1 onward). Use the selected tag in
+`git checkout --detach <tag>` and verify `git rev-parse HEAD` matches
+`git rev-parse <tag>^{commit}`. On a
+resumed installation, keep the existing release and continue from the first
+unfinished step.
 
 Then the Python environment. `--seed` puts pip into it, which installing and
 updating use:
@@ -325,14 +335,16 @@ website. If it does:
 
 1. The id from step 3, or pick one now: lowercase with dashes, e.g.
    `lone-star-car-buyers`.
-2. `mkdir -p clients && cp .env.example clients/<id>.env`, then edit the file
-   with your file tools and fill in the answers from step 3.
+2. For a new client, create `clients/` and copy `.env.example` to
+   `clients/<id>.env` only if the file is absent. On resume, reuse the
+   existing file. Fill in the missing answers from step 3 and preserve
+   passwords, generated keys and any hosting project ID.
 3. The look from step 3: `BRAND_COLOR`, and the files as paths from the
    repository, e.g. `BRAND_LOGO=clients/<id>/logo.png`. Leave empty whatever
    they keep.
 4. `PUBLIC_URL=https://buy.<domain>` if the domain from step 3 is ready for
-   its DNS records today; otherwise leave it empty for now (step 6). Leave
-   these empty: `SECRET_KEY`, `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`,
+   its DNS records today; otherwise leave it empty for now (step 6). In a new
+   settings file leave these empty: `SECRET_KEY`, `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`,
    `RAILWAY_PROJECT_ID`.
    The deploy script generates the keys, writes them into the file, and adds
    the project id after the first run. Local-only values copied from
@@ -701,8 +713,9 @@ For a server of its own, the business rents it in its own name from a
 provider in its country: Ubuntu 24.04, 2 GB of memory, 20 GB of disk, a
 public IPv4 address. Give the person this computer's SSH public key
 (`~/.ssh/id_ed25519.pub`; make one with `ssh-keygen -t ed25519` if there is
-none) to add when the server is created, or run `! ssh-copy-id
-root@<address>` with them once, with the root password from the provider.
+none) to add when the server is created, or have the person run
+`ssh-copy-id root@<address>` once in their terminal and enter the provider's
+root password there. In Claude Code they can prefix the command with `!`.
 Then `VPS_HOST=root@<address>` in the settings file. The domain gets an A
 record pointing at the server's address before the first deploy (step 6
 moves before step 5). Where Docker Hub is slow or closed, set
