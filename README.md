@@ -17,7 +17,7 @@ Suggested price: $300–600 per setup, plus optional monthly support. The
 business pays its own hosting and domain.
 
 [Live demo](https://ilyaxxing.github.io/cash-for-cars-lead-system/) ·
-[Set it up with Claude Code](#get-started) · [Business model](docs/business.md)
+[Set it up with Claude Code or Codex](#get-started) · [Business model](docs/business.md)
 
 ## How it works
 
@@ -72,25 +72,34 @@ also picks the buyer's country and language: eleven of them, as in [countries/](
 
 ## Get started
 
-Open [Claude Code](https://claude.com/product/claude-code) (for example the
-Code tab in the Claude desktop app) in an empty folder on a Mac or a Linux
-computer (on Windows, inside WSL) and send:
+Choose an assistant and open an empty local folder on a Mac or Linux
+computer (on Windows, use WSL).
+
+- **Claude Code** — open the Code tab in the Claude desktop app or start
+  [Claude Code](https://claude.com/product/claude-code) in the folder.
+- **ChatGPT / Codex** — open a local project in Codex with access to the
+  folder and its terminal. In the ChatGPT desktop app, choose Codex and
+  [work locally](https://learn.chatgpt.com/docs/environments/modes).
+  Codex setup is included from v1.0.1. To continue in a new chat, reopen
+  the cloned repository folder and ask Codex to resume the installation.
+
+Send the same request in either:
 
 ```text
 Set up https://github.com/ilyaxxing/cash-for-cars-lead-system for my client.
 ```
 
-Claude asks about the business, deploys it, connects the owner's phone and
-makes the card and the QR codes. It tells you when a step needs a person:
-signing in, payment, the domain's DNS settings. About an hour for the setup
+The assistant asks about the business, sets up the system and guides you
+through a test on the owner's phone. You sign in and approve the hosting
+cost before it creates the server. It then helps connect the domain and
+makes the card and QR codes. About an hour for the setup
 itself once the accounts are ready; handing the project over to the business
 and the domain's DNS can take up to a day.
 
-- **You bring** Claude Code, which needs a paid Claude plan (Pro or higher)
-  or an Anthropic API account, and your own [Railway](https://railway.com)
+- **You bring** access to Codex or to Claude Code (Claude Pro or higher,
+  or an Anthropic API account). For Railway setups you also need your own [Railway](https://railway.com)
   account on the Hobby plan, from $5 a month (usage above the included $5 is
-  billed): each project is built there before it is handed over. These two
-  are your own running costs.
+  billed): each project is built there before it is handed over.
 - **The business brings** its own Railway account with its card, hosting
   from $5 a month; the finished project is handed over to it.
   Also its domain, its name and email, and the owner's phone for ten minutes.
@@ -102,7 +111,7 @@ and a lawyer's check of the privacy policy. See
 <details>
 <summary><b>Other countries</b></summary>
 
-The system can be adapted for other countries: Claude changes the sellers'
+The system can be adapted for other countries: the assistant changes the sellers'
 language, the questions, the privacy policy, the card's size and, where
 needed, where it runs. The legal side needs a local check: where sellers'
 data may be kept, whether it may leave the country and what the business
@@ -115,7 +124,9 @@ and what it does not support, such as languages written right to left.
 
 </details>
 
-> **AI assistants:** follow [SETUP.md](SETUP.md).
+> **Setting this up from the URL?** Once the repository is open locally, Codex
+> should read [setup-client](.agents/skills/setup-client/SKILL.md). Both
+> assistants follow [SETUP.md](SETUP.md).
 
 ## Limitations
 
