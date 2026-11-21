@@ -80,8 +80,9 @@ décision fondée exclusivement sur un traitement automatisé à votre sujet.
   accessibles aux tribunaux et aux autorités selon les lois de ce pays.
 - **Les services de notifications push.** Quand vous envoyez une demande,
   nous sommes avisés sur notre téléphone par le service de notifications de
-  son fabricant (par exemple Apple ou Google). La notification ne contient
-  que l'auto et le prix, jamais votre nom ni vos coordonnées.
+  son fabricant (par exemple Apple ou Google). La notification indique le
+  véhicule et peut préciser son kilométrage, son état, le prix demandé et le
+  nombre de photos reçues. Votre nom et vos coordonnées en sont exclus.
 - **Les messageries.** Si nous échangeons par une application comme
   WhatsApp, la conversation relève aussi de la politique de confidentialité
   de cette application.
@@ -93,9 +94,11 @@ Nous gardons votre nom, votre téléphone, votre courriel et les photos de
 votre auto le temps de traiter votre demande.
 **{retention_days} jours après la fermeture de la demande**, que nous ayons
 acheté l'auto ou non, ils sont effacés automatiquement. Nous conservons les
-autres renseignements sur l'auto et le résultat, qui ne vous identifient
-plus, pour notre suivi. Si nous achetons votre auto, le contrat de vente et
-nos pièces comptables sont conservés à part, aussi longtemps que la loi
+autres renseignements sur le véhicule, y compris son numéro de série s’il a
+été fourni, ainsi que le résultat de la demande. Les notes de notre équipe
+sont conservées séparément. Les coordonnées saisies dans ces notes échappent
+à l’effacement automatique. Si nous achetons votre auto, le contrat de vente
+et nos pièces comptables sont conservés à part, aussi longtemps que la loi
 l'exige.
 
 Certaines copies échappent à cet effacement automatique, et nous préférons
@@ -130,11 +133,12 @@ recueillons pas sciemment de renseignements sur des personnes de moins de
 
 ## Sécurité
 
-Vos renseignements circulent par des connexions chiffrées, sont stockés sur
-des serveurs auxquels seule notre application a accès, et ne sont visibles
-que par nous, après connexion. En cas d'incident de confidentialité
-présentant un risque de préjudice sérieux, nous vous aviserons, ainsi que
-la Commission d'accès à l'information.
+Vos renseignements sont transmis par des connexions chiffrées. Il faut
+ouvrir une session pour consulter les demandes dans le tableau de bord. Les
+administrateurs de l’infrastructure d’hébergement peuvent également avoir
+accès aux renseignements. En cas d'incident de confidentialité présentant un
+risque de préjudice sérieux, nous vous aviserons, ainsi que la Commission
+d'accès à l'information.
 
 ## Modifications
 

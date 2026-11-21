@@ -1,6 +1,6 @@
 # Technical documentation
 
-For people changing the code, and for Claude Code. Setting up an instance for
+For people and assistants working on the code. Setting up an instance for
 a business is a guided process in [SETUP.md](../SETUP.md); the project's rules
 for working on the code are in [CLAUDE.md](../CLAUDE.md).
 

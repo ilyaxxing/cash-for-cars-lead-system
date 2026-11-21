@@ -31,9 +31,9 @@ while the seller is still looking for a buyer. The car (make, model, year,
 mileage and condition) is always in the lead; the asking price and photos are
 there when the seller adds them.
 
-You build it with Claude Code on your Railway account and hand it over to the
-client's own: Railway and the domain are in the client's name and on the
-client's card, so it keeps working whatever happens between you. You charge
+Use Claude Code or Codex. On Railway, build the project on your account and
+transfer it to the client's account. If the client uses its own server,
+install directly there. The client owns the hosting and domain. You charge
 for the setup and, if they want it, for support. Some cities and private lots
 restrict leaving flyers on cars, so the client should check the local rules.
 
@@ -57,11 +57,10 @@ restrict leaving flyers on cars, so the client should check the local rules.
   statistics: how many sellers came and how many cars were bought, from
   each place.
 - **Their own brand and their own accounts**: their name, color, logo and
-  domain, hosted on their own Railway account from $5 a month, their
-  data in their own database.
+  domain, hosting account and database.
 - **Privacy built in**: a privacy policy template, a consent checkbox, and
-  sellers' names, phones and photos erased automatically 90 days after a lead
-  is closed.
+  automatic cleanup of the form's contact fields and uploaded photos 90 days
+  after a lead is closed. Staff notes are kept separately.
 
 ## Where leads come from
 
@@ -88,19 +87,19 @@ Suggested starting points.
 |---|---|---|
 | Setup | $300-600 once | Turnkey: installation, their name, color and logo, connecting their domain, the app on the owner's phone, the card PDF, and QR codes and links for every place. |
 | Support (optional) | $25-50 a month | Up to two small changes a month (form questions, texts, new QR codes and labels), updates to new releases, a reply within a working day. New features and rework are extra. |
-| Hosting | from $5 a month | Railway bills the client directly. If the business needs its own server, check the local provider's price. |
+| Hosting | Railway from $5 a month, or the server provider's rate | The client pays its hosting provider directly. |
 | Domain | about $10-15 a year | Required, in the business's name. Free if the business has a website: use a subdomain such as `buy.<their domain>`. |
 | Printing | usually under $150 per 1,000 cards | Any print shop; the PDF is print-ready. |
 
 Hosting, the domain and printing are paid by the client directly, on top of the setup price.
 
-Hosting is from $5 a month (Railway Hobby includes $5 of usage; anything above is billed, taxes may apply).
+Railway hosting is from $5 a month (Railway Hobby includes $5 of usage; anything above is billed, taxes may apply).
 Check the bill after the first week.
 
 You pick the price within the range, and whether to sell the setup alone or
-with monthly support. Your own costs are a paid Claude plan for Claude Code
-and your own Railway Hobby plan, from $5 a month (usage above the included
-$5 is billed): each instance is built there before it is handed over.
+with monthly support. You need access to Claude Code or Codex. For Railway installations,
+you also need a Railway Hobby account while building and testing the project.
+For a client-owned server, the client pays its hosting provider directly.
 
 The argument for the owner is arithmetic, not a promise: if a car earns them
 a few hundred dollars, one extra car from the system pays for the setup.
@@ -147,7 +146,7 @@ mileage under it, so vehicles and electronics fit with no change to the app:
 Photo guide sketches are drawn for cars; other items get plain photo tiles unless new sketches are added.
 
 Engine hours or a boat's hull number are questions of their own: they show
-in the lead, not on its card in the list. To adapt it, tell Claude Code what
+in the lead, not on its card in the list. To adapt it, tell your assistant what
 the business buys, for example:
 *"Adapt this system for a business that buys motorcycles. Ask for make,
 model, year, mileage, title status and photos of both sides and the

@@ -17,6 +17,9 @@ counts from closing, so leads still being worked keep their contacts. What it
 cannot reach, and the policy says so: database backups until they rotate out,
 notifications already shown, and calls and chats on both sides. Leads that
 are never closed are never erased, so close the ones you are done with.
+Vehicle details (including the VIN where collected) and the outcome remain.
+Staff notes survive this cleanup, including notes hidden with Delete so they
+can be restored. Keep sellers' contact details out of notes.
 
 A visitor's IP address is used in memory for the rate limits and is never
 stored, as the policy says, so it is kept out of every log: the app logs its

@@ -14,15 +14,15 @@ Running the app locally, the checks that must pass, and how it is built.
   way the seller chose, and statistics by source and conversion.
 - **Push notifications.** Web Push, including iPhone (iOS 16.4+ home screen
   apps). A notification carries the car, its mileage and condition, and the
-  price and photos once the seller has added them, never the seller's name
+  asking price and photo count when available, never the seller's name
   or phone number.
 - **Data retention.** The seller's name, phone, email and the photos are
   erased 90 days after a lead is closed. The car and the outcome are kept for
-  statistics.
+  statistics. Staff notes remain, including any contact details written in them.
 - **Spam protection.** A honeypot field and per-address rate limits. Addresses
   are counted in memory and never stored.
 - **One instance per client.** Each business gets its own deployment, database
-  and photo bucket. Everything client-specific is configured through
+  and photo storage. Everything client-specific is configured through
   environment variables and the form preset.
 
 ## Stack

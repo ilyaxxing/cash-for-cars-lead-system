@@ -42,11 +42,9 @@ for its question and sign-in options.
 - Before creating infrastructure or taking a paid step (a Railway project, a
   server, a domain), explain what will be created, who pays and the expected
   cost. Wait for a clear yes.
-- The client's settings file holds passwords and keys. Never paste its contents
-  into the chat, never commit it, never send it anywhere: only the deploy
-  script reads it. The one exception is the owner's first password, which
-  you show once, in the message for the owner (step 8). It stays in this chat,
-  so it opens the dashboard only until the owner sets their own.
+- Keep passwords, keys and the contents of the settings file out of chat,
+  tool output and Git. The installer shares only the initial dashboard
+  password with the owner through their password manager (steps 4 and 8).
 - Never push to GitHub. Change tracked files only as described in
   [Customizing the form](#customizing-the-form).
 - When something fails, read the error, fix what you can, and tell the person
@@ -70,19 +68,20 @@ Tell the person briefly what they will need:
    the project over to the business and the domain's DNS can take up to a
    day.
 2. Facts about the business (asked in step 3); they can ask the client as you go.
-3. Two Railway accounts, each on the Hobby plan (from $5 a month, with a
+3. For a Railway installation, two Railway accounts, each on the Hobby plan (from $5 a month, with a
    payment card): their own, where the instance is built and tested, and the
    business's own, on the business's card, which the finished project is
    handed over to (step 10). Hosting is from $5 a month (Railway Hobby includes $5 of usage; anything above is billed, taxes may apply).
    Railway moves a project between accounts only when both have a paid plan.
-   Outside the US the instance may run on a server of the business's own in
-   its country instead ([Another country](#another-country)).
+   For a [server of the business's own](docs/deploy-vps.md), use its hosting
+   account and SSH access instead. Confirm local hosting requirements
+   before choosing a provider ([Another country](#another-country)).
 4. The business's own domain, owned by the business: a subdomain of its
    website such as `buy.<domain>`, or a new domain the business buys in its
    own name (about $10-15 a year). QR codes and cards are made only for it.
 5. Later: the owner's phone (iPhone or Android) for ten minutes.
 
-Explain why the Railway account and the domain belong to the business: printed
+Explain why the hosting account and the domain belong to the business: printed
 cards point at the domain for good, and the database holds sellers' personal
 data, with the business named as its operator in the privacy policy. Whatever
 happens between the person and the business later, everything keeps working.
@@ -106,7 +105,7 @@ Check what is installed and install what is missing (ask first):
   Python 3.12 from https://www.python.org/downloads/ (on Linux, the
   distribution's `python3.12` package), and `python3.12 -m venv .venv` below
   instead of the `uv venv` line.
-- **Railway CLI**: `railway --version`. Install it the first way that works:
+- **Railway CLI** (Railway installations only): `railway --version`. Install it the first way that works:
   with Homebrew (`brew --version` answers), `brew install railway`; with
   Node.js (`npm --version` answers), `npm install -g @railway/cli`; otherwise
   Railway's own installer, `bash <(curl -fsSL cli.new)`: tell the person it is
@@ -136,7 +135,7 @@ uv venv --python 3.12 --seed .venv
 .venv/bin/python -m pip install -r requirements.txt
 ```
 
-Node.js and Docker are not needed: Railway builds everything.
+Railway builds the app remotely. For a client-owned server, the VPS deploy script sets up Docker on that server.
 
 ## Step 2. Railway accounts
 
@@ -277,9 +276,9 @@ website. If it does:
   `locales/privacy-policy.en.md` section by section and tell the person
   what it leaves out: what the form collects (the car, the photos, the name,
   phone and email), that the IP address is used briefly and never stored,
-  the push notifications (car and price, no contacts), the hosting provider,
-  the erasure 90 days after a lead is closed and what it cannot reach
-  (backups, notifications already shown), and how to ask for erasure. The
+  the vehicle details sent in push notifications, the hosting provider,
+  the fields and photos erased after closing, and what remains (vehicle
+  details, staff notes, backup copies and notifications already shown), and how to ask for erasure. The
   gaps are for the lawyer to fill; never fill them in yourself.
 
 **Where sellers will find the form**
@@ -319,12 +318,13 @@ website. If it does:
   comes in step 9.
 
 **Owner's password**
-- Generate a strong, typeable one (three random words and a number) unless the
-  person wants to choose it (`OWNER_PASSWORD`). It is for the first sign-in
-  only: the dashboard then asks the owner to set a password of their own
-  before anything else, and the one from this chat stops working.
+- Ask the installer to generate the initial dashboard password in their
+  password manager. Use at least 24 random letters and digits so the password
+  can be pasted directly into the settings file in step 4. Keep the value
+  out of this conversation. On the first sign-in, the owner must replace it
+  before they can open the dashboard.
 
-**Photo storage location**
+**Photo storage location on Railway**
 - West of the Rockies: `sjc`; otherwise `iad` (`RAILWAY_BUCKET_REGION`). It
   can't be changed later.
 
@@ -335,12 +335,15 @@ website. If it does:
 2. For a new client, create `clients/` and copy `.env.example` to
    `clients/<id>.env` only if the file is absent. On resume, reuse the
    existing file. Fill in the missing answers from step 3 and preserve
-   passwords, generated keys and any hosting project ID.
+   passwords, generated keys and any hosting project ID. Once the new file is
+   ready, have the installer open it locally in a text editor, paste the saved
+   password after `OWNER_PASSWORD=` and save. On resume, keep the existing value.
 3. The look from step 3: `BRAND_COLOR`, and the files as paths from the
    repository, e.g. `BRAND_LOGO=clients/<id>/logo.png`. Leave empty whatever
    they keep.
-4. `PUBLIC_URL=https://buy.<domain>` if the domain from step 3 is ready for
-   its DNS records today; otherwise leave it empty for now (step 6). In a new
+4. Set `PUBLIC_URL=https://buy.<domain>` when the domain is ready. On Railway
+   it can stay empty until step 6. For a client-owned server, set it before
+   deployment and add the DNS record from the server guide. In a new
    settings file leave these empty: `SECRET_KEY`, `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`,
    `RAILWAY_PROJECT_ID`.
    The deploy script generates the keys, writes them into the file, and adds
@@ -355,12 +358,13 @@ website. If it does:
 
 ## Step 5. Deploy
 
-On a server of the business's own: `.venv/bin/python tools/deploy_vps.py
-clients/<id>.env` instead, once the domain points at the server (its DNS
-record, step 6, comes first there); the rest of this step reads the same.
+**Client-owned server.** Confirm the server, provider cost and deployment with
+the person. Point the domain at its IP address and follow
+[the server deployment guide](docs/deploy-vps.md) to deploy and check backups.
+Once the site opens over HTTPS, continue at [step 7](#step-7-test-it-together).
 
-Ask for the go-ahead: this creates the Railway project on the person's own
-account; it moves to the business's account in step 10. Then:
+**Railway.** Ask for approval to create the project on the installer's account.
+It moves to the business's account in step 10. Then run:
 
 ```bash
 .venv/bin/python tools/deploy.py clients/<id>.env
@@ -402,7 +406,8 @@ Never add `--no-backups` yourself just to get past the stop.
 
 ## Step 6. The business's own domain
 
-Required: the QR and card commands refuse the Railway address. Explain why: a
+On a client-owned server, verify HTTPS after step 5 and continue to step 7.
+For Railway, connect the business's domain as follows. Explain why: a
 code printed on cards points to one address for good, so it must be the
 business's own, not the Railway one, which belongs to one Railway project.
 
@@ -433,7 +438,7 @@ of step 9, which need the domain anyway.
 1. Ask the person to open the seller form on their own phone through the
    test link, `https://<address>/?src=test` (the business's address, or the
    Railway one while the domain is on its way), and send a test car (any
-   car; a 555 number like 512-555-0100 is fine). The `test` label marks the
+   car and a fictional number valid for the selected country, taken from its demo). The `test` label marks the
    lead **Test** in the dashboard and keeps it out of every number in the
    owner's statistics.
 2. Don't sign in to the dashboard yourself. The first sign-in sets the
@@ -445,19 +450,20 @@ of step 9, which need the domain anyway.
 
 ## Step 8. The owner's phone
 
-Once the business's address works (step 6), give the person this message for
+Once the business's address works (step 6), have the installer share only the
+initial dashboard password with the owner using their password manager. Send
+the setup instructions separately. Give the person this message for
 the business owner, filled in with that address, in the owner's language
 (English in the US; elsewhere translate it, as the dashboard's texts are):
 
 > Your new lead system is ready. To get a notification for every car seller:
 >
-> 1. On your iPhone, open **Safari** and go to <dashboard address>.
->    (Android: open it in **Chrome** and tap **Install app**.)
-> 2. Tap **Share**, then **Add to Home Screen**, then **Add**.
-> 3. Open the new icon on your home screen and sign in with this one-time
->    password: <password>
-> 4. Choose a password of your own when asked. Only you will know it; the
->    one above stops working.
+> 1. Open <dashboard address> in Safari on iPhone or Chrome on Android.
+> 2. On iPhone, tap **Share → Add to Home Screen → Add**. On Android,
+>    choose **Install app** in Chrome.
+> 3. Open the app from your home screen. Sign in with the initial password
+>    shared with you separately.
+> 4. Choose your own password. This replaces the initial one.
 > 5. Tap **Turn on notifications** and allow them, then **Send test
 >    notification**.
 > 6. Test leads are marked **Test** and don't count in your statistics; you
@@ -466,8 +472,8 @@ the business owner, filled in with that address, in the owner's language
 > iPhone shows notifications only for the home-screen app, and needs iOS 16.4
 > or newer. Make sure Focus or Do Not Disturb isn't hiding them.
 
-Send it to the owner privately, and ask them to do it soon: until they set
-their own password, anyone with this message could. Then ask the person to
+Ask the owner to complete the first sign-in promptly and keep their new
+password private. Then ask the person to
 send another test lead through the same test link and confirm the owner got
 the notification. If it
 didn't arrive, see [Troubleshooting](#troubleshooting). From now on nobody
@@ -593,15 +599,16 @@ keys. If the business moves support to someone else, it goes to them over a
 private channel (a password manager's shared item, not email or chat).
 
 Then summarize for the person, in their language: the three addresses, where
-the settings file is, the monthly cost (the business's Railway plan and
-domain), and that you are done. Give them a short note for the owner, in
+the settings file is and what the chosen hosting and domain cost.
+Give them a short note for the owner in
 the owner's language (English in the US):
 
 - The form address, the business card link and the dashboard address.
 - What the statuses mean is in the app: Settings, Help.
 - Privacy: a seller's name, phone, email and photos are erased automatically
   90 days after the lead is marked Purchased or Rejected. Leads never closed
-  are never erased, so close them when done.
+  are never erased, so close them when done. Keep contact details out of
+  staff notes: those notes remain after the scheduled cleanup.
 - The password is the owner's own: nobody else knows it. It can be changed in
   Settings; if it is forgotten, the person who installed the system can reset
   it, and the owner chooses a new one at the next sign-in.
@@ -609,13 +616,12 @@ the owner's language (English in the US):
 And remind the person:
 - Updates: move to the newest release (`git fetch --tags`, then
   `git checkout` the newest `v*` tag), then the same deploy command, while
-  they are an Editor on the business's project (docs/deploy.md, Updating).
+  they have Editor access on Railway or SSH access to the client's server.
   With texts of its own in another language, the deploy names any text the
   new release added: add it to the business's file and run it again.
 - Forgotten owner password: change `OWNER_PASSWORD` in the settings file and
   deploy again. That signs every device out; give the owner the new password
-  privately, like the first one: it works for one sign-in, then they set
-  their own again.
+  through the password manager, as in step 8. The owner replaces it at sign-in.
 - Backups: Railway keeps about 4 weeks of continuous database backups
   (point-in-time recovery). Photos are not backed up, which is fine: they are
   working material that is erased anyway. On a server of the business's own,
