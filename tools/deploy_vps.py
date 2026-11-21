@@ -2,14 +2,14 @@
 
     .venv/bin/python tools/deploy_vps.py clients/acme.env
 
-For a client Railway does not suit: a country whose law keeps personal data
-at home (Russia), or a business that cannot pay Railway. Any Linux server
+Use this for a business that needs local data storage, cannot pay for Railway,
+or prefers its own server. Any Linux server
 with SSH works; Ubuntu 24.04 is what this is tested on. The client rents it in
 its own name and adds the installer's SSH key. The env file is the same as for
 tools/deploy.py, plus:
 
     VPS_HOST=root@203.0.113.10         # how to reach the server over SSH
-    PUBLIC_URL=https://buy.example.ru  # required: its DNS A record points at the server
+    PUBLIC_URL=https://buy.example.com  # required: its DNS A record points at the server
     DOCKER_MIRROR=                     # optional: a Docker Hub mirror, where the hub is slow
 
 Every run:
@@ -86,7 +86,7 @@ def target(env: Mapping[str, str]) -> tuple[str, str]:
     domain = urlsplit(public_url).hostname or ""
     if not public_url.startswith("https://") or not domain:
         raise DeployError(
-            "PUBLIC_URL must be the client's own https:// address, e.g. https://buy.example.ru: "
+            "PUBLIC_URL must be the client's own https:// address, e.g. https://buy.example.com: "
             "Caddy gets its certificate for that domain."
         )
     return host, domain

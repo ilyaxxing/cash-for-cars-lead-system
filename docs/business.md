@@ -75,8 +75,8 @@ cars each one brings:
   partner, so each one's sellers are counted.
 - **A sign or banner**: a large code for people who stop, and the address in
   large letters (someone who types the address by hand shows up as Other).
-- **A link in the Google Maps listing** (Yandex Maps in Russia): in the
-  website field.
+- **A link in the business's map listing**: use the website field on the
+  map service local sellers use to find the business.
 - **A link in the social profiles and local groups**: in the bio, and in
   posts in neighborhood and car groups.
 
@@ -88,7 +88,7 @@ Suggested starting points.
 |---|---|---|
 | Setup | $300-600 once | Turnkey: installation, their name, color and logo, connecting their domain, the app on the owner's phone, the card PDF, and QR codes and links for every place. |
 | Support (optional) | $25-50 a month | Up to two small changes a month (form questions, texts, new QR codes and labels), updates to new releases, a reply within a working day. New features and rework are extra. |
-| Hosting | from $5 a month | On the client's own card. Where Railway doesn't fit (Russia), a small server in the client's country, at a similar price. |
+| Hosting | from $5 a month | Railway bills the client directly. If the business needs its own server, check the local provider's price. |
 | Domain | about $10-15 a year | Required, in the business's name. Free if the business has a website: use a subdomain such as `buy.<their domain>`. |
 | Printing | usually under $150 per 1,000 cards | Any print shop; the PDF is print-ready. |
 

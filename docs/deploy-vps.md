@@ -1,9 +1,8 @@
 # Deploy on a server of the client's own
 
-For a client Railway does not suit: where the client's lawyer says personal
-data must stay in the country (in Russia, sellers' names and phones are
-stored on servers in Russia), a business that cannot pay Railway, or one
-that wants its own server. The instance is the same app as on Railway; only
+Use this option if the client's lawyer confirms that seller data must stay
+in the country, if the business cannot pay for Railway, or if it prefers
+its own server. The instance is the same app as on Railway; only
 where it runs differs. [SETUP.md](../SETUP.md) drives these steps for an
 installer.
 
@@ -22,7 +21,7 @@ Railway ([Deploy and run an instance](deploy.md)).
   `ssh-copy-id root@<address>` and the root password. The script signs in with
   the key only.
 - **The client's domain, pointing at the server**: an A record such as
-  `buy.example.ru` → `203.0.113.10` at the registrar, before the first
+  `buy.example.com` → `203.0.113.10` at the registrar, before the first
   deploy. Caddy gets the HTTPS certificate for it, which needs the record in
   place.
 - This repository with the Python environment from
@@ -35,7 +34,7 @@ The client's settings file is the same as for Railway (`.env.example`), plus:
 
 ```bash
 VPS_HOST=root@203.0.113.10          # the server, over SSH
-PUBLIC_URL=https://buy.example.ru   # required: the client's domain
+PUBLIC_URL=https://buy.example.com   # required: the client's domain
 DOCKER_MIRROR=                      # optional, see below
 BACKUP_DAYS=14                      # optional: how long the daily dumps are kept
 ```
