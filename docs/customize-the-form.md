@@ -100,7 +100,7 @@ Phone numbers are checked and shown the way people write them in that
 country (the rules are libphonenumber's), and a number with another
 country's calling code is refused. Outside the US, replace
 `postal_code_format` with `postal_code_pattern`, a pattern the whole code
-must match, e.g. `postal_code_pattern: '\d{6}'` in Russia. Keep it to digits,
+must match. For a six-digit postal code, use `postal_code_pattern: '\d{6}'`. Keep it to digits,
 letters, spaces and dashes: the browser and the server both check it.
 
 ## Another country
@@ -123,7 +123,7 @@ checks that it is complete.
 | `PRESET_FILE` | The form: a copy of the shipped preset with the country's questions, `distance_unit`, `phone_region` and postal code rule. Its `id` is stored on each lead. |
 | `LOCALE`, `LOCALE_FILE` | The language code (`ru`, `de`, `zh-Hant` with its script where it has several, never the country) and the texts. For a language that ships (`en`), the file only needs the texts that change; otherwise it is a full translation of `locales/en.json`. |
 | `PRIVACY_POLICY_FILE` | The privacy policy in that language and under that country's law, a template like `locales/privacy-policy.en.md`. A lawyer of the client's checks it. |
-| `CURRENCY`, `TIMEZONE` | e.g. `RUB`, `Europe/Moscow`. Where a car costs millions in the currency, the price question's `max` goes up with it. |
+| `CURRENCY`, `TIMEZONE` | The business's three-letter currency code and IANA time zone. Where a car costs millions in the currency, the price question's `max` goes up with it. |
 | `CARD_SIZE`, `CARD_FONT` | The card's size there, and a font for card text in a script the card's own fonts lack ([Configuration](configuration.md)). |
 
 The app checks them at startup, and the deploy script checks them before it

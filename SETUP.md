@@ -188,9 +188,8 @@ Texas, so Central time?" with the buttons "Yes, Central" and "Another zone".
 - Where the business is, to pick its time zone, e.g. Texas → `America/Chicago`
   (`TIMEZONE`). Confirm the zone with the person.
 - How sellers may ask to be contacted: phone call, SMS, WhatsApp and email
-  out of the box. Telegram can be added, for example when many of the
-  business's sellers speak Russian; if they want it, add it to the preset as
-  in [Customizing the form](#customizing-the-form);
+  out of the box. Ask which channels the business's sellers use. If they want
+  Telegram, add it to the preset as in [Customizing the form](#customizing-the-form);
   [docs/customize-the-form.md](docs/customize-the-form.md) shows the line.
   Keep the rest as it is.
 
@@ -244,8 +243,7 @@ The business card is asked about later, in step 9.
   operator of sellers' data (`OPERATOR_NAME`). Ask it first, with buttons:
   - A company: its legal name, e.g. "Lone Star Car Buyers LLC".
   - A sole proprietor: their full legal name, with the business name if they
-    trade under one, e.g. "Jane Doe, doing business as Lone Star Car Buyers"
-    (in Russia "ИП Иванов Иван Иванович").
+    trade under one, e.g. "Jane Doe, doing business as Lone Star Car Buyers".
   - A private person, with no business registered: their full legal name as
     on their ID, e.g. "Jane Doe".
 
@@ -292,8 +290,7 @@ website. If it does:
   - a poster at a partner repair shop or tow company, one label per partner
     (`shop_<name>`, `tow_<name>`), so each one's sellers are counted;
   - a sign or banner (`sign`, or one per spot);
-  - a link in the Google Maps listing, or the Yandex Maps one in Russia
-    (`maps`);
+  - a link in the business's listing on the map service its sellers use (`maps`);
   - a link in the social profiles and local groups (`social`, or one per
     profile or group: `instagram`, `group_<name>`).
 - Write each into `SOURCE_LABELS` now, label and the name the owner will read
@@ -664,8 +661,7 @@ when you have one): the country's rules change, and a wrong guess ends up
 printed on a thousand cards. Tell the person what you found in a sentence or
 two and let them confirm it with the business. The legal points go to the
 business's local lawyer: say what is commonly known, say where you are not
-sure, and never present either as a legal answer. Russia is the worked example
-throughout.
+sure, and never present either as a legal answer.
 
 **First, what decides the plan** (before step 1):
 
@@ -692,10 +688,8 @@ throughout.
 2. **Where the data may be kept**, for the local lawyer to confirm: whether
    sellers' names and phones must stay in the country, whether keeping them
    abroad needs extra paperwork, and whether the business must register with
-   a regulator. Say what is commonly known (Russia's 152-FZ keeps such data
-   in Russia, which is why the Russian files run on a server there). Until
-   the lawyer has answered, choose a server in the country (below): it is
-   the safe side.
+   a regulator. Until the lawyer has answered, plan for a server in the
+   business's country (below).
 3. **Whether a site needs a permit there**, also for the lawyer: some
    countries require one before a server in the country may serve a site
    (mainland China's ICP filing takes weeks). Ask before promising a launch
@@ -730,32 +724,28 @@ provider's server backups if it offers them, or copy a dump off now and then
   written in more than one: `ru`, `sv`, `tr`, `ja`, `zh-Hans` (simplified
   Chinese) or `zh-Hant` (traditional). Never the country (`zh-CN` is
   refused): that comes from the form.
-- **Phone numbers**: the country's code in the form (`phone_region`, e.g.
-  `RU`). Numbers from other countries are refused, as US numbers are in the
-  US.
+- **Phone numbers**: set `phone_region` to the two-letter country code for
+  sellers' phone numbers. The form rejects numbers outside that region.
 - **Postal code**: its pattern in the form (`postal_code_pattern`, e.g.
   `'\d{6}'` in Russia, `'\d{3} ?\d{2}'` in Sweden), or the field dropped
   where the country has none.
 - **Distance**: kilometers or miles (`distance_unit`).
-- **Currency** (`CURRENCY`, e.g. `RUB`), written the country's way by
-  itself. Where a car costs millions (Korean won, Vietnamese dong,
-  Indonesian rupiah), raise the price question's `max` in the form to a
+- **Currency** (`CURRENCY`): use the business's three-letter currency code.
+  Where a car costs millions (Korean won, Vietnamese dong, Indonesian rupiah), raise the price question's `max` in the form to a
   generous price in that currency: the field takes as many digits as that.
-- **Time zone** (`TIMEZONE`, e.g. `Europe/Moscow`): the business's own.
-- **The form's questions.** Offer the US questions, translated, and ask what
-  to add, drop or change: in Russia, for example, the vehicle title (ПТС,
-  original or duplicate), the number of owners, and whether the car is
-  pledged (залог). Car makes common there go into the make suggestions.
-  Ask what a seller might not know offhand, and make that optional or drop
-  it: in Russia the title and the owners are a step the seller may skip, and
-  the form asks for the city alone (few know their postal code); elsewhere
-  outside the US the postal code is optional. Where buyers look a car up by
-  its number plate rather than the VIN (the UK, France, Spain, Brazil), the
+- **Time zone** (`TIMEZONE`): use the business's local IANA time zone.
+- **The form's questions.** Offer the US questions, translated, and ask
+  which details the buyer uses to value a car, such as title status, ownership
+  history or an outstanding loan. Include makes that sellers drive locally.
+  Make questions optional when sellers may need to look up the answer.
+  Outside the US, keep the postal code optional or ask for the city alone.
+  Where buyers look a car up by its number plate rather than the VIN
+  (the UK, France, Spain, Brazil), the
   form asks for the plate (`registration`), marked `personal: true`: a
   registry ties a plate to its owner, so it is erased with the contact
   details.
-- **How sellers like to be reached**: in Russia Telegram is common, so add
-  it to the contact methods (see point 1 for others).
+- **How sellers like to be reached**: ask the business which contact methods
+  to offer. See point 1 for the messengers the app can open directly.
 - **The card's size** print shops there use (`CARD_SIZE`): `3.5x2in` in the
   US and Canada, `90x50mm` in Russia, `85x55mm` in most of Europe, or any
   card from `85x50mm` to `92x56mm` (Japan's `91x55mm`, China's `90x54mm`).
@@ -770,7 +760,7 @@ provider's server backups if it offers them, or copy a dump off now and then
 **The business's files** (with step 4), in `clients/<id>/`:
 
 1. `form.yaml` (`PRESET_FILE`): a copy of `presets/us-car-buyout.yaml` with
-   its own `id` (e.g. `ru-car-buyout`), `distance_unit`, `phone_region` and
+   its own `id`, `distance_unit`, `phone_region` and
    `postal_code_pattern` instead of `postal_code_format`, and the changes
    agreed above.
 2. `texts.json` (`LOCALE_FILE`): the whole of `locales/en.json` in the
@@ -780,8 +770,8 @@ provider's server backups if it offers them, or copy a dump off now and then
    question. Short and natural, in the same tone: read it back as a seller
    would. A placeholder gets its word or date as it is, in one form, and a
    counted text has only English's one and many: word them so they read
-   right anyway (in Russian "Источник: {source}", not a sentence that would
-   need the word declined). Then run `.venv/bin/python -m app.cli check-texts --env-file
+   naturally for every value. For example, a label like "Source: {source}"
+   lets the source name stand on its own. Then run `.venv/bin/python -m app.cli check-texts --env-file
    clients/<id>.env`: it lists every text still missing (it would show as its
    key on screen) and every placeholder that differs from English.
 3. `policy.md` (`PRIVACY_POLICY_FILE`): the privacy policy in that language
@@ -789,10 +779,9 @@ provider's server backups if it offers them, or copy a dump off now and then
    with its `{placeholders}` kept: the operator and its contact, what is
    collected and why, the legal basis (the seller's consent), where the data
    is stored, how long (90 days after a lead is closed), and the seller's
-   rights and how to use them, in the terms of that law (in Russia, 152-FZ,
-   storage in Russia). Tell the person plainly that it is a draft for the
-   business's lawyer to review before launch, along with any registration
-   with the regulator (in Russia, notifying Roskomnadzor).
+   rights and how to use them, in the terms of that law. Tell the person
+   this is a draft. Before launch, the business's lawyer reviews it and
+   confirms whether the business needs to register with a regulator.
 4. In the settings file: `LOCALE`, `LOCALE_FILE`, `PRESET_FILE`,
    `PRIVACY_POLICY_FILE`, `CURRENCY`, `TIMEZONE`, `CARD_SIZE`, `CARD_FONT`
    if needed; and on a server of its own `VPS_HOST` and `PUBLIC_URL` (the

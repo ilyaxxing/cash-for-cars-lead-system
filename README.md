@@ -100,20 +100,17 @@ and the domain's DNS can take up to a day.
   or an Anthropic API account). For Railway setups you also need your own [Railway](https://railway.com)
   account on the Hobby plan, from $5 a month (usage above the included $5 is
   billed): each project is built there before it is handed over.
-- **The business brings** its own Railway account with its card, hosting
-  from $5 a month; the finished project is handed over to it.
-  Also its domain, its name and email, and the owner's phone for ten minutes.
-
-**In Russia** the business needs its own server in the country, its own domain
-and a lawyer's check of the privacy policy. See
-[Another country](SETUP.md#another-country).
+- **The business brings** its domain, its name and email, and the owner's phone
+  for ten minutes. For a Railway setup it also needs its own account and payment
+  card to take over the project, with hosting from $5 a month.
 
 <details>
 <summary><b>Other countries</b></summary>
 
 The system can be adapted for other countries: the assistant changes the sellers'
 language, the questions, the privacy policy, the card's size and, where
-needed, where it runs. The legal side needs a local check: where sellers'
+needed, where it runs. If local hosting is required, use a server in the
+business's country. The legal side needs a local check: where sellers'
 data may be kept, whether it may leave the country and what the business
 must register are for its local lawyer to confirm. For the countries in
 [countries/](countries/) it starts from ready files; their translations
