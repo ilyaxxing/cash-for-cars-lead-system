@@ -1,9 +1,8 @@
 """The owner's password and signed-in devices.
 
-One owner per instance. The password starts as OWNER_PASSWORD, which whoever
-set the system up has seen and often left in a chat history. So it opens the
-dashboard once: until the owner sets a password of their own, nothing but
-that change is allowed. Changing it signs every other device out. Changing
+One owner per instance. The installer shares OWNER_PASSWORD with the owner
+through a password manager. The owner must choose a new password before
+opening the dashboard. Changing it signs every other device out. Changing
 OWNER_PASSWORD and restarting resets the dashboard password to it, signs
 every device out, and asks for an own password again.
 

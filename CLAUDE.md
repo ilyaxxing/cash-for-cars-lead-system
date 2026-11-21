@@ -6,7 +6,7 @@ Lead intake for "we buy cars" dealers, installed one business at a time.
 Business-card-size cards with a QR code, left under the windshield wipers of
 parked cars (the main channel) → mobile web form for the car seller → Postgres →
 Web Push to the owner → owner dashboard (PWA, must work on iPhone).
-One instance per client (separate Railway project), not multi-tenant.
+One instance per client, in a separate Railway project or on the client's server.
 
 The repository is public. Write everything as if strangers read it.
 
@@ -31,8 +31,8 @@ The repository is public. Write everything as if strangers read it.
   deploy release tags, not `main`. No force push unless the user asks.
 - Default brand "Car Buyout"; `BRAND_NAME` overrides.
   The privacy-consent operator is the client (`OPERATOR_NAME`).
-- Installers are usually not technical and follow SETUP.md through Claude
-  Code. Keep SETUP.md, the deploy script's messages, the README and docs/ in step
+- Installers are usually not technical and follow SETUP.md with Claude
+  Code or Codex. Keep SETUP.md, the deploy script's messages, the README and docs/ in step
   with any change they touch.
 
 ## Stack
@@ -188,9 +188,9 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   when there is no working push subscription or the last push failed.
   Settings has no "Backup email" section.
 - Not in the design, built in the same visual system and shown for approval:
-  login, the first sign-in's own-password screen (OWNER_PASSWORD was handed
-  over in a chat, so it opens nothing else until replaced; a reset asks
-  again), onboarding (Add to Home Screen for iOS/Android, enable push, test push),
+  login, the first sign-in's own-password screen (the installer shares
+  OWNER_PASSWORD through a password manager; the owner must replace it
+  before opening the dashboard, including after a reset), onboarding (Add to Home Screen for iOS/Android, enable push, test push),
   Help in Settings, privacy policy page, the lead's second contact button.
 
 ## Data model

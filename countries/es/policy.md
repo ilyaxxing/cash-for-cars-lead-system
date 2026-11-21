@@ -77,8 +77,10 @@ importancia similar.
   las cláusulas contractuales tipo de la Comisión Europea.
 - **Servicios de notificaciones push.** Cuando envías una solicitud, nos
   llega un aviso al móvil a través del servicio de notificaciones de su
-  fabricante (por ejemplo, Apple o Google). El aviso solo incluye el coche y
-  el precio, nunca tu nombre ni tus datos de contacto.
+  fabricante (por ejemplo, Apple o Google). El aviso indica de qué coche se
+  trata y puede incluir el kilometraje, el estado, el precio solicitado y el
+  número de fotos recibidas. Tu nombre y los datos de contacto del
+  formulario quedan fuera del aviso.
 - **Apps de mensajería.** Si hablamos por una app como WhatsApp, esa
   conversación también se rige por la política de privacidad de la app.
 - Podemos comunicar datos a las autoridades cuando la ley lo exija.
@@ -87,10 +89,11 @@ importancia similar.
 
 Guardamos tu nombre, tu teléfono, tu email, la matrícula y las fotos de tu
 coche mientras gestionamos tu solicitud.
-**{retention_days} días después de cerrar la solicitud**, te hayamos
-comprado el coche o no, se borran automáticamente. Conservamos el resto de
-datos del coche y el resultado, que ya no te identifican, para nuestros
-registros. Si te compramos el coche, el contrato y las facturas se guardan
+**{retention_days} días después de cerrar la solicitud**, te hayamos comprado
+el coche o no, se borran automáticamente. Conservamos los demás datos del
+coche y el resultado de la solicitud. Las notas del equipo se guardan por
+separado. Los datos de contacto que se anoten allí quedan fuera del borrado
+automático. Si te compramos el coche, el contrato y las facturas se guardan
 aparte durante el plazo que exige la ley.
 
 Algunas copias quedan fuera de ese borrado automático, y preferimos decirlo
@@ -124,9 +127,9 @@ sabiendas datos de menores de 18 años.
 
 ## Seguridad
 
-Tus datos viajan por conexiones cifradas, se guardan en servidores a los que
-solo accede nuestra aplicación y solo nosotros podemos verlos, tras iniciar
-sesión.
+Tus datos se transmiten por conexiones cifradas. Para consultar solicitudes
+en el panel hay que iniciar sesión. Quienes administran la infraestructura
+de alojamiento también pueden tener acceso a los datos.
 
 ## Cambios en esta política
 

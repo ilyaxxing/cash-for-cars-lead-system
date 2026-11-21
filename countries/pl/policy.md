@@ -76,8 +76,9 @@ przetwarzaniu.
   Europejskiej.
 - **Usługi powiadomień push.** Gdy wysyłasz zgłoszenie, dostajemy
   powiadomienie na telefon przez usługę jego producenta (np. Apple lub
-  Google). Powiadomienie zawiera tylko auto i cenę, nigdy Twoje imię ani
-  dane kontaktowe.
+  Google). Powiadomienie wskazuje pojazd i może zawierać przebieg, stan
+  auta, cenę podaną przez sprzedającego oraz liczbę otrzymanych zdjęć. Nie
+  zawiera imienia ani danych kontaktowych z formularza.
 - **Komunikatory.** Jeśli rozmawiamy przez aplikację taką jak WhatsApp,
   rozmowa podlega też polityce prywatności tej aplikacji.
 - Możemy przekazać dane organom, gdy wymaga tego prawo.
@@ -87,10 +88,11 @@ przetwarzaniu.
 Imię i nazwisko, telefon, e-mail i zdjęcia auta przechowujemy, dopóki
 obsługujemy zgłoszenie.
 **{retention_days} dni po zamknięciu zgłoszenia**, niezależnie od tego, czy
-kupiliśmy auto, są one automatycznie usuwane. Pozostałe dane o aucie i
-wynik, które już Cię nie identyfikują, zachowujemy w naszych zapisach. Jeśli
-kupimy Twoje auto, umowę i dokumenty księgowe przechowujemy osobno, tak
-długo, jak wymaga tego prawo.
+kupiliśmy auto, są one automatycznie usuwane. Zachowujemy pozostałe dane
+auta, w tym VIN, jeśli został podany, oraz wynik zgłoszenia. Notatki
+pracowników są przechowywane osobno. Dane kontaktowe wpisane do notatek nie
+są automatycznie usuwane. Jeśli kupimy Twoje auto, umowę i dokumenty
+księgowe przechowujemy osobno, tak długo, jak wymaga tego prawo.
 
 Do niektórych kopii to automatyczne usuwanie nie sięga i wolimy powiedzieć
 to wprost:
@@ -123,9 +125,9 @@ danych osób poniżej 18 roku życia.
 
 ## Bezpieczeństwo
 
-Dane są przesyłane szyfrowanym połączeniem, przechowywane na serwerach, do
-których dostęp ma tylko nasza aplikacja, i widzimy je tylko my, po
-zalogowaniu.
+Dane przesyłamy przez szyfrowane połączenia. Przeglądanie zgłoszeń w panelu
+wymaga zalogowania się. Dostęp do danych mogą mieć także administratorzy
+infrastruktury hostingowej.
 
 ## Zmiany
 

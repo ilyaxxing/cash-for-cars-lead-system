@@ -57,8 +57,10 @@ legales o igual de importantes.
   y no pueden usarla para sus propios fines.
 - **Servicios de notificaciones push.** Cuando envía una solicitud, nos
   llega un aviso al teléfono a través del servicio de notificaciones del
-  fabricante del teléfono (por ejemplo, Apple o Google). El aviso solo
-  contiene el auto y el precio, nunca su nombre ni sus datos de contacto.
+  fabricante del teléfono (por ejemplo, Apple o Google). El aviso indica de
+  qué auto se trata y puede incluir el millaje, el estado, el precio
+  solicitado y la cantidad de fotos recibidas. Su nombre y los datos de
+  contacto del formulario quedan fuera del aviso.
 - **Apps de mensajería.** Si usted y nosotros hablamos por una app como
   WhatsApp, esa conversación también queda sujeta a la política de
   privacidad de la app.
@@ -68,9 +70,12 @@ legales o igual de importantes.
 
 Guardamos su nombre, teléfono, correo electrónico y las fotos de su auto
 mientras atendemos su solicitud.
-**{retention_days} días después de cerrar la solicitud**, hayamos comprado
-el auto o no, se borran automáticamente. Conservamos los demás datos del
-auto y el resultado, que ya no lo identifican, para nuestros registros.
+**{retention_days} días después de cerrar la solicitud**, hayamos comprado el
+auto o no, se borran automáticamente. Conservamos los demás datos del auto,
+incluido el número de identificación del vehículo (VIN) si lo proporcionó, y
+el resultado de la solicitud. Las notas del personal se guardan por
+separado. Los datos de contacto anotados allí quedan fuera del borrado
+automático.
 
 Algunas copias quedan fuera del alcance de ese borrado automático, y
 preferimos decirlo con claridad:
@@ -105,9 +110,9 @@ sabiendas información de menores de 18 años.
 
 ## Seguridad
 
-Su información viaja por conexiones cifradas, se guarda en servidores a los
-que solo nuestra aplicación tiene acceso y solo nosotros podemos verla
-después de iniciar sesión.
+Su información se transmite por conexiones cifradas. Para consultar las
+solicitudes en el panel se debe iniciar sesión. Quienes administran la
+infraestructura de alojamiento también pueden tener acceso a los datos.
 
 ## Cambios a esta política
 

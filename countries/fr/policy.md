@@ -79,8 +79,9 @@ des effets juridiques ou d'importance comparable.
   clauses contractuelles types de la Commission européenne.
 - **Les services de notifications push.** Quand vous envoyez une demande,
   nous sommes prévenus sur notre téléphone par le service de notifications
-  de son fabricant (par exemple Apple ou Google). La notification ne
-  contient que la voiture et le prix, jamais votre nom ni vos coordonnées.
+  de son fabricant (par exemple Apple ou Google). La notification indique le
+  véhicule et peut préciser son kilométrage, son état, le prix demandé et le
+  nombre de photos reçues. Votre nom et vos coordonnées en sont exclus.
 - **Les messageries.** Si nous échangeons par une application comme
   WhatsApp, la conversation relève aussi de la politique de confidentialité
   de cette application.
@@ -93,10 +94,11 @@ Nous gardons vos nom, téléphone, e-mail, l'immatriculation et les photos de
 votre voiture le temps de traiter votre demande.
 **{retention_days} jours après la clôture de la demande**, que nous ayons
 acheté la voiture ou non, ils sont effacés automatiquement. Nous conservons
-les autres informations sur la voiture et le résultat, qui ne vous
-identifient plus, pour notre suivi. Si nous achetons votre voiture, le
-contrat et les factures sont conservés à part, pendant la durée prévue par
-la loi.
+les autres renseignements sur le véhicule ainsi que le résultat de la
+demande. Les notes de notre équipe sont conservées séparément. Les
+coordonnées saisies dans ces notes échappent à l’effacement automatique. Si
+nous achetons votre voiture, le contrat et les factures sont conservés à
+part, pendant la durée prévue par la loi.
 
 Certaines copies échappent à cet effacement automatique, et nous préférons
 le dire clairement :
@@ -130,9 +132,10 @@ pas sciemment de données sur des personnes de moins de 18 ans.
 
 ## Sécurité
 
-Vos données transitent par des connexions chiffrées, sont stockées sur des
-serveurs auxquels seule notre application a accès, et ne sont visibles que
-par nous, après connexion.
+Vos données sont transmises par des connexions chiffrées. La consultation
+des demandes dans le tableau de bord exige une authentification. Les
+administrateurs de l’infrastructure d’hébergement peuvent également avoir
+accès aux données.
 
 ## Modifications
 
