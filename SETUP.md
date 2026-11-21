@@ -122,7 +122,7 @@ git tag --list 'v*' --sort=-v:refname | grep -Ex 'v[0-9]+\.[0-9]+\.[0-9]+' | hea
 
 If the fetch fails or there is no release, stop. For Codex, check that the
 selected tag includes [the setup-client skill](.agents/skills/setup-client/SKILL.md)
-and `AGENTS.md` before continuing (v1.0.1 onward). Use the selected tag in
+and `AGENTS.md` before continuing. Use the selected tag in
 `git checkout --detach <tag>` and verify `git rev-parse HEAD` matches
 `git rev-parse <tag>^{commit}`. On a
 resumed installation, keep the existing release and continue from the first

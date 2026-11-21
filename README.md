@@ -80,7 +80,7 @@ computer (on Windows, use WSL).
 - **ChatGPT / Codex** — open a local project in Codex with access to the
   folder and its terminal. In the ChatGPT desktop app, choose Codex and
   [work locally](https://learn.chatgpt.com/docs/environments/modes).
-  Codex setup is included from v1.0.1. To continue in a new chat, reopen
+  To continue in a new chat, reopen
   the cloned repository folder and ask Codex to resume the installation.
 
 Send the same request in either:
