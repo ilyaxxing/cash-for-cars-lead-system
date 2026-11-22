@@ -143,21 +143,24 @@ you read at night.
 arithmetic above. Hosting, the domain and printing are paid by the business
 directly: say so in the same breath, with the amounts.
 
-**"What is Railway, and why do I need a domain?"** Railway is the hosting
-company the system runs on, from $5 a month on your own card. The address,
+**"What is Railway, and why do I need a domain?"** If we use Railway, it hosts
+the system on your account, from $5 a month. If you prefer your own server,
+we can install it there. The address,
 such as `buy.yourbusiness.com`, is printed inside every QR code, so it has to
 be yours for good. Both are in your name so that the system and the leads
-stay yours even if I disappear. I do the technical part; you sign up, add a
-card and accept the hand-over.
+stay yours even if I disappear. I do the technical part. For Railway, you sign up, add a
+card and accept the hand-over. For your own server, you provide secure access.
 
 **"Do I need to install an app?"** Nothing from an app store. The dashboard
 is added to the phone's home screen from the browser, and we do it together
 in ten minutes. An iPhone needs iOS 16.4 or later. The same login works on a
 second phone, so a partner gets the notifications too.
 
-**"Who sees my sellers?"** Only you. The leads are in your own database, on
-your own account. Sellers' names, phones and photos are erased 90 days after
-a lead is closed.
+**"Who sees my sellers?"** The leads are in your database on your hosting
+account. People with dashboard access can view them. Your hosting provider
+and anyone with administrative access to your database can also access them. The app clears
+the form's contact fields and uploaded photos 90 days after you close a lead.
+Keep contact details out of staff notes, which remain in the dashboard.
 
 **"Is leaving cards on cars even allowed here?"** It depends on the city and
 on who owns the parking lot: some ban it, and some fine for it. Check the
@@ -181,23 +184,23 @@ it is due, and what monthly support covers if they take it (the table in
 
 ## When they say yes
 
-Ask for what the setup needs; Claude asks for it step by step, following
+Ask for what the setup needs; your assistant asks for it step by step, following
 [SETUP.md](../SETUP.md):
 
 - the business's name and phone, and who runs it (for the privacy policy);
 - a domain, or a subdomain of their website;
-- a Railway account on their own card;
+- their Railway account for hand-over, or access to their own server;
 - their logo and color, if they have them;
 - ten minutes with the owner's phone.
 
-Then open Claude Code and send the line from the
+Then open Claude Code or Codex and send the line from the
 [README](../README.md#get-started).
 
 A month in, open the statistics together: sellers and cars bought, from each
 place. With their permission, those numbers are your case for the next
 client.
 
-Claude Code can help with the selling too. Open this repository in it and
+Either assistant can help with the selling too. Open this repository and
 ask, for example: *"Write my first text to Rapid Cash Cars. I found their
 card on Main Street."* In another country, have it write in the buyers'
 language, and check the local rules for unsolicited messages first.

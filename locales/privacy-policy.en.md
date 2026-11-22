@@ -53,10 +53,11 @@ or similarly significant effects.
 - **Our hosting providers** run the servers and the storage where your
   inquiry is kept. They process it on our behalf and may not use it for
   their own purposes.
-- **Push notification services.** When you send an inquiry, we are
-  notified on our phone through the notification service of the phone's
-  maker (for example Apple or Google). The notification contains only the
-  car and the price, never your name or contact details.
+- **Push notification services.** When you send an inquiry, we are notified
+  on our phone through the notification service of the phone's maker (for
+  example Apple or Google). The notification names the car and can include
+  mileage, condition, asking price and the number of photos received. We
+  leave your name and contact fields out of the notification.
 - **Messaging apps.** If you and we talk through an app such as WhatsApp,
   that conversation is also covered by the app's own privacy policy.
 - We may disclose information when the law requires it.
@@ -66,8 +67,10 @@ or similarly significant effects.
 We keep your name, phone number, email address and the photos of your car
 while we work on your inquiry.
 **{retention_days} days after the inquiry is closed**, whether we bought the
-car or not, they are erased automatically. We keep the other details of the
-car and the outcome, which no longer identify you, for our records.
+car or not, they are erased automatically. We keep vehicle details,
+including the VIN if supplied, and the outcome of the inquiry. Staff notes
+are kept separately from the contact fields. Contact details entered in
+notes are outside the automatic deletion process.
 
 Some copies are out of reach of that automatic erasure, and we would rather
 say so plainly:
@@ -102,9 +105,9 @@ information from anyone under 18.
 
 ## Security
 
-Your information travels over encrypted connections, is stored on servers
-that only our application can reach, and is visible only to us after
-signing in.
+We use encrypted connections to transmit your information. Viewing inquiries
+in the dashboard requires signing in. Administrators with access to the
+hosting infrastructure may also have access to the data.
 
 ## Changes to this policy
 

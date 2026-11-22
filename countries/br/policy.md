@@ -72,8 +72,10 @@ tomamos decisões sobre você baseadas unicamente em tratamento automatizado.
   LGPD, com cláusulas contratuais que garantem a proteção dos dados.
 - **Serviços de notificação push.** Quando você envia um pedido, somos
   avisados no celular pelo serviço de notificações do fabricante (por
-  exemplo, Apple ou Google). O aviso traz só o carro e o preço, nunca o seu
-  nome ou contato.
+  exemplo, Apple ou Google). O aviso informa qual é o veículo e pode incluir
+  a quilometragem, o estado de conservação, o preço pedido e a quantidade de
+  fotos recebidas. Seu nome e os dados de contato do formulário ficam fora
+  do aviso.
 - **Aplicativos de mensagem.** Se conversarmos por um app como o WhatsApp,
   a conversa também segue a política de privacidade desse app.
 - Podemos informar dados às autoridades quando a lei exigir.
@@ -82,11 +84,12 @@ tomamos decisões sobre você baseadas unicamente em tratamento automatizado.
 
 Guardamos seu nome, celular, e-mail, a placa e as fotos do carro enquanto
 atendemos o pedido.
-**{retention_days} dias depois que o pedido é encerrado**, tenhamos comprado
-o carro ou não, eles são apagados automaticamente. Mantemos os demais dados
-do carro e o resultado, que não identificam mais você, para nossos
-registros. Se comprarmos o seu carro, o contrato e os documentos fiscais
-ficam guardados à parte, pelo prazo que a lei exige.
+**{retention_days} dias depois que o pedido é encerrado**, tenhamos comprado o
+carro ou não, eles são apagados automaticamente. Mantemos os demais dados do
+veículo e o resultado do pedido. As anotações da equipe ficam guardadas
+separadamente. Dados de contato registrados nessas anotações não são
+apagados automaticamente. Se comprarmos o seu carro, o contrato e os
+documentos fiscais ficam guardados à parte, pelo prazo que a lei exige.
 
 Algumas cópias ficam fora desse apagamento automático, e preferimos dizer
 isso com clareza:
@@ -119,8 +122,9 @@ dados de menores de 18 anos.
 
 ## Segurança
 
-Seus dados trafegam por conexões criptografadas, ficam em servidores que só
-a nossa aplicação acessa e só nós vemos, depois de entrar com senha.
+Seus dados são transmitidos por conexões criptografadas. É preciso entrar na
+conta para ver os pedidos no painel. Administradores com acesso à
+infraestrutura de hospedagem também podem ter acesso aos dados.
 
 ## Mudanças nesta política
 

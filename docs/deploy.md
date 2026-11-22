@@ -1,6 +1,6 @@
 # Deploy and run an instance
 
-How one client's instance is deployed to Railway and kept running. Installing for a client with Claude Code follows [SETUP.md](../SETUP.md), which drives the same steps.
+How one client's instance is deployed to Railway and kept running. Installing for a client with Claude Code or Codex follows [SETUP.md](../SETUP.md), which drives the same steps.
 
 Each client gets a separate Railway project: the app, a PostgreSQL database
 with point-in-time recovery, and a storage bucket for photos. One command
@@ -38,7 +38,7 @@ somewhere safe, such as a password manager. Fill in at least:
 | `BRAND_NAME`, `BRAND_PHONE` | Shown to sellers and in the dashboard; the phone in the country's own format, however it is typed. |
 | `OPERATOR_NAME`, `OPERATOR_EMAIL`, `OPERATOR_ADDRESS` | Who runs the business that receives the leads (a company, or a person by full legal name), for the privacy policy and the consent text. |
 | `POLICY_EFFECTIVE_DATE` | The date the client's privacy policy takes effect. |
-| `OWNER_PASSWORD` | The owner's first dashboard password, for one sign-in: the dashboard then asks for one of their own. |
+| `OWNER_PASSWORD` | Initial dashboard password. The installer shares it through a password manager. The owner replaces it before opening the dashboard. |
 | `TIMEZONE` | The owner's time zone, for dates and statistics. |
 | `VAPID_SUBJECT` | `mailto:` the client's email. Push services use it to report problems. |
 | `SOURCE_LABELS` | Names for every place besides the business card, printed (a QR code) or online (a link), e.g. `sticker:Car sticker,maps:Google Maps`. See [QR codes](#qr-codes). |

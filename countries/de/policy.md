@@ -78,8 +78,10 @@ mit rechtlicher oder ähnlich erheblicher Wirkung.
   EU-Kommission.
 - **Push-Dienste.** Wenn Sie eine Anfrage senden, werden wir auf unserem
   Handy über den Benachrichtigungsdienst des Herstellers (zum Beispiel Apple
-  oder Google) informiert. Die Meldung enthält nur das Auto und den Preis,
-  nie Ihren Namen oder Ihre Kontaktdaten.
+  oder Google) informiert. Die Meldung nennt das Fahrzeug und kann
+  Kilometerstand, Zustand, Preisvorstellung und Anzahl der eingegangenen
+  Fotos enthalten. Name und Kontaktdaten aus dem Formular werden dabei nicht
+  übermittelt.
 - **Messenger.** Schreiben wir über eine App wie WhatsApp, gilt für das
   Gespräch auch die Datenschutzerklärung dieser App.
 - Wir geben Daten heraus, wenn das Gesetz es verlangt.
@@ -89,10 +91,12 @@ mit rechtlicher oder ähnlich erheblicher Wirkung.
 Name, Telefonnummer, E-Mail-Adresse und die Fotos Ihres Autos speichern wir,
 solange wir Ihre Anfrage bearbeiten.
 **{retention_days} Tage nach Abschluss der Anfrage**, ob wir das Auto gekauft
-haben oder nicht, werden sie automatisch gelöscht. Die übrigen Angaben zum
-Auto und das Ergebnis, die Sie nicht mehr erkennbar machen, behalten wir für
-unsere Unterlagen. Kaufen wir Ihr Auto, bewahren wir Kaufvertrag und Belege
-getrennt davon so lange auf, wie das Handels- und Steuerrecht es vorschreibt.
+haben oder nicht, werden sie automatisch gelöscht. Die übrigen
+Fahrzeugangaben, einschließlich der FIN, falls angegeben, und das Ergebnis
+der Anfrage bleiben gespeichert. Interne Notizen bleiben separat erhalten.
+Dort eingetragene Kontaktdaten werden nicht automatisch gelöscht. Kaufen wir
+Ihr Auto, bewahren wir Kaufvertrag und Belege getrennt davon so lange auf,
+wie das Handels- und Steuerrecht es vorschreibt.
 
 Manche Kopien erreicht diese automatische Löschung nicht, und das sagen wir
 lieber offen:
@@ -126,9 +130,9 @@ erheben wissentlich keine Daten von Personen unter 18 Jahren.
 
 ## Sicherheit
 
-Ihre Daten werden verschlüsselt übertragen, auf Servern gespeichert, auf die
-nur unsere Anwendung zugreift, und sind nur für uns nach der Anmeldung
-sichtbar.
+Ihre Daten werden verschlüsselt übertragen. Um Anfragen im Dashboard
+einzusehen, ist eine Anmeldung erforderlich. Personen, die die
+Hosting-Infrastruktur verwalten, können ebenfalls Zugriff auf die Daten haben.
 
 ## Änderungen
 

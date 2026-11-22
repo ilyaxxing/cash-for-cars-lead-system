@@ -18,8 +18,9 @@ missing detail or confirmation.
 - Claude's `!` shortcut is specific to Claude Code. For Railway, run the
   guide's browser login flow and verify the account after the person signs
   in. For SSH, have them enter any password in their own terminal. Keep
-  credentials out of tool output and client settings and assets under the
-  release's Git-ignored paths.
+  the initial dashboard password in the installer's password manager and the
+  local settings file. Keep credentials out of chat and tool output. Store
+  client settings and assets under the release's Git-ignored paths.
 - Before creating infrastructure or incurring a charge, name the resources,
   account and expected cost and wait for explicit agreement. Confirming the
   settings alone does not authorize deployment. For a rehearsal, prepare
