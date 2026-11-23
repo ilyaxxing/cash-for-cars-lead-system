@@ -40,9 +40,8 @@ The repository is public. Write everything as if strangers read it.
   pydantic-settings. Package `app/`.
 - Frontend: Svelte 5 + Vite + TypeScript, two separate bundles (seller form at `/`,
   dashboard PWA at `/app/`), served by FastAPI. Node only at image build time.
-  Chosen because the designs are HTML templates with if/for and inline styles,
-  which map onto Svelte almost 1:1. Fonts self-hosted: Geist, Geist Mono,
-  and Sofia Sans Extra Condensed for headlines.
+  Fonts self-hosted: Geist, Geist Mono, and Sofia Sans Extra Condensed for
+  headlines.
 - Project page (`docs/index.html`, GitHub Pages) with a live demo (`docs/demo`):
   the real bundles plus a stand-in server that runs in the browser
   (`frontend/src/demo`, typed against the API modules, never part of an
@@ -90,20 +89,19 @@ The repository is public. Write everything as if strangers read it.
   `${{photos...}}`); secrets go over stdin. GIT_SHA is a service variable that
   the Dockerfile reads as a build arg (`railway up` sets no commit sha).
 
-## Designs (source of truth for UI, repeat exactly)
-Claude Design projects "Seller Flow" and "Buyer Dashboard" (US market variant:
-miles, USD, ZIP, US phone format). Agreed deviations:
+## UI and print design
+The [live demo](https://ilyaxxing.github.io/cash-for-cars-lead-system/#demo)
+shows the current seller form and buyer dashboard. The US variant uses miles,
+USD, ZIP codes, and US phone formatting.
 - Seller steps: Welcome → Vehicle → Year & mileage → Condition → Contact &
   consent → Accident (+details) → Finance/lien (+details) → Price → Location
-  city+ZIP → VIN (separate step) → Photos → Review → Success. The contacts
-  come early on purpose (the design had them last): every step before them
-  stands between a seller and the owner's phone.
+  city+ZIP → VIN (separate step) → Photos → Review → Success. Keep Contact
+  early so the owner can follow up even when a seller skips later steps.
 - After Contact the lead is saved and the owner is notified (the push names
   the car, its mileage and condition: the price is not asked yet).
   Every question after it is optional (Skip for now) and is added to the lead
   as the seller moves on; a bar says so ("The buyer has your details. The
-  rest is optional.") with Finish now, which goes to Review. Not in the
-  design, built in its visual system.
+  rest is optional.") with Finish now, which goes to Review.
   Photos upload right after picking; skip label "I'll send later". Final
   submit on Review marks the lead submitted (one more push if it has photos).
   A submitted lead takes no more photos, so with none added Review and
@@ -114,17 +112,15 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   the consent step's policy link opens in the same tab, and back from it
   the form goes straight to that step (sessionStorage flag).
 - Display type: headlines and key numbers (a price, a count) are set in
-  Sofia Sans Extra Condensed 800, in capitals (`--font-display`), where the
-  design had Geist 700 and 800; text and controls stay in Geist. Sizes keep
-  the design's footprint: a step's title takes the lines it took. A step's
-  label is its name in the display face, without the design's number and
-  accent dot: the accent is for actions and states (the main button,
-  progress, a chosen option, New), not for labels. Chosen by the owner from a
-  side-by-side mockup. The business card uses the same display face; the
-  link preview pictures and the home-screen icons are still drawn in Geist.
-- Accident and lien: Yes / No / Don't know (third tile added in design style).
-- Photo tiles open the system picker directly (iOS offers camera or library
-  there); the design's action sheet is unused in the prototype, so it is not built.
+  Sofia Sans Extra Condensed 800, in capitals (`--font-display`). Use Geist
+  for body text and controls. Preserve existing step-title line breaks. Use
+  the step name alone as its label, set in the display face. Reserve the accent color for
+  actions and states such as the main button, progress, a chosen
+  option, and New. Use the same display face on the business card and Geist
+  for link previews and home-screen icons.
+- Accident and lien: Yes / No / Don't know.
+- Photo tiles open the system picker directly. On iOS it offers the camera
+  or photo library.
 - Illustrations: sources go to `design-reference/` (git-ignored), the app ships
   WebP versions in `frontend/src/assets/illustrations/` (hero in several widths
   for srcset, guides named as in the preset). Guide sources are pencil sketches
@@ -134,30 +130,27 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   right corner stays clear of it, and the left and right views are mirrors of
   one sketch. `tools/make_guides.py` redraws them in two colors, paper = the
   empty tile's `--surface-sunken`, pencil = a soft light line, dense interior
-  sketches dimmed to match. Simple outline drawings were tried and dropped:
-  the owner found them childish next to the sketches.
-- Brand mark: the design's lime rounded square, with a dark price tag instead
-  of the design's dot (chosen by the owner; `shared/TagGlyph.svelte`, and
-  `app/branding/mark.py` for the home-screen icons). The $ shows only where
-  the mark is large: sign-in screen and app icons.
-- Client branding (`app/branding/`): the defaults are the owner's own look
-  (lime, price-tag mark, car photo). `BRAND_COLOR` recolors every accent
+  sketches dimmed to match.
+- Brand mark: a lime rounded square with a dark price tag
+  (`frontend/src/shared/TagGlyph.svelte` and `app/branding/mark.py` for
+  home-screen icons). Show the dollar sign on the sign-in screen and app icons.
+- Client branding (`app/branding/`): defaults are a lime accent, the price-tag
+  mark, and a car photo. `BRAND_COLOR` recolors every accent
   (the server injects CSS variables; no hard-coded accent colors in the
   frontend), `BRAND_LOGO`/`BRAND_ICON`/`BRAND_PHOTO` replace the mark, the
   home-screen icon and the welcome photo. Icons are drawn by the app, not
   shipped as files. The installer is asked item by item what to change;
   anything not changed stays default.
-- Business card (`python -m app.cli card`): our own design, deliberately not
-  a copy of the card the owner made for a client. The front is the accent
-  from edge to edge (seen on a dark windshield), with black or white on it,
-  whichever reads better: the brand, the headline as large as the room lets
-  it be, the tags in one line and the QR code on its white plate. The back is
+- Business card (`python -m app.cli card`): the front uses the accent color
+  from edge to edge, with black or white text for contrast. It shows the
+  brand, the headline as large as the room allows, the tags in one line,
+  and the QR code on a white plate. The back is
   dark: the promise, three lines, the code again, the contact name and the
   phone, the largest thing there, in the accent. Headline, tags, call to
   action and phone are in the display face, the rest in Geist. A logo is
   made for the dark interface, so on the accent it keeps a dark plate.
-  Chosen by the owner from a mockup. Print-ready by rule: vector
-  CMYK PDF in the client's country size (`CARD_SIZE`: 3.5x2in, 90x50mm,
+  The print file is a vector CMYK PDF in the client's country
+  size (`CARD_SIZE`: 3.5x2in, 90x50mm,
   85x55mm, any metric card from 85x50 to 92x56mm) with that country's bleed
   and page boxes, fonts embedded (`CARD_FONT` for scripts Geist lacks; never a
   missing letter, no joining scripts yet), text >= 7 pt and
@@ -175,23 +168,24 @@ miles, USD, ZIP, US phone format). Agreed deviations:
   (one line in the preset; texts ship). The lead's second button, next to
   Call, follows the chosen method: sms: for SMS, mailto: for email, t.me for
   Telegram, WhatsApp for WhatsApp, a call or anything else.
-- Status: design's 4-way switch; confirmation dialog for Purchased and Rejected,
-  undo toast for others. Any transition allowed; `closed_at` set on entering a
-  closed status, cleared on leaving it.
-- Notes: list with timestamps and delete (design). Activity log per lead.
-- List cards exactly as in design (general info); full details inside the lead.
-- Dates and times use the US convention through Intl ("Oct 2, 2:05 PM") instead
-  of the prototype's 24-hour "2 Oct, 14:05"; phone numbers read "(415) 555-0142".
+- Status: four-way switch with confirmation for Purchased and Rejected and
+  an undo toast for other changes. All transitions are allowed. Set `closed_at`
+  on entering a closed status and clear it on leaving one.
+- Each lead has notes with timestamps and a delete action, plus its own
+  activity log.
+- Lead cards show summary information. Full details are inside each lead.
+- Format dates and times with Intl for the US ("Oct 2, 2:05 PM"). Format US
+  phone numbers as "(415) 555-0142".
 - Leads open at /app/leads/<id> (used by push notifications), statistics at
   /app/stats, settings at /app/settings.
-- No email at all: notifications are Web Push only. Dashboard shows a warning
-  when there is no working push subscription or the last push failed.
-  Settings has no "Backup email" section.
-- Not in the design, built in the same visual system and shown for approval:
-  login, the first sign-in's own-password screen (the installer shares
-  OWNER_PASSWORD through a password manager; the owner must replace it
-  before opening the dashboard, including after a reset), onboarding (Add to Home Screen for iOS/Android, enable push, test push),
-  Help in Settings, privacy policy page, the lead's second contact button.
+- Notifications use Web Push only. The dashboard warns when there is no
+  working subscription or the last push failed.
+- The installer shares `OWNER_PASSWORD` through a password manager. The owner
+  must choose a new password before opening the dashboard on first sign-in or
+  after a password reset. Onboarding covers Add to Home Screen on iOS and
+  Android, enabling push, and sending a test notification.
+- Use the same visual rules for login, onboarding, Settings help, the privacy
+  policy page, and the lead's second contact button.
 
 ## Data model
 `leads` fixed columns: make, model, year, mileage, asking_price, location, phone,
