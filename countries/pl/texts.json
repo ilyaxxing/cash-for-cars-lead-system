@@ -326,7 +326,7 @@
       },
       "telegram_username": {
         "label": "Nazwa użytkownika w Telegramie",
-        "placeholder": "@username / t.me/username",
+        "placeholder": "@username",
         "errors": {
           "format": "Wpisz @nazwę lub link t.me do swojego profilu."
         }

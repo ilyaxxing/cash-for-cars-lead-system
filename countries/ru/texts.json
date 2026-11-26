@@ -349,7 +349,7 @@
       },
       "telegram_username": {
         "label": "Имя пользователя в Telegram",
-        "placeholder": "@username / t.me/username",
+        "placeholder": "@username",
         "errors": {
           "format": "Введите @username или ссылку на свой профиль t.me."
         }
