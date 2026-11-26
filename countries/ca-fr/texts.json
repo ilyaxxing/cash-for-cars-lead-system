@@ -594,6 +594,19 @@
       "undo": "Annuler",
       "failed": "Enregistrement impossible. Vérifiez votre connexion et réessayez."
     },
+    "qr": {
+      "add": "Ajouter une source",
+      "codes": "Codes QR",
+      "name": "Nom de la source",
+      "create": "Créer la source",
+      "source": "Source",
+      "link": "Lien du formulaire",
+      "save": "Enregistrer le code QR",
+      "print": "Télécharger pour impression (SVG)",
+      "copy": "Copier le lien",
+      "failed": "Impossible de charger ou d’enregistrer la source. Réessayez.",
+      "domain": "Connectez le domaine de l’entreprise pour créer des codes QR."
+    },
     "stats": {
       "title": "Statistiques",
       "subtitle": "Combien de demandes vous recevez, combien de voitures vous achetez et quels canaux marchent le mieux.",

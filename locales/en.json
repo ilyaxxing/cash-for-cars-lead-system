@@ -594,6 +594,19 @@
       "undo": "Undo",
       "failed": "Couldn't save. Check your connection and try again."
     },
+    "qr": {
+      "add": "Add source",
+      "codes": "QR codes",
+      "name": "Source name",
+      "create": "Create source",
+      "source": "Source",
+      "link": "Seller link",
+      "save": "Save QR code",
+      "print": "Download for print (SVG)",
+      "copy": "Copy link",
+      "failed": "Couldn’t load or save the source. Please try again.",
+      "domain": "Connect the business’s public domain to create QR codes."
+    },
     "stats": {
       "title": "Statistics",
       "subtitle": "How many leads you receive, how many cars you buy, and which sources work best.",

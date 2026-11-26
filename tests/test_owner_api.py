@@ -18,6 +18,7 @@ async def owner(client_for, tmp_path):
         local_storage_dir=tmp_path / "store",
         secret_key="k" * 40,
         source_labels="flyer:Flyers",
+        public_url="https://buyer.example.com",
     )
     await sign_in(client, PASSWORD)
     return client
@@ -252,3 +253,31 @@ def test_stats_periods_and_buckets():
     assert everything["total"] == 4 and everything["purchased"] == 2
     assert everything["buckets"][0]["start"] == "2026-09-07"  # Monday of the first lead's week
     assert sum(b["leads"] for b in everything["buckets"]) == 4
+
+
+async def test_owner_creates_and_reopens_qr_placements(owner):
+    url = "/api/owner/sources"
+    existing = (await owner.get(url)).json()
+    assert {p["code"]: p["url"] for p in existing} == {
+        "card": "https://buyer.example.com/v",
+        "flyer": "https://buyer.example.com/?src=flyer",
+    }
+    body = {"name": "  Partner shop  "}
+    first = (await owner.post(url, json=body)).json()
+    assert first["url"] == f"https://buyer.example.com/?src={first['code']}"
+    assert first["name"] == "Partner shop"
+    assert (await owner.post(url, json=body)).json() == first
+    assert first in (await owner.get(url)).json()
+    assert (await owner.post(url, json={"name": " "})).status_code == 422
+    lead, _ = await new_lead(owner, source=first["code"])
+    assert (await owner.get(f"/api/owner/leads/{lead}")).json()["sourceLabel"] == first["name"]
+    stats = (await owner.get("/api/owner/stats")).json()
+    assert stats["sources"][0]["label"] == first["name"]
+
+
+async def test_placements_need_owner_and_public_domain(client_for):
+    client = client_for(owner_password=PASSWORD)
+    assert (await client.get("/api/owner/sources")).status_code == 401
+    assert (await client.post("/api/owner/sources", json={"name": "Private"})).status_code == 401
+    await sign_in(client, PASSWORD)
+    assert (await client.post("/api/owner/sources", json={"name": "Private"})).status_code == 409

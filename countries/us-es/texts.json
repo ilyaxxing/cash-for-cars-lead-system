@@ -594,6 +594,19 @@
       "undo": "Deshacer",
       "failed": "No se pudo guardar. Revise su conexión e inténtelo de nuevo."
     },
+    "qr": {
+      "add": "Añadir fuente",
+      "codes": "Códigos QR",
+      "name": "Nombre de la fuente",
+      "create": "Crear fuente",
+      "source": "Fuente",
+      "link": "Enlace al formulario",
+      "save": "Guardar código QR",
+      "print": "Descargar para imprimir (SVG)",
+      "copy": "Copiar enlace",
+      "failed": "No se pudo cargar o guardar la fuente. Inténtalo de nuevo.",
+      "domain": "Conecta el dominio de la empresa para crear códigos QR."
+    },
     "stats": {
       "title": "Estadísticas",
       "subtitle": "Cuántos prospectos recibe, cuántos autos compra y qué fuentes funcionan mejor.",

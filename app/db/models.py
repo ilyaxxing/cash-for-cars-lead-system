@@ -50,6 +50,15 @@ FIXED_ANSWER_COLUMNS = {
 }
 
 
+class Placement(Base):
+    """An owner-created placement. Its code is permanent once printed."""
+
+    __tablename__ = "placements"
+
+    code: Mapped[str] = mapped_column(String(64), primary_key=True)
+    name: Mapped[str] = mapped_column(String(80), unique=True)
+
+
 class Lead(Base):
     """A car seller's request, created when the contact step is submitted."""
 

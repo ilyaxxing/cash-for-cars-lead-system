@@ -42,6 +42,7 @@ export interface DemoData {
   nextId: number
   signedIn: boolean
   pushOn: boolean
+  placements?: Record<string, string>
 }
 
 // What the server would send to the owner's phone.
@@ -80,6 +81,8 @@ export class Backend {
     private readonly now: () => Date = () => new Date(),
     // The demo business's own placements (SOURCE_LABELS on a real instance).
     private readonly sourceLabels: Record<string, string> = {},
+    private readonly formUrl?: string,
+    private readonly savePlacements?: (labels: Record<string, string>) => void,
   ) {
     this.t = createTranslator(config.messages)
     this.money = new Intl.NumberFormat(`${config.locale}-${config.preset.phone_region}`, {
@@ -106,6 +109,8 @@ export class Backend {
       ['POST', /^\/api\/auth\/login$/, () => this.signIn(true)],
       ['POST', /^\/api\/auth\/logout$/, () => this.signIn(false)],
       ['POST', /^\/api\/auth\/password$/, () => ({ status: 200, body: { ok: true } })],
+      ['GET', /^\/api\/owner\/sources$/, () => this.owner(() => ({ status: 200, body: this.placements() }))],
+      ['POST', /^\/api\/owner\/sources$/, (_m, _q, body) => this.owner(() => this.createPlacement(body))],
       ['GET', /^\/api\/owner\/leads$/, (_m, query) => this.owner(() => this.list(query))],
       ['GET', new RegExp(`^/api/owner/leads/${id}$`), (m) => this.owner(() => this.detail(Number(m[1])))],
       [
@@ -420,7 +425,31 @@ export class Backend {
     }
   }
 
+  private placements() {
+    const labels = { card: this.t('sources.card'), ...this.sourceLabels, ...this.data.placements }
+    return Object.entries(labels).filter(([code]) => !['test', 'direct', 'other'].includes(code)).map(([code, name]) => {
+      const url = new URL(this.formUrl ?? 'https://example.com/')
+      url.searchParams.set('src', code)
+      return { code, name, url: url.href }
+    })
+  }
+
+  private createPlacement(body: Record<string, unknown>): Reply {
+    const name = typeof body.name === 'string' ? body.name.trim() : ''
+    if (!name || name.length > 80) return { status: 422 }
+    let item = this.placements().find((p) => p.name === name)
+    if (!item) {
+      const code = 'p_' + crypto.randomUUID().replaceAll('-', '').slice(0, 16)
+      this.data.placements = { ...this.data.placements, [code]: name }
+      this.savePlacements?.(this.data.placements)
+      item = this.placements().find((p) => p.code === code)
+    }
+    return { status: 200, body: item }
+  }
+
   private sourceLabel(source: string): string {
+    const placements = this.data.placements
+    if (placements && Object.hasOwn(placements, source)) return placements[source]
     if (source in this.sourceLabels) return this.sourceLabels[source]
     const label = this.t(`sources.${source}`)
     return label === `sources.${source}` ? this.t('sources.other') : label

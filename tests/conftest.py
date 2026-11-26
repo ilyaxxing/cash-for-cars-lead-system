@@ -137,8 +137,8 @@ async def clean_db(engine: AsyncEngine) -> AsyncIterator[AsyncEngine]:
     async with engine.begin() as connection:
         await connection.execute(
             text(
-                "TRUNCATE leads, photos, notes, lead_events, owner_sessions, owner_account, "
-                "push_subscriptions, notification_outbox "
+                "TRUNCATE placements, leads, photos, notes, lead_events, owner_sessions, "
+                "owner_account, push_subscriptions, notification_outbox "
                 "RESTART IDENTITY CASCADE"
             )
         )

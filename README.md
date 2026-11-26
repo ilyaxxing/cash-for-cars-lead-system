@@ -11,7 +11,8 @@ yours to sell. By [@ilyaxxing](https://instagram.com/ilyaxxing).
 
 Give a car buyer QR codes and links for their cards, signs and online
 listings. Sellers send their car through a short form, and the buyer gets a
-push on their phone in seconds, with every lead in one app.
+push on their phone in seconds, with every lead in one app. In Statistics,
+the buyer can add a source, copy its seller link and save its QR code for sharing or print.
 
 Suggested price: $300–600 per setup, plus optional monthly support. The
 business pays its own hosting and domain.
@@ -47,7 +48,7 @@ and repair shops.
 | | Price | What's included |
 |---|---|---|
 | Setup | $300-600 once | Turnkey: installation, their name, color and logo, connecting their domain, the app on the owner's phone, the card PDF, and QR codes and links for every place |
-| Support | $25-50 a month | Optional: up to two small changes a month (form questions, texts, new QR codes and labels), updates to new releases, a reply within a working day. New features and rework are extra. |
+| Support | $25-50 a month | Optional: up to two small changes a month (form questions or interface texts), updates to new releases, a reply within a working day. New features and rework are extra. |
 | Hosting | Railway from $5 a month, or the server provider's rate | Paid by the client |
 | Domain | about $10-15 a year | In the business's name, if it has none |
 

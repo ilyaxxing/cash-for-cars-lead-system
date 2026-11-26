@@ -600,6 +600,19 @@
       "undo": "Desfazer",
       "failed": "Não deu para salvar. Verifique a conexão e tente de novo."
     },
+    "qr": {
+      "add": "Adicionar origem",
+      "codes": "Códigos QR",
+      "name": "Nome da origem",
+      "create": "Criar origem",
+      "source": "Origem",
+      "link": "Link do formulário",
+      "save": "Salvar código QR",
+      "print": "Baixar para impressão (SVG)",
+      "copy": "Copiar link",
+      "failed": "Não foi possível carregar ou salvar a origem. Tente novamente.",
+      "domain": "Conecte o domínio da empresa para criar códigos QR."
+    },
     "stats": {
       "title": "Estatísticas",
       "subtitle": "Quantos pedidos você recebe, quantos carros compra e quais canais funcionam melhor.",

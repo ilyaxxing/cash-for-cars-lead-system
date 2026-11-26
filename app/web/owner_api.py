@@ -4,12 +4,17 @@ from __future__ import annotations
 
 from datetime import datetime
 from typing import Any, Literal
+from urllib.parse import urlsplit
+from uuid import uuid4
 
 from fastapi import APIRouter, HTTPException, Query, Request
 from fastapi.responses import JSONResponse, Response
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from sqlalchemy import select
+from sqlalchemy.dialects.postgresql import insert
 
-from app.db.models import STATUSES, Lead, LeadEvent, Note, Photo
+from app import qr
+from app.db.models import STATUSES, Lead, LeadEvent, Note, Photo, Placement
 from app.preset.schema import Preset
 from app.services import dashboard
 from app.services import leads as lead_service
@@ -57,9 +62,66 @@ def note_json(note: Note) -> dict[str, Any]:
     return {"id": note.id, "text": note.text, "createdAt": iso(note.created_at)}
 
 
-def label_for(request: Request, source: str) -> str:
-    settings = request.app.state.settings
-    return source_label(source, settings.source_labels, request.app.state.messages)
+async def placement_labels(request: Request, session: Session) -> dict[str, str]:
+    configured = request.app.state.settings.source_labels
+    stored = await session.execute(select(Placement.code, Placement.name).order_by(Placement.name))
+    return {**configured, **dict(stored.all())}
+
+
+def placement_base(request: Request) -> str:
+    base = request.app.state.settings.resolved_public_url
+    parts = urlsplit(base)
+    if parts.scheme != "https" or not parts.hostname or parts.hostname.endswith(qr.RAILWAY_HOSTS):
+        raise HTTPException(status_code=409, detail="public_domain_required")
+    return base
+
+
+class PlacementBody(BaseModel):
+    name: str = Field(max_length=80)
+
+
+def placement_item(base: str, code: str, name: str) -> dict[str, str]:
+    return {"code": code, "name": name, "url": qr.link(base, code)}
+
+
+def available_placements(request: Request, labels: dict[str, str]) -> dict[str, str]:
+    card = source_label("card", labels, request.app.state.messages)
+    return {
+        code: name
+        for code, name in {"card": card, **labels}.items()
+        if code not in {"direct", "test", "other"}
+    }
+
+
+@router.get("/sources")
+async def list_sources(owner: Owner, request: Request, session: Session) -> list[dict[str, str]]:
+    base = placement_base(request)
+    labels = available_placements(request, await placement_labels(request, session))
+    return [placement_item(base, code, name) for code, name in labels.items()]
+
+
+@router.post("/sources")
+async def create_source(
+    body: PlacementBody, owner: Owner, request: Request, session: Session
+) -> dict[str, str]:
+    name = body.name.strip()
+    if not name:
+        raise HTTPException(status_code=422, detail="name_required")
+    base = placement_base(request)
+    labels = available_placements(request, await placement_labels(request, session))
+    for code, label in labels.items():
+        if label == name:
+            return placement_item(base, code, name)
+    # The unique name makes retries and simultaneous saves return the same QR.
+    code = "p_" + uuid4().hex[:16]
+    await session.execute(
+        insert(Placement)
+        .values(code=code, name=name)
+        .on_conflict_do_nothing(index_elements=["name"])
+    )
+    code = (await session.scalars(select(Placement.code).where(Placement.name == name))).one()
+    await session.commit()
+    return placement_item(base, code, name)
 
 
 def answers_for(preset: Preset, lead: Lead, *, personal: bool) -> dict[str, Any]:
@@ -70,7 +132,9 @@ def answers_for(preset: Preset, lead: Lead, *, personal: bool) -> dict[str, Any]
     return values
 
 
-def card_json(request: Request, lead: Lead, photos: list[Photo]) -> dict[str, Any]:
+def card_json(
+    request: Request, lead: Lead, photos: list[Photo], labels: dict[str, str]
+) -> dict[str, Any]:
     preset = request.app.state.preset
     shown = ordered(preset, photos)
     return {
@@ -78,7 +142,7 @@ def card_json(request: Request, lead: Lead, photos: list[Photo]) -> dict[str, An
         "status": lead.status,
         "createdAt": iso(lead.created_at),
         "source": lead.source,
-        "sourceLabel": label_for(request, lead.source),
+        "sourceLabel": source_label(lead.source, labels, request.app.state.messages),
         "answers": answers_for(preset, lead, personal=False),
         "photoCount": len(shown),
         "photos": [photo_json(p) for p in shown[:CARD_PHOTOS]],
@@ -103,9 +167,10 @@ async def list_leads(
 ) -> dict[str, Any]:
     leads, more = await dashboard.list_leads(session, tab, q.strip(), offset)
     photos = await dashboard.photos_by_lead(session, [lead.id for lead in leads])
+    labels = await placement_labels(request, session)
     return {
         "counts": await dashboard.tab_counts(session),
-        "leads": [card_json(request, lead, photos[lead.id]) for lead in leads],
+        "leads": [card_json(request, lead, photos[lead.id], labels) for lead in leads],
         "hasMore": more,
     }
 
@@ -122,7 +187,7 @@ async def read_lead(
     preset = request.app.state.preset
     photos = (await dashboard.photos_by_lead(session, [lead.id]))[lead.id]
     return {
-        **card_json(request, lead, photos),
+        **card_json(request, lead, photos, await placement_labels(request, session)),
         "answers": answers_for(preset, lead, personal=lead.purged_at is None),
         "photos": [photo_json(p) for p in ordered(preset, photos)],
         "submittedAt": iso(lead.submitted_at),
@@ -206,6 +271,7 @@ async def stats(
     rows = [stats_service.Row(*row) for row in await dashboard.stats_rows(session)]
     settings = request.app.state.settings
     result = stats_service.compute(rows, period, lead_service.utcnow(), settings.tz)
+    labels = await placement_labels(request, session)
     for source in result["sources"]:
-        source["label"] = label_for(request, source["source"])
+        source["label"] = source_label(source["source"], labels, request.app.state.messages)
     return result

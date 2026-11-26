@@ -1,6 +1,7 @@
 <script lang="ts">
   // Statistics: totals for a period, purchases, conversion, sources and activity.
   import { getContext } from 'svelte'
+  import SourceManager from './SourceManager.svelte'
   import * as api from './api'
   import type { DashboardState } from './state.svelte'
 
@@ -152,6 +153,7 @@
             <span><span class="swatch lime"></span>{t('dashboard.stats.legend_purchased')}</span>
           </div>
         </div>
+        <SourceManager />
         {#each sources as source (source.source)}
           <div class="source">
             <div class="source-head">

@@ -267,7 +267,15 @@ export function install() {
   }
   const normalize = (answers: Record<string, Value>) =>
     typeof answers.phone === 'string' ? { ...answers, phone: normalizePhone(answers.phone) ?? answers.phone } : answers
-  const backend = new Backend(data, config, announce, normalize, () => new Date(), country.sources)
+  const formUrl = new URL(`index.html${business().query}`, config.privacyUrl)
+  const placementsKey = `demo-placements:${formUrl.href}`
+  storage((store) => {
+    const saved = store.getItem(placementsKey)
+    if (saved) data.placements = JSON.parse(saved)
+  })
+  const backend = new Backend(data, config, announce, normalize, () => new Date(), country.sources, formUrl.href,
+    (labels) => storage((store) => store.setItem(placementsKey, JSON.stringify(labels))))
+
   routeFetch(backend)
   document.addEventListener(
     'click',

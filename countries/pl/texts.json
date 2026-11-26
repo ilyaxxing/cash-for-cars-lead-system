@@ -594,6 +594,19 @@
       "undo": "Cofnij",
       "failed": "Nie udało się zapisać. Sprawdź połączenie i spróbuj ponownie."
     },
+    "qr": {
+      "add": "Dodaj źródło",
+      "codes": "Kody QR",
+      "name": "Nazwa źródła",
+      "create": "Utwórz źródło",
+      "source": "Źródło",
+      "link": "Link do formularza",
+      "save": "Zapisz kod QR",
+      "print": "Pobierz do druku (SVG)",
+      "copy": "Kopiuj link",
+      "failed": "Nie udało się wczytać lub zapisać źródła. Spróbuj ponownie.",
+      "domain": "Podłącz domenę firmy, aby tworzyć kody QR."
+    },
     "stats": {
       "title": "Statystyki",
       "subtitle": "Ile zgłoszeń dostajesz, ile aut kupujesz i które kanały działają najlepiej.",

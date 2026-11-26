@@ -287,3 +287,16 @@ describe('the demo leads', () => {
     for (const place of month.sources) expect(place.purchased, `${code} ${place.source}`).toBeGreaterThan(0)
   })
 })
+
+it('keeps a demo placement available before its first lead and credits that lead by name', () => {
+  const { call } = setup()
+  const name = 'Partner shop'
+  const path = '/api/owner/sources'
+  const item = call('POST', path, { name }).body as { code: string; url: string }
+  expect(new URL(item.url).searchParams.get('src')).toBe(item.code)
+  expect(call('POST', path, { name }).body).toEqual(item)
+  expect(call('GET', path).body).toContainEqual(item)
+  call('POST', '/api/leads', { answers: ANSWERS, source: item.code })
+  const stats = call('GET', '/api/owner/stats?period=all').body as Stats
+  expect(stats.sources).toContainEqual({ source: item.code, label: name, leads: 1, purchased: 0 })
+})

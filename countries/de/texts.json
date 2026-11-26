@@ -594,6 +594,19 @@
       "undo": "Rückgängig",
       "failed": "Speichern fehlgeschlagen. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
     },
+    "qr": {
+      "add": "Quelle hinzufügen",
+      "codes": "QR-Codes",
+      "name": "Name der Quelle",
+      "create": "Quelle erstellen",
+      "source": "Quelle",
+      "link": "Link zum Formular",
+      "save": "QR-Code speichern",
+      "print": "Druckdatei laden (SVG)",
+      "copy": "Link kopieren",
+      "failed": "Die Quelle konnte nicht geladen oder gespeichert werden. Bitte erneut versuchen.",
+      "domain": "Zum Erstellen von QR-Codes die Domain des Unternehmens verbinden."
+    },
     "stats": {
       "title": "Statistik",
       "subtitle": "Wie viele Anfragen Sie bekommen, wie viele Autos Sie kaufen und welche Kanäle am besten funktionieren.",

@@ -113,6 +113,15 @@ export const restoreNote = (id: number, noteId: number) =>
   call<Note>('POST', `/api/owner/leads/${id}/notes/${noteId}/restore`)
 export const getStats = (period: Stats['period']) => call<Stats>('GET', `/api/owner/stats?period=${period}`)
 
+export interface Placement {
+  code: string
+  name: string
+  url: string
+}
+
+export const getSources = () => call<Placement[]>('GET', '/api/owner/sources')
+export const createSource = (name: string) => call<Placement>('POST', '/api/owner/sources', { name })
+
 export interface PushStatus {
   configured: boolean
   publicKey: string

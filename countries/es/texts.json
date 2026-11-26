@@ -600,6 +600,19 @@
       "undo": "Deshacer",
       "failed": "No se ha podido guardar. Revisa la conexión y vuelve a intentarlo."
     },
+    "qr": {
+      "add": "Añadir fuente",
+      "codes": "Códigos QR",
+      "name": "Nombre de la fuente",
+      "create": "Crear fuente",
+      "source": "Fuente",
+      "link": "Enlace al formulario",
+      "save": "Guardar código QR",
+      "print": "Descargar para imprimir (SVG)",
+      "copy": "Copiar enlace",
+      "failed": "No se pudo cargar o guardar la fuente. Inténtalo de nuevo.",
+      "domain": "Conecta el dominio de la empresa para crear códigos QR."
+    },
     "stats": {
       "title": "Estadísticas",
       "subtitle": "Cuántas solicitudes recibes, cuántos coches compras y qué canales funcionan mejor.",

@@ -295,7 +295,9 @@ website. If it does:
 - Write each into `SOURCE_LABELS` now, label and the name the owner will read
   in statistics: `sticker:Car sticker,shop_lone_star:Lone Star Auto Repair,maps:Google Maps`.
   Labels are lowercase letters, digits, `-` and `_`; names have no commas or
-  quotes. A place added later is one more entry and a deploy.
+  quotes. After handoff, the owner can add more places in Statistics → Add source.
+  Enter a name to get a permanent link and QR code immediately. Open QR codes
+  to find existing placements, save or share the PNG, or download the print SVG.
 - Printed places get a QR code in step 9. Online places (the maps listing,
   social profiles and local groups) get a link, `https://<domain>/?src=<label>`,
   not a QR code: also in step 9, once the domain is connected.
@@ -558,7 +560,8 @@ person: send the SVG to the print shop, ask them not to crop the white margin
 around the code, and scan a printed proof before ordering a batch. If the
 command refuses (the code would print too small), it says why: print it larger
 or use a shorter address. A warning that a label would show as Other means it
-is missing from `SOURCE_LABELS`: add it and deploy again.
+is missing from `SOURCE_LABELS` when preparing installer-generated codes.
+Codes created in the dashboard already have a name and are ready to use.
 
 **Links** for the online places from step 3 (the maps listing, social
 profiles and local groups), one per label:
