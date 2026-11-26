@@ -80,12 +80,16 @@ is built in as well (texts included) for businesses whose sellers use it:
           - { id: whatsapp }
           - { id: telegram }
           - { id: email }
+        follow_up:
+          when: telegram
+          fields:
+            - { id: telegram_username, type: text, format: telegram_username, personal: true }
 ```
 
 In the lead, the button next to Call follows the seller's choice: a text
 (`sms:`) for `sms`, an email for `email`, Telegram for `telegram`
-(`t.me/+<number>`: Telegram finds the seller by phone unless they have
-turned that off), and WhatsApp for `whatsapp`, `call` and any other
+(the seller's optional username, or a phone lookup if they leave it blank
+and their Telegram privacy settings allow it), and WhatsApp for `whatsapp`, `call` and any other
 option. An email given with another choice gets an Email button as well.
 
 **Country.** The top of the preset says where the sellers are:

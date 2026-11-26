@@ -1,6 +1,7 @@
 <script lang="ts">
   // The open lead: status, photos, the car's answers, seller contact,
   // notes and activity. A side panel on wide screens, full screen on phones.
+  import { telegramUsername } from '../shared/telegram'
   import { getContext } from 'svelte'
   import { TEST_SOURCE } from '../form/engine'
   import type { FieldSpec } from '../shared/config'
@@ -69,7 +70,8 @@
   const name = $derived(String(lead?.answers[nameField?.id ?? ''] ?? ''))
   const subject = $derived(car ? t('dashboard.lead.email_subject', { car: car.title }) : '')
   const mail = $derived(`mailto:${email}?subject=${encodeURIComponent(subject)}`)
-  const answer = $derived(reply(lead?.answers[methodField?.id ?? ''], phone, email, subject))
+  const username = $derived(telegramUsername(lead?.answers.telegram_username))
+  const answer = $derived(reply(lead?.answers[methodField?.id ?? ''], phone, email, subject, username))
   // A web link opens in a new tab; a text or an email opens the phone's own app.
   const target = $derived(answer.href.startsWith('https:') ? '_blank' : undefined)
   const lastChange = $derived(lead?.events[0])
@@ -220,6 +222,12 @@
                 <div class="contact-row stack">
                   <span class="key">{t('dashboard.lead.email')}</span>
                   <span class="email" class:missing={!email}>{email || t('dashboard.lead.not_provided')}</span>
+                </div>
+              {/if}
+              {#if answer.key === 'telegram' && phone}
+                <div class="contact-row stack">
+                  <span class="key">{t('preset.fields.telegram_username.label')}</span>
+                  <span>{username || t('dashboard.lead.telegram_by_phone')}</span>
                 </div>
               {/if}
               {#if methodField}

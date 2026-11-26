@@ -6,6 +6,8 @@
 // Validation mirrors app/services/answers.py and returns the same error codes;
 // the server checks everything again, this only spares the seller a round trip.
 
+import { telegramUsername } from '../shared/telegram'
+
 import type { FieldSpec, Preset, Step } from '../shared/config'
 import { isPostalCode, normalizePhone } from '../shared/region'
 
@@ -174,6 +176,7 @@ function fieldError(field: FieldSpec, value: Value, today: Date): FieldError | n
       const text = String(value).trim()
       const limit = field.max_length ?? (field.multiline ? 1000 : 200)
       if (text.length > limit) return { code: 'too_long', params: { max: limit } }
+      if (field.format === 'telegram_username' && !telegramUsername(text)) return { code: 'format' }
       if (field.format === 'vin') return vinError(text)
       if (field.format === 'email' && !EMAIL_RE.test(text)) return { code: 'format' }
       if (field.format === 'postal_code' && !isPostalCode(text)) return { code: 'format' }
@@ -236,6 +239,7 @@ export function payload(preset: Preset, answers: Answers): Record<string, Value>
       }
       if (field.type === 'number' && value !== EARLIER) value = parseIntStrict(value!) ?? value
       if (typeof value === 'string') value = value.trim()
+      if (field.format === 'telegram_username') value = telegramUsername(value) ?? value
       result[field.id] = value!
     }
   }

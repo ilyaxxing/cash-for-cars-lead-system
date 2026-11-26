@@ -46,6 +46,8 @@
     type={kind.type}
     inputmode={kind.inputmode}
     autocomplete={kind.autocomplete}
+    autocapitalize={field.format === 'telegram_username' ? 'none' : undefined}
+    spellcheck={field.format === 'telegram_username' ? false : undefined}
     value={value ?? ''}
     oninput={(event) => form.set(field.id, event.currentTarget.value)}
     onfocus={(event) => scrollIntoView(event.currentTarget, scroller)}

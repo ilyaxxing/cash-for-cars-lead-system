@@ -47,11 +47,16 @@ async def reload(session, lead_id) -> Lead:
 
 async def test_personal_data_and_photos_go_after_the_period(session, preset, storage, clean_db):
     lead_id = await closed_lead(session, preset, storage, days_ago=91)
+    # An older form collected a Telegram username; the current preset does not.
+    old = await reload(session, lead_id)
+    old.answers = {**old.answers, "telegram_username": "@example_seller"}
+    await session.commit()
     result = await purge(clean_db, preset, storage)
     assert (result.leads, result.photos, result.retry) == (1, 2, 0)
 
     lead = await reload(session, lead_id)
     assert (lead.name, lead.phone) == (None, None)
+    assert "telegram_username" not in lead.answers
     assert "email" not in lead.answers
     assert lead.purged_at == NOW
     # The car and the outcome stay for statistics.

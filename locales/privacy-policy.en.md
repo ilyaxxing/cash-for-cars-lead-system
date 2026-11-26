@@ -15,7 +15,7 @@ When you fill in the form, you tell us:
   the city and ZIP code where it is, and photos of it. Questions marked as
   optional can be skipped.
 - **About you:** your name and phone number, and, if you choose to give
-  them, your email address and how you prefer to be contacted.
+  them, your email address, Telegram username (if offered) and how you prefer to be contacted.
 
 Before we store a photo, we remove the hidden information phones attach to
 it, including the location where it was taken.
@@ -39,7 +39,7 @@ We don't use advertising cookies or third-party analytics.
 ## How we use your information
 
 - To evaluate your car and make you an offer.
-- To contact you about this inquiry by phone, text message or WhatsApp, or
+- To contact you about this inquiry by phone, text message or your chosen messaging app, or
   by email if you chose it.
 - To keep records of the cars we buy and to see which ways of finding us
   work.
@@ -64,7 +64,7 @@ or similarly significant effects.
 
 ## How long we keep it
 
-We keep your name, phone number, email address and the photos of your car
+We keep your name, phone number, email address, any Telegram username and the photos of your car
 while we work on your inquiry.
 **{retention_days} days after the inquiry is closed**, whether we bought the
 car or not, they are erased automatically. We keep vehicle details,

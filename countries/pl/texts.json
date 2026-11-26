@@ -324,6 +324,13 @@
           "format": "Ten adres e-mail wygląda na niepełny."
         }
       },
+      "telegram_username": {
+        "label": "Nazwa użytkownika w Telegramie",
+        "placeholder": "@username",
+        "errors": {
+          "format": "Wpisz @nazwę lub link t.me do swojego profilu."
+        }
+      },
       "contact_method": {
         "label": "Preferowany kontakt",
         "review_label": "Preferowany"
@@ -545,6 +552,7 @@
       "email_seller": "Napisz do sprzedającego",
       "email_short": "E-mail",
       "whatsapp": "WhatsApp",
+      "telegram_by_phone": "Brak nazwy użytkownika. Spróbuj wyszukać po numerze telefonu.",
       "telegram": "Telegram",
       "sms": "SMS",
       "email_subject": "Twoje auto: {car}",

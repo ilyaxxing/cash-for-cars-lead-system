@@ -324,6 +324,13 @@
           "format": "That email address doesn't look complete."
         }
       },
+      "telegram_username": {
+        "label": "Telegram username",
+        "placeholder": "@username",
+        "errors": {
+          "format": "Enter your @username or a t.me profile link."
+        }
+      },
       "contact_method": {
         "label": "Preferred contact method",
         "review_label": "Preferred"
@@ -545,6 +552,7 @@
       "email_seller": "Email seller",
       "email_short": "Email",
       "whatsapp": "WhatsApp",
+      "telegram_by_phone": "No username provided. Try the phone number.",
       "telegram": "Telegram",
       "sms": "Text",
       "email_subject": "Your {car}",

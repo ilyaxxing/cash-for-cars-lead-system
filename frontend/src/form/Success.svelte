@@ -1,5 +1,6 @@
 <script lang="ts">
   // Done: a summary of the car with its photos and what happens next.
+  import { telegramUsername } from '../shared/telegram'
   import { getContext } from 'svelte'
   import type { FieldSpec } from '../shared/config'
   import { formatPhone } from '../shared/region'
@@ -39,7 +40,9 @@
   const method = String(answer('contact_method') ?? field('contact_method')?.default ?? 'call')
   const methodBy = t(`preset.options.contact_method.${method}.by`)
   // The number as the review showed it, not as it was typed.
-  const contact = method === 'email' ? String(answer('email') ?? '') : formatPhone(String(answer('phone') ?? ''))
+  const phone = formatPhone(String(answer('phone') ?? ''))
+  const contact = method === 'email' ? String(answer('email') ?? '')
+    : (method === 'telegram' && telegramUsername(answer('telegram_username'))) || phone
   const next = [
     {
       n: '1',

@@ -28,7 +28,7 @@ export interface FieldSpec {
   follow_up?: { when: string; fields: FieldSpec[] }
   max_length?: number
   multiline: boolean
-  format?: 'vin' | 'email' | 'postal_code'
+  format?: 'vin' | 'email' | 'postal_code' | 'telegram_username'
   min?: number
   max?: number
   unit?: 'distance' | 'currency'

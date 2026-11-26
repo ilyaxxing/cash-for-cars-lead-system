@@ -101,6 +101,10 @@ steps:
           - { id: whatsapp }
           - { id: sms }
           - { id: email }
+        follow_up:
+          when: telegram
+          fields:
+            - { id: telegram_username, type: text, format: telegram_username, personal: true }
 
   - id: accident
     group: history
