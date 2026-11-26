@@ -167,7 +167,7 @@ def test_disabled_step_is_ignored(build_preset):
 
 
 def test_personal_fields_include_email(preset):
-    assert personal_fields(preset) == ["name", "phone", "email"]
+    assert personal_fields(preset) == ["name", "phone", "email", "telegram_username"]
 
 
 def test_telegram_is_a_contact_method_only_where_the_preset_offers_it(preset, build_preset):
@@ -177,3 +177,23 @@ def test_telegram_is_a_contact_method_only_where_the_preset_offers_it(preset, bu
     assert errors_of(preset, raw) == {("contact_method", "option")}
     cleaned = validate_answers(build_preset(with_telegram), raw, today=TODAY)
     assert cleaned["contact_method"] == "telegram"
+
+
+def test_telegram_profile_is_optional_and_only_saved_for_telegram():
+    from app.config import BASE_DIR
+    from app.preset.loader import load_preset
+
+    preset = load_preset(BASE_DIR / "presets", "ru", BASE_DIR / "countries/ru/form.yaml")
+    phone = "+79055550142"  # pii-allow (fictional test number)
+    raw = {"name": "Test Seller", "phone": phone, "contact_method": "telegram"}
+    steps = [preset.submit_step]
+    assert "telegram_username" not in validate_answers(preset, raw, steps=steps)
+    for value in ("@Test_Seller", "t.me/Test_Seller", "https://t.me/Test_Seller/"):
+        clean = validate_answers(preset, {**raw, "telegram_username": value}, steps=steps)
+        assert split_answers(preset, clean)[1]["telegram_username"] == "@Test_Seller"
+    raw["telegram_username"] = "https://example.com/Test_Seller"
+    with pytest.raises(AnswersInvalid) as caught:
+        validate_answers(preset, raw, steps=steps)
+    assert [(e.field, e.code) for e in caught.value.errors] == [("telegram_username", "format")]
+    raw["contact_method"] = "call"
+    assert "telegram_username" not in validate_answers(preset, raw, steps=steps)

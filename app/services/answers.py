@@ -147,6 +147,8 @@ def _clean_text(preset: Preset, spec: FieldSpec, value: Any) -> str:
     match spec.format:
         case "vin":
             return validation.normalize_vin(text)
+        case "telegram_username":
+            return validation.normalize_telegram_username(text)
         case "email":
             return validation.normalize_email(text)
         case "postal_code":
@@ -196,4 +198,8 @@ def split_answers(preset: Preset, values: Mapping[str, Any]) -> tuple[dict[str, 
 
 def personal_fields(preset: Preset) -> list[str]:
     """Answers that retention erases together with name and phone."""
-    return [spec.id for spec in preset.all_fields() if spec.personal]
+    ids = [spec.id for spec in preset.all_fields() if spec.personal]
+    # Older leads can still have a username after a buyer removes Telegram.
+    if "telegram_username" not in ids:
+        ids.append("telegram_username")
+    return ids

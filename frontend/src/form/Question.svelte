@@ -30,7 +30,11 @@
   const isDependent = (field: FieldSpec) =>
     Boolean(field.suggestions_by && step.fields.some((f) => f.id === field.suggestions_by && f.widget === 'tiles'))
   const dependentsOf = (field: FieldSpec) => step.fields.filter((f) => f.suggestions_by === field.id)
-  const shown = $derived(step.fields.filter((field) => !isDependent(field)))
+  const shown = $derived(step.fields.filter((field) => !isDependent(field)).flatMap((field) => {
+    const follow = field.follow_up
+    const selected = form.answers[field.id] ?? field.default
+    return field.type === 'select' && follow && selected === follow.when ? [field, ...follow.fields] : [field]
+  }))
 
   // Two short text fields share a row (city and ZIP code).
   const sideBySide = $derived(

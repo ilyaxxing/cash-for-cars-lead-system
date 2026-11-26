@@ -54,6 +54,8 @@ describe('the second contact button', () => {
       href: 'mailto:sam@example.com?subject=Your%202019%20Toyota%20Camry',
     })
     expect(reply('telegram', '+79055550142')).toEqual({ key: 'telegram', href: 'https://t.me/+79055550142' }) // pii-allow (made-up number)
+    expect(reply('telegram', '+14155550142', '', '', '@Test_Seller').href).toBe('https://t.me/Test_Seller')
+    expect(reply('telegram', '+14155550142', '', '', 'https://example.com').href).toBe('https://t.me/+14155550142')
     expect(reply('whatsapp', '+14155550142').href).toBe('https://wa.me/14155550142')
   })
 

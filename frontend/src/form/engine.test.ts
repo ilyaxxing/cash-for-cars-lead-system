@@ -24,8 +24,8 @@ import {
 } from './engine'
 
 // The shipped preset, with the defaults the server adds when it serializes it.
-function loadPreset(): Preset {
-  const raw = parse(readFileSync(new URL('../../../presets/us-car-buyout.yaml', import.meta.url), 'utf8'))
+function loadPreset(file = '../../../presets/us-car-buyout.yaml'): Preset {
+  const raw = parse(readFileSync(new URL(file, import.meta.url), 'utf8'))
   const submitAt = raw.steps.findIndex((s: any) => s.submit)
   for (const [index, step] of raw.steps.entries()) {
     Object.assign(step, { enabled: true, skippable: false, submit: false, consent: false, show_chips: false, ...step })
@@ -237,4 +237,17 @@ describe('number fields', () => {
     expect(maxDigits({ ...price, max: 50_000_000_000 })).toBe(11)
     expect(maxDigits({ ...price, max: undefined })).toBe(7)
   })
+})
+
+it('only validates and sends the Telegram handle when the seller chooses Telegram', () => {
+  const ru = loadPreset('../../../countries/ru/form.yaml')
+  const contact = stepById(ru, 'contact')!
+  const answers = { ...COMPLETE, contact_method: 'telegram', telegram_username: 'https://t.me/Test_Seller/' }
+  expect(validateStep(contact, answers).telegram_username).toBeUndefined()
+  expect(payload(ru, answers).telegram_username).toBe('@Test_Seller')
+  expect(validateStep(contact, { ...answers, telegram_username: '' }).telegram_username).toBeUndefined()
+  for (const value of ['t.me/+123456', 'https://example.com/profile', 't.me/name/12', '@two names']) {
+    expect(validateStep(contact, { ...answers, telegram_username: value }).telegram_username?.code).toBe('format')
+  }
+  expect(payload(ru, { ...answers, contact_method: 'call' })).not.toHaveProperty('telegram_username')
 })

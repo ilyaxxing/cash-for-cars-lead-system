@@ -45,6 +45,17 @@ def parse_int(raw: Any) -> int:
     raise FieldError("format")
 
 
+def normalize_telegram_username(raw: str) -> str:
+    match = re.fullmatch(
+        r"(?:(?:https?://)?t\.me/([a-z][a-z0-9_]{0,31})/?|@?([a-z][a-z0-9_]{0,31}))",
+        raw.strip(),
+        re.ASCII | re.IGNORECASE,
+    )
+    if not match:
+        raise FieldError("format")
+    return "@" + (match[1] or match[2])
+
+
 def normalize_vin(raw: str) -> str:
     """Upper-case VIN without spaces and dashes.
 

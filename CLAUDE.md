@@ -165,7 +165,8 @@ USD, ZIP codes, and US phone formatting.
   removed. A new illustration gets the same treatment before it is converted.
 - Contact: name, phone (required), email (optional, personal data), preferred
   contact method (call, SMS, WhatsApp, email). Telegram is opt-in per client
-  (one line in the preset; texts ship). The lead's second button, next to
+  (see the contact-method example in docs/customize-the-form.md). A seller
+  choosing Telegram can give a username or a t.me profile link. The lead's second button, next to
   Call, follows the chosen method: sms: for SMS, mailto: for email, t.me for
   Telegram, WhatsApp for WhatsApp, a call or anything else.
 - Status: four-way switch with confirmation for Purchased and Rejected and

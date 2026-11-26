@@ -330,6 +330,13 @@
           "format": "Esse e-mail parece incompleto."
         }
       },
+      "telegram_username": {
+        "label": "Nome de usuário no Telegram",
+        "placeholder": "@username / t.me/username",
+        "errors": {
+          "format": "Digite seu @usuário ou um link t.me para seu perfil."
+        }
+      },
       "contact_method": {
         "label": "Contato preferido",
         "review_label": "Preferido"
@@ -551,6 +558,7 @@
       "email_seller": "Escrever para o vendedor",
       "email_short": "E-mail",
       "whatsapp": "WhatsApp",
+      "telegram_by_phone": "Nome de usuário não informado. Tente pelo número de telefone.",
       "telegram": "Telegram",
       "sms": "SMS",
       "email_subject": "Seu {car}",

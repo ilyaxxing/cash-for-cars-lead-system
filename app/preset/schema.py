@@ -75,7 +75,7 @@ class FieldSpec(StrictModel):
     # text
     max_length: int | None = Field(default=None, ge=1, le=5000)
     multiline: bool = False
-    format: Literal["vin", "email", "postal_code"] | None = None
+    format: Literal["vin", "email", "postal_code", "telegram_username"] | None = None
 
     # number
     min: int | None = None

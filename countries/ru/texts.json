@@ -347,6 +347,13 @@
           "format": "Кажется, адрес почты неполный."
         }
       },
+      "telegram_username": {
+        "label": "Имя пользователя в Telegram",
+        "placeholder": "@username / t.me/username",
+        "errors": {
+          "format": "Введите @username или ссылку на свой профиль t.me."
+        }
+      },
       "contact_method": {
         "label": "Как удобнее связаться",
         "review_label": "Связь"
@@ -582,6 +589,7 @@
       "email_seller": "Написать продавцу",
       "email_short": "Почта",
       "whatsapp": "WhatsApp",
+      "telegram_by_phone": "Имя пользователя не указано. Попробуйте найти по номеру телефона.",
       "telegram": "Telegram",
       "sms": "SMS",
       "email_subject": "Ваша машина {car}",

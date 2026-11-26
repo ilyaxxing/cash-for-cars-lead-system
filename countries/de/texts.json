@@ -324,6 +324,13 @@
           "format": "Diese E-Mail-Adresse scheint unvollständig."
         }
       },
+      "telegram_username": {
+        "label": "Telegram-Benutzername",
+        "placeholder": "@username / t.me/username",
+        "errors": {
+          "format": "Gib deinen @Benutzernamen oder deinen t.me-Profillink ein."
+        }
+      },
       "contact_method": {
         "label": "Bevorzugter Kontaktweg",
         "review_label": "Bevorzugt"
@@ -545,6 +552,7 @@
       "email_seller": "Verkäufer anschreiben",
       "email_short": "E-Mail",
       "whatsapp": "WhatsApp",
+      "telegram_by_phone": "Kein Benutzername angegeben. Versuchen Sie es über die Telefonnummer.",
       "telegram": "Telegram",
       "sms": "SMS",
       "email_subject": "Ihr {car}",
