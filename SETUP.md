@@ -61,6 +61,12 @@ cannot do there), and follow its notes as you go: the system adapts to
 the language, the form, the privacy law, the card and, where needed, the
 server, without changing its code.
 
+During the first conversation with the client, ask where sellers will find
+the form. Which printed placements need a QR code (for example, business
+cards or a poster at a partner shop)? Which online placements need a link
+(for example, a website or a social profile)? Agree on a name for each
+placement the client wants to track separately, and keep that list for step 3.
+
 Tell the person briefly what they will need:
 
 1. This computer: a Mac or a Linux computer; on Windows, WSL (step 1).
@@ -282,9 +288,9 @@ website. If it does:
   gaps are for the lawyer to fill; never fill them in yourself.
 
 **Where sellers will find the form**
-- A card under a wiper is built in (`card`) and comes first. Then go through
-  the other places with the person, one at a time, and note the ones the
-  business will use:
+- Use the placements and names agreed with the client in the first
+  conversation. A card under a wiper is built in (`card`). If any details
+  are missing, use these examples to fill the gaps:
   - a sticker on the buyer's own car (`sticker`);
   - a poster at a partner repair shop or tow company, one label per partner
     (`shop_<name>`, `tow_<name>`), so each one's sellers are counted;
