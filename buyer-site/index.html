@@ -89,9 +89,14 @@
     .button:active { transform: translateY(1px); }
 
     .cards { position: relative; width: min(520px, 100%); margin: 0 auto; aspect-ratio: 3.5 / 3.1; }
-    .cards img { position: absolute; width: 72%; height: auto; border-radius: 9px; box-shadow: 0 24px 60px rgba(0, 0, 0, .55); }
+    .card-sample { position: absolute; width: 72%; perspective: 800px; cursor: grab; touch-action: none; user-select: none; -webkit-touch-callout: none; }
+    .card-sample.is-grabbed { cursor: grabbing; }
     .cards .front { left: 0; top: 0; transform: rotate(-4deg); z-index: 1; }
     .cards .back { right: 0; bottom: 0; transform: rotate(3deg); }
+    .card-object { display: grid; grid-template-columns: minmax(0, 1fr); transform-style: preserve-3d; border-radius: 9px; box-shadow: 0 24px 60px rgba(0, 0, 0, .55); }
+    .card-object::before { content: ""; grid-area: 1 / 1; border-radius: inherit; background: var(--text); transform: translateZ(-.6px); }
+    .card-face { display: block; grid-area: 1 / 1; width: 100%; height: auto; border-radius: inherit; -webkit-backface-visibility: hidden; backface-visibility: hidden; pointer-events: none; }
+    .card-face.reverse { transform: translateZ(-1.2px) rotateY(180deg); }
     .caption { text-align: center; color: var(--faint); font-size: 13.5px; line-height: 1.5; margin: 14px 0 0; }
 
     /* One panel of places, its cells parted by hairlines: the gaps show the panel's own color. */
@@ -190,8 +195,18 @@
       </div>
       <div>
         <div class="cards">
-          <img class="front" id="card-front" src="{{root}}assets/card/{{cards}}lime-front.webp" alt="{{card_front_alt}}" width="{{card_width}}" height="{{card_height}}">
-          <img class="back" id="card-back" src="{{root}}assets/card/{{cards}}lime-back.webp" alt="{{card_back_alt}}" width="{{card_width}}" height="{{card_height}}">
+          <div class="card-sample front">
+            <div class="card-object">
+              <img class="card-face" src="{{root}}assets/card/{{cards}}lime-front.webp" alt="{{card_front_alt}}" width="{{card_width}}" height="{{card_height}}" draggable="false">
+              <img class="card-face reverse" src="{{root}}assets/card/{{cards}}lime-back.webp" alt="" width="{{card_width}}" height="{{card_height}}" draggable="false">
+            </div>
+          </div>
+          <div class="card-sample back">
+            <div class="card-object">
+              <img class="card-face" src="{{root}}assets/card/{{cards}}lime-back.webp" alt="{{card_back_alt}}" width="{{card_width}}" height="{{card_height}}" draggable="false">
+              <img class="card-face reverse" src="{{root}}assets/card/{{cards}}lime-front.webp" alt="" width="{{card_width}}" height="{{card_height}}" draggable="false">
+            </div>
+          </div>
         </div>
         <p class="caption">{{card_caption}}</p>
       </div>
@@ -322,9 +337,57 @@
     const target = rgb(visitor.colors ? visitor.colors['--accent'] : CARDS.lime);
     const distance = (hex) => rgb(hex).reduce((sum, channel, i) => sum + (channel - target[i]) ** 2, 0);
     const [closest] = Object.keys(CARDS).sort((a, b) => distance(CARDS[a]) - distance(CARDS[b]));
-    for (const side of ['front', 'back']) {
-      const card = document.getElementById(`card-${side}`);
-      card.src = card.getAttribute('src').replace(/[a-z]+-(front|back)\.webp$/, `${closest}-$1.webp`);
+    for (const face of document.querySelectorAll('.card-face')) {
+      face.src = face.getAttribute('src').replace(/[a-z]+-(front|back)\.webp$/, `${closest}-$1.webp`);
+    }
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    for (const sample of document.querySelectorAll('.card-sample')) {
+      const object = sample.querySelector('.card-object');
+      let drag;
+      let returning;
+
+      sample.addEventListener('pointerdown', (event) => {
+        if (drag || event.button !== 0) return;
+        // Continue from the visible pose if the card is picked up mid-return.
+        const pose = getComputedStyle(object).transform;
+        returning?.cancel();
+        object.style.transform = pose;
+        sample.setPointerCapture(event.pointerId);
+        sample.classList.add('is-grabbed');
+        drag = {
+          id: event.pointerId,
+          x: event.clientX,
+          y: event.clientY,
+          degreesPerPixel: 360 / sample.offsetWidth,
+          pose: pose === 'none' ? '' : pose,
+        };
+      });
+
+      sample.addEventListener('pointermove', (event) => {
+        if (event.pointerId !== drag?.id) return;
+        const yaw = (event.clientX - drag.x) * drag.degreesPerPixel;
+        const pitch = (drag.y - event.clientY) * drag.degreesPerPixel;
+        object.style.transform = `rotateY(${yaw}deg) rotateX(${pitch}deg) ${drag.pose}`;
+      });
+
+      function release(event) {
+        if (event.pointerId !== drag?.id) return;
+        const pose = getComputedStyle(object).transform;
+        drag = undefined;
+        sample.classList.remove('is-grabbed');
+        object.style.removeProperty('transform');
+        if (!reduceMotion.matches && pose !== 'none') {
+          returning = object.animate([{ transform: pose }, { transform: 'none' }], {
+            duration: 440,
+            easing: 'cubic-bezier(.16, 1, .3, 1)',
+          });
+        }
+      }
+
+      for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) {
+        sample.addEventListener(type, release);
+      }
     }
     document.documentElement.classList.remove('pending');
   </script>
