@@ -89,9 +89,26 @@
     .button:active { transform: translateY(1px); }
 
     .cards { position: relative; width: min(520px, 100%); margin: 0 auto; aspect-ratio: 3.5 / 3.1; }
-    .cards img { position: absolute; width: 72%; height: auto; border-radius: 9px; box-shadow: 0 24px 60px rgba(0, 0, 0, .55); }
+    .card-sample { position: absolute; width: 72%; perspective: 800px; cursor: grab; touch-action: none; user-select: none; -webkit-touch-callout: none; }
+    .card-sample.is-grabbed { cursor: grabbing; }
     .cards .front { left: 0; top: 0; transform: rotate(-4deg); z-index: 1; }
     .cards .back { right: 0; bottom: 0; transform: rotate(3deg); }
+    .card-object { display: grid; grid-template-columns: minmax(0, 1fr); transform-style: preserve-3d; border-radius: 9px; box-shadow: 0 24px 60px rgba(0, 0, 0, .55); }
+    .card-object::before { content: ""; grid-area: 1 / 1; border-radius: inherit; background: var(--text); transform: translateZ(-.6px); }
+    .card-face { display: block; grid-area: 1 / 1; width: 100%; height: auto; border-radius: inherit; -webkit-backface-visibility: hidden; backface-visibility: hidden; pointer-events: none; }
+    .card-face.reverse { transform: translateZ(-1.2px) rotateY(180deg); }
+    .card-palette { border: 0; padding: 0; margin: 24px auto 0; min-width: 0; text-align: center; }
+    .card-palette legend { margin: auto; padding: 0; font-size: 14px; color: var(--muted); }
+    .card-palette output { color: var(--text); font-weight: 600; }
+    .swatches { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 3px; }
+    .swatches input { appearance: none; display: grid; place-content: center; margin: 0; width: 44px; height: 44px; cursor: pointer; border: 0; background: transparent; }
+    .swatches input::before { content: ""; width: 22px; height: 22px; border-radius: 50%; background: var(--swatch); }
+    .swatches input:checked::before { outline: 2px solid var(--text); outline-offset: 3px; }
+    .swatches input:focus-visible { outline: 2px dashed var(--text); outline-offset: -1px; border-radius: 8px; }
+    @media (forced-colors: active) {
+      .swatches input::before { forced-color-adjust: none; }
+      .swatches input:checked::before { outline-color: CanvasText; }
+    }
     .caption { text-align: center; color: var(--faint); font-size: 13.5px; line-height: 1.5; margin: 14px 0 0; }
 
     /* One panel of places, its cells parted by hairlines: the gaps show the panel's own color. */
@@ -190,9 +207,30 @@
       </div>
       <div>
         <div class="cards">
-          <img class="front" id="card-front" src="{{root}}assets/card/{{cards}}lime-front.webp" alt="{{card_front_alt}}" width="{{card_width}}" height="{{card_height}}">
-          <img class="back" id="card-back" src="{{root}}assets/card/{{cards}}lime-back.webp" alt="{{card_back_alt}}" width="{{card_width}}" height="{{card_height}}">
+          <div class="card-sample front">
+            <div class="card-object">
+              <img class="card-face" src="{{root}}assets/card/{{cards}}lime-front.webp" alt="{{card_front_alt}}" width="{{card_width}}" height="{{card_height}}" draggable="false">
+              <img class="card-face reverse" src="{{root}}assets/card/{{cards}}lime-back.webp" alt="" width="{{card_width}}" height="{{card_height}}" draggable="false">
+            </div>
+          </div>
+          <div class="card-sample back">
+            <div class="card-object">
+              <img class="card-face" src="{{root}}assets/card/{{cards}}lime-back.webp" alt="{{card_back_alt}}" width="{{card_width}}" height="{{card_height}}" draggable="false">
+              <img class="card-face reverse" src="{{root}}assets/card/{{cards}}lime-front.webp" alt="" width="{{card_width}}" height="{{card_height}}" draggable="false">
+            </div>
+          </div>
         </div>
+        <fieldset class="card-palette" hidden>
+          <legend>{{card_color}} · <output id="shade-name"></output></legend>
+          <div class="swatches">
+            <input type="radio" name="card-color" value="lime" aria-label="{{shade_lime}}" title="{{shade_lime}}">
+            <input type="radio" name="card-color" value="yellow" aria-label="{{shade_yellow}}" title="{{shade_yellow}}">
+            <input type="radio" name="card-color" value="orange" aria-label="{{shade_orange}}" title="{{shade_orange}}">
+            <input type="radio" name="card-color" value="red" aria-label="{{shade_red}}" title="{{shade_red}}">
+            <input type="radio" name="card-color" value="blue" aria-label="{{shade_blue}}" title="{{shade_blue}}">
+            <input type="radio" name="card-color" value="mint" aria-label="{{shade_mint}}" title="{{shade_mint}}">
+          </div>
+        </fieldset>
         <p class="caption">{{card_caption}}</p>
       </div>
     </div>
@@ -322,9 +360,93 @@
     const target = rgb(visitor.colors ? visitor.colors['--accent'] : CARDS.lime);
     const distance = (hex) => rgb(hex).reduce((sum, channel, i) => sum + (channel - target[i]) ** 2, 0);
     const [closest] = Object.keys(CARDS).sort((a, b) => distance(CARDS[a]) - distance(CARDS[b]));
-    for (const side of ['front', 'back']) {
-      const card = document.getElementById(`card-${side}`);
-      card.src = card.getAttribute('src').replace(/[a-z]+-(front|back)\.webp$/, `${closest}-$1.webp`);
+    const palette = document.querySelector('.card-palette');
+    const inputs = palette.querySelectorAll('input');
+    const faces = document.querySelectorAll('.card-face');
+    function selectShade(input) {
+      for (const face of faces) {
+        face.src = face.getAttribute('src').replace(/[a-z]+-(front|back)\.webp$/, `${input.value}-$1.webp`);
+      }
+      palette.querySelector('output').textContent = input.title;
+    }
+    for (const input of inputs) {
+      input.style.setProperty('--swatch', CARDS[input.value]);
+      input.checked = input.value === closest;
+      if (input.checked) selectShade(input);
+      input.addEventListener('change', () => selectShade(input));
+    }
+    palette.hidden = false;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const stack = document.querySelector('.cards');
+    let hintObserver;
+    let hintAnimation;
+    function stopHint() {
+      hintObserver?.disconnect();
+      hintObserver = undefined;
+      hintAnimation?.cancel();
+    }
+    if (!reduceMotion.matches && 'IntersectionObserver' in window) {
+      hintObserver = new IntersectionObserver(([entry]) => {
+        if (!hintObserver || entry.intersectionRatio < 0.75) return;
+        stopHint();
+        hintAnimation = stack.querySelector('.front .card-object').animate([
+          { transform: 'rotateY(0deg)', easing: 'ease-in-out' },
+          { transform: 'rotateY(-25deg)', offset: 0.46, easing: 'ease-in-out' },
+          { transform: 'rotateY(0deg)' },
+        ], { duration: 1000 });
+      }, { threshold: 0.75 });
+      hintObserver.observe(stack);
+      reduceMotion.addEventListener('change', stopHint, { once: true });
+    }
+
+    for (const sample of document.querySelectorAll('.card-sample')) {
+      const object = sample.querySelector('.card-object');
+      let drag;
+      let returning;
+
+      sample.addEventListener('pointerdown', (event) => {
+        if (drag || event.button !== 0) return;
+        // Continue from the visible pose if the card is picked up during an animation.
+        const pose = getComputedStyle(object).transform;
+        stopHint();
+        returning?.cancel();
+        object.style.transform = pose;
+        sample.setPointerCapture(event.pointerId);
+        sample.classList.add('is-grabbed');
+        drag = {
+          id: event.pointerId,
+          x: event.clientX,
+          y: event.clientY,
+          degreesPerPixel: 360 / sample.offsetWidth,
+          pose: pose === 'none' ? '' : pose,
+        };
+      });
+
+      sample.addEventListener('pointermove', (event) => {
+        if (event.pointerId !== drag?.id) return;
+        const yaw = (event.clientX - drag.x) * drag.degreesPerPixel;
+        const pitch = (drag.y - event.clientY) * drag.degreesPerPixel;
+        object.style.transform = `rotateY(${yaw}deg) rotateX(${pitch}deg) ${drag.pose}`;
+      });
+
+      function release(event) {
+        if (event.pointerId !== drag?.id) return;
+        const pose = getComputedStyle(object).transform;
+        drag = undefined;
+        sample.classList.remove('is-grabbed');
+        object.style.removeProperty('transform');
+        if (!reduceMotion.matches && pose !== 'none') {
+          returning = object.animate([{ transform: pose }, { transform: 'none' }], {
+            duration: 440,
+            easing: 'cubic-bezier(.16, 1, .3, 1)',
+          });
+        }
+      }
+
+      for (const type of ['pointerup', 'pointercancel', 'lostpointercapture']) {
+        sample.addEventListener(type, release);
+      }
     }
     document.documentElement.classList.remove('pending');
   </script>

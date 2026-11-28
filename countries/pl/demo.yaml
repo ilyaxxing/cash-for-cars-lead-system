@@ -47,6 +47,13 @@ page:
   try_button: Wypróbuj sam ↓
   card_front_alt: 'Przykładowa wizytówka, przód: Kupimy Twoje auto, z kodem QR'
   card_back_alt: 'Przykładowa wizytówka, tył: co kupujemy, znowu kod QR i numer telefonu'
+  card_color: Kolor wizytówki
+  shade_lime: Limonkowy
+  shade_yellow: Słonecznikowy
+  shade_orange: Mandarynkowy
+  shade_red: Koralowy
+  shade_blue: Błękitny
+  shade_mint: Miętowy
   card_caption: Przykładowa wizytówka. Twoja ma Twoje imię, numer i kolor.
   kicker_places: Jeden kod, dowolne miejsce
   h2_places: Zobacz, które miejsca przynoszą sprzedających.

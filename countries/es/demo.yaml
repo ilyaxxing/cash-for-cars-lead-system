@@ -47,6 +47,13 @@ page:
   try_button: Pruébalo tú mismo ↓
   card_front_alt: 'Una tarjeta de ejemplo, anverso: Compramos coches, con un código QR'
   card_back_alt: 'Una tarjeta de ejemplo, reverso: qué compramos, el código QR otra vez y el teléfono'
+  card_color: Color de la tarjeta
+  shade_lime: Lima
+  shade_yellow: Amarillo girasol
+  shade_orange: Mandarina
+  shade_red: Coral
+  shade_blue: Azul cielo
+  shade_mint: Menta
   card_caption: Una tarjeta de ejemplo. La tuya lleva tu nombre, tu teléfono y tu color.
   kicker_places: Un código, cualquier sitio
   h2_places: Mira qué sitios te traen vendedores.
