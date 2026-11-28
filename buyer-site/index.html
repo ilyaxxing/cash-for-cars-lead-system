@@ -378,6 +378,28 @@
     palette.hidden = false;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const stack = document.querySelector('.cards');
+    let hintObserver;
+    let hintAnimation;
+    function stopHint() {
+      hintObserver?.disconnect();
+      hintObserver = undefined;
+      hintAnimation?.cancel();
+    }
+    if (!reduceMotion.matches && 'IntersectionObserver' in window) {
+      hintObserver = new IntersectionObserver(([entry]) => {
+        if (!hintObserver || entry.intersectionRatio < 0.75) return;
+        stopHint();
+        hintAnimation = stack.querySelector('.front .card-object').animate([
+          { transform: 'rotateY(0deg)', easing: 'ease-in-out' },
+          { transform: 'rotateY(-25deg)', offset: 0.46, easing: 'ease-in-out' },
+          { transform: 'rotateY(0deg)' },
+        ], { duration: 1000 });
+      }, { threshold: 0.75 });
+      hintObserver.observe(stack);
+      reduceMotion.addEventListener('change', stopHint, { once: true });
+    }
+
     for (const sample of document.querySelectorAll('.card-sample')) {
       const object = sample.querySelector('.card-object');
       let drag;
@@ -385,8 +407,9 @@
 
       sample.addEventListener('pointerdown', (event) => {
         if (drag || event.button !== 0) return;
-        // Continue from the visible pose if the card is picked up mid-return.
+        // Continue from the visible pose if the card is picked up during an animation.
         const pose = getComputedStyle(object).transform;
+        stopHint();
         returning?.cancel();
         object.style.transform = pose;
         sample.setPointerCapture(event.pointerId);
