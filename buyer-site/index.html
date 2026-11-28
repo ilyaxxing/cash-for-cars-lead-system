@@ -97,6 +97,18 @@
     .card-object::before { content: ""; grid-area: 1 / 1; border-radius: inherit; background: var(--text); transform: translateZ(-.6px); }
     .card-face { display: block; grid-area: 1 / 1; width: 100%; height: auto; border-radius: inherit; -webkit-backface-visibility: hidden; backface-visibility: hidden; pointer-events: none; }
     .card-face.reverse { transform: translateZ(-1.2px) rotateY(180deg); }
+    .card-palette { border: 0; padding: 0; margin: 24px auto 0; min-width: 0; text-align: center; }
+    .card-palette legend { margin: auto; padding: 0; font-size: 14px; color: var(--muted); }
+    .card-palette output { color: var(--text); font-weight: 600; }
+    .swatches { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 3px; }
+    .swatches input { appearance: none; display: grid; place-content: center; margin: 0; width: 44px; height: 44px; cursor: pointer; border: 0; background: transparent; }
+    .swatches input::before { content: ""; width: 22px; height: 22px; border-radius: 50%; background: var(--swatch); }
+    .swatches input:checked::before { outline: 2px solid var(--text); outline-offset: 3px; }
+    .swatches input:focus-visible { outline: 2px dashed var(--text); outline-offset: -1px; border-radius: 8px; }
+    @media (forced-colors: active) {
+      .swatches input::before { forced-color-adjust: none; }
+      .swatches input:checked::before { outline-color: CanvasText; }
+    }
     .caption { text-align: center; color: var(--faint); font-size: 13.5px; line-height: 1.5; margin: 14px 0 0; }
 
     /* One panel of places, its cells parted by hairlines: the gaps show the panel's own color. */
@@ -208,6 +220,17 @@
             </div>
           </div>
         </div>
+        <fieldset class="card-palette" hidden>
+          <legend>{{card_color}} · <output id="shade-name"></output></legend>
+          <div class="swatches">
+            <input type="radio" name="card-color" value="lime" aria-label="{{shade_lime}}" title="{{shade_lime}}">
+            <input type="radio" name="card-color" value="yellow" aria-label="{{shade_yellow}}" title="{{shade_yellow}}">
+            <input type="radio" name="card-color" value="orange" aria-label="{{shade_orange}}" title="{{shade_orange}}">
+            <input type="radio" name="card-color" value="red" aria-label="{{shade_red}}" title="{{shade_red}}">
+            <input type="radio" name="card-color" value="blue" aria-label="{{shade_blue}}" title="{{shade_blue}}">
+            <input type="radio" name="card-color" value="mint" aria-label="{{shade_mint}}" title="{{shade_mint}}">
+          </div>
+        </fieldset>
         <p class="caption">{{card_caption}}</p>
       </div>
     </div>
@@ -337,9 +360,22 @@
     const target = rgb(visitor.colors ? visitor.colors['--accent'] : CARDS.lime);
     const distance = (hex) => rgb(hex).reduce((sum, channel, i) => sum + (channel - target[i]) ** 2, 0);
     const [closest] = Object.keys(CARDS).sort((a, b) => distance(CARDS[a]) - distance(CARDS[b]));
-    for (const face of document.querySelectorAll('.card-face')) {
-      face.src = face.getAttribute('src').replace(/[a-z]+-(front|back)\.webp$/, `${closest}-$1.webp`);
+    const palette = document.querySelector('.card-palette');
+    const inputs = palette.querySelectorAll('input');
+    const faces = document.querySelectorAll('.card-face');
+    function selectShade(input) {
+      for (const face of faces) {
+        face.src = face.getAttribute('src').replace(/[a-z]+-(front|back)\.webp$/, `${input.value}-$1.webp`);
+      }
+      palette.querySelector('output').textContent = input.title;
     }
+    for (const input of inputs) {
+      input.style.setProperty('--swatch', CARDS[input.value]);
+      input.checked = input.value === closest;
+      if (input.checked) selectShade(input);
+      input.addEventListener('change', () => selectShade(input));
+    }
+    palette.hidden = false;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     for (const sample of document.querySelectorAll('.card-sample')) {

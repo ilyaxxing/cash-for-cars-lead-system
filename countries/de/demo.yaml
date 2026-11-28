@@ -47,6 +47,13 @@ page:
   try_button: Selbst ausprobieren ↓
   card_front_alt: 'Eine Beispielkarte, Vorderseite: Wir kaufen alle Autos, mit QR-Code'
   card_back_alt: 'Eine Beispielkarte, Rückseite: was wir kaufen, noch einmal der QR-Code und die Telefonnummer'
+  card_color: Kartenfarbe
+  shade_lime: Limettengrün
+  shade_yellow: Sonnengelb
+  shade_orange: Mandarine
+  shade_red: Koralle
+  shade_blue: Himmelblau
+  shade_mint: Mintgrün
   card_caption: Eine Beispielkarte. Ihre trägt Ihren Namen, Ihre Nummer und Ihre Farbe.
   kicker_places: Ein Code, jeder Ort
   h2_places: Sehen Sie, welche Orte Ihnen Verkäufer bringen.

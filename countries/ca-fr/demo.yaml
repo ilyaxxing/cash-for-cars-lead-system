@@ -46,6 +46,13 @@ page:
   try_button: Essayez vous-même ↓
   card_front_alt: 'Une carte d''exemple, recto : On rachète votre auto, avec un QR code'
   card_back_alt: 'Une carte d''exemple, verso : ce que nous rachetons, le QR code à nouveau et le numéro de téléphone'
+  card_color: Couleur de la carte
+  shade_lime: Vert citron
+  shade_yellow: Jaune tournesol
+  shade_orange: Mandarine
+  shade_red: Corail
+  shade_blue: Bleu ciel
+  shade_mint: Menthe
   card_caption: Une carte d'exemple. La vôtre porte votre nom, votre numéro et votre couleur.
   kicker_places: Un code, partout
   h2_places: Voyez quels endroits vous amènent des vendeurs.

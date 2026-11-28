@@ -59,6 +59,13 @@ page:
   try_button: Try it yourself ↓
   card_front_alt: 'A sample card, front: We buy all cars, with a QR code'
   card_back_alt: 'A sample card, back: what is bought, the QR code again and the phone number'
+  card_color: Card colour
+  shade_lime: Lime
+  shade_yellow: Sunflower
+  shade_orange: Tangerine
+  shade_red: Coral
+  shade_blue: Sky blue
+  shade_mint: Mint
   card_caption: A sample card. Yours carries your name, phone and colour.
   kicker_places: One code, any place
   h2_places: See which places bring you sellers.
